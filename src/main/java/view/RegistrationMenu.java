@@ -7,28 +7,30 @@ import view.enums.Responses;
 
 public class RegistrationMenu extends Menu {
     public void run() {
-        setCurrentMenu(Menus.REGISTER_MENU);
 
-        while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())){
-            String response = "invalid command";
 
-            if (command.matches(Regexes.MENU_ENTER.getLabel()))
-                response = Responses.MENU_ENTER_NOT_ALLOWED.getLabel();
-            if (command.matches(Regexes.MENU_CURRENT.getLabel()))
-                response = currentMenu;
+        while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())) {
+            setCurrentMenu(Menus.REGISTER_MENU);
 
-            if (command.matches(Regexes.CREATE_USER.getLabel())){
+            if (command.matches(Regexes.MENU_ENTER.getLabel()))     // enter other menus
+                Console.print(Responses.MENU_ENTER_NOT_ALLOWED.getLabel());
+            else if (command.matches(Regexes.MENU_CURRENT.getLabel()))  // show current menu
+                Console.print(currentMenu);
+            else if (command.matches(Regexes.CREATE_USER.getLabel())) {  // register ...
                 Request.setCommandTag(CommandTags.REGISTER);
                 Request.extractData(command);
-                response = Request.send();
-            }
-            if (command.matches(Regexes.LOGIN_USER.getLabel())){
+                Request.send();
+                Console.print(Request.getResponse());
+            } else if (command.matches(Regexes.LOGIN_USER.getLabel())) {  // log in ...
                 Request.setCommandTag(CommandTags.LOGIN);
                 Request.extractData(command);
-                response = Request.send();
-            }
+                Request.send();
+                Console.print(Request.getResponse());
+                if (Request.isSuccessful()) {
+                    new MainMenu().run();
+                }
+            } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
-            Console.print(response);
         }
     }
 }

@@ -1,74 +1,65 @@
 package Controller;
 
+import Controller.enums.Responses;
 import model.User;
 import org.json.JSONObject;
 
 public class RegistrationController {
 
 
-    public static String processCommand(JSONObject request) {
+    public static void processCommand(JSONObject request) {
 
-
-        String response = null;
         String commandTag = request.getString("command");
 
-        if (commandTag.equals("login")) {
-            response = login(request.getString("username"),
-                    request.getString("password"));
-        } else if (commandTag.equals("register")) {
-            response = createNewUser(request.getString("username"), request.getString("nickname"),
-                    request.getString("password"));
-        }
+        if (commandTag.equals("login"))
+            login(request.getString("username"), request.getString("password"));
+        else if (commandTag.equals("register"))
+            register(request.getString("username"), request.getString("password"), request.getString("nickname"));
 
-        return response;
     }
 
-
-    private static String login(String username, String password) {
-
-        if (doesUsernameExists(username)) {
+    private static void login(String username, String password) {
+        if (doesUsernameExists(username))
             if (isPasswordCorrects(username, password)) {
-                return "user logged in successfully!";
-
+                Response.success();
+                Response.addMessage(Responses.LOGIN_SUCCESSFUL.getLabel());
             } else {
-                return "Username and password didn’t match!";
+                Response.error();
+                Response.addMessage(Responses.WRONG_PASSWORD.getLabel());
             }
-        } else {
-            return "Username and password didn’t match!";
+        else {
+            Response.error();
+            Response.addMessage(Responses.WRONG_PASSWORD.getLabel());
         }
     }
 
 
-    private static String createNewUser(String username, String nickname, String password) {
-
-
+    private static void register(String username, String password, String nickname) {
         if (!doesUsernameExists(username)) {
             if (!nicknameExists(nickname)) {
-                User user = new User(username, password, nickname);             // add new user
-                return "user created successfully!";
+                Response.success();
+                new User(username, password, nickname); // add new user
+                Response.addMessage(Responses.REGISTER_SUCCESSFUL.getLabel());
             } else {
-                return "user with nickname " + nickname + " already exists";
+                Response.error();
+                Response.addMessage("user with nickname " + nickname + " already exists");
             }
         } else {
-            return "user with username " + username + " already exists";
+            Response.error();
+            Response.addMessage("user with username " + username + " already exists");
         }
     }
 
 
     private static boolean isPasswordCorrects(String username, String password) {
-
         return User.isPasswordCorrect(username, password);
     }
 
-
     private static boolean doesUsernameExists(String username) {
-
         return User.doesUsernameExist(username);
     }
 
-
     private static boolean nicknameExists(String nickname) {
-
         return User.doesNicknameExist(nickname);
     }
 }

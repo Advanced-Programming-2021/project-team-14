@@ -9,14 +9,10 @@ public class MainController {
 
         JSONObject request = new JSONObject(command);
 
-        if (request.getString("view").equals(Menus.REGISTER_MENU.getLabel())) {
+        if (request.getString("view").equals(Menus.REGISTER_MENU.getLabel()))
+            RegistrationController.processCommand(request);
 
-            command = RegistrationController.processCommand(request);
-        }
-
-        request = new JSONObject(command);
-
-        return "from server : " + request.toString();
+        return Response.getResponse().toString();
 
     }
 }

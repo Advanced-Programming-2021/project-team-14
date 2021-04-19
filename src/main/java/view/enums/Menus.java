@@ -1,7 +1,9 @@
 package view.enums;
 
 public enum Menus {
-    REGISTER_MENU("registerMenu");
+    REGISTER_MENU("Register Menu"),
+    PROFILE_MENU("Register Menu"),
+    MAIN_MENU("Main menu");
     public final String label;
 
     Menus(String label) {

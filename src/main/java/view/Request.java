@@ -4,39 +4,44 @@ import Controller.MainController;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 import view.enums.Regexes;
+import view.enums.Responses;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Request {
-    private static final JSONObject request = new JSONObject();
+    private static JSONObject request = new JSONObject();
+    private static JSONObject response;
 
-    public static void addData(String key, String value) {
+    public static void addData(String key, String value) { // adding data with key and value
         request.put(key, value);
     }
 
-    public static void setCommandTag(CommandTags commandTag) {
+    public static void setCommandTag(CommandTags commandTag) { // set the request main command
         request.put("command", commandTag.getLabel());
     }
 
-    public static void extractData(String command){
+    public static void extractData(String command) { // extract data from the input with the "--key value" format
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
-        while(matcher.find()){
+        while (matcher.find())
             request.put(matcher.group(1), matcher.group(2));
-        }
     }
 
-    public static String send() {
-        String response = MainController.processCommand(request.toString());
-        String viewTag = request.get("view").toString();
+    public static void send() { // sending the request to the main controller
+        response = new JSONObject(MainController.processCommand(request.toString()));
         clear();
-        Request.addData("view", viewTag);
-        return response;
+    }
+
+    public static String getResponse() {
+        return response.getString("message");
     }
 
     public static void clear() {
-        while(request.length() > 0)
-            request.remove(request.keys().next());
+        request = new JSONObject();
+    }
+
+    public static boolean isSuccessful() { // check whether the command was successful or not
+        return response.getString("type").equals(Responses.SUCCESS.getLabel());
     }
 }

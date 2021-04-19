@@ -8,6 +8,12 @@ public class User {
 //    private Deck activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
+
+    static {
+        users = new HashMap<>();
+        nicknames = new ArrayList<>();
+    }
+
     private String username;
     private String password;
     private String nickname;
@@ -27,10 +33,11 @@ public class User {
 //    public Deck getDeck(String title){}
 
     public User(String username, String password, String nickname) {
-
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        users.put(username, this);
+        nicknames.add(nickname);
     }
 
 //    public static void addUser(User user){}
@@ -45,7 +52,6 @@ public class User {
     }
 
     public static boolean isPasswordCorrect(String username, String password) {
-
         return users.get(username).password.equals(password);
     }
 

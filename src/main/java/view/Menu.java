@@ -5,7 +5,7 @@ import view.enums.Menus;
 
 public abstract class Menu {
 
-    String command, currentMenu;
+    protected String command, currentMenu, response;
 
     public void setCurrentMenu(Menus currentMenu) {
         this.currentMenu = currentMenu.getLabel();
