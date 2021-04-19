@@ -1,6 +1,7 @@
 package Controller;
 
 import org.json.JSONObject;
+import view.enums.Menus;
 
 public class MainController {
 
@@ -8,9 +9,12 @@ public class MainController {
 
         JSONObject request = new JSONObject(command);
 
-//        if (request.get("view").toString().equals(Menus.REGISTER_MENU.getLabel())){
-        // send request to login controller
-//        }
+        if (request.getString("view").equals(Menus.REGISTER_MENU.getLabel())) {
+
+            command = RegistrationController.processCommand(request);
+        }
+
+        request = new JSONObject(command);
 
         return "from server : " + request.toString();
 
