@@ -12,7 +12,7 @@ public class MainMenu extends Menu {
             response = "invalid command";
 
             if (command.matches(Regexes.MENU_ENTER.getLabel())) // menu enter
-                changeMenu(command.split("\\s+")[2]);
+                changeMenu(command.substring(11));
             else if (command.matches(Regexes.MENU_CURRENT.getLabel())) // show current menu
                 Console.print(currentMenu);
             else Console.print(Responses.INVALID_COMMAND.getLabel());
@@ -20,6 +20,9 @@ public class MainMenu extends Menu {
     }
 
     private void changeMenu(String destinationMenu) {
-        // To Do
+        System.out.println(destinationMenu);
+        if (destinationMenu.equals(Menus.SCOREBOARD_MENU.getLabel()))
+            new ScoreboardMenu().run();
+        else Console.print(Responses.INVALID_COMMAND.getLabel());
     }
 }

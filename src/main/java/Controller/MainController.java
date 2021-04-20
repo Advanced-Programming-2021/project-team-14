@@ -9,8 +9,11 @@ public class MainController {
 
         JSONObject request = new JSONObject(command);
 
-        if (request.getString("view").equals(Menus.REGISTER_MENU.getLabel()))
+        String view = request.getString("view");
+        if (view.equals(Menus.REGISTER_MENU.getLabel()))
             RegistrationController.processCommand(request);
+        else if (view.equals(Menus.SCOREBOARD_MENU.getLabel()))
+            ScoreboardController.processCommand(request);
 
         return Response.getResponse().toString();
 

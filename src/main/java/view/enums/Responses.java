@@ -2,7 +2,8 @@ package view.enums;
 
 public enum Responses {
     MENU_ENTER_NOT_ALLOWED("please login first"),
-    INVALID_COMMAND("invalid command"), SUCCESS("Successful");
+    INVALID_COMMAND("invalid command"), SUCCESS("Successful"),
+    NO_MORE_MENU("no more menu available");
 
 
     public final String label;

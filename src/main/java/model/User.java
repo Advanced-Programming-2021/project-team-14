@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class User {
     //    private Wallet wallet;
@@ -18,6 +19,7 @@ public class User {
     private String password;
     private String nickname;
     private int score;
+    private int rank;
 
 
 //    private HashMap<String, Deck> decks;
@@ -33,6 +35,9 @@ public class User {
 //    public Deck getDeck(String title){}
 
     public User(String username, String password, String nickname) {
+        Random random = new Random();
+        this.score = random.nextInt(5);
+
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -55,7 +60,28 @@ public class User {
         return users.get(username).password.equals(password);
     }
 
-//    public void changePassword(String CurrentPassword, String newPassword){}
+    public static ArrayList<User> getUsers() {
+        return new ArrayList<>(users.values());
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-3d | %-20s : %d", rank, nickname, score);
+    }
+
+    //    public void changePassword(String CurrentPassword, String newPassword){}
 //
 //    public void changeNickname(String newNickname){}
 //

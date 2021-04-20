@@ -2,7 +2,8 @@ package view.enums;
 
 public enum CommandTags {
     LOGIN("login"),
-    REGISTER("register");
+    REGISTER("register"),
+    SHOW_SCOREBOARD("scoreboard show");
     public final String label;
 
     CommandTags(String label) {
