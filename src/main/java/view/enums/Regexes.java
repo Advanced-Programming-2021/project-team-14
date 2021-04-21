@@ -6,6 +6,8 @@ public enum Regexes {
     MENU_ENTER("menu enter (.*)"),
     CREATE_USER("^user create (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+)))(?=.*(--(nickname) (\\w+))).*$"),
     LOGIN_USER("^user login (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+))).*$"),
+    CHANGE_PROFILE_NICKNAME("^profile change (?=.*(--(nickname) (\\w+))).*$"),
+    CHANGE_PROFILE_PASSWORD("^profile change --password (?=.*(--(current) (\\w+)))(?=.*(--(new) (\\w+))).*$"),
     DATA("--(\\w+) (\\w+)"),
     SHOW_SCOREBOARD("show scoreboard");
 

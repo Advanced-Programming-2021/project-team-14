@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.enums.CommandTags;
 import Controller.enums.Responses;
 import model.User;
 import org.json.JSONObject;
@@ -11,14 +12,15 @@ public class RegistrationController {
 
         String commandTag = request.getString("command");
 
-        if (commandTag.equals("login"))
+        if (commandTag.equals(CommandTags.LOGIN.getLabel()))
             login(request.getString("username"), request.getString("password"));
-        else if (commandTag.equals("register"))
+        else if (commandTag.equals(CommandTags.REGISTER.getLabel()))
             register(request.getString("username"), request.getString("password"), request.getString("nickname"));
 
     }
 
     private static void login(String username, String password) {
+
         if (doesUsernameExists(username))
             if (isPasswordCorrects(username, password)) {
                 Response.success();
@@ -35,6 +37,7 @@ public class RegistrationController {
 
 
     private static void register(String username, String password, String nickname) {
+
         if (!doesUsernameExists(username)) {
             if (!nicknameExists(nickname)) {
                 Response.success();
@@ -52,6 +55,7 @@ public class RegistrationController {
 
 
     private static boolean isPasswordCorrects(String username, String password) {
+
         return User.isPasswordCorrect(username, password);
     }
 

@@ -81,13 +81,22 @@ public class User {
         return String.format("%-3d | %-20s : %d", rank, nickname, score);
     }
 
-    //    public void changePassword(String CurrentPassword, String newPassword){}
-//
-//    public void changeNickname(String newNickname){}
-//
+    public static User getUserByName(String username) {
+        return users.get(username);
+    }
+
+    public void changePassword(String newPassword) {
+
+        this.password = newPassword;
+    }
 ////    public void buyCard(Card card){}
 //
-//    public static User getUserByName(String username) {
-//        return users.get(username);
-//    }
+
+    public void changeNickname(String newNickname) {
+
+        nicknames.remove(this.nickname);    // remove old nickname
+        nicknames.add(newNickname);         // add new nickname
+        this.nickname = newNickname;
+
+    }
 }

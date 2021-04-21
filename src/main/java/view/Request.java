@@ -22,10 +22,16 @@ public class Request {
     }
 
     public static void extractData(String command) { // extract data from the input with the "--key value" format
+
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
-        while (matcher.find())
+        while (matcher.find()) {
+
+            if (matcher.group(1).equals("username")) {
+                new Token(matcher.group(2));
+            }
             request.put(matcher.group(1), matcher.group(2));
+        }
     }
 
     public static void send() { // sending the request to the main controller
