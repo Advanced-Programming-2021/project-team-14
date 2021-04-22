@@ -12,6 +12,11 @@ import java.util.regex.Pattern;
 public class Request {
     private static JSONObject request = new JSONObject();
     private static JSONObject response;
+    private static String token = null;
+
+    public static void getToken() {
+        token = response.getString("token");
+    }
 
     public static void addData(String key, String value) { // adding data with key and value
         request.put(key, value);
@@ -22,29 +27,28 @@ public class Request {
     }
 
     public static void extractData(String command) { // extract data from the input with the "--key value" format
-
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
-        while (matcher.find()) {
-
-            if (matcher.group(1).equals("username")) {
-                new Token(matcher.group(2));
-            }
+        while (matcher.find())
             request.put(matcher.group(1), matcher.group(2));
-        }
     }
 
     public static void send() { // sending the request to the main controller
+        Request.setToken();
         response = new JSONObject(MainController.processCommand(request.toString()));
         clear();
     }
 
     public static String getResponse() {
-        return response.getString("message");
+        return response.toString();
     }
 
     public static void clear() {
         request = new JSONObject();
+    }
+
+    private static void setToken() {
+        request.put("token", token);
     }
 
     public static boolean isSuccessful() { // check whether the command was successful or not

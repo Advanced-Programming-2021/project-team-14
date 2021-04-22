@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class Response {
     private static JSONObject response = new JSONObject();
-
+    private static String token;
     public static void addMessage(String message) {
         response.put("message", message);
     }
@@ -21,5 +21,10 @@ public class Response {
 
     public static void error() {
         response.put("type", Responses.ERROR.getLabel());
+    }
+
+    public static void addToken(String generatedToken) {
+        token = generatedToken;
+        response.put("token", generatedToken);
     }
 }

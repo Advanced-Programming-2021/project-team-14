@@ -6,6 +6,7 @@ public enum CommandTags {
     CHANGE_PASSWORD("change-password"),
     CHANGE_NICKNAME("change-nickname"),
     SHOW_SCOREBOARD("scoreboard show");
+
     public final String label;
 
     CommandTags(String label) {

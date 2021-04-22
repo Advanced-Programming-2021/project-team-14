@@ -11,7 +11,6 @@ public class ProfileMenu extends Menu {
 
         while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())) {
             setCurrentMenu(Menus.PROFILE_MENU);
-            response = "invalid command";
 
             if (command.matches(Regexes.MENU_ENTER.getLabel()))                       // enter other menus
                 Console.print(Responses.MENU_ENTER_NOT_ALLOWED.getLabel());
@@ -23,7 +22,6 @@ public class ProfileMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
                 Request.extractData(command);
-                Request.addData("username", Token.getCurrentUser());
                 Request.send();
                 Console.print(Request.getResponse());
 
@@ -31,12 +29,10 @@ public class ProfileMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
                 Request.extractData(command);
-                Request.addData("username", Token.getCurrentUser());
                 Request.send();
                 Console.print(Request.getResponse());
             } else Console.print(Responses.INVALID_COMMAND.getLabel());
         }
 
-        new MainMenu().run();
     }
 }

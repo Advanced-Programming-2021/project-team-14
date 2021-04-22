@@ -11,7 +11,6 @@ public class RegistrationMenu extends Menu {
 
         while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())) {
             setCurrentMenu(Menus.REGISTER_MENU);
-            response = "invalid command";
 
             if (command.matches(Regexes.MENU_ENTER.getLabel()))     // enter other menus
                 Console.print(Responses.MENU_ENTER_NOT_ALLOWED.getLabel());
@@ -28,6 +27,7 @@ public class RegistrationMenu extends Menu {
                 Request.send();
                 Console.print(Request.getResponse());
                 if (Request.isSuccessful()) {
+                    Request.getToken();
                     new MainMenu().run();
                 }
             } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command

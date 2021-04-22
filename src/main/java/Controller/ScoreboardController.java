@@ -11,14 +11,14 @@ public class ScoreboardController {
         String commandTag = request.getString("command");
 
         if (commandTag.equals(CommandTags.SHOW_SCOREBOARD.getLabel()))
-            showScoreboard();
+            Response.addMessage(showScoreboard());
 
     }
 
-    private static void showScoreboard() {
+    private static String showScoreboard() {
         ScoreBoard.getInstance().updateScoreboard();
         Response.success();
-        Response.addMessage(ScoreBoard.getInstance().getScoreboard());
+        return ScoreBoard.getInstance().getScoreboard();
     }
 
 }

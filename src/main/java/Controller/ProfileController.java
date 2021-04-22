@@ -12,45 +12,41 @@ public class ProfileController {
         String commandTag = request.getString("command");
 
         if (commandTag.equals(CommandTags.CHANGE_PASSWORD.getLabel()))
-            changePass(request.getString("username"), request.getString("current"), request.getString("new"));
+            Response.addMessage(changePass(request.getString("token"), request.getString("current"), request.getString("new")));
         else if (commandTag.equals(CommandTags.CHANGE_NICKNAME.getLabel()))
-            changeNickname(request.getString("username"), request.getString("nickname"));
+            Response.addMessage(changeNickname(request.getString("token"), request.getString("nickname")));
 
     }
 
 
-    private static void changePass(String username, String currentPassword, String newPassword) {
+    private static String changePass(String username, String currentPassword, String newPassword) {
 
         if (isPasswordValid(username, currentPassword)) {         // if current password valid
             if (!currentPassword.equals(newPassword)) {
 
                 Response.success();
-                Response.addMessage(Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel());
                 User.getUserByName(username).changePassword(newPassword);
+                return Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel();
 
             } else {
                 Response.error();
-                Response.addMessage(Responses.NOT_NEW_PASSWORD.getLabel());
+                return Responses.NOT_NEW_PASSWORD.getLabel();
             }
-        } else {
-            Response.error();
-            Response.addMessage(Responses.INVALID_CURRENT_PASSWORD.getLabel());
         }
+        Response.error();
+        return Responses.INVALID_CURRENT_PASSWORD.getLabel();
     }
 
 
-    private static void changeNickname(String username, String newNickname) {
+    private static String changeNickname(String username, String newNickname) {
 
         if (!doesNicknameExists(newNickname)) {
-
             Response.success();
-            Response.addMessage(Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel());
             User.getUserByName(username).changeNickname(newNickname);
-
-        } else {
-            Response.error();
-            Response.addMessage("user with nickname " + newNickname + " already exists");
+            return Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel();
         }
+        Response.error();
+        return "user with nickname " + newNickname + " already exists";
     }
 
     private static boolean isPasswordValid(String username, String password) {

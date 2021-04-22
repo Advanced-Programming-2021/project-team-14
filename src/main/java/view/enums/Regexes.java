@@ -9,6 +9,7 @@ public enum Regexes {
     CHANGE_PROFILE_NICKNAME("^profile change (?=.*(--(nickname) (\\w+))).*$"),
     CHANGE_PROFILE_PASSWORD("^profile change --password (?=.*(--(current) (\\w+)))(?=.*(--(new) (\\w+))).*$"),
     DATA("--(\\w+) (\\w+)"),
+    LOGOUT("logout"),
     SHOW_SCOREBOARD("show scoreboard");
 
     public final String label;

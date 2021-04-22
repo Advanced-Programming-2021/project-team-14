@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 public class User {
     //    private Wallet wallet;
@@ -35,18 +34,22 @@ public class User {
 //    public Deck getDeck(String title){}
 
     public User(String username, String password, String nickname) {
-        Random random = new Random();
-        this.score = random.nextInt(5);
-
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         users.put(username, this);
         nicknames.add(nickname);
+//        Database.saveUserInDatabase(this);
     }
 
-//    public static void addUser(User user){}
+    public static void addUser(User user) {
+        users.put(user.getUsername(), user);
+        nicknames.add(user.getNickname());
+    }
 
+    public String getUsername() {
+        return username;
+    }
 
     public static boolean doesUsernameExist(String username) {
         return users.containsKey(username);
@@ -86,17 +89,13 @@ public class User {
     }
 
     public void changePassword(String newPassword) {
-
         this.password = newPassword;
     }
-////    public void buyCard(Card card){}
-//
+
 
     public void changeNickname(String newNickname) {
-
         nicknames.remove(this.nickname);    // remove old nickname
         nicknames.add(newNickname);         // add new nickname
         this.nickname = newNickname;
-
     }
 }

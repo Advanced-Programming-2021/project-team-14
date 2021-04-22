@@ -13,43 +13,44 @@ public class RegistrationController {
         String commandTag = request.getString("command");
 
         if (commandTag.equals(CommandTags.LOGIN.getLabel()))
-            login(request.getString("username"), request.getString("password"));
+            Response.addMessage(login(request.getString("username"), request.getString("password")));
         else if (commandTag.equals(CommandTags.REGISTER.getLabel()))
-            register(request.getString("username"), request.getString("password"), request.getString("nickname"));
+            Response.addMessage(register(request.getString("username"), request.getString("password"), request.getString("nickname")));
 
     }
 
-    private static void login(String username, String password) {
+    private static String login(String username, String password) {
 
         if (doesUsernameExists(username))
             if (isPasswordCorrects(username, password)) {
                 Response.success();
-                Response.addMessage(Responses.LOGIN_SUCCESSFUL.getLabel());
+                Response.addToken(username);
+                return Responses.LOGIN_SUCCESSFUL.getLabel();
             } else {
                 Response.error();
-                Response.addMessage(Responses.WRONG_PASSWORD.getLabel());
+                return Responses.WRONG_PASSWORD.getLabel();
             }
         else {
             Response.error();
-            Response.addMessage(Responses.WRONG_PASSWORD.getLabel());
+            return Responses.WRONG_PASSWORD.getLabel();
         }
     }
 
 
-    private static void register(String username, String password, String nickname) {
+    private static String register(String username, String password, String nickname) {
 
         if (!doesUsernameExists(username)) {
             if (!nicknameExists(nickname)) {
                 Response.success();
                 new User(username, password, nickname); // add new user
-                Response.addMessage(Responses.REGISTER_SUCCESSFUL.getLabel());
+                return Responses.REGISTER_SUCCESSFUL.getLabel();
             } else {
                 Response.error();
-                Response.addMessage("user with nickname " + nickname + " already exists");
+                return "user with nickname " + nickname + " already exists";
             }
         } else {
             Response.error();
-            Response.addMessage("user with username " + username + " already exists");
+            return "user with username " + username + " already exists";
         }
     }
 
