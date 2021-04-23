@@ -17,11 +17,14 @@ public class RegistrationMenu extends Menu {
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))  // show current menu
                 Console.print(currentMenu);
             else if (command.matches(Regexes.CREATE_USER.getLabel())) {  // register ...
+
                 Request.setCommandTag(CommandTags.REGISTER);
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getResponse());
+
             } else if (command.matches(Regexes.LOGIN_USER.getLabel())) {  // log in ...
+
                 Request.setCommandTag(CommandTags.LOGIN);
                 Request.extractData(command);
                 Request.send();
@@ -30,6 +33,7 @@ public class RegistrationMenu extends Menu {
                     Request.getToken();
                     new MainMenu().run();
                 }
+
             } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
         }

@@ -28,6 +28,10 @@ public class MainMenu extends Menu {
             new ScoreboardMenu().run();
         } else if (destinationMenu.equals(Menus.PROFILE_MENU.getLabel())) {
             new ProfileMenu().run();
+        } else if (destinationMenu.equals(Menus.DECK_MENU.getLabel())) {
+            new DeckMenu().run();
+        } else if (destinationMenu.equals(Menus.SHOP_MENU.getLabel())) {
+//            new ShopMenu().run();
         } else {
             Console.print(Responses.INVALID_COMMAND.getLabel());
         }

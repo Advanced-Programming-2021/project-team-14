@@ -4,6 +4,8 @@ public enum Menus {
     REGISTER_MENU("Register Menu"),
     PROFILE_MENU("Profile Menu"),
     MAIN_MENU("Main Menu"),
+    DECK_MENU("Deck Menu"),
+    SHOP_MENU("Shop Menu"),
     SCOREBOARD_MENU("Scoreboard Menu");
     public final String label;
 

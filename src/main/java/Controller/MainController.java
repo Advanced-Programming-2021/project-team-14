@@ -16,8 +16,9 @@ public class MainController {
             ScoreboardController.processCommand(request);
         } else if (view.equals(Menus.PROFILE_MENU.getLabel())) {
             ProfileController.processCommand(request);
+        } else if (view.equals(Menus.DECK_MENU.getLabel())) {
+            DeckController.processCommand(request);
         }
-        System.out.println(Response.getResponse().toString());
         return Response.getResponse().toString();
 
     }

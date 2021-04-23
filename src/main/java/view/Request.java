@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Request {
+
     private static JSONObject request = new JSONObject();
     private static JSONObject response;
     private static String token = null;
@@ -24,6 +25,14 @@ public class Request {
 
     public static void setCommandTag(CommandTags commandTag) { // set the request main command
         request.put("command", commandTag.getLabel());
+    }
+
+    public static void checkOption(String command) { // extract option if available
+
+        Pattern pattern = Pattern.compile(Regexes.OPTION.getLabel());
+        Matcher matcher = pattern.matcher(command);
+        while (matcher.find())
+            request.put("option", matcher.group(1));
     }
 
     public static void extractData(String command) { // extract data from the input with the "--key value" format

@@ -12,13 +12,13 @@ public class ProfileMenu extends Menu {
         while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())) {
             setCurrentMenu(Menus.PROFILE_MENU);
 
-            if (command.matches(Regexes.MENU_ENTER.getLabel()))                       // enter other menus
-                Console.print(Responses.MENU_ENTER_NOT_ALLOWED.getLabel());
+            if (command.matches(Regexes.MENU_ENTER.getLabel()))                           // enter other menus
+                Console.print(Responses.IMPOSSIBLE_MENU_NAVIGATION.getLabel());
 
-            else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                // show current menu
+            else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                    // show current menu
                 Console.print(currentMenu);
 
-            else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {    // change profile nickname
+            else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {       // change profile nickname
 
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
                 Request.extractData(command);
@@ -31,6 +31,7 @@ public class ProfileMenu extends Menu {
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getResponse());
+
             } else Console.print(Responses.INVALID_COMMAND.getLabel());
         }
 

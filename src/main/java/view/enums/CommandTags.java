@@ -1,8 +1,17 @@
 package view.enums;
 
 public enum CommandTags {
+
     LOGIN("login"),
     REGISTER("register"),
+    CREATE_DECK("create-deck"),
+    DELETE_DECK("delete-deck"),
+    ACTIVATE_DECK("activate-deck"),
+    ADD_CARD("add-card"),
+    REMOVE_CARD("remove-card"),
+    SHOW_ALL_DECKS("show-all-decks"),
+    SHOW_DECK("show-deck"),
+    SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
     CHANGE_NICKNAME("change-nickname"),
     SHOW_SCOREBOARD("scoreboard show");
