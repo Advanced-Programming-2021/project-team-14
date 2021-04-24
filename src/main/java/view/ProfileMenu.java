@@ -17,7 +17,6 @@ public class ProfileMenu extends Menu {
 
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                // show current menu
                 Console.print(currentMenu);
-
             else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {    // change profile nickname
 
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);

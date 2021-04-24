@@ -13,7 +13,6 @@ public class User {
         users = new HashMap<>();
         nicknames = new ArrayList<>();
     }
-
     private String username;
     private String password;
     private String nickname;
