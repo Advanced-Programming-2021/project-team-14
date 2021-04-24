@@ -1,4 +1,4 @@
-package view.enums;
+package Controller.enums;
 
 public enum CommandTags {
 
@@ -13,9 +13,7 @@ public enum CommandTags {
     SHOW_DECK("show-deck"),
     SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
-    CHANGE_NICKNAME("change-nickname"),
-    SHOW_SCOREBOARD("scoreboard show");
-
+    CHANGE_NICKNAME("change-nickname");
     public final String label;
 
     CommandTags(String label) {

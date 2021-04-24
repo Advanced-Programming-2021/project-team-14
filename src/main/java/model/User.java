@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
-    //    private Wallet wallet;
-//    private Deck activeDeck;
+
+    private Wallet wallet;
+    private Deck activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
 
@@ -41,6 +42,13 @@ public class User {
 //        Database.saveUserInDatabase(this);
     }
 
+
+    public static void setActiveDeck(String username, String deckName) {
+
+        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+    }
+
+
     public static void addUser(User user) {
         users.put(user.getUsername(), user);
         nicknames.add(user.getNickname());
@@ -68,6 +76,10 @@ public class User {
 
     public int getScore() {
         return this.score;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 
     public String getNickname() {

@@ -12,7 +12,7 @@ public class ScoreboardMenu extends Menu {
             setCurrentMenu(Menus.SCOREBOARD_MENU);
 
             if (command.matches(Regexes.MENU_ENTER.getLabel()))    // enter other menus
-                Console.print(Responses.NO_MORE_MENU.getLabel());
+                Console.print(Responses.IMPOSSIBLE_MENU_NAVIGATION.getLabel());
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))  // show current menu
                 Console.print(currentMenu);
             else if (command.matches(Regexes.SHOW_SCOREBOARD.getLabel())) { // show scoreboard
