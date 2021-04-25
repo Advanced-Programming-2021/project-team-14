@@ -13,7 +13,8 @@ public enum CommandTags {
     SHOW_DECK("show-deck"),
     SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
-    CHANGE_NICKNAME("change-nickname");
+    CHANGE_NICKNAME("change-nickname"),
+    SIDE("side");
     public final String label;
 
     CommandTags(String label) {

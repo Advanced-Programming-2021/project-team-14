@@ -46,7 +46,7 @@ public class ProfileController {
             return Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel();
         }
         Response.error();
-        return "user with nickname " + newNickname + " already exists";
+        return String.format(Responses.NICKNAME_ALREADY_EXIST.getLabel(), newNickname);
     }
 
     private static boolean isPasswordValid(String username, String password) {

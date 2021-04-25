@@ -46,11 +46,11 @@ public class RegistrationController {
                 return Responses.REGISTER_SUCCESSFUL.getLabel();
             } else {
                 Response.error();
-                return "user with nickname " + nickname + " already exists";
+                return String.format(Responses.NICKNAME_ALREADY_EXIST.getLabel(), nickname);
             }
         } else {
             Response.error();
-            return "user with username " + username + " already exists";
+            return String.format(Responses.USERNAME_ALREADY_EXIST.getLabel(), username);
         }
     }
 

@@ -71,9 +71,6 @@ public class Deck {
         return decks.get(deckName);
     }
 
-    public static boolean doesDeckExist(String deckName) {
-        return decks.containsKey(deckName);
-    }
 
     public void addCard(Card card, String option) {
         if (option.equals("side")) {

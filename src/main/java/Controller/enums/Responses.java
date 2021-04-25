@@ -14,7 +14,17 @@ public enum Responses {
     INVALID_CURRENT_PASSWORD("current password is invalid"),
     NOT_NEW_PASSWORD("please enter a new password"),
     SUCCESS("Successful"),
-    ERROR("Error");
+    ERROR("Error"),
+    DECK_NOT_EXIST("deck with name %s does not exist"),
+    DECK_ALREADY_EXIST("deck with name %s already exists"),
+    CARD_NOT_EXIST("card with name %s does not exist"),
+    CARD_NOT_EXIST_IN_DECK("card with name %s does not exist in %s deck"),
+    CARD_ALREADY_EXIST("card with name %s already exists"),
+    ENOUGH_CARDS("there are already three cards with name %s in deck %s"),
+    NICKNAME_ALREADY_EXIST("user with nickname %s already exists"),
+    USERNAME_ALREADY_EXIST("user with username %s already exists"),
+    SIDE_DECK_IS_FULL("side deck is full"),
+    MAIN_DECK_IS_FULL("main deck is full");
 
 
     public final String label;

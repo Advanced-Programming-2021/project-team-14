@@ -9,11 +9,13 @@ public class User {
     private Deck activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
+    private HashMap<String, Deck> decks = new HashMap<>();
 
     static {
         users = new HashMap<>();
         nicknames = new ArrayList<>();
     }
+
     private String username;
     private String password;
     private String nickname;
@@ -21,9 +23,9 @@ public class User {
     private int rank;
 
 
-//    private HashMap<String, Deck> decks;
-
-//    public boolean doesDeckExist(String title){}
+    public boolean doesDeckExist(String deckName) {
+        return decks.containsKey(deckName);
+    }
 //
 //    public void addDeck(String title){}
 //
@@ -53,6 +55,7 @@ public class User {
         users.put(user.getUsername(), user);
         nicknames.add(user.getNickname());
     }
+
 
     public String getUsername() {
         return username;
