@@ -26,10 +26,20 @@ public class User {
     public boolean doesDeckExist(String deckName) {
         return decks.containsKey(deckName);
     }
-//
-//    public void addDeck(String title){}
-//
-//    public void removeDeck(String title){}
+
+
+    public void addDeck(String deckName) {
+
+        new Deck(deckName);
+        decks.put(deckName, Deck.getDeckByName(deckName));
+    }
+
+
+    public void removeDeck(String deckName) {
+        decks.remove(deckName);
+        Deck.getDeckByName(deckName).removeDeck(deckName);              // remove card from deck
+    }
+
 //
 //    public String showDecks(){}
 

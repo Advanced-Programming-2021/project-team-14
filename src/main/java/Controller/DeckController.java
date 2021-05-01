@@ -35,8 +35,9 @@ public class DeckController {
                     request.getString("token")));
 
 //        else if (commandTag.equals(CommandTags.SHOW_ALL_DECKS.getLabel()))
-//            Response.addMessage(showAllDecks(request.getString("deck-name")));
-//
+//            Response.addMessage(showAllDecks());
+
+
 //        else if (commandTag.equals(CommandTags.SHOW_DECK.getLabel()))
 //            Response.addMessage(showDeck(request.getString("deck-name")));
     }
@@ -47,7 +48,7 @@ public class DeckController {
         if (!user.doesDeckExist(deckName)) {
 
             Response.success();
-            new Deck(deckName);
+            user.addDeck(deckName);
             return Responses.CREATE_DECK_SUCCESSFUL.getLabel();
 
         }
@@ -62,7 +63,7 @@ public class DeckController {
         if (user.doesDeckExist(deckName)) {
 
             Response.success();
-            Deck.removeDeck(deckName);
+            user.removeDeck(deckName);
             return Responses.DELETE_DECK_SUCCESSFUL.getLabel();
 
         }
@@ -138,11 +139,12 @@ public class DeckController {
     }
 
 
-//    private static String showAllDecks(String title) {
+//    private static String showAllDecks() {
+//
 //
 //    }
-//
-//
+
+
 //    private static String showDeck(String title) {
 //
 //    }

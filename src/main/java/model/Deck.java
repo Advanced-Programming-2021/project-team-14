@@ -15,9 +15,9 @@ public class Deck {
     private ArrayList<Card> sideCards;
     private ArrayList<Card> mainCards;
 
-    public Deck(String name) {
+    public Deck(String deckName) {
 
-        this.name = name;
+        this.name = deckName;
         decks.put(name, this);
     }
 
@@ -46,9 +46,6 @@ public class Deck {
         }
     }
 
-    public static void removeDeck(String deckName) {
-        decks.remove(deckName);
-    }
 
     public static int getNumberOfCardInDeck(String cardName, String deckName) {
 
@@ -69,6 +66,16 @@ public class Deck {
 
     public static Deck getDeckByName(String deckName) {
         return decks.get(deckName);
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void removeDeck(String deckName) {
+        decks.remove(deckName);
     }
 
 
