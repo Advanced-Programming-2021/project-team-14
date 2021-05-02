@@ -35,12 +35,18 @@ public class User {
     }
 
 
+    public static void setActiveDeck(String username, String deckName) {
+
+        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+        Deck.getDeckByName(deckName).setActiveDeck(true);
+    }
+
     public void removeDeck(String deckName) {
         decks.remove(deckName);
         Deck.getDeckByName(deckName).removeDeck(deckName);              // remove card from deck
     }
 
-//
+    //
 //    public String showDecks(){}
 
 //    public Deck getDeck(String title){}
@@ -54,10 +60,8 @@ public class User {
 //        Database.saveUserInDatabase(this);
     }
 
-
-    public static void setActiveDeck(String username, String deckName) {
-
-        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+    public HashMap<String, Deck> getDecks() {
+        return decks;
     }
 
 

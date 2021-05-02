@@ -6,6 +6,9 @@ import java.util.HashMap;
 public class Deck {
 
     private static HashMap<String, Deck> decks;
+    private ArrayList<String> cardNames = new ArrayList<>();
+    private boolean isActive;
+    private boolean isValid;
 
     static {
         decks = new HashMap<>();
@@ -18,6 +21,8 @@ public class Deck {
     public Deck(String deckName) {
 
         this.name = deckName;
+        isActive = false;
+        isValid = false;
         decks.put(name, this);
     }
 
@@ -30,10 +35,8 @@ public class Deck {
         }
     }
 
-//    public void removeCard(Card card){}
 //    public boolean isFrequencyValid(Card card){}
 //    public String showDeck(){}
-//    public boolean isValid(){}
 //    public boolean isFull(){}
 //    public void shuffle(){}
 //    public Card drawOneCard(){}
@@ -69,6 +72,10 @@ public class Deck {
     }
 
 
+    public ArrayList<String> getCardNames() {
+        return cardNames;
+    }
+
     public String getName() {
         return name;
     }
@@ -79,7 +86,38 @@ public class Deck {
     }
 
 
+    public ArrayList<Card> getCards(String option) {
+
+        if (option.equals("side")) {
+            return sideCards;
+        }
+        return mainCards;
+    }
+
+    public boolean isValid() {
+
+        return this.getCards("main").size() >= 40;
+    }
+
+    public void setActiveDeck(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
     public void addCard(Card card, String option) {
+        cardNames.add(card.getName());
+        if (option.equals("side")) {
+            sideCards.add(card);
+        } else {
+            mainCards.add(card);
+        }
+    }
+
+    public void removeCard(Card card, String option) {
+        cardNames.remove(card.getName());
         if (option.equals("side")) {
             sideCards.add(card);
         } else {

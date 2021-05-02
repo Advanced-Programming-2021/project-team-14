@@ -3,9 +3,12 @@ package Controller;
 import Controller.enums.CommandTags;
 import Controller.enums.Responses;
 import model.Card;
+import model.CardTypes;
 import model.Deck;
 import model.User;
 import org.json.JSONObject;
+
+import java.util.Collections;
 
 public class DeckController {
 
@@ -34,12 +37,12 @@ public class DeckController {
                     request.getString("option"),
                     request.getString("token")));
 
-//        else if (commandTag.equals(CommandTags.SHOW_ALL_DECKS.getLabel()))
-//            Response.addMessage(showAllDecks());
+        else if (commandTag.equals(CommandTags.SHOW_ALL_DECKS.getLabel()))
+            Response.addMessage(showAllDecks(request.getString("token")));
 
 
-//        else if (commandTag.equals(CommandTags.SHOW_DECK.getLabel()))
-//            Response.addMessage(showDeck(request.getString("deck-name")));
+        else if (commandTag.equals(CommandTags.SHOW_DECK.getLabel()))
+            Response.addMessage(showDeck(request.getString("deck-name"), request.getString("option")));
     }
 
     private static String createDeck(String deckName, String username) {
@@ -124,10 +127,11 @@ public class DeckController {
         User user = User.getUserByName(username);
         Card card = Card.getCardByName(cardName);
         if (user.doesDeckExist(deckName)) {
+            Deck deck = Deck.getDeckByName(deckName);
             if (Deck.doesCardAvailableInDeck(cardName, deckName, option)) {
                 Response.success();
-                user.getWallet().removeCard(card);
-                User.setActiveDeck(username, deckName);
+                deck.removeCard(card, option);
+                user.getWallet().addCard(card);
                 return Responses.REMOVE_CARD_SUCCESSFUL.getLabel();
 
             }
@@ -139,15 +143,82 @@ public class DeckController {
     }
 
 
-//    private static String showAllDecks() {
-//
-//
-//    }
+    private static String showAllDecks(String username) {
+
+        User user = User.getUserByName(username);
+        String decksTitle = "Decks:";
+        String activeDecksTitle = "Active deck:";
+        String activeDecks = "";
+        String otherDecksTitle = "Other decks:";
+        String otherDecks = "";
+        for (Deck deck : user.getDecks().values()) {
+            if (deck.isActive()) {
+                activeDecks = collectDecks(deck);
+            } else {
+                otherDecks = collectDecks(deck);
+            }
+        }
+
+        return decksTitle + "\n" + activeDecksTitle + "\n" + activeDecks + "\n" + otherDecksTitle + "\n" + otherDecks;
+    }
 
 
-//    private static String showDeck(String title) {
-//
-//    }
+    private static String collectDecks(Deck deck) {
+
+        String deckName = deck.getName();
+        String mainDeckPart = "main deck";
+        String sideDeckPart = "side deck";
+        int mainDeckNumberOfCards = deck.getCards("main").size();
+        int sideDeckNumberOfCards = deck.getCards("side").size();
+        String validity;
+        if (deck.isValid()) {
+            validity = "valid";
+        } else {
+            validity = "invalid";
+        }
+
+        return deckName + ": " + mainDeckPart + " " + mainDeckNumberOfCards + ", " + sideDeckPart + " " +
+                sideDeckNumberOfCards + ", " + validity;
+    }
+
+
+    private static String showDeck(String deckName, String option) {
+
+        Deck deck = Deck.getDeckByName(deckName);
+        String deckNamePart = String.format("Deck: %s\n", deckName);
+        String optionPart;
+        if (option.equals("side")) {
+            optionPart = "Side deck:\n";
+        } else {
+            optionPart = "Main deck:\n";
+        }
+
+        String monsterPart = "Monsters:";
+        String monsterCards = "";
+        Collections.sort(deck.getCardNames());
+
+        monsterCards = collectCards(CardTypes.MONSTER, CardTypes.MONSTER, deck);
+
+        String trapSpellPart = "Spell and Traps:";
+        String spellAndTrapCards = "";
+        trapSpellPart = collectCards(CardTypes.SPELL, CardTypes.TRAP, deck);
+
+        return deckNamePart + optionPart + monsterPart + monsterCards + trapSpellPart + spellAndTrapCards;
+    }
+
+
+    private static String collectCards(CardTypes cardType1, CardTypes cardType2, Deck deck) {
+
+        String monsterCards = "";
+        for (String cardName : deck.getCardNames()) {
+
+            if (Card.getCardByName(cardName).getType().equals(cardType1) ||
+                    Card.getCardByName(cardName).getType().equals(cardType2)) {
+                monsterCards += cardName + ": " + Card.getCardByName(cardName).getDescription() + "\n";
+            }
+        }
+        return monsterCards;
+    }
 
 
     private static boolean canAddCard(String deckName, String cardName) {

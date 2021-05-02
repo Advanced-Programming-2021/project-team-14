@@ -31,5 +31,13 @@ public class Card {
         return this.name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public CardTypes getType() {
+        return type;
+    }
+
     // toString ...
 }
