@@ -6,9 +6,10 @@ import java.util.HashMap;
 public class User {
 
     private Wallet wallet;
-//    private Deck activeDeck;
+    private Deck activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
+    private HashMap<String, Deck> decks = new HashMap<>();
 
     static {
         users = new HashMap<>();
@@ -21,14 +22,30 @@ public class User {
     private int rank;
 
 
-//    private HashMap<String, Deck> decks;
+    public boolean doesDeckExist(String deckName) {
+        return decks.containsKey(deckName);
+    }
 
-//    public boolean doesDeckExist(String title){}
-//
-//    public void addDeck(String title){}
-//
-//    public void removeDeck(String title){}
-//
+
+    public void addDeck(String deckName) {
+
+        new Deck(deckName);
+        decks.put(deckName, Deck.getDeckByName(deckName));
+    }
+
+
+    public static void setActiveDeck(String username, String deckName) {
+
+        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+        Deck.getDeckByName(deckName).setActiveDeck(true);
+    }
+
+    public void removeDeck(String deckName) {
+        decks.remove(deckName);
+        Deck.getDeckByName(deckName).removeDeck(deckName);              // remove card from deck
+    }
+
+    //
 //    public String showDecks(){}
 
 //    public Deck getDeck(String title){}
@@ -43,10 +60,10 @@ public class User {
     }
 
 
-//    public static void setActiveDeck(String username, String deckName) {
-//
-//        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
-//    }
+    public static void setActiveDeck(String username, String deckName) {
+
+        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+    }
 
 
     public static void addUser(User user) {

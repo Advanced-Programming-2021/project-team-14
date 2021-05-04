@@ -11,13 +11,13 @@ public enum Regexes {
     CREATE_DECK("deck create (\\w+)"),
     DELETE_DECK("deck delete (\\w+)"),
     ACTIVATE_DECK("deck set-activate (.*)"),
-    ADD_CARD("^deck add-card (?=.*(--(card) ([a-zA-Z\\-]+)))(?=.*(--(deck) ([a-zA-Z\\-]+)))(?=.*(--(side))).*$"),
-    REMOVE_CARD("^deck rm-card (?=.*(--(card) ([a-zA-Z\\-]+)))(?=.*(--(deck) ([a-zA-Z\\-]+)))(?=.*(--(side))).*$"),
+    ADD_CARD("^deck add-card (?=.*(--(card) ([\\w\\-]+)))(?=.*(--(deck) ([\\w\\-]+)))(?=.*(--(side))).*$"),
+    REMOVE_CARD("^deck rm-card (?=.*(--(card) ([\\w\\-]+)))(?=.*(--(deck) ([\\w\\-]+)))(?=.*(--(side))).*$"),
     SHOW_ALL_DECKS("deck show --all"),
-    SHOW_DECK("^deck show (?=.*(--(deck-name) ([a-zA-Z\\-]+)))(?=.*(--(side))).*$"),
+    SHOW_DECK("^deck show (?=.*(--(deck-name) ([\\w\\-]+)))(?=.*(--(side))).*$"),
     SHOW_CARDS("deck show --cards"),
-    OPTION("--([a-zA-Z\\-]+)$"),
-    DATA("--([a-zA-Z\\-]+) (\\w+)"),
+    OPTION("--([\\w\\-]+)\\b(\\s+--([\\w\\-]+)|$)"),
+    DATA("--([\\w\\-]+) (\\w+)"),
     LOGOUT("logout"),
     SHOW_SCOREBOARD("show scoreboard");
 
