@@ -24,7 +24,8 @@ public enum Responses {
     NICKNAME_ALREADY_EXIST("user with nickname %s already exists"),
     USERNAME_ALREADY_EXIST("user with username %s already exists"),
     SIDE_DECK_IS_FULL("side deck is full"),
-    MAIN_DECK_IS_FULL("main deck is full");
+    MAIN_DECK_IS_FULL("main deck is full"),
+    DECK_SHOW("%s: mainDeck %d, sideDeck %d, %s");
 
 
     public final String label;

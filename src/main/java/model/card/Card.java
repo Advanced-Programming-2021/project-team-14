@@ -27,7 +27,20 @@ public abstract class Card {
         cards.put(card.getName(), card);
     }
 
+    public static Card getCardByName(String cardName) {
+        return cards.get(cardName);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public CardType getCardType() {
+        return cardType;
+    }
+
     public String getName() {
         return name;
     }
+
 }

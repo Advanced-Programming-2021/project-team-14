@@ -6,69 +6,68 @@ import java.util.HashMap;
 public class User {
 
     private Wallet wallet;
-    private Deck activeDeck;
+    private String activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
-    private HashMap<String, Deck> decks = new HashMap<>();
+    private HashMap<String, Deck> decks;
 
     static {
         users = new HashMap<>();
         nicknames = new ArrayList<>();
     }
+
     private String username;
     private String password;
     private String nickname;
     private int score;
     private int rank;
 
+    public User(String username, String password, String nickname) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.wallet = new Wallet();
+        users.put(username, this);
+        nicknames.add(nickname);
+        this.decks = new HashMap<>();
+        updateDatabase();
+    }
 
     public boolean doesDeckExist(String deckName) {
         return decks.containsKey(deckName);
     }
 
 
-    public void addDeck(String deckName) {
-
-        new Deck(deckName);
-        decks.put(deckName, Deck.getDeckByName(deckName));
+    public User(User user) {
+        users.put(user.getUsername(), user);
     }
 
-
-    public static void setActiveDeck(String username, String deckName) {
-
-        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
-        Deck.getDeckByName(deckName).setActiveDeck(true);
-    }
 
     public void removeDeck(String deckName) {
         decks.remove(deckName);
-        Deck.getDeckByName(deckName).removeDeck(deckName);              // remove card from deck
     }
-
-    //
 //    public String showDecks(){}
 
 //    public Deck getDeck(String title){}
 
-    public User(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        users.put(username, this);
-        nicknames.add(nickname);
+    public static void addUser(User user) {
+        new User(user);
+    }
+
+    public HashMap<String, Deck> getDecks() {
+        return decks;
+    }
+
+    public void addDeck(String deckName) {
+        decks.put(deckName, new Deck(deckName));
+    }
+
+    public void updateDatabase() {
         Database.saveUserInDatabase(this);
     }
 
-
-    public static void setActiveDeck(String username, String deckName) {
-
-        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
-    }
-
-
-    public static void addUser(User user) {
-        users.put(user.getUsername(), user);
-        nicknames.add(user.getNickname());
+    public void setActiveDeck(String deckName) {
+        this.activeDeck = deckName;
     }
 
     public String getUsername() {
@@ -125,5 +124,9 @@ public class User {
         nicknames.remove(this.nickname);    // remove old nickname
         nicknames.add(newNickname);         // add new nickname
         this.nickname = newNickname;
+    }
+
+    public Deck getDeck(String deckName) {
+        return decks.get(deckName);
     }
 }
