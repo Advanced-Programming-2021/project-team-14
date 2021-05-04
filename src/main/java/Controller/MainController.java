@@ -1,6 +1,7 @@
 package Controller;
 
 import org.json.JSONObject;
+import view.Logger;
 import view.enums.Menus;
 
 public class MainController {
@@ -16,9 +17,12 @@ public class MainController {
             ScoreboardController.processCommand(request);
         } else if (view.equals(Menus.PROFILE_MENU.getLabel())) {
             ProfileController.processCommand(request);
-        } else if (view.equals(Menus.DECK_MENU.getLabel())) {
-            DeckController.processCommand(request);
         }
+//        } else if (view.equals(Menus.DECK_MENU.getLabel())) {
+//            DeckController.processCommand(request);
+//        }
+
+        Logger.log("server", Response.getResponse().toString());
         return Response.getResponse().toString();
 
     }

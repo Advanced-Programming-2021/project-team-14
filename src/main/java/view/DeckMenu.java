@@ -83,7 +83,6 @@ public class DeckMenu extends Menu {
     }
 
     private void addDataToRequest(String regex, String command, String key) {
-
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(command);
         if (matcher.find()) {

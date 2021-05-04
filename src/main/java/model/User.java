@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class User {
 
     private Wallet wallet;
-    private Deck activeDeck;
+//    private Deck activeDeck;
     private static HashMap<String, User> users;
     private static ArrayList<String> nicknames;
 
@@ -39,14 +39,14 @@ public class User {
         this.nickname = nickname;
         users.put(username, this);
         nicknames.add(nickname);
-//        Database.saveUserInDatabase(this);
+        Database.saveUserInDatabase(this);
     }
 
 
-    public static void setActiveDeck(String username, String deckName) {
-
-        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
-    }
+//    public static void setActiveDeck(String username, String deckName) {
+//
+//        User.getUserByName(username).activeDeck = Deck.getDeckByName(deckName);
+//    }
 
 
     public static void addUser(User user) {

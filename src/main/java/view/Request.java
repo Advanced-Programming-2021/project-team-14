@@ -28,7 +28,6 @@ public class Request {
     }
 
     public static void checkOption(String command) { // extract option if available
-
         Pattern pattern = Pattern.compile(Regexes.OPTION.getLabel());
         Matcher matcher = pattern.matcher(command);
         while (matcher.find())
@@ -44,12 +43,13 @@ public class Request {
 
     public static void send() { // sending the request to the main controller
         Request.setToken();
+        Logger.log("client", request.toString());
         response = new JSONObject(MainController.processCommand(request.toString()));
         clear();
     }
 
     public static String getResponse() {
-        return response.toString();
+        return response.getString("message");
     }
 
     public static void clear() {
