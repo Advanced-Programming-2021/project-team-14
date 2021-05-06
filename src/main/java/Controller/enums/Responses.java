@@ -25,7 +25,9 @@ public enum Responses {
     USERNAME_ALREADY_EXIST("user with username %s already exists"),
     SIDE_DECK_IS_FULL("side deck is full"),
     MAIN_DECK_IS_FULL("main deck is full"),
-    DECK_SHOW("%s: mainDeck %d, sideDeck %d, %s");
+    THERE_IS_NO_CARD_WITH_THIS_NAME("there is no card with this name"),
+    NOT_ENOUGH_MONEY("not enough money"),
+    CARD_BOUGHT_SUCCESSFULLY("card added to your wallet successfully!");
 
 
     public final String label;

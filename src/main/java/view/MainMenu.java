@@ -31,7 +31,7 @@ public class MainMenu extends Menu {
         } else if (destinationMenu.equals(Menus.DECK_MENU.getLabel())) {
             new DeckMenu().run();
         } else if (destinationMenu.equals(Menus.SHOP_MENU.getLabel())) {
-//            new ShopMenu().run();
+            new ShopMenu().run();
         } else {
             Console.print(Responses.INVALID_COMMAND.getLabel());
         }

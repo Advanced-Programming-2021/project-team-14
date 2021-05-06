@@ -63,4 +63,12 @@ public class Request {
     public static boolean isSuccessful() { // check whether the command was successful or not
         return response.getString("type").equals(Responses.SUCCESS.getLabel());
     }
+
+    public static void addDataToRequest(String regex, String command, String key) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(command);
+        if (matcher.find()) {
+            Request.addData(key, matcher.group(1));
+        }
+    }
 }

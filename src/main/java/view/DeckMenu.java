@@ -23,21 +23,21 @@ public class DeckMenu extends Menu {
             else if (command.matches(Regexes.CREATE_DECK.getLabel())) {     // create deck ...
 
                 Request.setCommandTag(CommandTags.CREATE_DECK);
-                addDataToRequest(Regexes.CREATE_DECK.getLabel(), command, "deck");
+                Request.addDataToRequest(Regexes.CREATE_DECK.getLabel(), command, "deck");
                 Request.send();
                 Console.print(Request.getResponse());
 
             } else if (command.matches(Regexes.DELETE_DECK.getLabel())) {   // delete deck ...
 
                 Request.setCommandTag(CommandTags.DELETE_DECK);
-                addDataToRequest(Regexes.DELETE_DECK.getLabel(), command, "deck");
+                Request.addDataToRequest(Regexes.DELETE_DECK.getLabel(), command, "deck");
                 Request.send();
                 Console.print(Request.getResponse());
 
             } else if (command.matches(Regexes.ACTIVATE_DECK.getLabel())) {  // activate deck ...
 
                 Request.setCommandTag(CommandTags.ACTIVATE_DECK);
-                addDataToRequest(Regexes.ACTIVATE_DECK.getLabel(), command, "deck");
+                Request.addDataToRequest(Regexes.ACTIVATE_DECK.getLabel(), command, "deck");
                 Request.send();
                 Console.print(Request.getResponse());
 
@@ -82,11 +82,5 @@ public class DeckMenu extends Menu {
         }
     }
 
-    private void addDataToRequest(String regex, String command, String key) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(command);
-        if (matcher.find()) {
-            Request.addData(key, matcher.group(1));
-        }
-    }
+
 }

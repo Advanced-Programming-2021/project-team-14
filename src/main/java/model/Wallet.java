@@ -10,9 +10,18 @@ public class Wallet {
     public Wallet() {
         this.cards = new ArrayList<>();
     }
-//        public void addCash(int amount){}
-//    public void decreaseCash(int amount){}
-//    public boolean isCashEnough(int amount){}
+
+    public void addCash(int amount) {
+        setCash(getCash() + amount);
+    }
+
+    public void decreaseCash(int amount) {
+        setCash(getCash() - amount);
+    }
+
+    public boolean isCashEnough(int amount) {
+        return getCash() >= amount;
+    }
 
     public void addCard(String card) {
         cards.add(card);
@@ -22,6 +31,14 @@ public class Wallet {
         return cards;
     }
 
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
     public void removeCard(String card) {
         cards.remove(card);
     }
@@ -29,4 +46,5 @@ public class Wallet {
     public boolean doesCardExist(String cardName) {
         return cards.contains(cardName);
     }
+
 }

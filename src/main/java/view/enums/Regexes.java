@@ -4,12 +4,12 @@ public enum Regexes {
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),
     MENU_ENTER("menu enter (.*)"),
-    CREATE_USER("^user create (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+)))(?=.*(--(nickname) (\\w+))).*$"),
-    LOGIN_USER("^user login (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+))).*$"),
+    CREATE_USER("^user create (?=.*(--(username) ([\\w\\-]+)))(?=.*(--(password) ([\\w\\-]+)))(?=.*(--(nickname) ([\\w\\-]+))).*$"),
+    LOGIN_USER("^user login (?=.*(--(username) ([\\w\\-]+)))(?=.*(--(password) ([\\w\\-]+))).*$"),
     CHANGE_PROFILE_NICKNAME("^profile change (?=.*(--(nickname) (\\w+))).*$"),
-    CHANGE_PROFILE_PASSWORD("^profile change (?=.*(--password))(?=.*(--(current) (\\w+)))(?=.*(--(new) (\\w+))).*$"),
-    CREATE_DECK("deck create (\\w+)"),
-    DELETE_DECK("deck delete (\\w+)"),
+    CHANGE_PROFILE_PASSWORD("^profile change --password (?=.*(--(current) ([\\w\\-]+)))(?=.*(--(new) ([\\w\\-]+))).*$"),
+    CREATE_DECK("deck create (.*)"),
+    DELETE_DECK("deck delete (.*)"),
     ACTIVATE_DECK("deck set-activate (.*)"),
     ADD_CARD("^deck add-card (?=.*(--(card) ([\\w\\-]+)))(?=.*(--(deck) ([\\w\\-]+)))(?=.*(--(side))).*$"),
     REMOVE_CARD("^deck rm-card (?=.*(--(card) ([\\w\\-]+)))(?=.*(--(deck) ([\\w\\-]+)))(?=.*(--(side))).*$"),
@@ -19,7 +19,11 @@ public enum Regexes {
     OPTION("--([\\w\\-]+)\\b(\\s+--([\\w\\-]+)|$)"),
     DATA("--([\\w\\-]+) (\\w+)"),
     LOGOUT("logout"),
-    SHOW_SCOREBOARD("show scoreboard");
+    SHOW_SCOREBOARD("show scoreboard"),
+    SHOP_BUY("shop buy ([\\w\\s-]+)"),
+    SHOP_SHOW_ALL("shop show --all");
+
+
 
     public final String label;
 

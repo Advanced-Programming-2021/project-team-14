@@ -14,7 +14,9 @@ public enum CommandTags {
     SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
     CHANGE_NICKNAME("change-nickname"),
-    SHOW_SCOREBOARD("scoreboard show");
+    SHOW_SCOREBOARD("scoreboard show"),
+    BUY_CARD("shop buy"),
+    SHOP_SHOW_ALL("shop show --all");
 
     public final String label;
 
