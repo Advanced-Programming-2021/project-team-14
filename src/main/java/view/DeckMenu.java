@@ -5,9 +5,6 @@ import view.enums.Menus;
 import view.enums.Regexes;
 import view.enums.Responses;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class DeckMenu extends Menu {
 
     public void run() {
@@ -45,15 +42,15 @@ public class DeckMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.ADD_CARD);
                 Request.extractData(command);
-                Request.checkOption(command);
+                Request.setOption(command);
                 Request.send();
                 Console.print(Request.getResponse());
 
             } else if (command.matches(Regexes.REMOVE_CARD.getLabel())) {    // remove card ...
 
-                Request.setCommandTag(CommandTags.ADD_CARD);
+                Request.setCommandTag(CommandTags.REMOVE_CARD);
                 Request.extractData(command);
-                Request.checkOption(command);
+                Request.setOption(command);
                 Request.send();
                 Console.print(Request.getResponse());
 
@@ -65,9 +62,9 @@ public class DeckMenu extends Menu {
 
             } else if (command.matches(Regexes.SHOW_DECK.getLabel())) {      // show deck ...
 
-                Request.setCommandTag(CommandTags.ADD_CARD);
+                Request.setCommandTag(CommandTags.SHOW_DECK);
                 Request.extractData(command);
-                Request.checkOption(command);
+                Request.setOption(command);
                 Request.send();
                 Console.print(Request.getResponse());
 

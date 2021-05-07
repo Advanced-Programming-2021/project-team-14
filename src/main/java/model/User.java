@@ -7,8 +7,8 @@ public class User {
 
     private Wallet wallet;
     private String activeDeck;
-    private static HashMap<String, User> users;
-    private static ArrayList<String> nicknames;
+    private static final HashMap<String, User> users;
+    private static final ArrayList<String> nicknames;
     private HashMap<String, Deck> decks;
 
     static {
@@ -26,10 +26,11 @@ public class User {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.wallet = new Wallet();
+        this.wallet = new Wallet(123);
         users.put(username, this);
         nicknames.add(nickname);
         this.decks = new HashMap<>();
+        this.activeDeck = null;
         updateDatabase();
     }
 
@@ -38,24 +39,26 @@ public class User {
     }
 
 
-    public User(User user) {
-        users.put(user.getUsername(), user);
+    public User(User user, String username) {
+        users.put(username, user);
     }
 
 
     public void removeDeck(String deckName) {
         decks.remove(deckName);
     }
-//    public String showDecks(){}
 
-//    public Deck getDeck(String title){}
 
     public static void addUser(User user) {
-        new User(user);
+        new User(user, user.getUsername());
     }
 
     public HashMap<String, Deck> getDecks() {
         return decks;
+    }
+
+    public String getActiveDeck() {
+        return activeDeck;
     }
 
     public void addDeck(String deckName) {

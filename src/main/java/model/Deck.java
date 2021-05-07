@@ -11,7 +11,6 @@ public class Deck {
     private static final int MAIN_MIN_SIZE = 40;
     private static final int MAX_CARD_NUMBER = 3;
 
-    private ArrayList<String> availableCards;
     private boolean isActive;
 
     private String name;
@@ -25,18 +24,12 @@ public class Deck {
         isActive = false;
     }
 
-    public boolean isCardAvailableInDeck(String cardName, String option) {
-        return (option.equals(Strings.SIDE.getLabel()) ? sideCards : mainCards).contains(cardName);
+    public boolean isCardAvailableInDeck(String cardName, boolean isSideDeck) {
+        return (isSideDeck ? sideCards : mainCards).contains(cardName);
     }
 
-//    public boolean isFrequencyValid(Card card){}
-//    public String showDeck(){}
-//    public boolean isFull(){}
-//    public void shuffle(){}
-//    public Card drawOneCard(){}
-
-    public boolean isDeckFull(String option) {
-        return option.equals(Strings.SIDE.getLabel()) ? sideCards.size() > SIDE_MAX_SIZE : mainCards.size() > MAIN_MAX_SIZE;
+    public boolean isDeckFull(Boolean isSide) {
+        return isSide ? sideCards.size() > SIDE_MAX_SIZE : mainCards.size() > MAIN_MAX_SIZE;
     }
 
 
@@ -44,45 +37,39 @@ public class Deck {
         return Collections.frequency(sideCards, cardName) + Collections.frequency(sideCards, cardName);
     }
 
-
-    public ArrayList<String> getCardNames() {
-        return availableCards;
-    }
-
     public String getName() {
         return name;
     }
 
 
-    public ArrayList<String> getCards(String option) {
-        return option.equals(Strings.SIDE.getLabel()) ? sideCards : mainCards;
+    public ArrayList<String> getCards(boolean option) {
+        return option ? sideCards : mainCards;
     }
 
     public boolean isValid() {
         return mainCards.size() >= MAIN_MIN_SIZE;
     }
 
-    public void setActiveDeck(boolean isActive) {
-        this.isActive = isActive;
-    }
-
     public boolean isActive() {
         return isActive;
     }
 
-    public void addCard(String card, String option) {
-        availableCards.remove(card);
-        (option.equals(Strings.SIDE.getLabel()) ? sideCards : mainCards).add(card);
+    public void addCard(String card, Boolean isSideDeck) {
+        (isSideDeck ? sideCards : mainCards).add(card);
     }
 
-    public void removeCard(String card, String option) {
-        availableCards.add(card);
-        (option.equals(Strings.SIDE.getLabel()) ? sideCards : mainCards).remove(card);
+    public void removeCard(String card, boolean isSideDeck) {
+        (isSideDeck ? sideCards : mainCards).remove(card);
     }
 
 
     public boolean canAddCard(String cardName) {
-        return getCardFrequency(cardName) < MAX_CARD_NUMBER;
+        return getCardFrequency(cardName) <= MAX_CARD_NUMBER;
     }
 
+    @Override
+    public String toString() {
+        return String.format(Strings.DECK_PRINT_FORMAT.getLabel(), name, mainCards.size(),
+                sideCards.size(), isValid() ? Strings.VALID.getLabel() : Strings.INVALID.getLabel());
+    }
 }

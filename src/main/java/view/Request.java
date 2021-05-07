@@ -1,6 +1,7 @@
 package view;
 
 import Controller.MainController;
+import model.Strings;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 import view.enums.Regexes;
@@ -27,18 +28,15 @@ public class Request {
         request.put("command", commandTag.getLabel());
     }
 
-    public static void checkOption(String command) { // extract option if available
-        Pattern pattern = Pattern.compile(Regexes.OPTION.getLabel());
-        Matcher matcher = pattern.matcher(command);
-        while (matcher.find())
-            request.put("option", matcher.group(1));
+    public static void setOption(String command) { // extract option if available
+        request.put(Strings.SIDE_OPTION.getLabel(), command.contains("--side"));
     }
 
     public static void extractData(String command) { // extract data from the input with the "--key value" format
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
         while (matcher.find())
-            request.put(matcher.group(1), matcher.group(2));
+            request.put(matcher.group(1), matcher.group(2).trim());
     }
 
     public static void send() { // sending the request to the main controller

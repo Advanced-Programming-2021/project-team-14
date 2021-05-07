@@ -1,14 +1,15 @@
 package model.card;
 
+import model.Strings;
 import model.card.enums.CardType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
+//import java.util.SortedSet;
+//import java.util.TreeSet;
 
 public abstract class Card {
-    private static HashMap<String, Card> cards;
+    private static final HashMap<String, Card> cards;
 
     static {
         cards = new HashMap<>();
@@ -26,6 +27,16 @@ public abstract class Card {
         this.cardType = cardType;
     }
 
+    public static ArrayList<Card> getCards() {
+        return new ArrayList<>(cards.values());
+    }
+
+    public static String getCard(int index) {
+        Object[] values = cards.values().toArray();
+        Card randomValue = (Card) values[index];
+        return randomValue.getName();
+    }
+
     public static void addCard(Card card) {
         cards.put(card.getName(), card);
     }
@@ -34,16 +45,9 @@ public abstract class Card {
         return cards.get(cardName);
     }
 
-    public static ArrayList<String> getCardsNameAndDescription() {
-        SortedSet<String> keys = new TreeSet<>(cards.keySet()); //sort keys
-        return new ArrayList<String>(keys);
-    }
 
     public static boolean doesCardExist(String cardName) {
-        if (cards.get(cardName) == null){
-            return false;
-        }
-        return true;
+        return cards.get(cardName) != null;
     }
 
 
@@ -63,4 +67,8 @@ public abstract class Card {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return String.format(Strings.CARD_PRINT_FORMAT.getLabel(), name, description);
+    }
 }

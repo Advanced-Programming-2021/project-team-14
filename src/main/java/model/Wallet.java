@@ -1,14 +1,21 @@
 package model;
 
+import model.card.Card;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Wallet {
 
     private int cash;
     private ArrayList<String> cards;
 
-    public Wallet() {
+    public Wallet(int test) {  // add some random cards to the wallet
         this.cards = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            addCard(Card.getCard(random.nextInt(40)));
+        }
     }
 
     public void addCash(int amount) {
