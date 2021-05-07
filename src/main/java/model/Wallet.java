@@ -1,9 +1,6 @@
 package model;
 
-import model.card.Card;
-
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Wallet {
 
@@ -11,11 +8,12 @@ public class Wallet {
     private ArrayList<String> cards;
 
     public Wallet(int test) {  // add some random cards to the wallet
+        this.cash = 10000;
         this.cards = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 50; i++) {
-            addCard(Card.getCard(random.nextInt(40)));
-        }
+//        Random random = new Random();
+//        for (int i = 0; i < 50; i++) {
+//            addCard(Card.getCard(random.nextInt(40)));
+//        }
     }
 
     public void addCash(int amount) {
@@ -43,7 +41,7 @@ public class Wallet {
     }
 
     public int getCash() {
-        return cash;
+        return this.cash;
     }
 
     public void removeCard(String card) {

@@ -37,20 +37,21 @@ public class ShopController {
     private static String buyCard(String cardName, String username) {
         if (!Card.doesCardExist(cardName)) {
             Response.error();
-            return Responses.THERE_IS_NO_CARD_WITH_THIS_NAME.getLabel();   //card does not exist
+            return Responses.THERE_IS_NO_CARD_WITH_THIS_NAME.getLabel();   // card does not exist
         }
 
         User user = User.getUserByName(username);
         int price = Card.getCardByName(cardName).getPrice();
         Wallet userWallet = user.getWallet();
-        if (!userWallet.isCashEnough(price)){
+        if (!userWallet.isCashEnough(price)) {
             Response.error();
-            return Responses.NOT_ENOUGH_MONEY.getLabel();   //cash is not enough
+            return Responses.NOT_ENOUGH_MONEY.getLabel();   // cash is not enough
         }
 
         userWallet.addCard(cardName);
         userWallet.decreaseCash(price);
-        return Responses.CARD_BOUGHT_SUCCESSFULLY.getLabel();   //card bought successfully
+        Response.success();
+        return Responses.CARD_BOUGHT_SUCCESSFULLY.getLabel();   // card bought successfully
 
     }
 

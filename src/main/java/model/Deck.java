@@ -34,7 +34,8 @@ public class Deck {
 
 
     public int getCardFrequency(String cardName) {
-        return Collections.frequency(sideCards, cardName) + Collections.frequency(sideCards, cardName);
+        int result = Collections.frequency(mainCards, cardName) + Collections.frequency(sideCards, cardName);
+        return result;
     }
 
     public String getName() {
@@ -64,7 +65,7 @@ public class Deck {
 
 
     public boolean canAddCard(String cardName) {
-        return getCardFrequency(cardName) <= MAX_CARD_NUMBER;
+        return getCardFrequency(cardName) < MAX_CARD_NUMBER;
     }
 
     @Override
