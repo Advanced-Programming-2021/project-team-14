@@ -8,7 +8,7 @@ public class Wallet {
     private ArrayList<String> cards;
 
     public Wallet(int test) {  // add some random cards to the wallet
-        this.cash = 10000;
+
         this.cards = new ArrayList<>();
 //        Random random = new Random();
 //        for (int i = 0; i < 50; i++) {
