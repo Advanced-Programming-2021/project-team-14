@@ -18,6 +18,14 @@ public class Game {
         // complete game information
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
     private void changeTurn() {
 
     }

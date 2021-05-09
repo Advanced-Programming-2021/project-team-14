@@ -69,6 +69,7 @@ public class Zone {
         for (int i = 1; i <= 5; i++) {
             result.append("\t").append(cells[positions.get(i)].getState());
         }
+        result.append("\t");
         return result.toString();
     }
 }
