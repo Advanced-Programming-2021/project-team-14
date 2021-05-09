@@ -20,12 +20,12 @@ public class Board {
         StringBuilder spellZone = new StringBuilder(rivalPlayer.getSpell().toString());
 
         return String.format(boardStructure, rivalPlayer.getNickname(), rivalPlayer.getLifePoint(),
-                "\t" + rivalPlayer.getHand().toString(), rivalPlayer.getPlayingDeck().getSize(),
+                "\t" + rivalPlayer.getHand().toString(), rivalPlayer.getPlayingDeck().getRemainingCardsSize(),
                 spellZone.reverse().toString(), monsterZone.reverse().toString(),
                 rivalPlayer.getGraveYard().toString(), rivalPlayer.getFieldZone().toString(),
                 mainPlayer.getFieldZone().toString(), mainPlayer.getGraveYard().toString(),
                 mainPlayer.getMonster().toString(), mainPlayer.getSpell().toString(),
-                mainPlayer.getPlayingDeck().getSize(), mainPlayer.getHand().toString(),
+                mainPlayer.getPlayingDeck().getRemainingCardsSize(), mainPlayer.getHand().toString(),
                 mainPlayer.getNickname(), mainPlayer.getLifePoint());
     }
 }

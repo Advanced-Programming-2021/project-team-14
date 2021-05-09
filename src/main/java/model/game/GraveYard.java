@@ -17,10 +17,21 @@ public class GraveYard {
         cards.add(card);
     }
 
-//    public static String showCards() {
-//
-//
-//    }
+    public static String showCards() {
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < cards.size(); i++) {
+
+            result.append(i + 1).append(". ").append(cards.get(i).toString()).append("\n");
+        }
+        return result.toString();
+    }
+
+
+    public boolean isEmpty() {
+        return cards.size() == 0;
+    }
+
 
     public Card getCard(String cardName) {
 

@@ -25,4 +25,7 @@ public class Cell {
         this.state = state;
     }
 
+    public boolean isEmpty() {
+        return this.getCard() == null;
+    }
 }

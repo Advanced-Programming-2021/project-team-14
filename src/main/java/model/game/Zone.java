@@ -18,7 +18,7 @@ public class Zone {
 
 
     public Cell getCell(int position) {
-        return this.cells[position];
+        return this.cells[adapter(position)];
     }
 
 
@@ -40,6 +40,27 @@ public class Zone {
         }
         return 0;
     }
+
+
+    public boolean isFull() {
+        for (int i = 0; i < 5; i++) {
+            if (cells[i].isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isEmpty() {
+        int counter = 0;
+        for (int i = 0; i < 5; i++) {
+            if (cells[i].isEmpty()) {
+                counter++;
+            }
+        }
+        return counter == 5;
+    }
+
 
     @Override
     public String toString() {
