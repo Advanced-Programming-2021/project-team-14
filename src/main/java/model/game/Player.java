@@ -1,6 +1,5 @@
 package model.game;
 
-import model.Deck;
 import model.User;
 import model.card.Card;
 
@@ -16,9 +15,9 @@ public class Player {
 
     private Card selectedCard;
 
-    private Zone monster;
+    private Zone monsterZone;
 
-    private Zone spell;
+    private Zone spellZone;
 
     private GraveYard graveYard;
 
@@ -27,12 +26,16 @@ public class Player {
     private int lifePoint;
 
 
-    public Player(User user, Deck playingDeck) {
-
+    public Player(User user) {
         this.username = user.getUsername();
         this.nickname = user.getNickname();
-
-
+        playingDeck = new PlayingDeck(user.getDeck(user.getActiveDeck()));
+        fieldZone = new FieldZone();
+        graveYard = new GraveYard();
+        monsterZone = new Zone();
+        spellZone = new Zone();
+        lifePoint = 8000;
+        hand = new Hand();
     }
 
 
@@ -100,19 +103,19 @@ public class Player {
         this.username = username;
     }
 
-    public Zone getMonster() {
-        return monster;
+    public Zone getMonsterZone() {
+        return monsterZone;
     }
 
-    public void setMonster(Zone monster) {
-        this.monster = monster;
+    public void setMonsterZone(Zone monsterZone) {
+        this.monsterZone = monsterZone;
     }
 
-    public Zone getSpell() {
-        return spell;
+    public Zone getSpellZone() {
+        return spellZone;
     }
 
-    public void setSpell(Zone spell) {
-        this.spell = spell;
+    public void setSpellZone(Zone spellZone) {
+        this.spellZone = spellZone;
     }
 }

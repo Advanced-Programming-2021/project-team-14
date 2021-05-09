@@ -11,7 +11,6 @@ public class Deck {
     private static final int MAIN_MIN_SIZE = 40;
     private static final int MAX_CARD_NUMBER = 3;
 
-    private boolean isActive;
 
     private String name;
     private ArrayList<String> sideCards;
@@ -21,7 +20,6 @@ public class Deck {
         sideCards = new ArrayList<>();
         mainCards = new ArrayList<>();
         this.name = deckName;
-        isActive = false;
     }
 
     public boolean isCardAvailableInDeck(String cardName, boolean isSideDeck) {
@@ -34,8 +32,7 @@ public class Deck {
 
 
     public int getCardFrequency(String cardName) {
-        int result = Collections.frequency(mainCards, cardName) + Collections.frequency(sideCards, cardName);
-        return result;
+        return Collections.frequency(mainCards, cardName) + Collections.frequency(sideCards, cardName);
     }
 
     public String getName() {
@@ -49,10 +46,6 @@ public class Deck {
 
     public boolean isValid() {
         return mainCards.size() >= MAIN_MIN_SIZE;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public void addCard(String card, Boolean isSideDeck) {

@@ -9,6 +9,10 @@ public class GraveYard {
 
     private static ArrayList<Card> cards;
 
+    public GraveYard() {
+        cards = new ArrayList<>();
+    }
+
     public int getSize() {
         return cards.size();
     }

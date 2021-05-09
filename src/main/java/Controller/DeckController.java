@@ -11,6 +11,7 @@ import model.card.enums.CardType;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class DeckController {
@@ -41,18 +42,18 @@ public class DeckController {
                     request.getBoolean(Strings.SIDE_OPTION.getLabel()),
                     user));
 
-//        else if (commandTag.equals(CommandTags.SHOW_ALL_DECKS.getLabel()))
-//            Response.addMessage(showAllDecks(user));
+        else if (commandTag.equals(CommandTags.SHOW_ALL_DECKS.getLabel()))
+            Response.addMessage(showAllDecks(user));
 
         else if (commandTag.equals(CommandTags.SHOW_DECK.getLabel()))
             Response.addMessage(showDeck(request.getString(Strings.DECK_NAME.getLabel()), request.getBoolean(Strings.SIDE_OPTION.getLabel()), user));
     }
 
-//    private static String showAllDecks(User user) {
-////        HashMap<String, Deck> decks = user.getDecks();
-////        String activeDeck = (user.getActiveDeck() == null) ? "" : "\n" + decks.remove(user.getActiveDeck()).toString();
-////        return String.format(Strings.DECKS_PRINT_FORMAT.getLabel(), activeDeck, stringifyDecks(new ArrayList<>(decks.values())));
-//    }
+    private static String showAllDecks(User user) {
+        HashMap<String, Deck> decks = new HashMap<>(user.getDecks());
+        String activeDeck = (user.getActiveDeck() == null) ? "" : "\n" + decks.remove(user.getActiveDeck()).toString();
+        return String.format(Strings.DECKS_PRINT_FORMAT.getLabel(), activeDeck, stringifyDecks(new ArrayList<>(decks.values())));
+    }
 
     private static String createDeck(String deckName, User user) {
 

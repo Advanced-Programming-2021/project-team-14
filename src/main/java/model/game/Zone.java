@@ -5,16 +5,21 @@ import model.card.Card;
 import java.util.HashMap;
 
 public class Zone {
-
-    private Cell[] cells = new Cell[5];
-
-    private HashMap<Integer, Integer> positions = new HashMap<Integer, Integer>() {{
+    private static final int ZONE_SIZE = 5;
+    private static final HashMap<Integer, Integer> positions = new HashMap<Integer, Integer>() {{
         put(1, 5);
         put(2, 3);
         put(3, 1);
         put(4, 2);
         put(5, 4);
     }};
+    private Cell[] cells = new Cell[ZONE_SIZE + 1];
+
+    public Zone() {
+        for (int i = 1; i <= ZONE_SIZE; i++) {
+            cells[i] = new Cell();
+        }
+    }
 
 
     public Cell getCell(int position) {
@@ -61,15 +66,9 @@ public class Zone {
         return counter == 5;
     }
 
-
-    @Override
-    public String toString() {
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 1; i <= 5; i++) {
-            result.append("\t").append(cells[positions.get(i)].getState());
-        }
-        result.append("\t");
-        return result.toString();
+    public String toString(boolean isRotated) {
+        if (isRotated)
+            return String.format("\t%s\t%s\t%s\t%s\t%s\t", cells[adapter(5)], cells[adapter(4)], cells[adapter(3)], cells[adapter(2)], cells[adapter(1)]);
+        return String.format("\t%s\t%s\t%s\t%s\t%s\t", cells[adapter(1)], cells[adapter(2)], cells[adapter(3)], cells[adapter(4)], cells[adapter(5)]);
     }
 }

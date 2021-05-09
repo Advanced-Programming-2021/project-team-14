@@ -1,13 +1,17 @@
 package model.game;
 
 import model.card.Card;
-import model.card.enums.Status;
+import model.card.enums.State;
 
 public class Cell {
 
     private Card card;
 
-    private Status state;
+    private State state;
+
+    public Cell() {  //temporary for test
+        this.state = State.DEFENSIVE_HIDDEN;
+    }
 
     public Card getCard() {
         return card;
@@ -17,15 +21,20 @@ public class Cell {
         this.card = card;
     }
 
-    public Status getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(Status state) {
+    public void setState(State state) {
         this.state = state;
     }
 
     public boolean isEmpty() {
         return this.getCard() == null;
+    }
+
+    @Override
+    public String toString() {
+        return state.getLabel();
     }
 }

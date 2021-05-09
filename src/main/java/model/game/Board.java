@@ -1,34 +1,30 @@
 package model.game;
 
+import model.Strings;
+
 public class Board {
 
-    private String boardStructure =
-            "\t\t\t%s\n%s : %s\n%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s : %s";
 
     private Player mainPlayer;
 
     private Player rivalPlayer;
 
-    private Game game;
 
-    public Board(Player mainPlayer, Player rivalPlayer, Game game) {
+    public Board(Player mainPlayer, Player rivalPlayer) {
         this.mainPlayer = mainPlayer;
         this.rivalPlayer = rivalPlayer;
-        this.game = game;
     }
 
     @Override
     public String toString() {
-        StringBuilder monsterZone = new StringBuilder(rivalPlayer.getMonster().toString());
-        StringBuilder spellZone = new StringBuilder(rivalPlayer.getSpell().toString());
 
-        return String.format(boardStructure, game.getPhase(), rivalPlayer.getNickname(), rivalPlayer.getLifePoint(),
-                "\t" + rivalPlayer.getHand().toString(), rivalPlayer.getPlayingDeck().getRemainingCardsSize(),
-                spellZone.reverse().toString(), monsterZone.reverse().toString(),
-                rivalPlayer.getGraveYard().toString(), rivalPlayer.getFieldZone().toString(),
-                mainPlayer.getFieldZone().toString(), mainPlayer.getGraveYard().toString(),
-                mainPlayer.getMonster().toString(), mainPlayer.getSpell().toString(),
-                mainPlayer.getPlayingDeck().getRemainingCardsSize(), mainPlayer.getHand().toString(),
+        return String.format(Strings.BOARD_STRUCTURE.getLabel(), "PhaseWasHere", rivalPlayer.getNickname(), rivalPlayer.getLifePoint(),
+                rivalPlayer.getHand(), rivalPlayer.getPlayingDeck(),
+                rivalPlayer.getSpellZone().toString(true), rivalPlayer.getMonsterZone().toString(true),
+                rivalPlayer.getGraveYard(), rivalPlayer.getFieldZone(),
+                mainPlayer.getFieldZone(), mainPlayer.getGraveYard(),
+                mainPlayer.getMonsterZone().toString(false), mainPlayer.getSpellZone().toString(false),
+                mainPlayer.getPlayingDeck(), mainPlayer.getHand(),
                 mainPlayer.getNickname(), mainPlayer.getLifePoint());
     }
 }

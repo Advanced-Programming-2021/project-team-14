@@ -1,28 +1,29 @@
 package model.game;
 
+import model.User;
+
+
 public class Game {
 
-    private Player mainPlayer;
-
-    private Player rivalPlayer;
 
     private String creatorNickname;
 
     private int round;
+    private Board board;
+    private Phase phase;
 
-    private String phase;
 
-
-    public Game(Player mainPlayer, Player rivalPlayer) {
-
-        // complete game information
+    public Game(User mainUser, User rivalUser, int round) {
+        this.round = round;
+        this.creatorNickname = mainUser.getNickname();
+        this.board = new Board(new Player(mainUser), new Player(rivalUser));
     }
 
     public int getRound() {
         return round;
     }
 
-    public String getPhase() {
+    public Phase getPhase() {
         return phase;
     }
 
@@ -30,8 +31,11 @@ public class Game {
 
     }
 
-    public void nextPhase() {
+    public Board getBoard() {
+        return board;
+    }
 
+    public void nextPhase() {
 
     }
 }

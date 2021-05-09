@@ -1,6 +1,7 @@
 package model.game;
 
 import model.Deck;
+import model.Strings;
 import model.card.Card;
 
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ public class PlayingDeck {
     private ArrayList<Card> cards = new ArrayList<>();
 
     public PlayingDeck(Deck activeDeck) {
-
         loadCards(activeDeck);
     }
 
@@ -41,5 +41,10 @@ public class PlayingDeck {
 
     public void addCard(Card card) {
         cards.add(card);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Strings.PLAYING_DECK_PRINT_FORMAT.getLabel(), cards.size());
     }
 }

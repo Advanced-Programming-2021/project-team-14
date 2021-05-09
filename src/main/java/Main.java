@@ -1,11 +1,13 @@
 import model.Database;
-import view.RegistrationMenu;
+import model.User;
+import model.game.Game;
 
 public class Main {
     public static void main(String[] args) {
         Database.prepareDatabase();
-        Database.readDataLineByLine("Resources\\Cards\\SpellTrap.csv");
-        Database.readDataLineByLine("Resources\\Cards\\Monster.csv");
-        new RegistrationMenu().run();   //  running the registration menu
+        System.out.println("\u001B[36m" + new Game(User.getUserByName("mainUser"), User.getUserByName("rivalUser"), 1).getBoard() + "\033[0m"); //testing board printing
+//        Database.readDataLineByLine("Resources\\Cards\\SpellTrap.csv");
+//        Database.readDataLineByLine("Resources\\Cards\\Monster.csv");
+//        new RegistrationMenu().run();   //  running the registration menu
     }
 }

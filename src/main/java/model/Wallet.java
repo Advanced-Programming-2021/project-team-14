@@ -10,10 +10,6 @@ public class Wallet {
     public Wallet(int test) {  // add some random cards to the wallet
 
         this.cards = new ArrayList<>();
-//        Random random = new Random();
-//        for (int i = 0; i < 50; i++) {
-//            addCard(Card.getCard(random.nextInt(40)));
-//        }
     }
 
     public void addCash(int amount) {
