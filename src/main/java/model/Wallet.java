@@ -9,6 +9,7 @@ public class Wallet {
 
     public Wallet(int test) {  // add some random cards to the wallet
 
+        this.cash = 100000;
         this.cards = new ArrayList<>();
     }
 

@@ -51,6 +51,7 @@ public class DeckController {
 
     private static String showAllDecks(User user) {
         HashMap<String, Deck> decks = new HashMap<>(user.getDecks());
+        Response.success();
         String activeDeck = (user.getActiveDeck() == null) ? "" : "\n" + decks.remove(user.getActiveDeck()).toString();
         return String.format(Strings.DECKS_PRINT_FORMAT.getLabel(), activeDeck, stringifyDecks(new ArrayList<>(decks.values())));
     }
