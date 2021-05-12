@@ -35,6 +35,12 @@ class ProfileControllerTest {
         Request.extractData("profile change --nickname newNickname");
         Request.send();
 
+        Request.addData("view", Menus.PROFILE_MENU.getLabel());
+
+        Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
+        Request.extractData("profile change --nickname nickname");
+        Request.send();
+
         Assertions.assertEquals(Request.getResponse(), Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel());
     }
 
@@ -45,7 +51,7 @@ class ProfileControllerTest {
         Request.extractData("profile change --nickname nickname");
         Request.send();
 
-        Assertions.assertEquals(Request.getResponse(), Responses.NICKNAME_ALREADY_EXIST.getLabel());
+        Assertions.assertEquals(Request.getResponse(), String.format(Responses.NICKNAME_ALREADY_EXIST.getLabel(), "nickname"));
     }
 
 
@@ -53,6 +59,11 @@ class ProfileControllerTest {
     public void changePasswordTest() {
         Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
         Request.extractData("profile change --password --current password --new newPassword");
+        Request.send();
+
+        Request.addData("view", Menus.PROFILE_MENU.getLabel());
+        Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
+        Request.extractData("profile change --password --current newPassword --new password");
         Request.send();
 
         Assertions.assertEquals(Request.getResponse(), Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel());

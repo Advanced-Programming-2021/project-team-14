@@ -4,7 +4,7 @@ public enum Strings {
 
     SIDE("side"),
     MAIN("main"),
-    MAIN_DECK("main deck"),
+    MAIN_DECK("main"),
     DECK("deck"),
     DECK_NAME("deck-name"),
     CARD("card"),
@@ -18,7 +18,7 @@ public enum Strings {
     FIELD_ZONE_PRINT_FORMAT("%s"),
     PLAYING_DECK_PRINT_FORMAT("%d"),
     HAND_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t%s"),
-    SIDE_DECK("side deck"),
+    SIDE_DECK("side"),
     VALID("valid"),
     INVALID("invalid"),
     SIDE_OPTION("side"),

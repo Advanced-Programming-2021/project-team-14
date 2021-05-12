@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.enums.Responses;
 import model.Database;
+import model.Strings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,13 +25,11 @@ class DeckControllerTest {
     @BeforeEach
     public void initialize() {
 
-        Request.addData("view", Menus.REGISTER_MENU.getLabel());
-        Request.setCommandTag(CommandTags.REGISTER);
-        Request.extractData("user create --username username --password password --nickname nickname");
-        Request.send();
+        Database.readDataLineByLine("Resources\\Cards\\SpellTrap.csv");
+        Database.readDataLineByLine("Resources\\Cards\\Monster.csv");
         Request.addData("view", Menus.REGISTER_MENU.getLabel());
         Request.setCommandTag(CommandTags.LOGIN);
-        Request.extractData("user login --username username --password password");
+        Request.extractData("user login --username mainUser --password admin");
         Request.send();
         if (Request.isSuccessful()) {
             Request.getToken();
@@ -43,7 +42,7 @@ class DeckControllerTest {
     @Test
     public void createDeckTest() {
 
-        createNewDeckWithName("deck");
+        createNewDeckWithName("newDeck");
 
         Assertions.assertEquals(Request.getResponse(), Responses.CREATE_DECK_SUCCESSFUL.getLabel());
     }
@@ -145,6 +144,7 @@ class DeckControllerTest {
     @Test
     public void addCardToDeckTest() {
 
+        Request.addDataToRequest("(mainUser)", "mainUser", "token");
         createNewDeckWithName("toAddedDeck");
 
         buyCardTemp("Haniwa");
@@ -178,7 +178,7 @@ class DeckControllerTest {
         addCardToDeckTemp("Bitron", "enoughCardsDeck");
         addCardToDeckTemp("Bitron", "enoughCardsDeck");
 
-        Assertions.assertEquals(Request.getResponse(), String.format(Responses.ENOUGH_CARDS.getLabel(), "Fireyarou", "enoughCardsDeck"));
+        Assertions.assertEquals(Request.getResponse(), String.format(Responses.ENOUGH_CARDS.getLabel(), "Bitron", "enoughCardsDeck"));
     }
 
 
@@ -191,6 +191,15 @@ class DeckControllerTest {
         addCardToDeckTemp("Bitron", "NotExistingDeck");
 
         Assertions.assertEquals(Request.getResponse(), String.format(Responses.DECK_NOT_EXIST.getLabel(), "NotExistingDeck"));
+    }
+
+
+    @Test
+    public void addNotExistingCardToDeckTest() {
+
+        addCardToDeckTemp("notExistingCard", "deckTemp");
+
+        Assertions.assertEquals(Request.getResponse(), String.format(Responses.CARD_NOT_EXIST.getLabel(), "notExistingCard"));
     }
 
 
@@ -253,7 +262,23 @@ class DeckControllerTest {
         Request.setOption("deck rm-card --card Haniwa --deck toRemovedDeck");
         Request.send();
 
-        Assertions.assertEquals(Request.getResponse(), Responses.ADD_CARD_SUCCESSFUL.getLabel());
+        Assertions.assertEquals(Request.getResponse(), Responses.REMOVE_CARD_SUCCESSFUL.getLabel());
+    }
+
+
+    @Test
+    public void removeNotExistingCardFromDeckTest() {
+
+        createNewDeckWithName("toNotExistingRemovedDeck");
+
+        Request.addData("view", Menus.DECK_MENU.getLabel());
+
+        Request.setCommandTag(CommandTags.REMOVE_CARD);
+        Request.extractData("deck rm-card --card notExistingCard --deck toNotExistingRemovedDeck");
+        Request.setOption("deck rm-card --card notExistingCard --deck toNotExistingRemovedDeck");
+        Request.send();
+
+        Assertions.assertEquals(Request.getResponse(), String.format(Responses.CARD_NOT_EXIST_IN_DECK.getLabel(), "notExistingCard", Strings.MAIN_DECK.getLabel()));
     }
 
 
@@ -290,6 +315,19 @@ class DeckControllerTest {
         Assertions.assertEquals(Request.getResponse(), "Deck: toShowMainDeck\n" +
                 "main Deck:\n" +
                 "Monsters:\n" +
+                "Haniwa : An earthen figure that protects the tomb of an ancient ruler.\n" +
                 "Spells and Traps:");
+    }
+
+
+    @Test
+    public void showNotExistingDeck() {
+
+        Request.setCommandTag(CommandTags.SHOW_DECK);
+        Request.extractData("deck show --deck-name notExistingDeck");
+        Request.setOption("deck show --deck-name notExistingDeck");
+        Request.send();
+
+        Assertions.assertEquals(Request.getResponse(), String.format(Responses.DECK_NOT_EXIST.getLabel(), "notExistingDeck"));
     }
 }
