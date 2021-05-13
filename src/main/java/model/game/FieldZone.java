@@ -6,26 +6,22 @@ import model.card.enums.State;
 
 public class FieldZone {
 
-    public boolean isEmpty;
     private Card card;
 
     public Card getCard() {
-        setEmpty(true);
         return card;
     }
-
+    public void removeCard(){
+        card = null;
+    }
     public void setCard(Card card) {
         this.card = card;
-        setEmpty(false);
     }
 
     public boolean isEmpty() {
-        return isEmpty;
+        return card == null;
     }
 
-    public void setEmpty(boolean bool) {
-        isEmpty = bool;
-    }
 
     @Override
     public String toString() {
