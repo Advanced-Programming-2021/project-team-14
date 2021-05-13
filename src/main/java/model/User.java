@@ -27,11 +27,11 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.wallet = new Wallet(123);
-//        this.wallet.addCard("Haniwa");
-//        this.wallet.addCard("Bitron");
-//        this.wallet.addCard("Suijin");
-//        this.wallet.addCard("Wattkid");
-//        this.wallet.addCard("Fireyarou");
+//        this.wallet.loadCard("Haniwa");
+//        this.wallet.loadCard("Bitron");
+//        this.wallet.loadCard("Suijin");
+//        this.wallet.loadCard("Wattkid");
+//        this.wallet.loadCard("Fireyarou");
         users.put(username, this);
         nicknames.add(nickname);
         this.decks = new HashMap<>();
