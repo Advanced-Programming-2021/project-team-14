@@ -2,6 +2,8 @@ package model.card;
 
 import model.Strings;
 import model.card.enums.CardType;
+import model.card.enums.Position;
+import model.card.enums.State;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +21,33 @@ public abstract class Card {
     protected CardType cardType;
     protected String description;
     protected int price;
+    protected int positionIndex;
+    protected Position position;
+    protected State state;
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPositionIndex(int positionIndex) {
+        this.positionIndex = positionIndex;
+    }
+
+    public int getPositionIndex() {
+        return positionIndex;
+    }
 
     public Card(String name, String description, CardType cardType, int price) {
         this.name = name;
