@@ -28,8 +28,8 @@ public class Request {
         request.put("command", commandTag.getLabel());
     }
 
-    public static void setOption(String command) { // extract option if available
-        request.put(Strings.SIDE_OPTION.getLabel(), command.contains("--side"));
+    public static void setOption(String command, String option) { // extract option if available
+        request.put(option, command.contains("--" + option));
     }
 
     public static void extractData(String command) { // extract data from the input with the "--key value" format
