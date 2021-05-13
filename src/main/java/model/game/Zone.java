@@ -1,74 +1,47 @@
 package model.game;
 
+
 import model.card.Card;
+import model.card.enums.Position;
+import sun.tools.tree.BitNotExpression;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Zone {
     private static final int ZONE_SIZE = 5;
-    private static final HashMap<Integer, Integer> positions = new HashMap<Integer, Integer>() {{
-        put(1, 5);
-        put(2, 3);
-        put(3, 1);
-        put(4, 2);
-        put(5, 4);
-    }};
-    private Cell[] cells = new Cell[ZONE_SIZE + 1];
+    
+    private HashMap<Integer, Cell> cells;
 
-    public Zone() {
-        for (int i = 1; i <= ZONE_SIZE; i++) {
-            cells[i] = new Cell();
-        }
+    public Zone (){
+        cells = new HashMap<>();
+        cells.put(5, new Cell());
+        cells.put(3, new Cell());
+        cells.put(1, new Cell());
+        cells.put(2, new Cell());
+        cells.put(4, new Cell());
     }
 
-
-    public Cell getCell(int position) {
-        return this.cells[adapter(position)];
+    public Cell getCells(int position) {
+        return cells.get(position);
     }
-
-
-    public void placeCard(Card card) {
-
-        for (int i = 1; i <= 5; i++) {
-            if (cells[adapter(i)].getCard() != null) {
-                cells[adapter(i)].setCard(card);
-            }
-        }
+    public void placeCard(Card card){
+        int position = firstEmptyPlace();
+        card.setPositionIndex(position);
+        cells.get(position).setCard(card);
     }
-
-    public int adapter(int position) {
-
-        for (int index : positions.keySet()) {
-            if (position == positions.get(index)) {
-                return index;
-            }
-        }
-        return 0;
+    private int firstEmptyPlace(){
+        for(Map.Entry<Integer, Cell> cell : cells.entrySet())
+            if (cell.getValue().isEmpty()) return cell.getKey();
+            return 0;
     }
-
-
-    public boolean isFull() {
-        for (int i = 0; i < 5; i++) {
-            if (cells[i].isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isFull(){
+        return getSize() == ZONE_SIZE;
     }
-
-    public boolean isEmpty() {
-        int counter = 0;
-        for (int i = 0; i < 5; i++) {
-            if (cells[i].isEmpty()) {
-                counter++;
-            }
-        }
-        return counter == 5;
-    }
-
-    public String toString(boolean isRotated) {
-        if (isRotated)
-            return String.format("\t%s\t%s\t%s\t%s\t%s\t", cells[adapter(5)], cells[adapter(4)], cells[adapter(3)], cells[adapter(2)], cells[adapter(1)]);
-        return String.format("\t%s\t%s\t%s\t%s\t%s\t", cells[adapter(1)], cells[adapter(2)], cells[adapter(3)], cells[adapter(4)], cells[adapter(5)]);
+    private int getSize(){
+        int size = 0;
+        for(Map.Entry<Integer, Cell> cell : cells.entrySet())
+            if (!cell.getValue().isEmpty()) size++;
+            return size;
     }
 }
