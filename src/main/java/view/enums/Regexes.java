@@ -21,6 +21,7 @@ public enum Regexes {
     LOGOUT("logout"),
     SHOW_SCOREBOARD("show scoreboard"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
+    START_DUEL("^duel (?=.*(--(second-player) ([\\w\\-]+)))(?=.*(--(rounds) (\\d+))).*$"),
     SHOP_SHOW_ALL("shop show --all");
 
 

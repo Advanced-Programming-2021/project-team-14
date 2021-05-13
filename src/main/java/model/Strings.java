@@ -22,6 +22,7 @@ public enum Strings {
     VALID("valid"),
     INVALID("invalid"),
     SIDE_OPTION("side"),
+    NEW_OPTION("new"),
     PLAYER_FORMAT("%s : %s"),
     ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
     BOARD_STRUCTURE("\t\t\t%s\n%s : %s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s : %s");

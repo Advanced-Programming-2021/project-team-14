@@ -32,6 +32,8 @@ public class MainMenu extends Menu {
             new DeckMenu().run();
         } else if (destinationMenu.equals(Menus.SHOP_MENU.getLabel())) {
             new ShopMenu().run();
+        }else if (destinationMenu.equals(Menus.DUEL_MENU.getLabel())) {
+            new DuelMenu().run();
         } else {
             Console.print(Responses.INVALID_COMMAND.getLabel());
         }
