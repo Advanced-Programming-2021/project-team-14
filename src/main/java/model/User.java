@@ -137,4 +137,8 @@ public class User {
     public Deck getDeck(String deckName) {
         return decks.get(deckName);
     }
+
+    public boolean doesHaveActiveDeck() {
+        return activeDeck != null;
+    }
 }

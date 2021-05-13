@@ -18,6 +18,7 @@ public class DuelMenu extends Menu{
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                    // show current menu
                 Console.print(currentMenu);
             else if (command.matches(Regexes.START_DUEL.getLabel())){
+                Request.setCommandTag(CommandTags.START_DUEL);
                 Request.extractData(command);
                 Request.setOption(command, Strings.NEW_OPTION.getLabel());
                 Request.send();

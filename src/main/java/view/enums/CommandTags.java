@@ -16,6 +16,7 @@ public enum CommandTags {
     CHANGE_NICKNAME("change-nickname"),
     SHOW_SCOREBOARD("scoreboard show"),
     BUY_CARD("shop buy"),
+    START_DUEL("start duel"),
     SHOP_SHOW_ALL("shop show --all");
 
     public final String label;

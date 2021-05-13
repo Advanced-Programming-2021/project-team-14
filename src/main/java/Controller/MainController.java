@@ -19,8 +19,10 @@ public class MainController {
             ProfileController.processCommand(request);
         } else if (view.equals(Menus.DECK_MENU.getLabel())) {
             DeckController.processCommand(request);
-        }else if (view.equals(Menus.SHOP_MENU.getLabel())) {
+        } else if (view.equals(Menus.SHOP_MENU.getLabel())) {
             ShopController.processCommand(request);
+        } else if (view.equals(Menus.DUEL_MENU.getLabel())) {
+            DuelController.processCommand(request);
         }
 
         Logger.log("server", Response.getResponse().toString());
