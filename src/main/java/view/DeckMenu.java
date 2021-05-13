@@ -1,5 +1,6 @@
 package view;
 
+import model.Strings;
 import view.enums.CommandTags;
 import view.enums.Menus;
 import view.enums.Regexes;
@@ -42,7 +43,7 @@ public class DeckMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.ADD_CARD);
                 Request.extractData(command);
-                Request.setOption(command);
+                Request.setOption(command, Strings.SIDE_OPTION.getLabel());
                 Request.send();
                 Console.print(Request.getResponse());
 
@@ -50,7 +51,7 @@ public class DeckMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.REMOVE_CARD);
                 Request.extractData(command);
-                Request.setOption(command);
+                Request.setOption(command, Strings.SIDE_OPTION.getLabel());
                 Request.send();
                 Console.print(Request.getResponse());
 
@@ -64,7 +65,7 @@ public class DeckMenu extends Menu {
 
                 Request.setCommandTag(CommandTags.SHOW_DECK);
                 Request.extractData(command);
-                Request.setOption(command);
+                Request.setOption(command, Strings.SIDE_OPTION.getLabel());
                 Request.send();
                 Console.print(Request.getResponse());
 
