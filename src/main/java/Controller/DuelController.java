@@ -10,7 +10,7 @@ public class DuelController {
     private static Game game;
     public static void processCommand(JSONObject request) {
 
-        String command = request.getString("view");
+        String command = request.getString("command");
         if (command.equals(CommandTags.START_DUEL.getLabel()))
             Response.addMessage(startGame(request));
     }
@@ -20,8 +20,8 @@ public class DuelController {
             return Strings.PLAYER_NOT_EXIST.getLabel();
         User first = User.getUserByName(request.getString("token"));
         User second = User.getUserByName(request.getString("second-player"));
-        if (first.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), first.getUsername());
-        if (second.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), second.getUsername());
+        if (!first.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), first.getUsername());
+        if (!second.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), second.getUsername());
         if (!first.getDeck(first.getActiveDeck()).isValid()) return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
         if (!second.getDeck(second.getActiveDeck()).isValid()) return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
         int rounds = request.getInt("round");
