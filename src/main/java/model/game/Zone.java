@@ -1,6 +1,7 @@
 package model.game;
 
 
+import model.Strings;
 import model.card.Card;
 import model.card.enums.Position;
 import sun.tools.tree.BitNotExpression;
@@ -43,5 +44,10 @@ public class Zone {
         for(Map.Entry<Integer, Cell> cell : cells.entrySet())
             if (!cell.getValue().isEmpty()) size++;
             return size;
+    }
+
+    public String toString(boolean isRotated) {
+        if (isRotated) return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(5), cells.get(3), cells.get(1), cells.get(2), cells.get(4));
+        return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(2), cells.get(2), cells.get(1), cells.get(3), cells.get(5));
     }
 }
