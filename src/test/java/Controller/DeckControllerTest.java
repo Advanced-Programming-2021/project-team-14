@@ -242,7 +242,7 @@ class DeckControllerTest {
         addCardToDeckTemp("Marshmallon", "fullDeck");
         addCardToDeckTemp("Scanner", "fullDeck");
 
-        Assertions.assertEquals(Request.getResponse(), Responses.SIDE_DECK_IS_FULL.getLabel());
+        Assertions.assertEquals(Responses.SIDE_DECK_IS_FULL.getLabel(), Request.getResponse());
     }
 
 

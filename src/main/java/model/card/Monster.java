@@ -21,4 +21,9 @@ public class Monster extends Card {
         this.monsterType = monsterType;
         addCard(this);
     }
+
+    public MonsterCardType getMonsterCardType() {
+        return monsterCardType;
+    }
+
 }
