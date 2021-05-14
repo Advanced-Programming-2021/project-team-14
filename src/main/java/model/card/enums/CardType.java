@@ -10,6 +10,9 @@ public enum CardType {
     CardType(String label) {
         this.label = label;
     }
+    public String getLabel() {
+        return label;
+    }
 
     public static CardType fromValue(String givenName) {
         for (CardType direction : values())
@@ -18,8 +21,5 @@ public enum CardType {
         return null;
     }
 
-    public String getLabel() {
-        return label;
-    }
 
 }

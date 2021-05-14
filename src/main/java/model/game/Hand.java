@@ -24,14 +24,8 @@ public class Hand {
         cards.add(card);
     }
 
-    public Card getCard(String cardName) {
-
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                return card;
-            }
-        }
-        return null;
+    public Card getCard(int position) {
+        return cards.get(position - 1);
     }
 public int getSize(){
         return cards.size();

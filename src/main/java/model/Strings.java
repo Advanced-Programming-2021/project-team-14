@@ -21,6 +21,8 @@ public enum Strings {
     CARD_SELECTED("card selected"),
     OPPONENT_OPTION("opponent"),
     NO_CARD_FOUND("no card found in the given position"),
+    AREA("area"),
+    POSITION("position"),
 
 
     SIDE("side"),
