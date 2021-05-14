@@ -1,6 +1,7 @@
 package model.game;
 
 import model.User;
+import model.card.Card;
 
 
 public class Game {
@@ -11,7 +12,11 @@ public class Game {
     private int round;
     private Board board;
     private Phase phase;
+    private Card selectedCard;
 
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
 
     public Game(User mainUser, User rivalUser, int round) {
         this.round = round;
