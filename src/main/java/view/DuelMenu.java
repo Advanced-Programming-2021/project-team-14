@@ -22,9 +22,8 @@ public class DuelMenu extends Menu{
                 Request.extractData(command);
                 Request.setOption(command, Strings.NEW_OPTION.getLabel());
                 Request.send();
-//                if (Request.isSuccessful()){
-                    // to gameplay menu
-//                }
+                if (Request.isSuccessful())
+                     new GamePlayMenu().run();
             }
 
             Console.print(Request.getResponse());

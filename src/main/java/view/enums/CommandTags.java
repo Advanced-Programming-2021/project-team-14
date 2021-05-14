@@ -3,11 +3,19 @@ package view.enums;
 public enum CommandTags {
 
 
+    SET("set"),
+    SELECT("select"),
+    NEXT_PHASE("next phase"),
     SET_POSITION("set position"),
     SUMMON("summon"),
     ATTACK("attack"),
     FLIP_SUMMON("flip-summon"),
-    SET("set"),
+    SELECT_CARD_MONSTER("select monster"),
+    SELECT_CARD_SPELL("select spell"),
+    DESELECT("deselect"),
+    SELECT_FIELD("select field"),
+    SELECT_HAND("select hand"),
+    ACTIVATE_EFFECT("activate effect"),
 
 
     LOGIN("login"),

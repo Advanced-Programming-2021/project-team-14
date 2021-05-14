@@ -1,6 +1,15 @@
 package view.enums;
 
 public enum Regexes {
+    SELECT("select"),
+    SELECT_SPELL("^select (?=.*(--(spell) (\\d+))).*$"),
+    DESELECT("select -d"),
+    SELECT_CARD_FROM_BOARD("^select (?=.*(--(monster|spell) (\\d+))).*$"),
+    SELECT_FIELD("^select (?=.*(--(field))).*$"),
+    SELECT_HAND("select --hand \\d+"),
+    SELECT_MONSTER("^select (?=.*(--(monster) (\\d+))).*$"),
+    OPPONENT_OPTION("opponent"),
+
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),
     MENU_ENTER("menu enter (.*)"),

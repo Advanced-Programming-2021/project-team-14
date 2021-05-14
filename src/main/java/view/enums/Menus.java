@@ -7,6 +7,7 @@ public enum Menus {
     DECK_MENU("Deck Menu"),
     SHOP_MENU("Shop Menu"),
     DUEL_MENU("Duel Menu"),
+    GAMEPLAY_MENU("GamePlay Menu"),
     SCOREBOARD_MENU("Scoreboard Menu");
     public final String label;
 
