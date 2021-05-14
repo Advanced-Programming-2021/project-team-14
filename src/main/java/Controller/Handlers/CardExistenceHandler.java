@@ -1,31 +1,34 @@
 package Controller.Handlers;
 
 import model.Strings;
-import model.card.Card;
 import model.game.Cell;
 import model.game.Game;
 import model.game.Player;
+import model.game.Zone;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 
 public class CardExistenceHandler extends GameHandler{
     public String handle (JSONObject request, Game game){
-        String command = request.getString(Strings.COMMAND.getLabel());
 
+        String area = request.getString(Strings.AREA.getLabel());
+        boolean isOpponent = request.getBoolean(Strings.OPPONENT_OPTION.getLabel());
+        Player player = isOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer();
+        int position = 1;
 
-        if (command.equals(CommandTags.SELECT_CARD_SPELL.getLabel())){
-            Cell cell = (request.getBoolean(Strings.OPPONENT_OPTION.getLabel()) ? game.getBoard().getRivalPlayer() :
-                    game.getBoard().getMainPlayer()).getSpellZone().getCell(request.getInt(Strings.SPELL_POSITION.getLabel()));
-            if (cell.isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
-        } else if (command.equals(CommandTags.SELECT_CARD_MONSTER.getLabel())){
-            Cell cell = (request.getBoolean(Strings.OPPONENT_OPTION.getLabel()) ? game.getBoard().getRivalPlayer() :
-                    game.getBoard().getMainPlayer()).getMonsterZone().getCell(request.getInt(Strings.SPELL_POSITION.getLabel()));
-            if (cell.isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
-        }
-        else if (command.equals(CommandTags.SELECT_FIELD.getLabel())){
-            Player player =  request.getBoolean(Strings.OPPONENT_OPTION.getLabel()) ? game.getBoard().getRivalPlayer() :
-                    game.getBoard().getMainPlayer();
-            if (player.getFieldZone().isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
+        switch (area){
+            case "monster":
+                position = request.getInt(Strings.POSITION.getLabel());
+                Zone monsterZone = player.getMonsterZone();
+                if (monsterZone.getCell(position).isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
+                break;
+            case "spell":
+                Zone spellTrapZone = player.getSpellZone();
+                if (spellTrapZone.getCell(position).isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
+                break;
+            case "field":
+                if (player.getFieldZone().isEmpty()) return Strings.NO_CARD_FOUND.getLabel();
+                break;
         }
 
         return super.handle(request, game);
