@@ -2,6 +2,14 @@ package view.enums;
 
 public enum CommandTags {
 
+
+    SET_POSITION("set position"),
+    SUMMON("summon"),
+    ATTACK("attack"),
+    FLIP_SUMMON("flip-summon"),
+    SET("set"),
+
+
     LOGIN("login"),
     REGISTER("register"),
     CREATE_DECK("create-deck"),

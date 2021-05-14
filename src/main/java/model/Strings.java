@@ -2,6 +2,19 @@ package model;
 
 public enum Strings {
 
+    CARD_NOT_EXIST_IN_HAND("you can’t summon this card_ hand"),
+    POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
+    ATTACK_OPTION("attack"),
+    SET_SUCCESSFULLY("set successfully"),
+    CANNOT_TAKE_ACTION_IN_THIS_PHASE("you can’t do this action in this phase"),
+    CARD_NOT_EXIST_IN_MONSTER_ZONE("you can’t change this card position"),
+    CANNOT_ATTACK_WITH_THIS_CARD("you can’t attack with this card"),
+    ACTION_NOT_ALlOWED_IN_THIS_PHASE("action not allowed in this phase"),
+    MONSTER_ZONE_FULL("monster card zone is full"),
+    SPELL_ZONE_FULL("spell card zone is full"),
+    ALREADY_POSITIONED("this card is already in the wanted position"),
+    CANNOT_CHANGE_POSITION("you can’t change this card position"),
+
     SIDE("side"),
     MAIN("main"),
     MAIN_DECK("main"),

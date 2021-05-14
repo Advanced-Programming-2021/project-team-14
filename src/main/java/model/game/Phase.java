@@ -6,6 +6,7 @@ public enum Phase {
     STANDBY_PHASE,
     BATTLE_PHASE,
     MAIN_PHASE_1,
-    MAIN_PHASE_2
+    MAIN_PHASE_2,
+    MAIN_PHASE
 
 }

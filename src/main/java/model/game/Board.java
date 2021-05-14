@@ -15,6 +15,14 @@ public class Board {
         this.rivalPlayer = rivalPlayer;
     }
 
+    public Player getMainPlayer() {
+        return mainPlayer;
+    }
+
+    public Player getRivalPlayer() {
+        return rivalPlayer;
+    }
+
     @Override
     public String toString() {
 
