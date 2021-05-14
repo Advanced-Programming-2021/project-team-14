@@ -26,7 +26,7 @@ public class DuelMenu extends Menu{
                      new GamePlayMenu().run();
             }
 
-            Console.print(Request.getResponse());
+            Console.print(Request.getMessage());
         }
 
     }

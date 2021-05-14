@@ -10,6 +10,7 @@ public enum Regexes {
     SELECT_MONSTER("^select (?=.*(--(monster) (\\d+))).*$"),
     SELECT_AREA(".*--(monster|hand|spell) \\d+.*"),
     SELECT_POSITION(".*--(?:monster|hand|spell) (\\d+).*"),
+    SHOW_SELECTED_CARD("card show --selected"),
 
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),

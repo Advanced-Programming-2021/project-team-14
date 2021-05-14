@@ -18,7 +18,7 @@ public class ScoreboardMenu extends Menu {
             else if (command.matches(Regexes.SHOW_SCOREBOARD.getLabel())) { // show scoreboard
                 Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
                 Request.send();
-                Console.print(Request.getResponse());
+                Console.print(Request.getMessage());
             } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
         }

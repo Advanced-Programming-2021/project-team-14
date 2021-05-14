@@ -21,12 +21,12 @@ public class ShopMenu extends Menu {
                 Request.setCommandTag(CommandTags.BUY_CARD);
                 Request.addDataToRequest(Regexes.SHOP_BUY.getLabel(), command, "cardName");
                 Request.send();
-                Console.print(Request.getResponse());
+                Console.print(Request.getMessage());
 
             } else if (command.matches(Regexes.SHOP_SHOW_ALL.getLabel())) {     // shop show all
                 Request.setCommandTag(CommandTags.SHOP_SHOW_ALL);
                 Request.send();
-                Console.print(Request.getResponse());
+                Console.print(Request.getMessage());
             } else Console.print(Responses.INVALID_COMMAND.getLabel());
         }
 

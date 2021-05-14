@@ -16,6 +16,7 @@ public enum CommandTags {
     SELECT_FIELD("select field"),
     SELECT_HAND("select hand"),
     ACTIVATE_EFFECT("activate effect"),
+    SHOW_SELECTED_CARD("show card"),
 
 
     LOGIN("login"),

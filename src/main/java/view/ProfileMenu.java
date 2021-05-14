@@ -23,14 +23,14 @@ public class ProfileMenu extends Menu {
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
                 Request.extractData(command);
                 Request.send();
-                Console.print(Request.getResponse());
+                Console.print(Request.getMessage());
 
             } else if (command.matches(Regexes.CHANGE_PROFILE_PASSWORD.getLabel())) {     // change profile password
 
                 Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
                 Request.extractData(command);
                 Request.send();
-                Console.print(Request.getResponse());
+                Console.print(Request.getMessage());
             } else Console.print(Responses.INVALID_COMMAND.getLabel());
         }
 

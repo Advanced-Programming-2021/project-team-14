@@ -31,7 +31,9 @@ public class Request {
     public static void setOption(String command, String option) { // extract option if available
         request.put(option, command.contains("--" + option));
     }
-
+    public static String getMessage() {
+        return response.getString("message");
+    }
     public static void extractData(String command) { // extract data from the input with the "--key value" format
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
@@ -46,8 +48,8 @@ public class Request {
         clear();
     }
 
-    public static String getResponse() {
-        return response.getString("message");
+    public static JSONObject getResponse() {
+        return response;
     }
 
     public static void clear() {

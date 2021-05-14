@@ -30,7 +30,7 @@ public class RegistrationMenu extends Menu {
         Request.setCommandTag(CommandTags.LOGIN);
         Request.extractData(command);
         Request.send();
-        Console.print(Request.getResponse());
+        Console.print(Request.getMessage());
         if (Request.isSuccessful()) {
             Request.getToken();
             new MainMenu().run();
@@ -41,6 +41,6 @@ public class RegistrationMenu extends Menu {
         Request.setCommandTag(CommandTags.REGISTER);
         Request.extractData(command);
         Request.send();
-        Console.print(Request.getResponse());
+        Console.print(Request.getMessage());
     }
 }
