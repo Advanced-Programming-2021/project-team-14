@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import view.enums.CommandTags;
 
 public class DuelController {
-    private static Game game;
     public static void processCommand(JSONObject request) {
 
         String command = request.getString("command");
@@ -16,6 +15,7 @@ public class DuelController {
     }
 
     private static String startGame(JSONObject request) {
+        Response.error();
         if (!User.doesUsernameExist(request.getString(Strings.SECOND_PLAYER.getLabel())))
             return Strings.PLAYER_NOT_EXIST.getLabel();
         User first = User.getUserByName(request.getString(Strings.TOKEN.getLabel()));
@@ -27,7 +27,8 @@ public class DuelController {
         int rounds = request.getInt(Strings.ROUNDS_NUMBER.getLabel());
         if (rounds != 1 && rounds != 3)
             return Strings.NUMBER_OF_ROUNDS_NOT_SUPPORTED.getLabel();
-        game = new Game(first, second, rounds);
+        Response.success();
+        GamePlayController.startAGame(first, second, rounds);
         return String.format(Strings.START_DUEL.getLabel(), first.getUsername(), second.getUsername());
     }
 }

@@ -6,7 +6,7 @@ import model.game.Game;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 
-public class PositionHandler extends GameHandler{
+public class CardPositionHandler extends GameHandler{
     public String handle(JSONObject request, Game game){
 
         String command = request.getString("command");

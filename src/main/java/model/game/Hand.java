@@ -33,7 +33,9 @@ public class Hand {
         }
         return null;
     }
-
+public int getSize(){
+        return cards.size();
+}
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

@@ -14,8 +14,13 @@ public enum Strings {
     SPELL_ZONE_FULL("spell card zone is full"),
     ALREADY_POSITIONED("this card is already in the wanted position"),
     CANNOT_CHANGE_POSITION("you can’t change this card position"),
+    INVALID_SELECTION("invalid selection"),
+    MONSTER_POSITION("monster"),
+    HAND_POSITION("hand"),
+    SPELL_POSITION("spell"),
 
     SIDE("side"),
+    COMMAND("command"),
     MAIN("main"),
     MAIN_DECK("main"),
     DECK("deck"),
