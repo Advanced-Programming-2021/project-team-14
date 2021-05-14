@@ -18,6 +18,10 @@ public class Game {
         return selectedCard;
     }
 
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
     public Game(User mainUser, User rivalUser, int round) {
         this.round = round;
         this.creatorNickname = mainUser.getNickname();

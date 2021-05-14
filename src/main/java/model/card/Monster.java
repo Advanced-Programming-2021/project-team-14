@@ -22,6 +22,36 @@ public class Monster extends Card {
         addCard(this);
     }
 
+    public MonsterType getMonsterType() {
+        return monsterType;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public Monster(Monster card) {
+        super(card);
+        this.attack = card.getAttack();
+        this.defence = card.getDefence();
+        this.attribute = card.getAttribute();
+        this.level = card.getLevel();
+        this.monsterCardType = card.getMonsterCardType();
+        this.monsterType = card.getMonsterType();
+    }
+
     public MonsterCardType getMonsterCardType() {
         return monsterCardType;
     }

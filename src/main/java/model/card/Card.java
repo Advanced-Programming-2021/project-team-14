@@ -55,7 +55,12 @@ public abstract class Card {
         this.price = price;
         this.cardType = cardType;
     }
-
+    public Card(Card card){
+        this.name = card.getName();
+        this.description = card.getDescription();
+        this.cardType = card.getCardType();
+        this.price = card.getPrice();
+    }
     public static ArrayList<Card> getCards() {
         return new ArrayList<>(cards.values());
     }

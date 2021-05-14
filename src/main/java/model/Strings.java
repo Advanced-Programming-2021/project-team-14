@@ -18,6 +18,10 @@ public enum Strings {
     MONSTER_POSITION("monster"),
     HAND_POSITION("hand"),
     SPELL_POSITION("spell"),
+    CARD_SELECTED("card selected"),
+    OPPONENT_OPTION("opponent"),
+    NO_CARD_FOUND("no card found in the given position"),
+
 
     SIDE("side"),
     COMMAND("command"),

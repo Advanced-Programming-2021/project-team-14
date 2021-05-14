@@ -17,6 +17,7 @@ public class PlayingDeck {
     public PlayingDeck(Deck activeDeck) {
         cards = new ArrayList<>();
         loadCards(activeDeck);
+        shuffle();
     }
 
     private void loadCards(Deck activeDeck) {
@@ -31,7 +32,6 @@ public class PlayingDeck {
     }
 
     public Card drawCard() {
-
         return cards.get(0);          // draw first card from deck
     }
 
@@ -40,13 +40,10 @@ public class PlayingDeck {
     }
 
     public void loadCard(Card card) {
-        if (card.getCardType() == CardType.MONSTER){
-        Monster copiedCard = (Monster) card;
-        cards.add(copiedCard);
-        }else{
-            SpellTrap copiedCard = (SpellTrap) card;
-            cards.add(copiedCard);
-        }
+        if (card.getCardType() == CardType.MONSTER)
+            cards.add(new Monster((Monster) card));
+        else
+            cards.add(new SpellTrap((SpellTrap) card));
     }
 
     @Override

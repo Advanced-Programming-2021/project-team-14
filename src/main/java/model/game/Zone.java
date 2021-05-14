@@ -21,7 +21,7 @@ public class Zone {
         cells.put(4, new Cell());
     }
 
-    public Cell getCells(int position) {
+    public Cell getCell(int position) {
         return cells.get(position);
     }
     public void placeCard(Card card){

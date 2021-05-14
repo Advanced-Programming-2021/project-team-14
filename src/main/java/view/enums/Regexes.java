@@ -8,7 +8,6 @@ public enum Regexes {
     SELECT_FIELD("^select (?=.*(--(field))).*$"),
     SELECT_HAND("select --hand \\d+"),
     SELECT_MONSTER("^select (?=.*(--(monster) (\\d+))).*$"),
-    OPPONENT_OPTION("opponent"),
 
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),

@@ -15,4 +15,17 @@ public class SpellTrap extends Card {
         addCard(this);
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public SpellTrap(SpellTrap card) {
+        super(card);
+        this.status = card.getStatus();
+        this.property = card.getProperty();
+    }
 }
