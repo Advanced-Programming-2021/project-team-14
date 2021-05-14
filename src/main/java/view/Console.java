@@ -23,4 +23,10 @@ public abstract class Console {
             System.out.println(output);
         }
     }
+
+    public static void printBoard(JSONObject jsonObject) {
+        JSONObject game = jsonObject.getJSONObject("game");
+        System.out.println("\033[1;36m" + game.getString("board") + "\033[0m");
+        System.out.println("phase: " + game.getString("phase"));
+    }
 }

@@ -1,5 +1,6 @@
 package model.game;
 
+import model.Strings;
 import model.User;
 import model.card.Card;
 
@@ -117,5 +118,10 @@ public class Player {
 
     public void setSpellZone(Zone spellZone) {
         this.spellZone = spellZone;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Strings.PLAYER_FORMAT.getLabel(), nickname, lifePoint);
     }
 }

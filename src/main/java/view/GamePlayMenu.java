@@ -25,8 +25,8 @@ public class GamePlayMenu extends Menu{
             else if (command.matches(Regexes.SELECT.getLabel()) ||
                      command.matches(Regexes.SELECT_FIELD.getLabel())) {
                 select();
-//                Console.printBoard(Request.getResponse());
-//                Console.print(Request.getMessage());
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             }else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 

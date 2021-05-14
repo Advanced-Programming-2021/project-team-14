@@ -12,7 +12,7 @@ public class Game {
 
     private int round;
     private Board board;
-    private Phase phase;
+    private Phase phase = Phase.START;
     private Card selectedCard;
 
     public Card getSelectedCard() {

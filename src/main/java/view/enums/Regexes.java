@@ -1,7 +1,7 @@
 package view.enums;
 
 public enum Regexes {
-    SELECT("select"),
+    SELECT("^select (?=.*(--(spell|monster|hand) (\\d+))).*$"),
     SELECT_SPELL("^select (?=.*(--(spell) (\\d+))).*$"),
     DESELECT("select -d"),
     SELECT_CARD_FROM_BOARD("^select (?=.*(--(monster|spell) (\\d+))).*$"),
