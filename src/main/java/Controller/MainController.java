@@ -22,6 +22,8 @@ public class MainController {
             ShopController.processCommand(request);
         } else if (view.equals(Menus.DUEL_MENU.getLabel())) {
             DuelController.processCommand(request);
+        } else if (view.equals(Menus.GAMEPLAY_MENU.getLabel())) {
+            GamePlayController.processCommand(request);
         }
 
         Logger.log("server", Response.getResponse().toString());
