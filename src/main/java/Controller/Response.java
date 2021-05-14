@@ -22,7 +22,9 @@ public class Response {
     public static void error() {
         response.put("type", Responses.ERROR.getLabel());
     }
-
+    public static void addObject(String key, JSONObject jsonObject){
+        response.put(key, jsonObject);
+    }
     public static void addToken(String generatedToken) {
         token = generatedToken;
         response.put("token", generatedToken);

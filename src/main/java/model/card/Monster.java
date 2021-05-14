@@ -21,7 +21,10 @@ public class Monster extends Card {
         this.monsterType = monsterType;
         addCard(this);
     }
-
+    @Override
+    public String show() {
+        return "monster show method"; // TODO
+    }
     public MonsterType getMonsterType() {
         return monsterType;
     }

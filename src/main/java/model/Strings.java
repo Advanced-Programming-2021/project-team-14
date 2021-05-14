@@ -56,7 +56,8 @@ public enum Strings {
     NEW_OPTION("new"),
     PLAYER_FORMAT("%s : %s"),
     ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
-    BOARD_STRUCTURE("\t\t\t%s\n%s : %s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s : %s");
+    BOARD_STRUCTURE("\n%s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s");
+
 
     public final String label;
 

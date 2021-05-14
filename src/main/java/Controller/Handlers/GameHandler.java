@@ -3,7 +3,7 @@ package Controller.Handlers;
 import model.game.Game;
 import org.json.JSONObject;
 
-public class GameHandler {
+public class GameHandler implements Handler{
     private Handler nextHandler;
     protected String response;
     public Handler linksWith(Handler handler){

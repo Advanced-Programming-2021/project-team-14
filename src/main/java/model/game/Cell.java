@@ -22,6 +22,7 @@ public class Cell {
 
     @Override
     public String toString() {
+        if (isEmpty()) return State.EMPTY.getLabel();
         return card.getState().getLabel();
     }
 }

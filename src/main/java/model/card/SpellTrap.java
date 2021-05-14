@@ -28,4 +28,9 @@ public class SpellTrap extends Card {
         this.status = card.getStatus();
         this.property = card.getProperty();
     }
+
+    @Override
+    public String show() {
+        return "spell show method"; // TODO
+    }
 }

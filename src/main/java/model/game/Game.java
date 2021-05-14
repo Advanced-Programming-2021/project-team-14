@@ -2,6 +2,7 @@ package model.game;
 
 import model.User;
 import model.card.Card;
+import org.json.JSONObject;
 
 
 public class Game {
@@ -27,7 +28,12 @@ public class Game {
         this.creatorNickname = mainUser.getNickname();
         this.board = new Board(new Player(mainUser), new Player(rivalUser));
     }
-
+    public JSONObject getGameObject(){
+        JSONObject game = new JSONObject();
+        game.put("board", board.toString());
+        game.put("phase", phase);
+        return game;
+    }
     public int getRound() {
         return round;
     }

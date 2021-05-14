@@ -24,6 +24,7 @@ public abstract class Card {
     protected int positionIndex;
     protected Position position;
     protected State state;
+    public abstract String show();
 
     public void setPosition(Position position) {
         this.position = position;
