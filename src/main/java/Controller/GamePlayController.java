@@ -26,9 +26,15 @@ public class GamePlayController {
             Response.addMessage(setPosition(request));
         }  else if (command.equals(CommandTags.SET.getLabel())){
             Response.addMessage(set(request));
+        }  else if (command.equals(CommandTags.NEXT_PHASE.getLabel())){
+            nextPhase(request);
         }
 
         Response.addObject("game", game.getGameObject());
+    }
+
+    private static void nextPhase(JSONObject request) {
+        new TaskHandler().handle(request, game);
     }
 
     private static String set(JSONObject request) {
@@ -39,7 +45,7 @@ public class GamePlayController {
                 .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TurnLogHandler())
                 .linksWith(new TaskHandler());
-        return null;
+        return set.handle(request, game);
     }
 
     private static String setPosition(JSONObject request) {

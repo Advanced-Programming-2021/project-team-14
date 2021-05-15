@@ -5,10 +5,11 @@ import model.game.Game;
 import model.game.Player;
 import model.game.Zone;
 import org.json.JSONObject;
+import view.Logger;
 
 public class CardExistenceHandler extends GameHandler {
     public String handle(JSONObject request, Game game) {
-
+        Logger.log("card existence handler", "checking ...");
         if (!request.getString(Strings.COMMAND.getLabel()).equals("select")) {
             if (game.getSelectedCard() == null) return "no card is selected yet";
         } else {

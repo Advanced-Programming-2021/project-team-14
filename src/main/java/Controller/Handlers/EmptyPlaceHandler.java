@@ -4,9 +4,15 @@ import model.Strings;
 import model.card.enums.CardType;
 import model.game.Game;
 import org.json.JSONObject;
+import view.Logger;
 
 public class EmptyPlaceHandler extends GameHandler{
+
     public String handle(JSONObject request, Game game){
+
+        Logger.log("empty place handler", "checking ...");
+
+
         String command = request.getString("command");
         if (game.getSelectedCard().getCard().getCardType() == CardType.MONSTER &&
             game.getBoard().getMainPlayer().getMonsterZone().isFull())

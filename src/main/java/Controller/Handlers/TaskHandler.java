@@ -8,6 +8,7 @@ import model.card.enums.State;
 import model.game.Game;
 import model.game.Player;
 import org.json.JSONObject;
+import view.Logger;
 import view.enums.CommandTags;
 
 import java.util.Objects;
@@ -15,13 +16,14 @@ import java.util.Objects;
 public class TaskHandler extends GameHandler {
 
     public String handle(JSONObject request, Game game) {
+        Logger.log("task handler", "doing ...");
         switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))){
             case SET:
                 return set(request, game);
             case SELECT:
                 return select(request, game);
             case NEXT_PHASE:
-                break;
+                return nextPhase(game);
             case SET_POSITION:
                 return setPosition(request, game);
             case SUMMON:
@@ -38,7 +40,12 @@ public class TaskHandler extends GameHandler {
                 return showSelectedCard(game);
 
         }
-        return game.getSelectedCard().getCard().show();
+        return "> .... <";
+    }
+
+    private String nextPhase(Game game) {
+        game.nextPhase();
+        return null;
     }
 
     private String set(JSONObject request, Game game) {

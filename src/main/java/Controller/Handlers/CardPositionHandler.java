@@ -4,10 +4,12 @@ import model.Strings;
 import model.card.enums.Position;
 import model.game.Game;
 import org.json.JSONObject;
+import view.Logger;
 import view.enums.CommandTags;
 
 public class CardPositionHandler extends GameHandler{
     public String handle(JSONObject request, Game game){
+        Logger.log("card position handler", "checking ...");
 
         String command = request.getString("command");
 
