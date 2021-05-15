@@ -1,12 +1,12 @@
 {
   "wallet": {
-    "cash": 0,
+    "cash": 100000,
     "cards": []
   },
   "activeDeck": "firstDeck",
   "decks": {
     "firstDeck": {
-      "isActive": false,
+      "isActive": true,
       "name": "firstDeck",
       "sideCards": [],
       "mainCards": [
