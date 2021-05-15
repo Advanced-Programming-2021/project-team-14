@@ -20,10 +20,12 @@ public class CardTypeHandler extends GameHandler {
 
         String command = request.getString("command");
 
-        if (!game.getSelectedCard().getCard().getCardType().getLabel().equals(type)) {
+        if (game.getSelectedCard() != null) {
+            if (!game.getSelectedCard().getCard().getCardType().getLabel().equals(type)) {
 
-            response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
-            return response;
+                response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
+                return response;
+            }
         }
 
         return super.handle(request, game);

@@ -21,12 +21,14 @@ public class MonsterCardTypeHandler extends GameHandler {
 
         String command = request.getString("command");
 
-        if (game.getBoard().getMainPlayer().getPlayingDeck().
-                getMonsterByName(game.getSelectedCard().getCard().getName()).
-                getMonsterCardType().getLabel().equals(monsterCardType)) {
+        if (game.getSelectedCard() != null) {
+            if (game.getBoard().getMainPlayer().getPlayingDeck().
+                    getMonsterByName(game.getSelectedCard().getCard().getName()).
+                    getMonsterCardType().getLabel().equals(monsterCardType)) {
 
-            response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
-            return response;
+                response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
+                return response;
+            }
         }
 
         return super.handle(request, game);

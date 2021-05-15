@@ -58,7 +58,8 @@ public class GamePlayController {
 
 
         Handler summon = new SelectedCardHandler();
-        summon.linksWith(new CardPositionHandler())
+        summon.linksWith(new MonsterTributeHandler())
+                .linksWith(new CardPositionHandler())
                 .linksWith(new CardTypeHandler("Monster", request, game))
                 .linksWith(new MonsterCardTypeHandler("Ritual", request, game))
                 .linksWith(new PhaseHandler())

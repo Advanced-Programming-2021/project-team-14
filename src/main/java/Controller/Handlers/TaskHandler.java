@@ -111,12 +111,25 @@ public class TaskHandler extends GameHandler {
 
 
     private String summon(JSONObject request, Game game) {
-        game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
-        game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
-        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
-        game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
-        game.deselect();
-        return Strings.SUMMON_SUCCESSFULLY.getLabel();
+
+        int level = game.getBoard().getMainPlayer().getPlayingDeck().
+                getMonsterByName(game.getSelectedCard().getCard().getName()).getLevel();
+
+        if (level <= 4) {
+            game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
+            game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
+            game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+            game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
+            game.deselect();
+            return Strings.SUMMON_SUCCESSFULLY.getLabel();
+        } else if (level == 5 || level == 6) {
+
+
+        } else if (level == 7 || level == 8) {
+
+        }
+
+        return null;
     }
 
 

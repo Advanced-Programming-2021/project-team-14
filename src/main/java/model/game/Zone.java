@@ -2,7 +2,6 @@ package model.game;
 
 
 import model.Strings;
-import model.card.Card;
 import model.card.SelectedCard;
 
 import java.util.HashMap;
@@ -30,20 +29,34 @@ public class Zone {
         card.setPositionIndex(position);
         cells.get(position).setCard(card.getCard());
     }
-    private int firstEmptyPlace(){
+
+    private int firstEmptyPlace() {
         for (int i = 1; i <= 5; i++) {
             if (cells.get(i).isEmpty()) return i;
         }
         return 0;
     }
-    public boolean isFull(){
+
+    public int getNumberOfFullCells() {
+
+        int counter = 0;
+        for (int i = 1; i < 6; i++) {
+            if (!cells.get(i).isEmpty()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public boolean isFull() {
         return getSize() == ZONE_SIZE;
     }
-    private int getSize(){
+
+    private int getSize() {
         int size = 0;
-        for(Map.Entry<Integer, Cell> cell : cells.entrySet())
+        for (Map.Entry<Integer, Cell> cell : cells.entrySet())
             if (!cell.getValue().isEmpty()) size++;
-            return size;
+        return size;
     }
 
     public String toString(boolean isRotated) {
