@@ -28,10 +28,7 @@ public class DuelMenu extends Menu{
                 }else
                     Console.print(Request.getMessage());
             }
-
-
         }
-
     }
 
 }
