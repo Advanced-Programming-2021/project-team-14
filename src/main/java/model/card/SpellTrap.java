@@ -46,8 +46,7 @@ public class SpellTrap extends Card {
         return showCard.getHorizontalLine() + showCard.getTypeLine(getCardType().getLabel()) +
                 showCard.getFreeLine() + showCard.getNameLine(getName()) +
                 showCard.getPriceLine(getPrice()) +
-                showCard.getFreeLine() +
-                showCard.getDescriptionLine(getDescription()) +
+                showCard.getFreeLine() +showCard.getDescriptionLine(getDescription()) +
                 showCard.getHorizontalLine();
     }
 }
