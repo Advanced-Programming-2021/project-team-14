@@ -1,5 +1,6 @@
 package Controller.Handlers;
 
+import Controller.Response;
 import model.Strings;
 import model.card.Card;
 import model.card.Monster;
@@ -130,6 +131,7 @@ public class TaskHandler extends GameHandler {
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
         game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
         game.deselect();
+        Response.add("needTribute", "false");
         return Strings.SUMMON_SUCCESSFULLY.getLabel();
 
     }

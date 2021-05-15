@@ -18,18 +18,20 @@ public class MonsterTributeHandler extends GameHandler {
 
         if (level == 5 || level == 6) {
 
-            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
-                response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
-                return response;
-            }
+            if (!request.getString("tributeCardAddress1").equals("")) {
 
-            if (request.getString("tributeCardAddress1") != null) {
+                if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
+                    response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
+                    Response.error();
+                    return response;
+                }
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, game);
                 if (response == null) {
 
                     return super.handle(request, game);
                 } else {
+                    Response.error();
                     return response;
                 }
             }
@@ -37,16 +39,18 @@ public class MonsterTributeHandler extends GameHandler {
             response = Strings.TRIBUTE_ONE_CARD.getLabel();
             Response.add("needTribute", "true");
             Response.add("tributeNumber", "1");
+            Response.error();
             return response;
 
         } else if (level == 7 || level == 8) {
 
-            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
-                response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
-                return response;
-            }
+            if (!request.getString("tributeCardAddress1").equals("")) {
 
-            if (request.getString("tributeCardAddress1") != null) {
+                if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
+                    response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
+                    Response.error();
+                    return response;
+                }
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")),
                         Integer.parseInt(request.getString("tributeCardAddress2")), game);
@@ -54,6 +58,7 @@ public class MonsterTributeHandler extends GameHandler {
 
                     return super.handle(request, game);
                 } else {
+                    Response.error();
                     return response;
                 }
             }
@@ -61,6 +66,7 @@ public class MonsterTributeHandler extends GameHandler {
             response = Strings.TRIBUTE_TWO_CARD.getLabel();
             Response.add("needTribute", "true");
             Response.add("tributeNumber", "2");
+            Response.error();
             return response;
         }
 

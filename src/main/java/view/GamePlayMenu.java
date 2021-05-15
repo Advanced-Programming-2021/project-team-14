@@ -36,17 +36,21 @@ public class GamePlayMenu extends Menu{
             else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
 
                 Request.setCommandTag(CommandTags.SUMMON);
+                Request.addData("tributeCardAddress1", "");
+                Request.addData("tributeCardAddress2", "");
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-                if (Request.getResponse().getString("needTribute").equals("true")) {
+                while (Request.getResponse().getString("needTribute").equals("true")) {
                     Request.getToken();
-                    for (int i = 0; i < Integer.parseInt(Request.getResponse().getString("tributeNumber")); i++) {
+                    for (int i = 1; i <= Integer.parseInt(Request.getResponse().getString("tributeNumber")); i++) {
 
                         Request.addData("tributeCardAddress" + i, Console.scan());
                     }
+                    setCurrentMenu(Menus.GAMEPLAY_MENU);
+                    Request.setCommandTag(CommandTags.SUMMON);
+                    Request.send();
                 }
-
 
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
                 System.out.println("setting the card");
