@@ -10,25 +10,25 @@ public abstract class showCard {
     }
 
     public static String getNameLine(String name) {
-        return getString(ShowCardTags.NAME.getLabel(), name, 27) + ShowCardTags.NEXT_LINE.getLabel();
+        return getString(ShowCardTags.NAME.getLabel(), name, 37) + ShowCardTags.NEXT_LINE.getLabel();
     }
 
     public static String getDescriptionLine(String description) {
         StringBuilder buildDescription = new StringBuilder(description);
-        StringBuilder response = new StringBuilder(ShowCardTags.DESCRIPTION.getLabel() + getSpace(13)
+        StringBuilder response = new StringBuilder(ShowCardTags.DESCRIPTION.getLabel() + getSpace(23)
                 + ShowCardTags.NEXT_LINE.getLabel());
 
         while (buildDescription.length() > 0) {
-            if (buildDescription.length() < 27) {
+            if (buildDescription.length() < 37) {
                 response.append(ShowCardTags.FIRST_CHARACTER.getLabel())
                         .append(buildDescription.substring(0, buildDescription.length() - 1))
-                        .append(getSpace(27 - buildDescription.length())).append(ShowCardTags.NEXT_LINE.getLabel());
+                        .append(getSpace(37 - buildDescription.length())).append(ShowCardTags.NEXT_LINE.getLabel());
                 break;
             }
-            int lastIndexOfSpace = buildDescription.substring(0, 26).lastIndexOf(ShowCardTags.FREE_SPACE.getLabel());
+            int lastIndexOfSpace = buildDescription.substring(0, 36).lastIndexOf(ShowCardTags.FREE_SPACE.getLabel());
             response.append(ShowCardTags.FIRST_CHARACTER.getLabel())
                     .append(buildDescription.substring(0, lastIndexOfSpace))
-                    .append(getSpace(26 - lastIndexOfSpace)).append(ShowCardTags.NEXT_LINE.getLabel());
+                    .append(getSpace(36 - lastIndexOfSpace)).append(ShowCardTags.NEXT_LINE.getLabel());
             buildDescription.replace(0, lastIndexOfSpace + 1, ShowCardTags.NULL.getLabel());
         }
         return response.toString();
@@ -36,32 +36,32 @@ public abstract class showCard {
 
 
     public static String getTypeLine(String type) {
-        return getString(ShowCardTags.TYPE.getLabel(), type, 27) + ShowCardTags.NEXT_LINE.getLabel();
+        return getString(ShowCardTags.TYPE.getLabel(), type, 37) + ShowCardTags.NEXT_LINE.getLabel();
     }
 
     public static String getMonsterTypeLine(String type) {
-        return getString(ShowCardTags.MONSTER_TYPE.getLabel(), type, 27) + ShowCardTags.NEXT_LINE.getLabel();
+        return getString(ShowCardTags.MONSTER_TYPE.getLabel(), type, 37) + ShowCardTags.NEXT_LINE.getLabel();
     }
 
     public static String getPriceLine(int price) {
-        return getString(ShowCardTags.PRICE.getLabel(), Integer.toString(price), 27) + ShowCardTags.NEXT_LINE.getLabel();
+        return getString(ShowCardTags.PRICE.getLabel(), Integer.toString(price), 37) + ShowCardTags.NEXT_LINE.getLabel();
     }
 
     public static String getFreeLine() {
-        return ShowCardTags.FIRST_CHARACTER.getLabel() + getSpace(26) + ShowCardTags.NEXT_LINE.getLabel();
+        return ShowCardTags.FIRST_CHARACTER.getLabel() + getSpace(36) + ShowCardTags.NEXT_LINE.getLabel();
     }
 
 
     public static String getPriceAndLevelLine(int price, int level) {
-        return getString(ShowCardTags.PRICE.getLabel(), Integer.toString(price), 13)
-                + getString(ShowCardTags.LEVEL.getLabel(), Integer.toString(level), 14)
+        return getString(ShowCardTags.PRICE.getLabel(), Integer.toString(price), 18)
+                + getString(ShowCardTags.LEVEL.getLabel(), Integer.toString(level),19)
                 + (ShowCardTags.NEXT_LINE.getLabel());
 
     }
 
     public static String getAttackAndDefenseLine(int attack, int defense) {
-        return getString(ShowCardTags.ATTACK.getLabel(), Integer.toString(attack), 13) +
-                getString(ShowCardTags.DEFENSE.getLabel(), Integer.toString(defense), 14) +
+        return getString(ShowCardTags.ATTACK.getLabel(), Integer.toString(attack), 18) +
+                getString(ShowCardTags.DEFENSE.getLabel(), Integer.toString(defense), 19) +
                 (ShowCardTags.NEXT_LINE.getLabel());
 
     }
