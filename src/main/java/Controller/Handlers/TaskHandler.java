@@ -50,6 +50,7 @@ public class TaskHandler extends GameHandler {
 
     private String set(JSONObject request, Game game) {
         game.getSelectedCard().getCard().setState(State.DEFENSIVE_HIDDEN);
+        game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
         game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();

@@ -4,8 +4,8 @@ public enum Position {
     HAND("hand"),
     DECK("deck"),
     GRAVEYARD("graveYard"),
-    MONSTER_ZONE("monsterZone"),
-    SPELL_ZONE("spellZone");
+    MONSTER_ZONE("monster"),
+    SPELL_ZONE("spell");
 
     public final String label;
 
