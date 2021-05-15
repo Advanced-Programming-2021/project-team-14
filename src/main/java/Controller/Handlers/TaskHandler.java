@@ -33,7 +33,7 @@ public class TaskHandler extends GameHandler {
             case SUMMON:
                 break;
             case ATTACK:
-                break;
+                return "assume we are attacking.    aaaaaah !";
             case FLIP_SUMMON:
                 break;
             case ACTIVATE_EFFECT:
@@ -52,6 +52,7 @@ public class TaskHandler extends GameHandler {
         game.getSelectedCard().getCard().setState(State.DEFENSIVE_HIDDEN);
         game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+        game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
         game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();
     }

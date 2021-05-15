@@ -51,7 +51,13 @@ public class GamePlayMenu extends Menu{
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());
-            } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
+            } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // summon cards
+                Request.setCommandTag(CommandTags.ATTACK);
+                Request.addDataToRequest(Regexes.ATTACK_TO.getLabel(), command, Strings.TO.getLabel());
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
+            }else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 
 

@@ -3,7 +3,9 @@ package Controller;
 import Controller.Handlers.*;
 import model.Strings;
 import model.User;
+import model.card.SelectedCard;
 import model.game.Game;
+import model.game.Phase;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 import view.enums.Regexes;
@@ -28,9 +30,22 @@ public class GamePlayController {
             Response.addMessage(set(request));
         }  else if (command.equals(CommandTags.NEXT_PHASE.getLabel())){
             nextPhase(request);
+        }  else if (command.equals(CommandTags.ATTACK.getLabel())){
+            Response.addMessage(attack(request));
         }
 
         Response.addObject("game", game.getGameObject());
+    }
+
+    private static String attack(JSONObject request) {
+        Handler attack = new SelectedCardHandler();
+        attack.linksWith(new CardPositionHandler())
+                .linksWith(new PhaseHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new CardExistenceHandler())
+                .linksWith(new TaskHandler());
+
+        return attack.handle(request, game);
     }
 
     private static void nextPhase(JSONObject request) {
@@ -39,7 +54,7 @@ public class GamePlayController {
 
     private static String set(JSONObject request) {
 
-        Handler set = new CardExistenceHandler();
+        Handler set = new SelectedCardHandler();
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
@@ -49,8 +64,9 @@ public class GamePlayController {
     }
 
     private static String setPosition(JSONObject request) {
-        Handler setPosition = new CardExistenceHandler();
-        setPosition.linksWith(new CardPositionHandler())
+        Handler setPosition = new SelectedCardHandler();
+        setPosition.linksWith(new CardExistenceHandler())
+                .linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new CardStateHandler())
                 .linksWith(new TurnLogHandler())
@@ -60,7 +76,7 @@ public class GamePlayController {
     }
 
     private static String showSelectedCard(JSONObject request) {
-        Handler showCard = new CardExistenceHandler();
+        Handler showCard = new SelectedCardHandler();
         showCard.linksWith(new CardStateHandler())
                 .linksWith(new TaskHandler());
         return showCard.handle(request, game);
