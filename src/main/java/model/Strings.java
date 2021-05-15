@@ -4,6 +4,7 @@ public enum Strings {
 
     CARD_NOT_EXIST_IN_HAND("you can’t summon this card_ hand"),
     POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
+    POSITION_ALREADY_CHANGED("you already changed this card position in this turn"),
     ATTACK_OPTION("attack"),
     SET_SUCCESSFULLY("set successfully"),
     CANNOT_TAKE_ACTION_IN_THIS_PHASE("you can’t do this action in this phase"),
@@ -16,6 +17,7 @@ public enum Strings {
     CANNOT_CHANGE_POSITION("you can’t change this card position"),
     INVALID_SELECTION("invalid selection"),
     MONSTER_POSITION("monster"),
+    MONSTER_POSITION_CHANGED("monster position changed successfully"),
     HAND_POSITION("hand"),
     SPELL_POSITION("spell"),
     CARD_SELECTED("card selected"),

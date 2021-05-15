@@ -24,6 +24,10 @@ public class SelectedCard {
         return positionIndex;
     }
 
+    public void setPositionIndex(int positionIndex) {
+        this.positionIndex = positionIndex;
+    }
+
     public Position getPosition() {
         return position;
     }

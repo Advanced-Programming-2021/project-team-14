@@ -1,15 +1,12 @@
 package Controller;
 
-import Controller.Handlers.CardExistenceHandler;
-import Controller.Handlers.Handler;
-import Controller.Handlers.PositionValidityHandler;
-import Controller.Handlers.SelectCardHandler;
+import Controller.Handlers.*;
 import model.Strings;
 import model.User;
-import model.card.enums.State;
 import model.game.Game;
 import org.json.JSONObject;
 import view.enums.CommandTags;
+import view.enums.Regexes;
 
 public class GamePlayController {
     private static Game game;
@@ -24,16 +21,30 @@ public class GamePlayController {
         if (command.equals(CommandTags.SELECT.getLabel())){
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())){
-            Response.addMessage(showSelectedCard());
+            Response.addMessage(showSelectedCard(request));
+        }  else if (command.matches(Regexes.SET_POSITION.getLabel())){
+            Response.addMessage(setPosition(request));
         }
 
         Response.addObject("game", game.getGameObject());
     }
 
-    private static String showSelectedCard() {
-        if (game.getSelectedCard() == null) return "no card is selected yet";
-        if (game.getSelectedCard().getCard().getState() == State.DEFENSIVE_HIDDEN) return "card is not visible";
-        return game.getSelectedCard().getCard().show();
+    private static String setPosition(JSONObject request) {
+        Handler setPosition = new CardExistenceHandler();
+        setPosition.linksWith(new CardPositionHandler())
+                .linksWith(new PhaseHandler())
+                .linksWith(new CardStateHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new SetPositionHandler());
+
+        return setPosition.handle(request, game);
+    }
+
+    private static String showSelectedCard(JSONObject request) {
+        Handler showCard = new CardExistenceHandler();
+        showCard.linksWith(new CardStateHandler())
+                .linksWith(new ShowCardHandler());
+        return showCard.handle(request, game);
     }
 
     private static String select(JSONObject request) {

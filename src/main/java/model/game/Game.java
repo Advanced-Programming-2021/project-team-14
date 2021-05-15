@@ -15,6 +15,11 @@ public class Game {
     private Board board;
     private Phase phase = Phase.START;
     private SelectedCard selectedCard;
+    private TurnLogger turnLogger;
+
+    public TurnLogger getTurnLogger() {
+        return turnLogger;
+    }
 
     public SelectedCard getSelectedCard() {
         return selectedCard;
@@ -28,6 +33,7 @@ public class Game {
         this.round = round;
         this.creatorNickname = mainUser.getNickname();
         this.board = new Board(new Player(mainUser), new Player(rivalUser));
+        this.turnLogger = new TurnLogger();
     }
     public JSONObject getGameObject(){
         JSONObject game = new JSONObject();

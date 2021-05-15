@@ -3,6 +3,7 @@ package model.game;
 
 import model.Strings;
 import model.card.Card;
+import model.card.SelectedCard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,10 +25,10 @@ public class Zone {
     public Cell getCell(int position) {
         return cells.get(position);
     }
-    public void placeCard(Card card){
+    public void placeCard(SelectedCard card){
         int position = firstEmptyPlace();
         card.setPositionIndex(position);
-        cells.get(position).setCard(card);
+        cells.get(position).setCard(card.getCard());
     }
     private int firstEmptyPlace(){
         for(Map.Entry<Integer, Cell> cell : cells.entrySet())
