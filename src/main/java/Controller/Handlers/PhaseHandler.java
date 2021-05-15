@@ -4,10 +4,13 @@ import model.Strings;
 import model.game.Game;
 import model.game.Phase;
 import org.json.JSONObject;
+import view.Logger;
 import view.enums.CommandTags;
 
 public class PhaseHandler extends GameHandler{
     public String handle(JSONObject request, Game game){
+        Logger.log("phase handler", "checking ...");
+
         String command = request.getString("command");
         Phase expectedPhase = Phase.MAIN_PHASE;
         if (command.equals(CommandTags.SUMMON.getLabel())){
@@ -19,7 +22,6 @@ public class PhaseHandler extends GameHandler{
             expectedPhase = Phase.BATTLE_PHASE;
         }
 
-        System.out.println("phase checker");
         if (!game.getPhase().toString().contains(expectedPhase.toString()))
             return response;
         return super.handle(request, game);

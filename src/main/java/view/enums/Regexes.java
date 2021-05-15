@@ -14,7 +14,9 @@ public enum Regexes {
     SHOW_SELECTED_CARD("card show --selected"),
     SUMMON("summon"),
     SET("set"),
+    NEXT_PHASE("next phase"),
     SET_POSITION("set --position (attack|defense)"),
+    ATTACK_TO("attack (\\d)"),
 
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),

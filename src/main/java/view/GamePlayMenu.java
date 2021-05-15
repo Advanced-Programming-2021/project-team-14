@@ -27,15 +27,23 @@ public class GamePlayMenu extends Menu{
                 select();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
+            }
+            else if (command.matches(Regexes.NEXT_PHASE.getLabel())){
+                Request.setCommandTag(CommandTags.NEXT_PHASE);
+                Request.send();
+                Console.printBoard(Request.getResponse());
+            }
+            else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
 
                 Request.setCommandTag(CommandTags.SUMMON);
                 Request.send();
+                Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
-
+                System.out.println("setting the card");
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();
+                Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // summon cards
 
@@ -43,7 +51,13 @@ public class GamePlayMenu extends Menu{
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());
-            } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
+            } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // summon cards
+                Request.setCommandTag(CommandTags.ATTACK);
+                Request.addDataToRequest(Regexes.ATTACK_TO.getLabel(), command, Strings.TO.getLabel());
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
+            }else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 
 
