@@ -24,9 +24,22 @@ public class GamePlayController {
             Response.addMessage(showSelectedCard(request));
         }  else if (command.equals(CommandTags.SET_POSITION.getLabel())){
             Response.addMessage(setPosition(request));
+        }  else if (command.equals(CommandTags.SET.getLabel())){
+            Response.addMessage(set(request));
         }
 
         Response.addObject("game", game.getGameObject());
+    }
+
+    private static String set(JSONObject request) {
+
+        Handler set = new CardExistenceHandler();
+        set.linksWith(new CardPositionHandler())
+                .linksWith(new PhaseHandler())
+                .linksWith(new EmptyPlaceHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new TaskHandler());
+        return null;
     }
 
     private static String setPosition(JSONObject request) {
@@ -35,7 +48,7 @@ public class GamePlayController {
                 .linksWith(new PhaseHandler())
                 .linksWith(new CardStateHandler())
                 .linksWith(new TurnLogHandler())
-                .linksWith(new SetPositionHandler());
+                .linksWith(new TaskHandler());
 
         return setPosition.handle(request, game);
     }
@@ -43,7 +56,7 @@ public class GamePlayController {
     private static String showSelectedCard(JSONObject request) {
         Handler showCard = new CardExistenceHandler();
         showCard.linksWith(new CardStateHandler())
-                .linksWith(new ShowCardHandler());
+                .linksWith(new TaskHandler());
         return showCard.handle(request, game);
     }
 
@@ -51,7 +64,7 @@ public class GamePlayController {
 
         Handler selection = new PositionValidityHandler();
         selection.linksWith(new CardExistenceHandler())
-                .linksWith(new SelectCardHandler());
+                .linksWith(new TaskHandler());
 
         return selection.handle(request, game);
     }

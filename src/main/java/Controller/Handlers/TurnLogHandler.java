@@ -11,6 +11,9 @@ public class TurnLogHandler extends GameHandler {
         if (command.equals(CommandTags.SET_POSITION.getLabel())){
             if (game.getTurnLogger().doesPositionChanged(game.getSelectedCard().getCard()))
                 return Strings.POSITION_ALREADY_CHANGED.getLabel();
+        } else if (command.equals(CommandTags.SET.getLabel())){
+            if (game.getTurnLogger().hasSummoned())
+                return Strings.ALREADY_SUMMONED.getLabel();
         }
         return Strings.CARD_SELECTED.getLabel();
     }

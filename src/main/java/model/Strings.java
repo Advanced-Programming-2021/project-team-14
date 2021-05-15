@@ -6,6 +6,7 @@ public enum Strings {
     POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
     POSITION_ALREADY_CHANGED("you already changed this card position in this turn"),
     ATTACK_OPTION("attack"),
+    ALREADY_SUMMONED("you already summoned/set on this turn"),
     SET_SUCCESSFULLY("set successfully"),
     CANNOT_TAKE_ACTION_IN_THIS_PHASE("you can’t do this action in this phase"),
     CARD_NOT_EXIST_IN_MONSTER_ZONE("you can’t change this card position"),
