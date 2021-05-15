@@ -28,9 +28,8 @@ public class Monster extends Card {
                 showCard.getMonsterTypeLine(getMonsterType().getLabel()) +
                 showCard.getFreeLine() + showCard.getNameLine(getName()) +
                 showCard.getPriceAndLevelLine(getPrice(), getLevel()) +
-                showCard.getAttackAndDefenseLine(getAttack(), getDefence())+
-                showCard.getFreeLine() + showCard.getFreeLine() +
-                showCard.getDescriptionLine(getDescription()) +
+                showCard.getAttackAndDefenseLine(getAttack(), getDefence()) +
+                showCard.getFreeLine() + showCard.getDescriptionLine(getDescription()) +
                 showCard.getHorizontalLine();
     }
 
