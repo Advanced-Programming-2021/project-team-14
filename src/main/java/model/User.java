@@ -134,6 +134,6 @@ public class User {
     }
 
     public boolean doesHaveActiveDeck() {
-        return activeDeck == null;
+        return activeDeck != null;
     }
 }
