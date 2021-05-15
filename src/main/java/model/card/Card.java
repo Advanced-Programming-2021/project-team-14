@@ -7,8 +7,6 @@ import model.card.enums.State;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-//import java.util.SortedSet;
-//import java.util.TreeSet;
 
 public abstract class Card {
     private static final HashMap<String, Card> cards;

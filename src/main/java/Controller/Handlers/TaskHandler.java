@@ -26,18 +26,18 @@ public class TaskHandler extends GameHandler {
                 return nextPhase(game);
             case SET_POSITION:
                 return setPosition(request, game);
+            case SHOW_SELECTED_CARD:
+                return showSelectedCard(game);
+            case DESELECT:
+                break;
             case SUMMON:
                 break;
             case ATTACK:
                 break;
             case FLIP_SUMMON:
                 break;
-            case DESELECT:
-                break;
             case ACTIVATE_EFFECT:
                 break;
-            case SHOW_SELECTED_CARD:
-                return showSelectedCard(game);
 
         }
         return "> .... <";

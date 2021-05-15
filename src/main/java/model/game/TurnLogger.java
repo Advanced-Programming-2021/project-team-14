@@ -7,15 +7,16 @@ import java.util.ArrayList;
 
 public class TurnLogger {
     private ArrayList<Card> changedPositionCards;
-    private boolean summoned;
+    private ArrayList<Card> recentlyAddedCards;
 
-    public boolean hasSummoned() {
-        return summoned;
+
+    public boolean hasSummoned(Card card) {
+        return recentlyAddedCards.contains(card);
     }
 
     public TurnLogger(){
         this.changedPositionCards = new ArrayList<>();
-        this.summoned = false;
+        this.recentlyAddedCards = new ArrayList<>();
     }
 
     public void cardPositionChanged(Card card){
