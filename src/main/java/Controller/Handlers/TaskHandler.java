@@ -115,21 +115,33 @@ public class TaskHandler extends GameHandler {
         int level = game.getBoard().getMainPlayer().getPlayingDeck().
                 getMonsterByName(game.getSelectedCard().getCard().getName()).getLevel();
 
-        if (level <= 4) {
-            game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
-            game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
-            game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
-            game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
-            game.deselect();
-            return Strings.SUMMON_SUCCESSFULLY.getLabel();
-        } else if (level == 5 || level == 6) {
+        if (level == 5 || level == 6) {
 
+            tribute(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, game);
 
         } else if (level == 7 || level == 8) {
 
+            tribute(Integer.parseInt(request.getString("tributeCardAddress1")),
+                    Integer.parseInt(request.getString("tributeCardAddress1")), game);
         }
 
-        return null;
+        game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
+        game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
+        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+        game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
+        game.deselect();
+        return Strings.SUMMON_SUCCESSFULLY.getLabel();
+
+    }
+
+
+    private void tribute(int tributeCardAddress1, int tributeCardAddress2, Game game) {
+
+        game.getBoard().getMainPlayer().getMonsterZone().emptyCell(tributeCardAddress1);
+
+        if (tributeCardAddress2 != 1000) {
+            game.getBoard().getMainPlayer().getMonsterZone().emptyCell(tributeCardAddress2);
+        }
     }
 
 

@@ -24,7 +24,12 @@ public class Zone {
     public Cell getCell(int position) {
         return cells.get(position);
     }
-    public void placeCard(SelectedCard card){
+
+    public void emptyCell(int position) {
+        cells.get(position).setCard(null);                         // here null means empty
+    }
+
+    public void placeCard(SelectedCard card) {
         int position = firstEmptyPlace();
         card.setPositionIndex(position);
         cells.get(position).setCard(card.getCard());

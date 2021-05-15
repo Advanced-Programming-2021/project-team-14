@@ -26,6 +26,12 @@ public class MonsterTributeHandler extends GameHandler {
             if (request.getString("tributeCardAddress1") != null) {
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, game);
+                if (response == null) {
+
+                    return super.handle(request, game);
+                } else {
+                    return response;
+                }
             }
 
             response = Strings.TRIBUTE_ONE_CARD.getLabel();
@@ -44,6 +50,12 @@ public class MonsterTributeHandler extends GameHandler {
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")),
                         Integer.parseInt(request.getString("tributeCardAddress2")), game);
+                if (response == null) {
+
+                    return super.handle(request, game);
+                } else {
+                    return response;
+                }
             }
 
             response = Strings.TRIBUTE_TWO_CARD.getLabel();

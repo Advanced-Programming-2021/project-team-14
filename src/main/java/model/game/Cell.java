@@ -20,6 +20,7 @@ public class Cell {
         return this.getCard() == null;
     }
 
+
     @Override
     public String toString() {
         if (isEmpty()) return State.EMPTY.getLabel();
