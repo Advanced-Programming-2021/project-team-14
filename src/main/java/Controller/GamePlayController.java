@@ -22,7 +22,7 @@ public class GamePlayController {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())){
             Response.addMessage(showSelectedCard(request));
-        }  else if (command.matches(Regexes.SET_POSITION.getLabel())){
+        }  else if (command.equals(CommandTags.SET_POSITION.getLabel())){
             Response.addMessage(setPosition(request));
         }
 

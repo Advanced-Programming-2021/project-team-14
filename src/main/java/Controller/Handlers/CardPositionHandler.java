@@ -24,7 +24,7 @@ public class CardPositionHandler extends GameHandler{
             expectedPosition = Position.MONSTER_ZONE;
             response = Strings.CANNOT_ATTACK_WITH_THIS_CARD.getLabel();
         }
-        System.out.println("position checker");
+
         if (!game.getSelectedCard().getPosition().equals(expectedPosition))
             return response;
         return super.handle(request, game);
