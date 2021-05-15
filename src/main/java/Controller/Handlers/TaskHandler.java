@@ -51,6 +51,7 @@ public class TaskHandler extends GameHandler {
     private String set(JSONObject request, Game game) {
         game.getSelectedCard().getCard().setState(State.DEFENSIVE_HIDDEN);
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+        game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();
     }
 
@@ -66,12 +67,14 @@ public class TaskHandler extends GameHandler {
                 card = player.getMonsterZone().getCell(position).getCard();
                 break;
             case "spell":
+                position = request.getInt(Strings.POSITION.getLabel());
                 card = player.getSpellZone().getCell(position).getCard();
                 break;
             case "field":
                 card = player.getFieldZone().getCard();
                 break;
             case "hand":
+                position = request.getInt(Strings.POSITION.getLabel());
                 card = player.getHand().getCard(position);
                 break;
         }
@@ -90,7 +93,7 @@ public class TaskHandler extends GameHandler {
             game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
         } else
             game.getSelectedCard().getCard().setState(State.DEFENSIVE_OCCUPIED);
-
+        game.deselect();
         return Strings.MONSTER_POSITION_CHANGED.getLabel();
     }
 

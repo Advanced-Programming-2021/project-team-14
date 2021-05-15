@@ -82,4 +82,8 @@ public class Game {
 
         }
     }
+
+    public void deselect() {
+        this.selectedCard = null;
+    }
 }
