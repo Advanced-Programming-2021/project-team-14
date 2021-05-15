@@ -1,7 +1,6 @@
 package model.game;
 
 import model.card.Card;
-import model.card.SelectedCard;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class TurnLogger {
     private ArrayList<Card> attackedCards;
 
 
-    public boolean hasSummoned(Card card) {
+    public boolean hasAdded(Card card) {
         return recentlyAddedCards.contains(card);
     }
 

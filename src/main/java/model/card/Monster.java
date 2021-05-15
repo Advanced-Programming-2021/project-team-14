@@ -5,12 +5,20 @@ import model.card.enums.CardType;
 import model.card.enums.MonsterCardType;
 import model.card.enums.MonsterType;
 
+import java.util.ArrayList;
+
 public class Monster extends Card {
     private int level;
     private int attack, defence;
     private Attribute attribute;
     private MonsterCardType monsterCardType;
     private MonsterType monsterType;
+
+    private static ArrayList<Monster> monsters;
+
+    static {
+        monsters = new ArrayList<>();
+    }
 
     public Monster(String name, int level, Attribute attribute, MonsterType monsterType, MonsterCardType monsterCardType, int attack, int defence, String description, int price) {
         super(name, description, CardType.fromValue("Monster"), price);
@@ -20,6 +28,7 @@ public class Monster extends Card {
         this.monsterCardType = monsterCardType;
         this.monsterType = monsterType;
         addCard(this);
+        monsters.add(this);
     }
 
     @Override
@@ -28,10 +37,14 @@ public class Monster extends Card {
                 showCard.getMonsterTypeLine(getMonsterType().getLabel()) +
                 showCard.getFreeLine() + showCard.getNameLine(getName()) +
                 showCard.getPriceAndLevelLine(getPrice(), getLevel()) +
-                showCard.getAttackAndDefenseLine(getAttack(), getDefence())+
+                showCard.getAttackAndDefenseLine(getAttack(), getDefence()) +
                 showCard.getFreeLine() + showCard.getFreeLine() +
                 showCard.getDescriptionLine(getDescription()) +
                 showCard.getHorizontalLine();
+    }
+
+    public static ArrayList<Monster> getMonsters() {
+        return monsters;
     }
 
     public MonsterType getMonsterType() {

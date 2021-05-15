@@ -39,6 +39,7 @@ public class GamePlayMenu extends Menu{
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
+
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
                 System.out.println("setting the card");
                 Request.setCommandTag(CommandTags.SET);
