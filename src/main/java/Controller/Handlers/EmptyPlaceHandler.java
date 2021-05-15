@@ -8,10 +8,10 @@ import org.json.JSONObject;
 public class EmptyPlaceHandler extends GameHandler{
     public String handle(JSONObject request, Game game){
         String command = request.getString("command");
-        if (game.getSelectedCard().getCardType() == CardType.MONSTER &&
+        if (game.getSelectedCard().getCard().getCardType() == CardType.MONSTER &&
             game.getBoard().getMainPlayer().getMonsterZone().isFull())
             return Strings.MONSTER_ZONE_FULL.getLabel();
-        if (game.getSelectedCard().getCardType() == CardType.SPELL &&
+        if (game.getSelectedCard().getCard().getCardType() == CardType.SPELL &&
             game.getBoard().getMainPlayer().getSpellZone().isFull())
             return Strings.SPELL_ZONE_FULL.getLabel();
         return super.handle(request, game);

@@ -17,6 +17,8 @@ public class DuelController {
     private static String startGame(JSONObject request) {
         Response.error();
         if (!User.doesUsernameExist(request.getString(Strings.SECOND_PLAYER.getLabel())))
+            return Strings.SAME_SECOND_PLAYER.getLabel();
+        if (request.getString(Strings.SECOND_PLAYER.getLabel()).equals(request.getString(Strings.TOKEN.getLabel())))
             return Strings.PLAYER_NOT_EXIST.getLabel();
         User first = User.getUserByName(request.getString(Strings.TOKEN.getLabel()));
         User second = User.getUserByName(request.getString(Strings.SECOND_PLAYER.getLabel()));

@@ -32,8 +32,8 @@ public class GamePlayController {
 
     private static String showSelectedCard() {
         if (game.getSelectedCard() == null) return "no card is selected yet";
-        if (game.getSelectedCard().getState() == State.DEFENSIVE_HIDDEN) return "card is not visible";
-        return game.getSelectedCard().show();
+        if (game.getSelectedCard().getCard().getState() == State.DEFENSIVE_HIDDEN) return "card is not visible";
+        return game.getSelectedCard().getCard().show();
     }
 
     private static String select(JSONObject request) {

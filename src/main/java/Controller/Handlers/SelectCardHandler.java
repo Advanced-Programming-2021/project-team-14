@@ -2,6 +2,8 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.Card;
+import model.card.SelectedCard;
+import model.card.enums.Position;
 import model.game.*;
 import org.json.JSONObject;
 
@@ -30,7 +32,7 @@ public class SelectCardHandler extends GameHandler{
                 break;
         }
 
-        game.setSelectedCard(card);
+        game.setSelectedCard(new SelectedCard(card, Position.fromValue(area), position, isOpponent));
         return Strings.CARD_SELECTED.getLabel();
     }
 

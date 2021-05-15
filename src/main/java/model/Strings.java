@@ -51,6 +51,7 @@ public enum Strings {
     INVALID_DECK("%s’s deck is invalid"),
     NO_ACTIVE_DECK("%s has no active deck"),
     PLAYER_NOT_EXIST("there is no player with this username"),
+    SAME_SECOND_PLAYER("please enter another username except yours"),
     SIDE_OPTION("side"),
     NUMBER_OF_ROUNDS_NOT_SUPPORTED("number of rounds is not supported"),
     NEW_OPTION("new"),

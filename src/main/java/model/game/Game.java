@@ -2,6 +2,7 @@ package model.game;
 
 import model.User;
 import model.card.Card;
+import model.card.SelectedCard;
 import org.json.JSONObject;
 
 
@@ -13,13 +14,13 @@ public class Game {
     private int round;
     private Board board;
     private Phase phase = Phase.START;
-    private Card selectedCard;
+    private SelectedCard selectedCard;
 
-    public Card getSelectedCard() {
+    public SelectedCard getSelectedCard() {
         return selectedCard;
     }
 
-    public void setSelectedCard(Card selectedCard) {
+    public void setSelectedCard(SelectedCard selectedCard) {
         this.selectedCard = selectedCard;
     }
 

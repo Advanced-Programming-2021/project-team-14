@@ -22,11 +22,14 @@ public class DuelMenu extends Menu{
                 Request.extractData(command);
                 Request.setOption(command, Strings.NEW_OPTION.getLabel());
                 Request.send();
-                if (Request.isSuccessful())
+                if (Request.isSuccessful()){
                      new GamePlayMenu().run();
+                     Console.print(Request.getMessage());
+                }else
+                    Console.print(Request.getMessage());
             }
 
-            Console.print(Request.getMessage());
+
         }
 
     }
