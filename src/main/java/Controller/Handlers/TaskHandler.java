@@ -20,7 +20,7 @@ public class TaskHandler extends GameHandler {
 
     public String handle(JSONObject request, Game game) {
         Logger.log("task handler", "doing ...");
-        switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))){
+        switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))) {
             case SET:
                 return set(request, game);
             case SELECT:
@@ -32,11 +32,13 @@ public class TaskHandler extends GameHandler {
             case SHOW_SELECTED_CARD:
                 return showSelectedCard(game);
             case DESELECT:
-                break;
+                return deselect(game);
             case SUMMON:
                 return summon(request, game);
             case ATTACK:
                 return attack(request, game);
+            case DIRECT_ATTACK:
+                return directAttack(game);
             case FLIP_SUMMON:
 //                return flipSummon(request, game);
             case ACTIVATE_EFFECT:
@@ -46,23 +48,37 @@ public class TaskHandler extends GameHandler {
         return "> .... <";
     }
 
+    private String directAttack(Game game) {
+        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
+        int damage = ((Monster) game.getSelectedCard().getCard()).getAttack();
+        Player rivalPlayer = game.getBoard().getRivalPlayer();
+        rivalPlayer.setLifePoint(rivalPlayer.getLifePoint()-damage);
+        selectedCell.removeCard();
+        return String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
+    }
+
+    private String deselect(Game game) {
+        game.deselect();
+        return Strings.CARD_DESELECTED.getLabel();
+    }
+
     private String attack(JSONObject request, Game game) {
 
         Cell rivalCard = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
         Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
         int damage;
         String opponentCardName = "";
-        switch (rivalCard.getCard().getState()){
+        switch (rivalCard.getCard().getState()) {
             case DEFENSIVE_HIDDEN:
                 opponentCardName = String.format(Strings.DH_ATTACK_EQUAL.getLabel(), rivalCard.getCard().getName());
             case DEFENSIVE_OCCUPIED:
                 damage = ((Monster) rivalCard.getCard()).getDefence() -
-                         ((Monster) selectedCell.getCard()).getAttack();
-                if (damage > 0){
+                        ((Monster) selectedCell.getCard()).getAttack();
+                if (damage > 0) {
                     damage(false, damage, game);
                     return opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
                 }
-                if (damage < 0){
+                if (damage < 0) {
                     game.getBoard().getGraveYard().addCard(rivalCard.getCard());
                     rivalCard.removeCard();
                     return opponentCardName + String.format(Strings.DO_ATTACK_LESS.getLabel(), damage);
@@ -70,14 +86,14 @@ public class TaskHandler extends GameHandler {
                 return opponentCardName + Strings.DO_ATTACK_EQUAL.getLabel();
             case OFFENSIVE_OCCUPIED:
                 damage = ((Monster) selectedCell.getCard()).getAttack() -
-                         ((Monster) rivalCard.getCard()).getAttack();
-                if (damage > 0){
+                        ((Monster) rivalCard.getCard()).getAttack();
+                if (damage > 0) {
                     damage(true, damage, game);
                     game.getBoard().getGraveYard().addCard(rivalCard.getCard());
                     rivalCard.removeCard();
                     return String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
                 }
-                if (damage < 0){
+                if (damage < 0) {
                     damage(true, damage, game);
                     game.getBoard().getGraveYard().addCard(selectedCell.getCard());
                     selectedCell.removeCard();

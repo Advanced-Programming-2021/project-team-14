@@ -11,6 +11,7 @@ public enum CommandTags {
     SET_POSITION("set position"),
     SUMMON("summon"),
     ATTACK("attack"),
+    DIRECT_ATTACK("attack direct"),
     FLIP_SUMMON("flip-summon"),
     SELECT_CARD_MONSTER("select monster"),
     SELECT_CARD_SPELL("select spell"),

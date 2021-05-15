@@ -32,6 +32,7 @@ public enum Strings {
     SPELL_POSITION("spell"),
     TO("to"),
     CARD_SELECTED("card selected"),
+    CARD_DESELECTED("card deselected"),
     OPPONENT_OPTION("opponent"),
     NO_CARD_FOUND("no card found in the given position"),
     AREA("area"),
@@ -44,7 +45,7 @@ public enum Strings {
     DO_ATTACK_LESS("the defense position monster is destroyed"),
     DO_ATTACK_EQUAL("no card is destroyed"),
     DH_ATTACK_EQUAL("opponents monster card was %s and "),
-
+    DIRECT_ATTACK("you opponent receives %d battle damage"),
     SIDE("side"),
     COMMAND("command"),
     MAIN("main"),

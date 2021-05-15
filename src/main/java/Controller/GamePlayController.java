@@ -33,6 +33,10 @@ public class GamePlayController {
             nextPhase(request);
         } else if (command.equals(CommandTags.ATTACK.getLabel())) {
             Response.addMessage(attack(request));
+        }else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
+            Response.addMessage(directAttack(request));
+        }else if (command.equals(CommandTags.DESELECT.getLabel())) {
+            Response.addMessage(deselect(request));
         }
 
         Response.addObject("game", game.getGameObject());
@@ -45,8 +49,16 @@ public class GamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new CardExistenceHandler())
                 .linksWith(new TaskHandler());
-
         return attack.handle(request, game);
+    }
+
+    private static String directAttack(JSONObject request) {
+        Handler directAttack = new SelectedCardHandler();
+        directAttack.linksWith(new CardPositionHandler())
+                .linksWith(new PhaseHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new TaskHandler());
+        return directAttack.handle(request, game);
     }
 
     private static void nextPhase(JSONObject request) {
@@ -55,8 +67,6 @@ public class GamePlayController {
 
 
     private static String summon(JSONObject request) {
-
-
         Handler summon = new SelectedCardHandler();
         summon.linksWith(new MonsterTributeHandler())
                 .linksWith(new CardPositionHandler())
@@ -71,7 +81,6 @@ public class GamePlayController {
 
 
     private static String flipSummon(JSONObject request) {
-
         Handler set = new SelectedCardHandler();
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
@@ -83,7 +92,6 @@ public class GamePlayController {
 
 
     private static String set(JSONObject request) {
-
         Handler set = new SelectedCardHandler();
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
@@ -113,11 +121,15 @@ public class GamePlayController {
     }
 
     private static String select(JSONObject request) {
-
         Handler selection = new PositionValidityHandler();
         selection.linksWith(new CardExistenceHandler())
                 .linksWith(new TaskHandler());
+        return selection.handle(request, game);
+    }
 
+    private static String deselect(JSONObject request) {
+        Handler selection = new SelectedCardHandler();
+        selection.linksWith(new TaskHandler());
         return selection.handle(request, game);
     }
 }
