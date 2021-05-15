@@ -23,11 +23,27 @@ public class GamePlayMenu extends Menu{
                 Console.print(Request.getMessage());
             }
             else if (command.matches(Regexes.SELECT.getLabel()) ||
-                     command.matches(Regexes.SELECT_FIELD.getLabel())) {
+                    command.matches(Regexes.SELECT_FIELD.getLabel())) {
                 select();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            }else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
+            } else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
+
+                Request.setCommandTag(CommandTags.SUMMON);
+                Request.send();
+                Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
+
+                Request.setCommandTag(CommandTags.SET);
+                Request.send();
+                Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // summon cards
+
+                Request.setCommandTag(CommandTags.SET_POSITION);
+                Request.extractData(command);
+                Request.send();
+                Console.print(Request.getMessage());
+            } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 
 
