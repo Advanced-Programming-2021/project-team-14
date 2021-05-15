@@ -26,12 +26,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.wallet = new Wallet(123);
-//        this.wallet.loadCard("Haniwa");
-//        this.wallet.loadCard("Bitron");
-//        this.wallet.loadCard("Suijin");
-//        this.wallet.loadCard("Wattkid");
-//        this.wallet.loadCard("Fireyarou");
+        this.wallet = new Wallet();
         users.put(username, this);
         nicknames.add(nickname);
         this.decks = new HashMap<>();
@@ -139,6 +134,6 @@ public class User {
     }
 
     public boolean doesHaveActiveDeck() {
-        return activeDeck != null;
+        return activeDeck == null;
     }
 }
