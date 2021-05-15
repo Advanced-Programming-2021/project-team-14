@@ -1,16 +1,19 @@
 package model;
 
+import model.card.Card;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Wallet {
 
     private int cash;
     private ArrayList<String> cards;
 
-    public Wallet(int test) {  // add some random cards to the wallet
-
-        this.cash = 100000;
+    public Wallet() {  // add some random cards to the wallet
         this.cards = new ArrayList<>();
+        this.cash = 100000;
     }
 
     public void addCash(int amount) {

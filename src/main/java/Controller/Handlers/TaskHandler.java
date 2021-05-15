@@ -33,11 +33,11 @@ public class TaskHandler extends GameHandler {
             case DESELECT:
                 break;
             case SUMMON:
-                break;
+                return summon(request, game);
             case ATTACK:
                 return attack(request, game);
             case FLIP_SUMMON:
-                break;
+//                return flipSummon(request, game);
             case ACTIVATE_EFFECT:
                 break;
 
@@ -109,13 +109,37 @@ public class TaskHandler extends GameHandler {
         return Strings.SET_SUCCESSFULLY.getLabel();
     }
 
+
+    private String summon(JSONObject request, Game game) {
+
+        int level = game.getBoard().getMainPlayer().getPlayingDeck().
+                getMonsterByName(game.getSelectedCard().getCard().getName()).getLevel();
+
+        if (level <= 4) {
+            game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
+            game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
+            game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+            game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
+            game.deselect();
+            return Strings.SUMMON_SUCCESSFULLY.getLabel();
+        } else if (level == 5 || level == 6) {
+
+
+        } else if (level == 7 || level == 8) {
+
+        }
+
+        return null;
+    }
+
+
     private String select(JSONObject request, Game game) {
         String area = request.getString(Strings.AREA.getLabel());
         boolean isOpponent = request.getBoolean(Strings.OPPONENT_OPTION.getLabel());
         Player player = isOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer();
         int position = 1;
         Card card = null;
-        switch (area){
+        switch (area) {
             case "monster":
                 position = request.getInt(Strings.POSITION.getLabel());
                 card = player.getMonsterZone().getCell(position).getCard();

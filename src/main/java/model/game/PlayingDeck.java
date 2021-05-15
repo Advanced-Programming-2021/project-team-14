@@ -13,6 +13,8 @@ import java.util.Collections;
 public class PlayingDeck {
 
     private ArrayList<Card> cards;
+    private ArrayList<Monster> monsters = new ArrayList<>();
+    private ArrayList<SpellTrap> spellTraps = new ArrayList<>();
 
     public PlayingDeck(Deck activeDeck) {
         cards = new ArrayList<>();
@@ -25,6 +27,8 @@ public class PlayingDeck {
             loadCard(Card.getCardByName(cardName));
         for (String cardName : activeDeck.getCards(false))   // load main cards
             loadCard(Card.getCardByName(cardName));
+        monsters = Monster.getMonsters();
+        spellTraps = SpellTrap.getSpellTraps();
     }
 
     public void shuffle() {
@@ -45,6 +49,38 @@ public class PlayingDeck {
         else
             cards.add(new SpellTrap((SpellTrap) card));
     }
+
+
+    public Monster getMonsterByName(String monsterName) {
+
+        for (Monster monster : monsters) {
+            if (monster.getName().equals(monsterName)) {
+                return monster;
+            }
+        }
+        return null;
+    }
+
+    public SpellTrap getSpellTrapByName(String spellTrapName) {
+
+        for (SpellTrap spellTrap : spellTraps) {
+            if (spellTrap.getName().equals(spellTrapName)) {
+                return spellTrap;
+            }
+        }
+        return null;
+    }
+
+    public Card getCardByName(String cardName) {
+
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                return card;
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {

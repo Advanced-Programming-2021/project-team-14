@@ -2,7 +2,13 @@ package model;
 
 public enum Strings {
 
-    CARD_NOT_EXIST_IN_HAND("you can’t summon this card_ hand"),
+    CARD_NOT_EXIST_IN_HAND_SET("you can’t set this card"),
+    CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card"),
+    TRIBUTE_ONE_CARD("tribute one card"),
+    TRIBUTE_TWO_CARD("tribute two cards"),
+    NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
+    NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters one this address"),
+    NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE("there is no monster on one of these addresses"),
     POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
     POSITION_ALREADY_CHANGED("you already changed this card position in this turn"),
     ATTACK_OPTION("attack"),
@@ -10,6 +16,7 @@ public enum Strings {
     NO_CARD_TO_ATTACK("there is no card to attack here"),
     ALREADY_ATTACKER("this card already attacked"),
     SET_SUCCESSFULLY("set successfully"),
+    SUMMON_SUCCESSFULLY("summoned successfully"),
     CANNOT_TAKE_ACTION_IN_THIS_PHASE("you can’t do this action in this phase"),
     CARD_NOT_EXIST_IN_MONSTER_ZONE("you can’t change this card position"),
     CANNOT_ATTACK_WITH_THIS_CARD("you can’t attack with this card"),

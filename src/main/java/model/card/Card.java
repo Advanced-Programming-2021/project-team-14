@@ -46,11 +46,11 @@ public abstract class Card {
         return new ArrayList<>(cards.values());
     }
 
-    public static String getCard(int index) {
-        Object[] values = cards.values().toArray();
-        Card randomValue = (Card) values[index];
-        return randomValue.getName();
-    }
+//    public static String getCard(int index) {
+//        Object[] values = cards.values().toArray();
+//        Card randomValue = (Card) values[index];
+//        return randomValue.getName();
+//    }
 
     public static void addCard(Card card) {
         cards.put(card.getName(), card);

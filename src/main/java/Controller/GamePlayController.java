@@ -3,12 +3,9 @@ package Controller;
 import Controller.Handlers.*;
 import model.Strings;
 import model.User;
-import model.card.SelectedCard;
 import model.game.Game;
-import model.game.Phase;
 import org.json.JSONObject;
 import view.enums.CommandTags;
-import view.enums.Regexes;
 
 public class GamePlayController {
     private static Game game;
@@ -24,13 +21,17 @@ public class GamePlayController {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())){
             Response.addMessage(showSelectedCard(request));
-        }  else if (command.equals(CommandTags.SET_POSITION.getLabel())){
+        }  else if (command.equals(CommandTags.SET_POSITION.getLabel())) {
             Response.addMessage(setPosition(request));
-        }  else if (command.equals(CommandTags.SET.getLabel())){
+        } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
+            Response.addMessage(flipSummon(request));
+        } else if (command.equals(CommandTags.SUMMON.getLabel())) {
+            Response.addMessage(summon(request));
+        } else if (command.equals(CommandTags.SET.getLabel())) {
             Response.addMessage(set(request));
-        }  else if (command.equals(CommandTags.NEXT_PHASE.getLabel())){
+        } else if (command.equals(CommandTags.NEXT_PHASE.getLabel())) {
             nextPhase(request);
-        }  else if (command.equals(CommandTags.ATTACK.getLabel())){
+        } else if (command.equals(CommandTags.ATTACK.getLabel())) {
             Response.addMessage(attack(request));
         }
 
@@ -51,6 +52,35 @@ public class GamePlayController {
     private static void nextPhase(JSONObject request) {
         new TaskHandler().handle(request, game);
     }
+
+
+    private static String summon(JSONObject request) {
+
+
+        Handler summon = new SelectedCardHandler();
+        summon.linksWith(new MonsterTributeHandler())
+                .linksWith(new CardPositionHandler())
+                .linksWith(new CardTypeHandler("Monster", request, game))
+                .linksWith(new MonsterCardTypeHandler("Ritual", request, game))
+                .linksWith(new PhaseHandler())
+                .linksWith(new EmptyPlaceHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new TaskHandler());
+        return summon.handle(request, game);
+    }
+
+
+    private static String flipSummon(JSONObject request) {
+
+        Handler set = new SelectedCardHandler();
+        set.linksWith(new CardPositionHandler())
+                .linksWith(new PhaseHandler())
+                .linksWith(new EmptyPlaceHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new TaskHandler());
+        return set.handle(request, game);
+    }
+
 
     private static String set(JSONObject request) {
 
