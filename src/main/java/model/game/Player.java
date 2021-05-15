@@ -3,6 +3,7 @@ package model.game;
 import model.Strings;
 import model.User;
 import model.card.Card;
+import org.w3c.dom.CDATASection;
 
 public class Player {
 
@@ -123,5 +124,9 @@ public class Player {
     @Override
     public String toString() {
         return String.format(Strings.PLAYER_FORMAT.getLabel(), nickname, lifePoint);
+    }
+
+    public void decreaseLP(int damage) {
+        this.lifePoint -= damage;
     }
 }

@@ -30,6 +30,13 @@ public enum Strings {
     AREA("area"),
     POSITION("position"),
 
+    OO_ATTACK_MORE("your opponent's monster is destroyed and your opponent receives %d battle damage"),
+    OO_ATTACK_LESS("your monster card is destroyed and you received %d battle damage"),
+    OO_ATTACK_EQUAL("both you and your opponent monster cards are destroyed and one receives damage"),
+    DO_ATTACK_MORE("no card is destroyed and you received %d battle damage"),
+    DO_ATTACK_LESS("the defense position monster is destroyed"),
+    DO_ATTACK_EQUAL("no card is destroyed"),
+    DH_ATTACK_EQUAL("opponents monster card was %s and "),
 
     SIDE("side"),
     COMMAND("command"),

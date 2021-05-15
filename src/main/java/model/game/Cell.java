@@ -25,4 +25,8 @@ public class Cell {
         if (isEmpty()) return State.EMPTY.getLabel();
         return card.getState().getLabel();
     }
+
+    public void removeCard(){
+        card = null;
+    }
 }

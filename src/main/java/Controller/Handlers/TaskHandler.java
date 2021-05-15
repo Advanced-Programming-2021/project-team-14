@@ -2,9 +2,11 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.Card;
+import model.card.Monster;
 import model.card.SelectedCard;
 import model.card.enums.Position;
 import model.card.enums.State;
+import model.game.Cell;
 import model.game.Game;
 import model.game.Player;
 import org.json.JSONObject;
@@ -33,7 +35,7 @@ public class TaskHandler extends GameHandler {
             case SUMMON:
                 break;
             case ATTACK:
-                return "assume we are attacking.    aaaaaah !";
+                return attack(request, game);
             case FLIP_SUMMON:
                 break;
             case ACTIVATE_EFFECT:
@@ -41,6 +43,56 @@ public class TaskHandler extends GameHandler {
 
         }
         return "> .... <";
+    }
+
+    private String attack(JSONObject request, Game game) {
+
+        Cell rivalCard = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
+        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
+        int damage;
+        String opponentCardName = "";
+        switch (rivalCard.getCard().getState()){
+            case DEFENSIVE_HIDDEN:
+                opponentCardName = String.format(Strings.DH_ATTACK_EQUAL.getLabel(), rivalCard.getCard().getName());
+            case DEFENSIVE_OCCUPIED:
+                damage = ((Monster) rivalCard.getCard()).getDefence() -
+                         ((Monster) selectedCell.getCard()).getAttack();
+                if (damage > 0){
+                    damage(false, damage, game);
+                    return opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
+                }
+                if (damage < 0){
+                    game.getBoard().getGraveYard().addCard(rivalCard.getCard());
+                    rivalCard.removeCard();
+                    return opponentCardName + String.format(Strings.DO_ATTACK_LESS.getLabel(), damage);
+                }
+                return opponentCardName + Strings.DO_ATTACK_EQUAL.getLabel();
+            case OFFENSIVE_OCCUPIED:
+                damage = ((Monster) selectedCell.getCard()).getAttack() -
+                         ((Monster) rivalCard.getCard()).getAttack();
+                if (damage > 0){
+                    damage(true, damage, game);
+                    game.getBoard().getGraveYard().addCard(rivalCard.getCard());
+                    rivalCard.removeCard();
+                    return String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
+                }
+                if (damage < 0){
+                    damage(true, damage, game);
+                    game.getBoard().getGraveYard().addCard(selectedCell.getCard());
+                    selectedCell.removeCard();
+                    return String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
+                }
+                selectedCell.removeCard();
+                rivalCard.removeCard();
+                return String.format(Strings.OO_ATTACK_EQUAL.getLabel(), damage);
+
+        }
+
+        return null;
+    }
+
+    private void damage(boolean toOpponent, int damage, Game game) {
+        (toOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer()).decreaseLP(damage);
     }
 
     private String nextPhase(Game game) {
