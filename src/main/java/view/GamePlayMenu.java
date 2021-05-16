@@ -52,6 +52,7 @@ public class GamePlayMenu extends Menu{
                     Request.send();
                 }
 
+
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();

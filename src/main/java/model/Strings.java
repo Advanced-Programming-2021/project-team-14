@@ -6,6 +6,8 @@ public enum Strings {
     CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card"),
     TRIBUTE_ONE_CARD("tribute one card"),
     TRIBUTE_TWO_CARD("tribute two cards"),
+    CARD_IS_NOT_VISIBLE("card is not visible"),
+    CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
     NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters one this address"),
     NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE("there is no monster on one of these addresses"),
