@@ -1,4 +1,4 @@
-Name,Type ,Icon (Property),Description,Status,Price,number of affected cards,effect time,change/destroy/add card,from,to,special summon,attack/defense/lifePoint,target,amount,attack/defense/lifepoint,target,amount,special command
+Name,Type ,Icon (Property),Description,Status,Price,number of affected cards,effect time,change/destroy/add card,from,to,special summon,first attack/defense/lifePoint,first target,first amount,second attack/defense/lifepoint,second target,second amount,special command
 Advanced Ritual Art,Spell,Ritual,This card can be used to Ritual Summon any 1 Ritual Monster. You must also send Normal Monsters from your Deck to the Graveyard whose total Levels equal the Level of that Ritual Monster.,Unlimited,3000,*,*,*,*,*,*,*,*,*,*,*,*,+
 Black Pendant,Spell,Equip,The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.,Unlimited,4300,all,*,change,*,*,*,attack,BLACK equipped monsters,500,*,*,*,*
 Change of Heart,Spell,Normal,Target 1 monster your opponent controls; take control of it until the End Phase.,Limited,2500,1,*,change owner,*,*,*,*,monsters,*,*,*,*,+
@@ -34,4 +34,3 @@ Solemn Warning,Trap,Counter,"When a monster(s) would be Summoned, OR when a Spel
 Time Seal,Trap,Normal,Skip the Draw Phase of your opponent's next turn.,Limited,2000,*,*,*,*,*,*,*,*,*,*,*,*,+
 Torrential Tribute,Trap,Normal,When a monster(s) is Summoned: Destroy all monsters on the field.,Unlimited,2000,all,monster summoned,destroy,both,*,*,*,monsters,*,*,*,*,*
 Trap Hole,Trap,Normal,When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.,Unlimited,2000,1, Normal or Flip Summons 1 monster with 1000 or more ATK,destroy,rival board,*,*,*,rival,*,*,*,*,*
-,,,,,,,,,,,,,,,,,,
