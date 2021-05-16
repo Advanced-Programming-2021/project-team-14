@@ -84,6 +84,14 @@ public abstract class Card {
         return effects;
     }
 
+    public boolean hasEffect(String key) {
+        return getEffects().containsKey(key) && !getEffects().get(key).equals("*");
+    }
+
+    public String getEffectValue(String key){
+        return getEffects().get(key);
+    }
+
     public int getPrice() {
         return price;
     }
