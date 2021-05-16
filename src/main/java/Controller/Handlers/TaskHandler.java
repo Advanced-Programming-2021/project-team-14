@@ -5,6 +5,7 @@ import model.Strings;
 import model.card.Card;
 import model.card.Monster;
 import model.card.SelectedCard;
+import model.card.enums.CardType;
 import model.card.enums.Position;
 import model.card.enums.State;
 import model.game.Cell;
@@ -49,11 +50,9 @@ public class TaskHandler extends GameHandler {
     }
 
     private String directAttack(Game game) {
-        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
         int damage = ((Monster) game.getSelectedCard().getCard()).getAttack();
-        Player rivalPlayer = game.getBoard().getRivalPlayer();
-        rivalPlayer.setLifePoint(rivalPlayer.getLifePoint()-damage);
-        selectedCell.removeCard();
+        damage(true, damage, game);
+        game.deselect();
         return String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
     }
 
@@ -118,10 +117,18 @@ public class TaskHandler extends GameHandler {
     }
 
     private String set(JSONObject request, Game game) {
-        game.getSelectedCard().getCard().setState(State.DEFENSIVE_HIDDEN);
-        game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
-        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
-        game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
+        SelectedCard selectedCard = game.getSelectedCard();
+        if (selectedCard.getCard().getCardType() == CardType.MONSTER){
+            selectedCard.getCard().setState(State.DEFENSIVE_HIDDEN);
+            selectedCard.setPosition(Position.MONSTER_ZONE);
+            game.getBoard().getMainPlayer().getMonsterZone().placeCard(selectedCard);
+        }else{
+            selectedCard.getCard().setState(State.HIDDEN);
+            selectedCard.setPosition(Position.SPELL_ZONE);
+            game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
+        }
+
+        game.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();
     }
