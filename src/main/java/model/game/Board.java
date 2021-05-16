@@ -24,6 +24,14 @@ public class Board {
         return mainPlayer;
     }
 
+    public void setMainPlayer(Player mainPlayer) {
+        this.mainPlayer = mainPlayer;
+    }
+
+    public void setRivalPlayer(Player rivalPlayer) {
+        this.rivalPlayer = rivalPlayer;
+    }
+
     public Player getRivalPlayer() {
         return rivalPlayer;
     }

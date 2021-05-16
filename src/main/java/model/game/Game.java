@@ -1,5 +1,6 @@
 package model.game;
 
+import model.Strings;
 import model.User;
 import model.card.Card;
 import model.card.SelectedCard;
@@ -34,6 +35,7 @@ public class Game {
         this.creatorNickname = mainUser.getNickname();
         this.board = new Board(new Player(mainUser), new Player(rivalUser));
         this.turnLogger = new TurnLogger();
+        nextPhase();
     }
     public JSONObject getGameObject(){
         JSONObject game = new JSONObject();
@@ -50,16 +52,17 @@ public class Game {
     }
 
     private void changeTurn() {
-
+        Player temp = board.getMainPlayer();
+        board.setMainPlayer(board.getRivalPlayer());
+        board.setRivalPlayer(temp);
     }
 
     public Board getBoard() {
         return board;
     }
 
-    public void nextPhase() {
+    public String nextPhase() {
         switch (phase){
-
             case DRAW_PHASE:
                 phase = Phase.STANDBY_PHASE;
                 break;
@@ -77,10 +80,22 @@ public class Game {
                 break;
             case START:
             case END_PHASE:
+                changeTurn();
                 phase = Phase.DRAW_PHASE;
-                break;
+                deselect();
+                return String.format(Strings.CHANGE_TURN_PRINT.getLabel(), phase, board.getMainPlayer().getNickname(), draw());
 
         }
+        return String.format(Strings.PHASE_PRINT.getLabel(), phase);
+    }
+
+
+    private String draw() {
+        if (!board.getMainPlayer().getHand().isFull()){
+            Card card = board.getMainPlayer().drawCard();
+            return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());
+        }
+        return "";
     }
 
     public void deselect() {
