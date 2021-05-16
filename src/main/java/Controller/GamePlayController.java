@@ -68,13 +68,13 @@ public class GamePlayController {
 
     private static String summon(JSONObject request) {
         Handler summon = new SelectedCardHandler();
-        summon.linksWith(new MonsterTributeHandler())
-                .linksWith(new CardPositionHandler())
-                .linksWith(new CardTypeHandler("Monster", request, game))
-                .linksWith(new MonsterCardTypeHandler("Ritual", request, game))
+        summon.linksWith(new CardPositionHandler())
+                .linksWith(new CardTypeHandler())
+                .linksWith(new MonsterCardTypeHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TurnLogHandler())
+                .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
         return summon.handle(request, game);
     }
@@ -84,8 +84,8 @@ public class GamePlayController {
         Handler set = new SelectedCardHandler();
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
-                .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TurnLogHandler())
+                .linksWith(new CardStateHandler())
                 .linksWith(new TaskHandler());
         return set.handle(request, game);
     }

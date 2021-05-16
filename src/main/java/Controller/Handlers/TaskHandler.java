@@ -41,7 +41,7 @@ public class TaskHandler extends GameHandler {
             case DIRECT_ATTACK:
                 return directAttack(game);
             case FLIP_SUMMON:
-//                return flipSummon(request, game);
+                return flipSummon(request, game);
             case ACTIVATE_EFFECT:
                 break;
 
@@ -118,15 +118,27 @@ public class TaskHandler extends GameHandler {
 
     private String set(JSONObject request, Game game) {
         SelectedCard selectedCard = game.getSelectedCard();
-        if (selectedCard.getCard().getCardType() == CardType.MONSTER){
+        if (selectedCard.getCard().getCardType() == CardType.MONSTER) {
             selectedCard.getCard().setState(State.DEFENSIVE_HIDDEN);
             selectedCard.setPosition(Position.MONSTER_ZONE);
             game.getBoard().getMainPlayer().getMonsterZone().placeCard(selectedCard);
-        }else{
+        } else {
             selectedCard.getCard().setState(State.HIDDEN);
             selectedCard.setPosition(Position.SPELL_ZONE);
             game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
         }
+
+        game.getTurnLogger().cardAdded(selectedCard.getCard());
+        game.deselect();
+        return Strings.SET_SUCCESSFULLY.getLabel();
+    }
+
+
+    private String flipSummon(JSONObject request, Game game) {
+        SelectedCard selectedCard = game.getSelectedCard();
+
+        selectedCard.getCard().setState(State.OFFENSIVE_OCCUPIED);
+        selectedCard.setPosition(Position.MONSTER_ZONE);
 
         game.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
@@ -211,6 +223,4 @@ public class TaskHandler extends GameHandler {
         game.deselect();
         return Strings.MONSTER_POSITION_CHANGED.getLabel();
     }
-
-
 }
