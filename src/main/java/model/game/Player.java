@@ -38,6 +38,13 @@ public class Player {
         spellZone = new Zone();
         lifePoint = 8000;
         hand = new Hand();
+        addNCardsToHand(6);
+    }
+
+    private void addNCardsToHand(int number) {
+        for (int j = 0; j < number; j++) {
+            hand.addCard(playingDeck.drawCard());
+        }
     }
 
 

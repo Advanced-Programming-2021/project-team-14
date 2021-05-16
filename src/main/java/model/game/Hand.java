@@ -10,10 +10,6 @@ public class Hand {
 
     public Hand() {
         cards = new ArrayList<>();
-        //temporary for test
-        for (int i = 0; i < 6; i++) {
-            cards.add(Card.getCardByName("Suijin"));
-        }
     }
 
     public boolean isFull() {
