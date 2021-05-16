@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 
 public class Database {
@@ -42,23 +43,27 @@ public class Database {
 
     public static void readDataLineByLine(String file) {
         try {
+
             FileReader filereader = new FileReader(file);
             // create csvReader object and skip first Line
-            CSVReader csvReader = new CSVReaderBuilder(filereader)
-                    .withSkipLines(1)
-                    .build();
+            CSVReader csvReader = new CSVReaderBuilder(filereader).build();
             List<String[]> allData = csvReader.readAll();
-
+            String[] keys = allData.get(0);
+            allData.remove(0);
             // add Cards :
             for (String[] row : allData) {
-                if (file.contains("Monster"))
+                HashMap<String, String> effects = new HashMap<>();
+
+                if (file.contains("Monster")) {
+                    setEffects(keys, effects, row, 9);
                     new Monster(row[0], Integer.parseInt(row[1]), Attribute.fromValue(row[2]),
                             MonsterType.fromValue(row[3]), MonsterCardType.fromValue(row[4]),
-                            Integer.parseInt(row[5]), Integer.parseInt(row[6]), row[7], Integer.parseInt(row[8]));
-                else
+                            Integer.parseInt(row[5]), Integer.parseInt(row[6]), row[7], Integer.parseInt(row[8]), effects);
+                } else {
+                    setEffects(keys, effects, row, 6);
                     new SpellTrap(row[0], CardType.fromValue(row[1]), Property.fromValue(row[2]),
-                            row[3], Status.fromValue(row[4]), Integer.parseInt(row[5]));
-
+                            row[3], Status.fromValue(row[4]), Integer.parseInt(row[5]), effects );
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,5 +103,13 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    private static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
+        for (int i = n; i < keys.length; i++) {
+            effects.put(keys[i], row[i]);
+        }
+    }
+
+
 
 }

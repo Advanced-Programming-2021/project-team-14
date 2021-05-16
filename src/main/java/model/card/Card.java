@@ -2,7 +2,6 @@ package model.card;
 
 import model.Strings;
 import model.card.enums.CardType;
-import model.card.enums.Position;
 import model.card.enums.State;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public abstract class Card {
         cards = new HashMap<>();
     }
 
+    protected HashMap<String, String> effects;
     protected String name;
     protected CardType cardType;
     protected String description;
@@ -41,6 +41,7 @@ public abstract class Card {
         this.description = card.getDescription();
         this.cardType = card.getCardType();
         this.price = card.getPrice();
+        this.effects = card.getEffects();
     }
     public static ArrayList<Card> getCards() {
         return new ArrayList<>(cards.values());
@@ -60,11 +61,9 @@ public abstract class Card {
         return cards.get(cardName);
     }
 
-
     public static boolean doesCardExist(String cardName) {
         return cards.get(cardName) != null;
     }
-
 
     public String getDescription() {
         return description;
@@ -80,6 +79,10 @@ public abstract class Card {
 
     public int getPrice() {
         return price;
+    }
+
+    public HashMap<String, String> getEffects() {
+        return effects;
     }
 
     @Override

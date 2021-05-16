@@ -5,6 +5,7 @@ import model.card.enums.Property;
 import model.card.enums.Status;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SpellTrap extends Card {
     private Property property;
@@ -15,10 +16,12 @@ public class SpellTrap extends Card {
         spellTraps = new ArrayList<>();
     }
 
-    public SpellTrap(String name, CardType cardType, Property property, String description, Status status, int price) {
+    public SpellTrap(String name, CardType cardType, Property property, String description, Status status,
+                     int price, HashMap<String , String > effects) {
         super(name, description, cardType, price);
         this.property = property;
         this.status = status;
+        this.effects = effects;
         addCard(this);
         spellTraps.add(this);
     }
@@ -39,6 +42,7 @@ public class SpellTrap extends Card {
         super(card);
         this.status = card.getStatus();
         this.property = card.getProperty();
+        this.effects = card.getEffects();
     }
 
     @Override
