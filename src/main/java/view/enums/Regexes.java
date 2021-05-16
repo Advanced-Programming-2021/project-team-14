@@ -13,6 +13,7 @@ public enum Regexes {
     SELECT_POSITION(".*--(?:monster|hand|spell) (\\d+).*"),
     SHOW_SELECTED_CARD("card show --selected"),
     SUMMON("summon"),
+    FLIP_SUMMON("flip-summon"),
     SET("set"),
     NEXT_PHASE("next phase"),
     SET_POSITION("set --position (attack|defense)"),

@@ -19,6 +19,11 @@ public class Zone {
         cells.put(1, new Cell());
         cells.put(2, new Cell());
         cells.put(4, new Cell());
+
+//        placeCard(new SelectedCard(Card.getCardByName("Battle OX"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(Card.getCardByName("Axe Raider"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(Card.getCardByName("Dark magician"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(Card.getCardByName("Flame manipulator"), Position.MONSTER_ZONE, 1, false));
     }
 
     public Cell getCell(int position) {

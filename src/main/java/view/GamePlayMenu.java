@@ -39,6 +39,7 @@ public class GamePlayMenu extends Menu{
                 Request.setCommandTag(CommandTags.SUMMON);
                 Request.addData("tributeCardAddress1", "");
                 Request.addData("tributeCardAddress2", "");
+                Request.addData("needTribute", "false");
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
@@ -53,6 +54,12 @@ public class GamePlayMenu extends Menu{
                 }
 
 
+            } else if (command.matches(Regexes.FLIP_SUMMON.getLabel())) {            // summon cards
+
+                Request.setCommandTag(CommandTags.FLIP_SUMMON);
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();
