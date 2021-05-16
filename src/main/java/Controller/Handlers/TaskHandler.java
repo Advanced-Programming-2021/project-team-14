@@ -153,8 +153,9 @@ public class TaskHandler extends GameHandler {
 
     private String summon(JSONObject request, Game game) {
 
-        int level = game.getBoard().getMainPlayer().getPlayingDeck().
-                getMonsterByName(game.getSelectedCard().getCard().getName()).getLevel();
+        Monster monster = (Monster) game.getSelectedCard().getCard();
+
+        int level = monster.getLevel();
 
         if (level == 5 || level == 6) {
 

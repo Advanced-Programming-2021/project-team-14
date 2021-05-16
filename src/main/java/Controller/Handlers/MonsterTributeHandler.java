@@ -2,6 +2,7 @@ package Controller.Handlers;
 
 import Controller.Response;
 import model.Strings;
+import model.card.Monster;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
@@ -13,8 +14,8 @@ public class MonsterTributeHandler extends GameHandler {
 
         String command = request.getString("command");
 
-        int level = game.getBoard().getMainPlayer().getPlayingDeck().
-                getMonsterByName(game.getSelectedCard().getCard().getName()).getLevel();
+        Monster monster = (Monster) game.getSelectedCard().getCard();
+        int level = monster.getLevel();
 
         if (level == 5 || level == 6) {
 

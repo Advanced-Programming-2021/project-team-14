@@ -36,7 +36,9 @@ public class PlayingDeck {
     }
 
     public Card drawCard() {
-        return cards.get(0);          // draw first card from deck
+        Card card = cards.get(0);
+        cards.remove(0);
+        return card;          // draw first card from deck
     }
 
     public int getRemainingCardsSize() {
