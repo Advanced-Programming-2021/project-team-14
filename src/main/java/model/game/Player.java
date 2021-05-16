@@ -52,32 +52,18 @@ public class Player {
         return selectedCard;
     }
 
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
-    }
 
     public PlayingDeck getPlayingDeck() {
         return playingDeck;
     }
 
-    public void setPlayingDeck(PlayingDeck playingDeck) {
-        this.playingDeck = playingDeck;
-    }
 
     public FieldZone getFieldZone() {
         return fieldZone;
     }
 
-    public void setFieldZone(FieldZone fieldZone) {
-        this.fieldZone = fieldZone;
-    }
-
     public GraveYard getGraveYard() {
         return graveYard;
-    }
-
-    public void setGraveYard(GraveYard graveYard) {
-        this.graveYard = graveYard;
     }
 
     public Hand getHand() {
@@ -116,16 +102,13 @@ public class Player {
         return monsterZone;
     }
 
-    public void setMonsterZone(Zone monsterZone) {
-        this.monsterZone = monsterZone;
-    }
-
     public Zone getSpellZone() {
         return spellZone;
     }
-
-    public void setSpellZone(Zone spellZone) {
-        this.spellZone = spellZone;
+    public Card drawCard(){
+        Card card = playingDeck.drawCard();
+        hand.addCard(card);
+        return card;
     }
 
     @Override

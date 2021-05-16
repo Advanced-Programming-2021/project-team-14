@@ -30,7 +30,7 @@ public class GamePlayController {
         } else if (command.equals(CommandTags.SET.getLabel())) {
             Response.addMessage(set(request));
         } else if (command.equals(CommandTags.NEXT_PHASE.getLabel())) {
-            nextPhase(request);
+            Response.addMessage(nextPhase(request));
         } else if (command.equals(CommandTags.ATTACK.getLabel())) {
             Response.addMessage(attack(request));
         }else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
@@ -61,8 +61,8 @@ public class GamePlayController {
         return directAttack.handle(request, game);
     }
 
-    private static void nextPhase(JSONObject request) {
-        new TaskHandler().handle(request, game);
+    private static String nextPhase(JSONObject request) {
+        return new TaskHandler().handle(request, game);
     }
 
 
@@ -105,8 +105,7 @@ public class GamePlayController {
 
     private static String setPosition(JSONObject request) {
         Handler setPosition = new SelectedCardHandler();
-        setPosition.linksWith(new CardExistenceHandler())
-                .linksWith(new CardPositionHandler())
+        setPosition.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new CardStateHandler())
                 .linksWith(new TurnLogHandler())
