@@ -20,6 +20,7 @@ public abstract class Card {
     protected String description;
     protected int price;
     protected State state;
+
     public abstract String show();
 
     public void setState(State state) {
@@ -36,13 +37,15 @@ public abstract class Card {
         this.price = price;
         this.cardType = cardType;
     }
-    public Card(Card card){
+
+    public Card(Card card) {
         this.name = card.getName();
         this.description = card.getDescription();
         this.cardType = card.getCardType();
         this.price = card.getPrice();
         this.effects = card.getEffects();
     }
+
     public static ArrayList<Card> getCards() {
         return new ArrayList<>(cards.values());
     }
@@ -77,13 +80,14 @@ public abstract class Card {
         return name;
     }
 
+    public HashMap<String, String> getEffects() {
+        return effects;
+    }
+
     public int getPrice() {
         return price;
     }
 
-    public HashMap<String, String> getEffects() {
-        return effects;
-    }
 
     @Override
     public String toString() {

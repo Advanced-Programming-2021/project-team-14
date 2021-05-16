@@ -17,7 +17,7 @@ public class SpellTrap extends Card {
     }
 
     public SpellTrap(String name, CardType cardType, Property property, String description, Status status,
-                     int price, HashMap<String , String > effects) {
+                     int price, HashMap<String, String> effects) {
         super(name, description, cardType, price);
         this.property = property;
         this.status = status;
@@ -50,7 +50,7 @@ public class SpellTrap extends Card {
         return showCard.getHorizontalLine() + showCard.getTypeLine(getCardType().getLabel()) +
                 showCard.getFreeLine() + showCard.getNameLine(getName()) +
                 showCard.getPriceLine(getPrice()) +
-                showCard.getFreeLine() +showCard.getDescriptionLine(getDescription()) +
+                showCard.getFreeLine() + showCard.getDescriptionLine(getDescription()) +
                 showCard.getHorizontalLine();
     }
 }

@@ -6,7 +6,6 @@ import model.card.enums.MonsterCardType;
 import model.card.enums.MonsterType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Monster extends Card {
