@@ -2,7 +2,7 @@ package model.card.enums;
 
 public enum ShowCardTags {
 
-    HORIZONTAL_LINE("----------------------------\n"),
+    HORIZONTAL_LINE("--------------------------------------\n"),
     NAME("|name: "),
     DESCRIPTION("|description: "),
     NEXT_LINE("|\n"),
