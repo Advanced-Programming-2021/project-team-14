@@ -112,8 +112,7 @@ public class TaskHandler extends GameHandler {
     }
 
     private String nextPhase(Game game) {
-        game.nextPhase();
-        return null;
+        return game.nextPhase();
     }
 
     private String set(JSONObject request, Game game) {
@@ -128,9 +127,15 @@ public class TaskHandler extends GameHandler {
             game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
         }
 
+        removeFromHand(selectedCard, game);
+
         game.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();
+    }
+
+    private void removeFromHand(SelectedCard selectedCard, Game game) {
+        game.getBoard().getMainPlayer().getHand().remove(selectedCard.getPositionIndex());
     }
 
 

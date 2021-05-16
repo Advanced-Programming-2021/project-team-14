@@ -36,4 +36,8 @@ public int getSize(){
         }
         return result.toString();
     }
+
+    public void remove(int positionIndex) {
+        cards.remove(positionIndex - 1);
+    }
 }

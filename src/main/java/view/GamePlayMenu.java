@@ -32,6 +32,7 @@ public class GamePlayMenu extends Menu{
                 Request.setCommandTag(CommandTags.NEXT_PHASE);
                 Request.send();
                 Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             }
             else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
 
@@ -44,7 +45,6 @@ public class GamePlayMenu extends Menu{
                 while (Request.getResponse().getString("needTribute").equals("true")) {
                     Request.getToken();
                     for (int i = 1; i <= Integer.parseInt(Request.getResponse().getString("tributeNumber")); i++) {
-
                         Request.addData("tributeCardAddress" + i, Console.scan());
                     }
                     setCurrentMenu(Menus.GAMEPLAY_MENU);
@@ -53,15 +53,17 @@ public class GamePlayMenu extends Menu{
                 }
 
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
-                System.out.println("setting the card");
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // summon cards
-
                 Request.setCommandTag(CommandTags.SET_POSITION);
                 Request.extractData(command);
+                Request.send();
+                Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.DESELECT.getLabel())) {            // summon cards
+                Request.setCommandTag(CommandTags.DESELECT);
                 Request.send();
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // summon cards
