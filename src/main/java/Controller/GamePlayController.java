@@ -67,6 +67,8 @@ public class GamePlayController {
 
 
     private static String summon(JSONObject request) {
+
+
         Handler summon = new SelectedCardHandler();
         summon.linksWith(new CardPositionHandler())
                 .linksWith(new CardTypeHandler())
