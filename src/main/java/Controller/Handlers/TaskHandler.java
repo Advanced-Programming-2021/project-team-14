@@ -170,7 +170,7 @@ public class TaskHandler extends GameHandler {
         } else if (level == 7 || level == 8) {
 
             tribute(Integer.parseInt(request.getString("tributeCardAddress1")),
-                    Integer.parseInt(request.getString("tributeCardAddress1")), game);
+                    Integer.parseInt(request.getString("tributeCardAddress2")), game);
         }
 
         removeFromHand(game.getSelectedCard(), game);

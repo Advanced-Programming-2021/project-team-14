@@ -90,7 +90,7 @@ public class MonsterTributeHandler extends GameHandler {
 
         } else if (!game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).isEmpty()) {
 
-            if (game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
+            if (tributeCardAddress2 != 1000 && game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
 
                 response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
             }

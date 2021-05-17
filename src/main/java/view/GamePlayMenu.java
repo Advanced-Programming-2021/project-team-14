@@ -56,6 +56,8 @@ public class GamePlayMenu extends Menu {
                     setCurrentMenu(Menus.GAMEPLAY_MENU);
                     Request.setCommandTag(CommandTags.SUMMON);
                     Request.send();
+                    Console.printBoard(Request.getResponse());
+                    Console.print(Request.getMessage());
                 }
 
 
