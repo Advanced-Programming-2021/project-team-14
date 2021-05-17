@@ -16,7 +16,7 @@ public enum Regexes {
     SUMMON("summon"),
     FLIP_SUMMON("flip-summon"),
     SET("set"),
-    NEXT_PHASE("next phase"),
+    NEXT_PHASE(">"),
     SET_POSITION("set --position (attack|defense)"),
     ATTACK_TO("attack (\\d)"),
     ACTIVATE_EFFECT("activate effect"),

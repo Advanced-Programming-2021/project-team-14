@@ -47,13 +47,14 @@ public class GamePlayController {
     }
 
     private static String activateEffect(JSONObject request) {
-        return "to be handled ...";
-//        Handler activateEffect = new SelectedCardHandler();
-//        activateEffect.linksWith(new CardTypeHandler())
-//                .linksWith(new PhaseHandler())
+
+        Handler activateEffect = new SelectedCardHandler();
+        activateEffect.linksWith(new CardTypeHandler())
+                .linksWith(new PhaseHandler())
 //                .linksWith(new TurnLogHandler())
 //                .linksWith(new EmptyPlaceHandler()); // remained ...
-//        return activateEffect.handle(request, game);
+                .linksWith(new TaskHandler());
+        return activateEffect.handle(request, game);
     }
 
     private static String attack(JSONObject request) {
@@ -62,6 +63,7 @@ public class GamePlayController {
                 .linksWith(new PhaseHandler())
                 .linksWith(new TurnLogHandler())
                 .linksWith(new CardExistenceHandler())
+                .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
         return attack.handle(request, game);
     }

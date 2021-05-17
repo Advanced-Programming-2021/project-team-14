@@ -10,6 +10,7 @@ public enum Strings {
     ACTIVATION_IS_ONLY_FOR_SPELLS("activate effect is only for spell cards."),
     CARD_IS_NOT_VISIBLE("card is not visible"),
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
+    ACTIVATE_SUCCESSFULLY("successfully activated"),
     CANNOT_SUMMON_THIS_CARD("you can’t summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
     NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters on this address"),
@@ -89,7 +90,7 @@ public enum Strings {
     NUMBER_OF_ROUNDS_NOT_SUPPORTED("number of rounds is not supported"),
     NEW_OPTION("new"),
     PLAYER_FORMAT("%s : %s"),
-    ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
+    ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s"),
     COLOR_YELLOW_BOLD("\033[1;36m %s \033[0m"),
     BOARD_STRUCTURE("\n%s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s");
 

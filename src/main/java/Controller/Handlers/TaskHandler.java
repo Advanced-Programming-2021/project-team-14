@@ -45,10 +45,21 @@ public class TaskHandler extends GameHandler {
             case FLIP_SUMMON:
                 return flipSummon(request, game);
             case ACTIVATE_EFFECT:
-                break;
+                return activateEffect(game);
 
         }
         return "> .... <";
+    }
+
+    private String activateEffect(Game game) {
+        SelectedCard selectedCard = game.getSelectedCard();
+
+        selectedCard.getCard().setState(State.OCCUPIED);
+        selectedCard.setPosition(Position.SPELL_ZONE);
+        game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
+        game.getBoard().getMainPlayer().addToActiveCards(selectedCard.getCard());
+        game.deselect();
+        return Strings.ACTIVATE_SUCCESSFULLY.getLabel();
     }
 
     private String directAttack(Game game) {
@@ -187,10 +198,10 @@ public class TaskHandler extends GameHandler {
 
     private void tribute(int tributeCardAddress1, int tributeCardAddress2, Game game) {
 
-        game.getBoard().getMainPlayer().getMonsterZone().emptyCell(tributeCardAddress1);
+        game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).removeCard();
 
         if (tributeCardAddress2 != 1000) {
-            game.getBoard().getMainPlayer().getMonsterZone().emptyCell(tributeCardAddress2);
+            game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).removeCard();
         }
     }
 

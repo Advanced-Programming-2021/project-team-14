@@ -4,6 +4,7 @@ import model.Strings;
 import model.card.enums.CardType;
 import model.card.enums.Property;
 import model.card.enums.State;
+import model.game.Hand;
 
 import java.util.ArrayList;
 import java.util.HashMap;

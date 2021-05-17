@@ -5,7 +5,7 @@ import model.card.enums.State;
 
 public class Cell {
 
-    private Card card;
+    private Card card = null;
 
 
     public Card getCard() {
@@ -23,8 +23,11 @@ public class Cell {
 
     @Override
     public String toString() {
-        if (isEmpty()) return State.EMPTY.getLabel();
-        return card.getState().getLabel();
+        if (this.card == null){
+            return State.EMPTY.getLabel();
+        }else{
+            return card.getState().getLabel();
+        }
     }
 
     public void removeCard(){

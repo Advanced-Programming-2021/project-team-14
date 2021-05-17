@@ -3,7 +3,8 @@ package model.game;
 import model.Strings;
 import model.User;
 import model.card.Card;
-import org.w3c.dom.CDATASection;
+
+import java.util.ArrayList;
 
 public class Player {
 
@@ -15,9 +16,12 @@ public class Player {
 
     private Hand hand;
 
-    private Card selectedCard;
-
     private Zone monsterZone;
+    private ArrayList<Card> activatedCards;
+
+    public ArrayList<Card> getActivatedCards() {
+        return activatedCards;
+    }
 
     private Zone spellZone;
 
@@ -26,7 +30,9 @@ public class Player {
     private FieldZone fieldZone;
 
     private int lifePoint;
-
+    public void addToActiveCards(Card card){
+        activatedCards.add(card);
+    }
 
     public Player(User user) {
         this.username = user.getUsername();
@@ -38,18 +44,15 @@ public class Player {
         spellZone = new Zone();
         lifePoint = 8000;
         hand = new Hand();
-        addNCardsToHand(6);
+        addNCardsToHand(5);
+        hand.addCard(Card.getCardByName("Magic Cylinder"));
+        this.activatedCards = new ArrayList<>();
     }
 
     private void addNCardsToHand(int number) {
         for (int j = 0; j < number; j++) {
             hand.addCard(playingDeck.drawCard());
         }
-    }
-
-
-    public Card getSelectedCard() {
-        return selectedCard;
     }
 
 

@@ -14,7 +14,7 @@ public class Game {
 
     private int round;
     private Board board;
-    private Phase phase = Phase.START;
+    private Phase phase;
     private SelectedCard selectedCard;
     private TurnLogger turnLogger;
 
@@ -35,6 +35,7 @@ public class Game {
         this.creatorNickname = mainUser.getNickname();
         this.board = new Board(new Player(mainUser), new Player(rivalUser));
         this.turnLogger = new TurnLogger();
+        this.phase = Phase.DRAW_PHASE;
         nextPhase();
     }
     public JSONObject getGameObject(){
@@ -78,7 +79,6 @@ public class Game {
             case MAIN_PHASE_2:
                 phase = Phase.END_PHASE;
                 break;
-            case START:
             case END_PHASE:
                 changeTurn();
                 turnLogger.reset();
