@@ -22,7 +22,7 @@ public class GraveYard {
     }
 
     public String showCards() {
-
+        if (cards.isEmpty()) return Strings.GRAVEYARD_IS_EMPTY.getLabel();
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < cards.size(); i++) {
 
