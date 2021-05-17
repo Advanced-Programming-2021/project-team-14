@@ -12,7 +12,7 @@ public enum Strings {
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
     CANNOT_SUMMON_THIS_CARD("you can’t summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
-    NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters one this address"),
+    NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters on this address"),
     NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE("there is no monster on one of these addresses"),
     POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
     POSITION_ALREADY_CHANGED("you already changed this card position in this turn"),
