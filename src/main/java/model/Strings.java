@@ -10,6 +10,7 @@ public enum Strings {
     ACTIVATION_IS_ONLY_FOR_SPELLS("activate effect is only for spell cards."),
     CARD_IS_NOT_VISIBLE("card is not visible"),
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
+    FLIP_SUMMON_SUCCESSFULLY("flip summoned successfully"),
     CANNOT_SUMMON_THIS_CARD("you can’t summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
     NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters on this address"),

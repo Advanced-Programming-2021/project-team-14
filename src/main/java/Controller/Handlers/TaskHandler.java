@@ -153,7 +153,8 @@ public class TaskHandler extends GameHandler {
 
         game.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
-        return Strings.SET_SUCCESSFULLY.getLabel();
+
+        return Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel();
     }
 
 
