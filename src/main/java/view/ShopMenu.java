@@ -23,6 +23,12 @@ public class ShopMenu extends Menu {
                 Request.send();
                 Console.print(Request.getMessage());
 
+            } else if (command.matches(Regexes.INCREASE_MONEY.getLabel())) {       // cheat increase money
+                Request.setCommandTag(CommandTags.INCREASE_MONEY);
+                Request.addDataToRequest(Regexes.INCREASE_MONEY.getLabel(), command, "amount");
+                Request.send();
+                Console.print(Request.getMessage());
+
             } else if (command.matches(Regexes.SHOP_SHOW_ALL.getLabel())) {     // shop show all
                 Request.setCommandTag(CommandTags.SHOP_SHOW_ALL);
                 Request.send();

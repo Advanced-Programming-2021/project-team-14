@@ -16,7 +16,8 @@ public enum CommandTags {
     CHANGE_NICKNAME("change-nickname"),
     SIDE("side"),
     BUY_CARD("shop buy"),
-    SHOP_SHOW_ALL("shop show --all");
+    SHOP_SHOW_ALL("shop show --all"),
+    INCREASE_MONEY("increase money");
     public final String label;
 
     CommandTags(String label) {

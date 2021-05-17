@@ -43,7 +43,9 @@ public enum Regexes {
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
     START_DUEL("^duel (?=.*(--(second-player) ([\\w\\-]+)))(?=.*(--(rounds) (\\d+))).*$"),
     SHOP_SHOW_ALL("shop show --all"),
-    ATTACK_DIRECT("attack direct");
+    ATTACK_DIRECT("attack direct"),
+    //cheat
+    INCREASE_MONEY("increase --money ([\\d]+)");
 
 
     public final String label;

@@ -38,7 +38,9 @@ public enum CommandTags {
     SHOW_SCOREBOARD("scoreboard show"),
     BUY_CARD("shop buy"),
     START_DUEL("start duel"),
-    SHOP_SHOW_ALL("shop show --all");
+    SHOP_SHOW_ALL("shop show --all"),
+    //cheat
+    INCREASE_MONEY("increase money");
 
     public final String label;
 

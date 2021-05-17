@@ -16,12 +16,14 @@ public class Wallet {
         this.cash = 100000;
     }
 
-    public void addCash(int amount) {
-        setCash(getCash() + amount);
-    }
 
     public void decreaseCash(int amount) {
-        setCash(getCash() - amount);
+        this.cash -= amount;
+    }
+
+    public void increaseCash(int amount) {
+        this.cash += amount;
+
     }
 
     public boolean isCashEnough(int amount) {
@@ -36,9 +38,6 @@ public class Wallet {
         return cards;
     }
 
-    public void setCash(int cash) {
-        this.cash = cash;
-    }
 
     public int getCash() {
         return this.cash;

@@ -27,7 +27,8 @@ public enum Responses {
     MAIN_DECK_IS_FULL("main deck is full"),
     THERE_IS_NO_CARD_WITH_THIS_NAME("there is no card with this name"),
     NOT_ENOUGH_MONEY("not enough money"),
-    CARD_BOUGHT_SUCCESSFULLY("card added to your wallet successfully!");
+    CARD_BOUGHT_SUCCESSFULLY("card added to your wallet successfully!"),
+    INCREASE_MONEY("cash increased successfully!");
 
 
     public final String label;

@@ -21,6 +21,15 @@ public class ShopController {
 
         else if (commandTag.equals(CommandTags.SHOP_SHOW_ALL.getLabel()))
             Response.addMessage(showAllCards());
+
+        else if (commandTag.equals(CommandTags.INCREASE_MONEY.getLabel()))
+            Response.addMessage(increaseMoney(request.getString("amount"), request.getString("token")));
+    }
+
+    private static String increaseMoney(String amount, String username) {       //cheat increase money
+        User.getUserByName(username).getWallet().increaseCash(Integer.parseInt(amount));
+        Response.success();
+        return Responses.INCREASE_MONEY.getLabel();
     }
 
 
