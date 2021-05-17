@@ -21,6 +21,8 @@ public class GamePlayController {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
             Response.addMessage(showSelectedCard(request));
+        } else if (command.equals(CommandTags.SHOW_GRAVEYARD.getLabel())) {
+            Response.addMessage(showGraveyard(request));
         } else if (command.equals(CommandTags.SET_POSITION.getLabel())) {
             Response.addMessage(setPosition(request));
         } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
@@ -133,6 +135,15 @@ public class GamePlayController {
                 .linksWith(new TaskHandler());
         return showCard.handle(request, game);
     }
+
+
+    private static String showGraveyard(JSONObject request) {
+
+        Handler set = new TaskHandler();
+
+        return set.handle(request, game);
+    }
+
 
     private static String select(JSONObject request) {
         Handler selection = new PositionValidityHandler();

@@ -32,6 +32,8 @@ public class TaskHandler extends GameHandler {
                 return setPosition(request, game);
             case SHOW_SELECTED_CARD:
                 return showSelectedCard(game);
+            case SHOW_GRAVEYARD:
+                return showGraveyard(game);
             case DESELECT:
                 return deselect(game);
             case SUMMON:
@@ -223,6 +225,10 @@ public class TaskHandler extends GameHandler {
 
     private String showSelectedCard(Game game) {
         return game.getSelectedCard().getCard().show();
+    }
+
+    private String showGraveyard(Game game) {
+        return game.getBoard().getMainPlayer().getGraveYard().showCards();
     }
 
     private String setPosition(JSONObject request, Game game) {
