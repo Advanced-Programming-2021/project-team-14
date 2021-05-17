@@ -2,7 +2,7 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.Monster;
-import model.card.enums.MonsterCardType;
+import model.card.enums.Property;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
@@ -17,7 +17,7 @@ public class MonsterCardTypeHandler extends GameHandler {
 
         if (game.getSelectedCard() != null) {
             Monster monster = (Monster) game.getSelectedCard().getCard();
-            if (monster.getMonsterCardType() == MonsterCardType.RITUAL) {
+            if (monster.getProperty() == Property.RITUAL) {
 
                 response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
                 return response;

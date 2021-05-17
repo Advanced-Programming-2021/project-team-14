@@ -2,6 +2,7 @@ package model.card;
 
 import model.Strings;
 import model.card.enums.CardType;
+import model.card.enums.Property;
 import model.card.enums.State;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public abstract class Card {
     protected String description;
     protected int price;
     protected State state;
+    protected Property property;
 
     public abstract String show();
 
@@ -74,6 +76,10 @@ public abstract class Card {
 
     public CardType getCardType() {
         return cardType;
+    }
+
+    public Property getProperty() {
+        return property;
     }
 
     public String getName() {

@@ -20,8 +20,9 @@ public enum EffectsEnum {
     ATTACKED_CARDS("attacked cards"),
     ATTACK_LIFE_POINT_DEFENSE("attack /lifePoint/defense"),
     CHANGE_AMOUNT("change amount"),
-    TRIBUTING_AMOUNT("tributing amount");
-
+    TRIBUTING_AMOUNT("tributing amount"),
+    EFFECT("Effect"),
+    NO_EFFECTS("nothing");
 
 
     public final String label;

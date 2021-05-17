@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SpellTrap extends Card {
-    private Property property;
+
     private Status status;
     private static ArrayList<SpellTrap> spellTraps;
 
@@ -16,14 +16,15 @@ public class SpellTrap extends Card {
         spellTraps = new ArrayList<>();
     }
 
-    public SpellTrap(String name, CardType cardType, Property property, String description, Status status,
-                     int price, HashMap<String, String> effects) {
+    public SpellTrap(String name, CardType cardType, Property property, String description,
+                     Status status, int price, HashMap<String, String> effects) {
         super(name, description, cardType, price);
         this.property = property;
         this.status = status;
         this.effects = effects;
         addCard(this);
         spellTraps.add(this);
+
     }
 
     public static ArrayList<SpellTrap> getSpellTraps() {
@@ -33,11 +34,7 @@ public class SpellTrap extends Card {
     public Status getStatus() {
         return status;
     }
-
-    public Property getProperty() {
-        return property;
-    }
-
+    
     public SpellTrap(SpellTrap card) {
         super(card);
         this.status = card.getStatus();

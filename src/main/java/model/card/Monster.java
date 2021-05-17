@@ -1,9 +1,6 @@
 package model.card;
 
-import model.card.enums.Attribute;
-import model.card.enums.CardType;
-import model.card.enums.MonsterCardType;
-import model.card.enums.MonsterType;
+import model.card.enums.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +9,6 @@ public class Monster extends Card {
     private int level;
     private int attack, defence;
     private Attribute attribute;
-    private MonsterCardType monsterCardType;
     private MonsterType monsterType;
 
     private static ArrayList<Monster> monsters;
@@ -21,13 +17,13 @@ public class Monster extends Card {
         monsters = new ArrayList<>();
     }
 
-    public Monster(String name, int level, Attribute attribute, MonsterType monsterType, MonsterCardType monsterCardType,
+    public Monster(String name, int level, Attribute attribute, MonsterType monsterType, Property monsterCardType,
                    int attack, int defence, String description, int price, HashMap<String, String> effects) {
         super(name, description, CardType.fromValue("Monster"), price);
         this.attack = attack;
         this.defence = defence;
         this.level = level;
-        this.monsterCardType = monsterCardType;
+        this.property = monsterCardType;
         this.monsterType = monsterType;
         this.effects = effects;
         addCard(this);
@@ -76,13 +72,10 @@ public class Monster extends Card {
         this.defence = card.getDefence();
         this.attribute = card.getAttribute();
         this.level = card.getLevel();
-        this.monsterCardType = card.getMonsterCardType();
+        this.property = card.getProperty();
         this.monsterType = card.getMonsterType();
         this.effects = card.getEffects();
     }
 
-    public MonsterCardType getMonsterCardType() {
-        return monsterCardType;
-    }
 
 }

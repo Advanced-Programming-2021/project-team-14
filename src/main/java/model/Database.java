@@ -57,12 +57,12 @@ public class Database {
                 if (file.contains("Monster")) {
                     setEffects(keys, effects, row, 9);
                     new Monster(row[0], Integer.parseInt(row[1]), Attribute.fromValue(row[2]),
-                            MonsterType.fromValue(row[3]), MonsterCardType.fromValue(row[4]),
+                            MonsterType.fromValue(row[3]), Property.fromValue(row[4]),
                             Integer.parseInt(row[5]), Integer.parseInt(row[6]), row[7], Integer.parseInt(row[8]), effects);
                 } else {
                     setEffects(keys, effects, row, 6);
                     new SpellTrap(row[0], CardType.fromValue(row[1]), Property.fromValue(row[2]),
-                            row[3], Status.fromValue(row[4]), Integer.parseInt(row[5]), effects );
+                            row[3], Status.fromValue(row[4]), Integer.parseInt(row[5]), effects);
                 }
             }
         } catch (Exception e) {
@@ -104,10 +104,12 @@ public class Database {
         }
     }
 
-    private static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
+    static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
         for (int i = n; i < keys.length; i++) {
             effects.put(keys[i], row[i]);
         }
     }
+
+
 
 }

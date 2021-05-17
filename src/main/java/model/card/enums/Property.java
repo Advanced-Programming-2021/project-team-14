@@ -7,7 +7,8 @@ public enum Property {
     QUICK_PLAY("Quick-play"),
     FIELD("Filed"),
     EQUIP("Equip"),
-    RITUAL("ritual");
+    RITUAL("ritual"),
+    EFFECT("Effect");
 
     public final String label;
 
