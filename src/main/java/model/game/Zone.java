@@ -31,7 +31,7 @@ public class Zone {
     }
 
     public void emptyCell(int position) {
-        cells.get(position).setCard(null);                         // here null means empty
+        cells.get(position).removeCard();                         // here null means empty
     }
 
     public void placeCard(SelectedCard card) {

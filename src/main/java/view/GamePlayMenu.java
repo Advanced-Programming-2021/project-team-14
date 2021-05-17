@@ -22,10 +22,13 @@ public class GamePlayMenu extends Menu {
                 Request.send();
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SHOW_GRAVEYARD.getLabel())) {
-                Request.setCommandTag(CommandTags.SHOW_GRAVEYARD);
-                Request.send();
-                Console.printBoard(Request.getResponse());
-                Console.print(Request.getMessage());
+                while (!command.equals(CommandTags.BACK.getLabel())) {
+                    Request.setCommandTag(CommandTags.SHOW_GRAVEYARD);
+                    Request.send();
+                    Console.printBoard(Request.getResponse());
+                    Console.print(Request.getMessage());
+                    command = Console.scan();
+                }
             } else if (command.matches(Regexes.SELECT.getLabel()) ||
                     command.matches(Regexes.SELECT_FIELD.getLabel())) {
                 select();
@@ -53,6 +56,8 @@ public class GamePlayMenu extends Menu {
                     setCurrentMenu(Menus.GAMEPLAY_MENU);
                     Request.setCommandTag(CommandTags.SUMMON);
                     Request.send();
+                    Console.printBoard(Request.getResponse());
+                    Console.print(Request.getMessage());
                 }
 
 
