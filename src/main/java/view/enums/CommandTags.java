@@ -20,6 +20,7 @@ public enum CommandTags {
     ACTIVATE_EFFECT("activate effect"),
     SHOW_SELECTED_CARD("show card"),
     ATTACK_DIRECT("attack direct"),
+    BACK("back"),
 
 
     LOGIN("login"),
