@@ -20,6 +20,7 @@ public enum CommandTags {
     SELECT_HAND("select hand"),
     ACTIVATE_EFFECT("activate effect"),
     SHOW_SELECTED_CARD("show card"),
+    ATTACK_DIRECT("attack direct"),
 
 
     LOGIN("login"),
@@ -44,12 +45,14 @@ public enum CommandTags {
     CommandTags(String label) {
         this.label = label;
     }
+
     public static CommandTags fromValue(String givenName) {
         for (CommandTags direction : values())
             if (direction.label.equals(givenName))
                 return direction;
         return null;
     }
+
     public String getLabel() {
         return label;
     }

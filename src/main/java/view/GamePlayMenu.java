@@ -6,7 +6,7 @@ import view.enums.Menus;
 import view.enums.Regexes;
 import view.enums.Responses;
 
-public class GamePlayMenu extends Menu{
+public class GamePlayMenu extends Menu {
 
 
     public void run() {
@@ -17,24 +17,21 @@ public class GamePlayMenu extends Menu{
                 Console.print(Responses.IMPOSSIBLE_MENU_NAVIGATION.getLabel());
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                    // show current menu
                 Console.print(currentMenu);
-            else if (command.matches(Regexes.SHOW_SELECTED_CARD.getLabel())){
+            else if (command.matches(Regexes.SHOW_SELECTED_CARD.getLabel())) {             //show selected card
                 Request.setCommandTag(CommandTags.SHOW_SELECTED_CARD);
                 Request.send();
                 Console.print(Request.getMessage());
-            }
-            else if (command.matches(Regexes.SELECT.getLabel()) ||
+            } else if (command.matches(Regexes.SELECT.getLabel()) ||
                     command.matches(Regexes.SELECT_FIELD.getLabel())) {
                 select();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            }
-            else if (command.matches(Regexes.NEXT_PHASE.getLabel())){
+            } else if (command.matches(Regexes.NEXT_PHASE.getLabel())) {
                 Request.setCommandTag(CommandTags.NEXT_PHASE);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            }
-            else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.SUMMON.getLabel())) {            // summon cards
 
                 Request.setCommandTag(CommandTags.SUMMON);
                 Request.addData("tributeCardAddress1", "");
@@ -60,33 +57,36 @@ public class GamePlayMenu extends Menu{
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            }else if (command.matches(Regexes.ACTIVATE_EFFECT.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.ACTIVATE_EFFECT.getLabel())) {            // active effect
                 Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.SET.getLabel())) {            // set
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // set position
                 Request.setCommandTag(CommandTags.SET_POSITION);
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.DESELECT.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.DESELECT.getLabel())) {            // deselect
                 Request.setCommandTag(CommandTags.DESELECT);
                 Request.send();
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.ATTACK_DIRECT.getLabel())) {            // direct attack
+                Request.setCommandTag(CommandTags.ATTACK_DIRECT);
+                Request.send();
+                Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // attack to
                 Request.setCommandTag(CommandTags.ATTACK);
                 Request.addDataToRequest(Regexes.ATTACK_TO.getLabel(), command, Strings.TO.getLabel());
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            }else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
-
+            } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 
         }
@@ -98,9 +98,9 @@ public class GamePlayMenu extends Menu{
         Request.setCommandTag(CommandTags.SELECT);
         Request.setOption(command, Strings.OPPONENT_OPTION.getLabel());
 
-        if (command.matches(Regexes.SELECT_FIELD.getLabel())){
+        if (command.matches(Regexes.SELECT_FIELD.getLabel())) {
             Request.addData("area", "field");
-        }else{
+        } else {
             Request.addDataToRequest(Regexes.SELECT_AREA.getLabel(), command, "area");
             Request.addDataToRequest(Regexes.SELECT_POSITION.getLabel(), command, "position");
         }

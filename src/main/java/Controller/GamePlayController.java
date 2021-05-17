@@ -17,11 +17,11 @@ public class GamePlayController {
     public static void processCommand(JSONObject request) {
         String command = request.getString(Strings.COMMAND.getLabel());
 
-        if (command.equals(CommandTags.SELECT.getLabel())){
+        if (command.equals(CommandTags.SELECT.getLabel())) {
             Response.addMessage(select(request));
-        } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())){
+        } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
             Response.addMessage(showSelectedCard(request));
-        }  else if (command.equals(CommandTags.SET_POSITION.getLabel())) {
+        } else if (command.equals(CommandTags.SET_POSITION.getLabel())) {
             Response.addMessage(setPosition(request));
         } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
             Response.addMessage(flipSummon(request));
@@ -33,11 +33,11 @@ public class GamePlayController {
             Response.addMessage(nextPhase(request));
         } else if (command.equals(CommandTags.ATTACK.getLabel())) {
             Response.addMessage(attack(request));
-        }else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
+        } else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
             Response.addMessage(directAttack(request));
-        }else if (command.equals(CommandTags.DESELECT.getLabel())) {
+        } else if (command.equals(CommandTags.DESELECT.getLabel())) {
             Response.addMessage(deselect(request));
-        }else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
+        } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
             Response.addMessage(activateEffect(request));
         }
 

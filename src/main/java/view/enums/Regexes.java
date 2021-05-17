@@ -41,7 +41,8 @@ public enum Regexes {
     SHOW_SCOREBOARD("show scoreboard"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
     START_DUEL("^duel (?=.*(--(second-player) ([\\w\\-]+)))(?=.*(--(rounds) (\\d+))).*$"),
-    SHOP_SHOW_ALL("shop show --all");
+    SHOP_SHOW_ALL("shop show --all"),
+    ATTACK_DIRECT("attack direct");
 
 
     public final String label;
