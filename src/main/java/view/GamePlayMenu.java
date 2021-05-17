@@ -21,6 +21,11 @@ public class GamePlayMenu extends Menu {
                 Request.setCommandTag(CommandTags.SHOW_SELECTED_CARD);
                 Request.send();
                 Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.SHOW_GRAVEYARD.getLabel())) {
+                Request.setCommandTag(CommandTags.SHOW_GRAVEYARD);
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SELECT.getLabel()) ||
                     command.matches(Regexes.SELECT_FIELD.getLabel())) {
                 select();

@@ -12,6 +12,7 @@ public enum Regexes {
     SELECT_AREA(".*--(monster|hand|spell) \\d+.*"),
     SELECT_POSITION(".*--(?:monster|hand|spell) (\\d+).*"),
     SHOW_SELECTED_CARD("card show --selected"),
+    SHOW_GRAVEYARD("show graveyard"),
     SUMMON("summon"),
     FLIP_SUMMON("flip-summon"),
     SET("set"),

@@ -1,7 +1,5 @@
 package view.enums;
 
-import model.card.enums.Position;
-
 public enum CommandTags {
 
 
@@ -13,6 +11,7 @@ public enum CommandTags {
     ATTACK("attack"),
     DIRECT_ATTACK("attack direct"),
     FLIP_SUMMON("flip-summon"),
+    SHOW_GRAVEYARD("show graveyard"),
     SELECT_CARD_MONSTER("select monster"),
     SELECT_CARD_SPELL("select spell"),
     DESELECT("deselect"),
