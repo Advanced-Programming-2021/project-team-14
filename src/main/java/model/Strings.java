@@ -12,7 +12,7 @@ public enum Strings {
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
     CANNOT_SUMMON_THIS_CARD("you can’t summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
-    NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters one this address"),
+    NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters on this address"),
     NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE("there is no monster on one of these addresses"),
     POSITION_CHANGED_SUCCESSFULLY("monster card position changed successfully"),
     POSITION_ALREADY_CHANGED("you already changed this card position in this turn"),
@@ -89,6 +89,7 @@ public enum Strings {
     NEW_OPTION("new"),
     PLAYER_FORMAT("%s : %s"),
     ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
+    COLOR_YELLOW_BOLD("\033[1;36m %s \033[0m"),
     BOARD_STRUCTURE("\n%s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s");
 
 

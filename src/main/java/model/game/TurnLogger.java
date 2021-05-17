@@ -10,19 +10,27 @@ public class TurnLogger {
     private ArrayList<Card> attackedCards;
 
 
+    public boolean hasSummonedOrSetCards() {
+
+        return recentlyAddedCards.size() != 0;
+    }
+
     public boolean hasAdded(Card card) {
+
         return recentlyAddedCards.contains(card);
     }
 
-    public TurnLogger(){
+    public TurnLogger() {
         this.changedPositionCards = new ArrayList<>();
         this.recentlyAddedCards = new ArrayList<>();
         this.attackedCards = new ArrayList<>();
     }
-    public void cardAdded(Card card){
+
+    public void cardAdded(Card card) {
         recentlyAddedCards.add(card);
     }
-    public void cardAttack(Card card){
+
+    public void cardAttack(Card card) {
         attackedCards.add(card);
     }
 
