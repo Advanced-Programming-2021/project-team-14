@@ -80,7 +80,8 @@ public class GamePlayController {
 
     private static String summon(JSONObject request) {
 
-
+        Response.add("needTribute", "false");
+        Response.add("tributeNumber", "");
         Handler summon = new SelectedCardHandler();
         summon.linksWith(new CardPositionHandler())
                 .linksWith(new CardTypeHandler())
