@@ -1,5 +1,6 @@
 package view;
 
+import model.Strings;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +27,6 @@ public abstract class Console {
 
     public static void printBoard(JSONObject jsonObject) {
         JSONObject game = jsonObject.getJSONObject("game");
-        System.out.println("\033[1;36m" + game.getString("board") + "\033[0m");
-        System.out.println("phase: " + game.getString("phase"));
+        System.out.printf((Strings.COLOR_YELLOW_BOLD.getLabel()) + "%n", game.getString("board"));
     }
 }

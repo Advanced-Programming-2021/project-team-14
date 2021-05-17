@@ -79,6 +79,7 @@ public class GamePlayMenu extends Menu {
             } else if (command.matches(Regexes.ATTACK_DIRECT.getLabel())) {            // direct attack
                 Request.setCommandTag(CommandTags.ATTACK_DIRECT);
                 Request.send();
+                Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.ATTACK_TO.getLabel())) {            // attack to
                 Request.setCommandTag(CommandTags.ATTACK);

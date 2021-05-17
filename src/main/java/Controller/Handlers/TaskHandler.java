@@ -50,7 +50,9 @@ public class TaskHandler extends GameHandler {
     }
 
     private String directAttack(Game game) {
-        int damage = ((Monster) game.getSelectedCard().getCard()).getAttack();
+        Monster card = (Monster) game.getSelectedCard().getCard();
+        int damage = card.getAttack();
+        game.getTurnLogger().cardAttack(card);
         damage(true, damage, game);
         game.deselect();
         return String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
@@ -169,6 +171,7 @@ public class TaskHandler extends GameHandler {
                     Integer.parseInt(request.getString("tributeCardAddress1")), game);
         }
 
+        removeFromHand(game.getSelectedCard(), game);
         game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
         game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());

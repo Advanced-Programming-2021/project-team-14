@@ -89,6 +89,7 @@ public enum Strings {
     NEW_OPTION("new"),
     PLAYER_FORMAT("%s : %s"),
     ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
+    COLOR_YELLOW_BOLD("\033[1;36m %s \033[0m"),
     BOARD_STRUCTURE("\n%s\n\t%s\n%s\n%s\n%s\n%s\t\t\t\t\t\t%s\n\n--------------------------\n\n%s\t\t\t\t\t\t%s\n%s\n%s\n\t\t\t\t\t\t%s\n%s\n%s");
 
 
