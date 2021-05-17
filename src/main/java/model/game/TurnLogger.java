@@ -36,4 +36,10 @@ public class TurnLogger {
     public boolean doesPositionChanged(Card card) {
         return changedPositionCards.contains(card);
     }
+
+    public void reset() {
+        changedPositionCards = new ArrayList<>();
+        recentlyAddedCards = new ArrayList<>();
+        attackedCards = new ArrayList<>();
+    }
 }

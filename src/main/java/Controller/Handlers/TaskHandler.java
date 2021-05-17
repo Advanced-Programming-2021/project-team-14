@@ -65,6 +65,7 @@ public class TaskHandler extends GameHandler {
 
         Cell rivalCard = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
         Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
+        game.getTurnLogger().cardAttack(selectedCell.getCard());
         int damage;
         String opponentCardName = "";
         switch (rivalCard.getCard().getState()) {
@@ -75,10 +76,11 @@ public class TaskHandler extends GameHandler {
                         ((Monster) selectedCell.getCard()).getAttack();
                 if (damage > 0) {
                     damage(false, damage, game);
+                    game.getTurnLogger().cardAttack(selectedCell.getCard());
                     return opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
                 }
                 if (damage < 0) {
-                    game.getBoard().getGraveYard().addCard(rivalCard.getCard());
+                    game.getBoard().getRivalPlayer().getGraveYard().addCard(rivalCard.getCard());
                     rivalCard.removeCard();
                     return opponentCardName + String.format(Strings.DO_ATTACK_LESS.getLabel(), damage);
                 }
@@ -88,13 +90,13 @@ public class TaskHandler extends GameHandler {
                         ((Monster) rivalCard.getCard()).getAttack();
                 if (damage > 0) {
                     damage(true, damage, game);
-                    game.getBoard().getGraveYard().addCard(rivalCard.getCard());
+                    game.getBoard().getRivalPlayer().getGraveYard().addCard(rivalCard.getCard());
                     rivalCard.removeCard();
                     return String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
                 }
                 if (damage < 0) {
                     damage(true, damage, game);
-                    game.getBoard().getGraveYard().addCard(selectedCell.getCard());
+                    game.getBoard().getMainPlayer().getGraveYard().addCard(selectedCell.getCard());
                     selectedCell.removeCard();
                     return String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
                 }

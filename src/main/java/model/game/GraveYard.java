@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GraveYard {
 
-    private static ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public GraveYard() {
         cards = new ArrayList<>();
@@ -21,7 +21,7 @@ public class GraveYard {
         cards.add(card);
     }
 
-    public static String showCards() {
+    public String showCards() {
 
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < cards.size(); i++) {

@@ -60,6 +60,11 @@ public class GamePlayMenu extends Menu{
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
+            }else if (command.matches(Regexes.ACTIVATE_EFFECT.getLabel())) {            // summon cards
+                Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET.getLabel())) {            // summon cards
                 Request.setCommandTag(CommandTags.SET);
                 Request.send();

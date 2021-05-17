@@ -18,6 +18,7 @@ public enum Regexes {
     NEXT_PHASE("next phase"),
     SET_POSITION("set --position (attack|defense)"),
     ATTACK_TO("attack (\\d)"),
+    ACTIVATE_EFFECT("activate effect"),
 
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),

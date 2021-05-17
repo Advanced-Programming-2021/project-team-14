@@ -3,11 +3,14 @@ package model;
 public enum Strings {
 
     CARD_NOT_EXIST_IN_HAND_SET("you can’t set this card"),
+    CANNOT_ACTIVATE_IN_THIS_TURN("you can’t activate an effect on this turn"),
     CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card"),
     TRIBUTE_ONE_CARD("tribute one card"),
     TRIBUTE_TWO_CARD("tribute two cards"),
+    ACTIVATION_IS_ONLY_FOR_SPELLS("activate effect is only for spell cards."),
     CARD_IS_NOT_VISIBLE("card is not visible"),
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
+    CANNOT_SUMMON_THIS_CARD("you can’t summon this card"),
     NOT_ENOUGH_CARDS_FOR_TRIBUTE("there are not enough cards for tribute"),
     NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE("there no monsters one this address"),
     NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE("there is no monster on one of these addresses"),
@@ -22,6 +25,7 @@ public enum Strings {
     NO_CARD_TO_ATTACK("there is no card to attack here"),
     CARD_NOT_VISIBLE("there is no card to attack here"),
     ALREADY_ATTACKER("this card already attacked"),
+    ALREADY_ACTIVATED("you have already activated this card"),
     SET_SUCCESSFULLY("set successfully"),
     SUMMON_SUCCESSFULLY("summoned successfully"),
     CANNOT_TAKE_ACTION_IN_THIS_PHASE("you can’t do this action in this phase"),

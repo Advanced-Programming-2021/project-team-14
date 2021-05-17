@@ -6,19 +6,15 @@ public class Board {
 
 
     private Player mainPlayer;
-    private GraveYard graveYard;
+
     private Player rivalPlayer;
 
 
     public Board(Player mainPlayer, Player rivalPlayer) {
         this.mainPlayer = mainPlayer;
         this.rivalPlayer = rivalPlayer;
-        this.graveYard = new GraveYard();
     }
 
-    public GraveYard getGraveYard() {
-        return graveYard;
-    }
 
     public Player getMainPlayer() {
         return mainPlayer;

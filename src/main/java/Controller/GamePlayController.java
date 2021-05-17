@@ -37,9 +37,21 @@ public class GamePlayController {
             Response.addMessage(directAttack(request));
         }else if (command.equals(CommandTags.DESELECT.getLabel())) {
             Response.addMessage(deselect(request));
+        }else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
+            Response.addMessage(activateEffect(request));
         }
 
         Response.addObject("game", game.getGameObject());
+    }
+
+    private static String activateEffect(JSONObject request) {
+        return "to be handled ...";
+//        Handler activateEffect = new SelectedCardHandler();
+//        activateEffect.linksWith(new CardTypeHandler())
+//                .linksWith(new PhaseHandler())
+//                .linksWith(new TurnLogHandler())
+//                .linksWith(new EmptyPlaceHandler()); // remained ...
+//        return activateEffect.handle(request, game);
     }
 
     private static String attack(JSONObject request) {

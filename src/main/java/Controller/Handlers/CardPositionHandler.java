@@ -29,6 +29,7 @@ public class CardPositionHandler extends GameHandler{
             response = Strings.CANNOT_ATTACK_WITH_THIS_CARD.getLabel();
         }
 
+
         if (!game.getSelectedCard().getPosition().equals(expectedPosition))
             return response;
         return super.handle(request, game);

@@ -81,6 +81,7 @@ public class Game {
             case START:
             case END_PHASE:
                 changeTurn();
+                turnLogger.reset();
                 phase = Phase.DRAW_PHASE;
                 deselect();
                 return String.format(Strings.CHANGE_TURN_PRINT.getLabel(), phase, board.getMainPlayer().getNickname(), draw());
