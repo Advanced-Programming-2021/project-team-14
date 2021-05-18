@@ -24,6 +24,8 @@ public class MainController {
             DuelController.processCommand(request);
         } else if (view.equals(Menus.GAMEPLAY_MENU.getLabel())) {
             GamePlayController.processCommand(request);
+        } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel())) {
+            ImportExportController.processCommand(request);
         }
 
         Logger.log("server", Response.getResponse().toString());

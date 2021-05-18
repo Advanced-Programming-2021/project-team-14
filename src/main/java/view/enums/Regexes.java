@@ -20,6 +20,8 @@ public enum Regexes {
     SET_POSITION("set --position (attack|defense)"),
     ATTACK_TO("attack (\\d)"),
     ACTIVATE_EFFECT("activate effect"),
+    IMPORT("import card ([\\w\\s-]+)"),
+    EXPORT("export card ([\\w\\s-]+)"),
 
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),

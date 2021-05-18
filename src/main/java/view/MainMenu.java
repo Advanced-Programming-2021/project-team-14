@@ -34,6 +34,8 @@ public class MainMenu extends Menu {
             new ShopMenu().run();
         }else if (destinationMenu.equals(Menus.DUEL_MENU.getLabel())) {
             new DuelMenu().run();
+        } else if (destinationMenu.equals(Menus.IMPORT_EXPORT_MENU.getLabel())) {
+            new ImportExportMenu().run();
         } else {
             Console.print(Responses.INVALID_COMMAND.getLabel());
         }

@@ -17,7 +17,10 @@ public enum CommandTags {
     SIDE("side"),
     BUY_CARD("shop buy"),
     SHOP_SHOW_ALL("shop show --all"),
-    INCREASE_MONEY("increase money");
+    INCREASE_MONEY("increase money"),
+    IMPORT("import card"),
+    EXPORT("export card");
+
     public final String label;
 
     CommandTags(String label) {
