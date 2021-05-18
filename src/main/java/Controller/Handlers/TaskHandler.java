@@ -137,12 +137,14 @@ public class TaskHandler extends GameHandler {
         Player rivalPlayer = game.getBoard().getRivalPlayer();
 
         if (toOpponent) {
-            if (game.getBoard().getMainPlayer().getLifePoint() <= damage) {
+            if (mainPlayer.getLifePoint() <= damage) {
+                mainPlayer.setLifePoint(0);
                 game.endGame(rivalPlayer, mainPlayer);
 
             }
         } else {
-            if (game.getBoard().getRivalPlayer().getLifePoint() <= damage) {
+            if (rivalPlayer.getLifePoint() <= damage) {
+                rivalPlayer.setLifePoint(0);
                 game.endGame(mainPlayer, rivalPlayer);
 
             }
