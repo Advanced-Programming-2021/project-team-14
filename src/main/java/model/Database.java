@@ -24,7 +24,7 @@ public class Database {
     private static final String monsterDirectory = "Resources\\Cards\\Monster.csv";
     private static final String resourcesDirectory = "Resources";
     private static final String usersDirectory = "Resources\\Users";
-    private static final String importedCardsDirectory = "Resources\\ImportedCards";
+    private static final String SavedCardsDirectory = "Resources\\SavedCards";
 
     private static void loadUsers() {
 
@@ -88,15 +88,15 @@ public class Database {
         //Creating a File object
         File resourcesFile = new File(resourcesDirectory);
         File usersFile = new File(usersDirectory);
-        File importedFile = new File(importedCardsDirectory);
+        File importedFile = new File(SavedCardsDirectory);
 
         //Creating the directory
         if (!resourcesFile.exists() && resourcesFile.mkdirs())
-            Logger.log("database", "Resource folder created successfully");
+            Logger.log("database", "Resource folder created successfully!");
         if (!usersFile.exists() && usersFile.mkdirs())
-            Logger.log("database", "User folder created successfully");
+            Logger.log("database", "User folder created successfully!");
         if (!importedFile.exists() && importedFile.mkdirs())
-            Logger.log("database", "ImportedCards folder created successfully");
+            Logger.log("database", "SavedCards folder created successfully!");
     }
 
     public static void saveUserInDatabase(User user) {
@@ -119,11 +119,12 @@ public class Database {
         }
     }
 
-    public static DatabaseResponses importCard(Card card) {
+    public static DatabaseResponses exportCard(String username, Card card) {
+        createUserDirectoryInSavedCardsDirectory(username);
         String jsonString = new Gson().toJson(card);
 
         //create file address
-        String cardFileAddress = importedCardsDirectory + "\\" + card.getName() + ".json";
+        String cardFileAddress = SavedCardsDirectory + "\\" + username + "\\" + card.getName() + ".json";
 
         try (FileWriter file = new FileWriter(cardFileAddress)) {
             //Write any JSONArray or JSONObject instance to the file
@@ -136,12 +137,11 @@ public class Database {
     }
 
 
-    public static DatabaseResponses exportCard(String cardName) {
+    public static DatabaseResponses importCard(String username, String cardName) {
 
         // Get all files from Users directory
-        File f = new File(importedCardsDirectory + "\\" + cardName + ".json");
+        File f = new File(SavedCardsDirectory + "\\" + username + "\\" + cardName + ".json");
         if (!f.exists()) {
-            System.out.println("------------" + DatabaseResponses.NOT_EXIST_ERROR.getLabel());
             return DatabaseResponses.NOT_EXIST_ERROR;
         } else {
             File file = f.getAbsoluteFile();
@@ -150,9 +150,9 @@ public class Database {
             try {
                 data = new String(Files.readAllBytes(Paths.get(file.toString())));
                 if (data.contains("Monster")) {
-                    Monster.addCard(new Gson().fromJson(data, Monster.class));
+                    Card.addCard(new Gson().fromJson(data, Monster.class));
                 } else {
-                    SpellTrap.addCard(new Gson().fromJson(data, SpellTrap.class));
+                    Card.addCard(new Gson().fromJson(data, SpellTrap.class));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -160,6 +160,15 @@ public class Database {
             }
             return DatabaseResponses.SUCCESSFUL;
         }
+    }
+
+    public static void createUserDirectoryInSavedCardsDirectory(String username) {
+        File userFile = new File(SavedCardsDirectory + "\\" + username);
+
+        //Creating the directory
+        if (!userFile.exists() && userFile.mkdirs())
+            Logger.log("database", "User folder created in SavedCards directory successfully!");
+
     }
 
 }
