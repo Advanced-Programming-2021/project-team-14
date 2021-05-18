@@ -1,6 +1,7 @@
 package Controller.Handlers;
 
 import Controller.Response;
+import Controller.enums.Responses;
 import model.Strings;
 import model.card.Card;
 import model.card.Monster;
@@ -46,9 +47,15 @@ public class TaskHandler extends GameHandler {
                 return flipSummon(request, game);
             case ACTIVATE_EFFECT:
                 return activateEffect(game);
-
+            case INCREASE_LIFE_POINT:
+                return increaseLifePoint(request, game);
         }
         return "> .... <";
+    }
+
+    private String increaseLifePoint(JSONObject request, Game game) {
+        game.getBoard().getMainPlayer().increaseLifePoint(request.getInt(Strings.AMOUNT.getLabel()));
+        return Responses.INCREASE_LIFE_POINT.getLabel();
     }
 
     private String activateEffect(Game game) {
@@ -155,7 +162,6 @@ public class TaskHandler extends GameHandler {
         game.getBoard().getMainPlayer().getHand().remove(selectedCard.getPositionIndex());
     }
 
-
     private String flipSummon(JSONObject request, Game game) {
         SelectedCard selectedCard = game.getSelectedCard();
 
@@ -167,7 +173,6 @@ public class TaskHandler extends GameHandler {
 
         return Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel();
     }
-
 
     private String summon(JSONObject request, Game game) {
 
@@ -196,7 +201,6 @@ public class TaskHandler extends GameHandler {
 
     }
 
-
     private void tribute(int tributeCardAddress1, int tributeCardAddress2, Game game) {
 
         Cell tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1);
@@ -209,7 +213,6 @@ public class TaskHandler extends GameHandler {
             game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
         }
     }
-
 
     private String select(JSONObject request, Game game) {
         String area = request.getString(Strings.AREA.getLabel());

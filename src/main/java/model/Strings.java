@@ -51,6 +51,7 @@ public enum Strings {
     NO_CARD_FOUND("no card found in the given position"),
     AREA("area"),
     POSITION("position"),
+    AMOUNT("amount"),
 
     OO_ATTACK_MORE("your opponent's monster is destroyed and your opponent receives %d battle damage"),
     OO_ATTACK_LESS("your monster card is destroyed and you received %d battle damage"),

@@ -28,7 +28,8 @@ public enum Responses {
     THERE_IS_NO_CARD_WITH_THIS_NAME("there is no card with this name"),
     NOT_ENOUGH_MONEY("not enough money"),
     CARD_BOUGHT_SUCCESSFULLY("card added to your wallet successfully!"),
-    INCREASE_MONEY("cash increased successfully!");
+    INCREASE_MONEY("cash increased successfully!"),
+    INCREASE_LIFE_POINT("life point increased successfully!");
 
 
     public final String label;

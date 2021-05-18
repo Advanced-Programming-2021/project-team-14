@@ -97,6 +97,12 @@ public class GamePlayMenu extends Menu {
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.INCREASE_LIFE_POINT.getLabel())) {            // attack to
+                Request.setCommandTag(CommandTags.INCREASE_LIFE_POINT);
+                Request.addDataToRequest(Regexes.INCREASE_LIFE_POINT.getLabel(), command, "increase life point");
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
             } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
 

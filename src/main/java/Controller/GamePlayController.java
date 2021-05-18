@@ -41,9 +41,16 @@ public class GamePlayController {
             Response.addMessage(deselect(request));
         } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
             Response.addMessage(activateEffect(request));
+        }else if (command.equals(CommandTags.INCREASE_LIFE_POINT.getLabel())) {
+            Response.addMessage(increaseLifePoint(request));
         }
 
         Response.addObject("game", game.getGameObject());
+    }
+
+    private static String increaseLifePoint(JSONObject request) {
+       Handler taskHandler = new TaskHandler();
+        return taskHandler.handle(request, game);
     }
 
     private static String activateEffect(JSONObject request) {

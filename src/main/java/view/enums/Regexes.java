@@ -45,7 +45,8 @@ public enum Regexes {
     SHOP_SHOW_ALL("shop show --all"),
     ATTACK_DIRECT("attack direct"),
     //cheat
-    INCREASE_MONEY("increase --money ([\\d]+)");
+    INCREASE_MONEY("increase --money ([\\d]+)"),
+    INCREASE_LIFE_POINT("increase --LP ([\\d]+)");
 
 
     public final String label;

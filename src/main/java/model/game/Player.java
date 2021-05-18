@@ -30,7 +30,8 @@ public class Player {
     private FieldZone fieldZone;
 
     private int lifePoint;
-    public void addToActiveCards(Card card){
+
+    public void addToActiveCards(Card card) {
         activatedCards.add(card);
     }
 
@@ -85,6 +86,14 @@ public class Player {
         this.lifePoint = lifePoint;
     }
 
+    public void increaseLifePoint(int lifePoint) {
+        this.lifePoint += lifePoint;
+    }
+
+    public void decreaseLifePoint(int lifePoint) {
+        this.lifePoint -= lifePoint;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -108,7 +117,8 @@ public class Player {
     public Zone getSpellZone() {
         return spellZone;
     }
-    public Card drawCard(){
+
+    public Card drawCard() {
         Card card = playingDeck.drawCard();
         hand.addCard(card);
         return card;

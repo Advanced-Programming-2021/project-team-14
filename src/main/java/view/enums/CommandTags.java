@@ -40,7 +40,8 @@ public enum CommandTags {
     START_DUEL("start duel"),
     SHOP_SHOW_ALL("shop show --all"),
     //cheat
-    INCREASE_MONEY("increase money");
+    INCREASE_MONEY("increase money"),
+    INCREASE_LIFE_POINT("increase --LP ([\\d]+)");
 
     public final String label;
 
