@@ -129,7 +129,4 @@ public class Player {
         return String.format(Strings.PLAYER_FORMAT.getLabel(), nickname, lifePoint);
     }
 
-    public void decreaseLP(int damage) {
-        this.lifePoint -= damage;
-    }
 }

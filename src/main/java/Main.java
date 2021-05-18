@@ -1,5 +1,4 @@
 import model.Database;
-import model.card.Card;
 import view.RegistrationMenu;
 
 public class Main {
@@ -11,3 +10,4 @@ public class Main {
         new RegistrationMenu().run();   //  running the registration menu
     }
 }
+

@@ -117,7 +117,7 @@ public class TaskHandler extends GameHandler {
                     return String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
                 }
                 if (damage < 0) {
-                    damage(true, damage, game);
+                    damage(false, damage, game);
                     game.getBoard().getMainPlayer().getGraveYard().addCard(selectedCell.getCard());
                     selectedCell.removeCard();
                     return String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
@@ -131,8 +131,23 @@ public class TaskHandler extends GameHandler {
         return null;
     }
 
-    private void damage(boolean toOpponent, int damage, Game game) {
-        (toOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer()).decreaseLP(damage);
+    public void damage(boolean toOpponent, int damage, Game game) {
+
+        Player mainPlayer = game.getBoard().getMainPlayer();
+        Player rivalPlayer = game.getBoard().getRivalPlayer();
+
+        if (toOpponent) {
+            if (game.getBoard().getMainPlayer().getLifePoint() <= damage) {
+                game.endGame(rivalPlayer, mainPlayer);
+
+            }
+        } else {
+            if (game.getBoard().getRivalPlayer().getLifePoint() <= damage) {
+                game.endGame(mainPlayer, rivalPlayer);
+
+            }
+        }
+        (toOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer()).decreaseLifePoint(damage);
     }
 
     private String nextPhase(Game game) {
@@ -168,7 +183,6 @@ public class TaskHandler extends GameHandler {
         selectedCard.getCard().setState(State.OFFENSIVE_OCCUPIED);
         selectedCard.setPosition(Position.MONSTER_ZONE);
 
-        game.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
 
         return Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel();

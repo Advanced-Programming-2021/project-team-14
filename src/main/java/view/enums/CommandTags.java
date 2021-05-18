@@ -2,7 +2,7 @@ package view.enums;
 
 public enum CommandTags {
 
-
+    SURRENDER("surrender"),
     SET("set"),
     SELECT("select"),
     NEXT_PHASE("next phase"),

@@ -3,15 +3,19 @@ package Controller;
 import Controller.Handlers.*;
 import model.Strings;
 import model.User;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 
 public class GamePlayController {
+    private static Duel duel;
     private static Game game;
 
     public static void startAGame(User first, User second, int rounds) {
-        game = new Game(first, second, rounds);
+
+        duel = new Duel(first, second, rounds);
+        game = duel.getGame();
     }
 
     public static void processCommand(JSONObject request) {
@@ -45,8 +49,10 @@ public class GamePlayController {
             Response.addMessage(increaseLifePoint(request));
         }
 
+//        endGame(game);
         Response.addObject("game", game.getGameObject());
     }
+
 
     private static String increaseLifePoint(JSONObject request) {
        Handler taskHandler = new TaskHandler();

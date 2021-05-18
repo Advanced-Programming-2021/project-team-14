@@ -9,10 +9,6 @@ import org.json.JSONObject;
 
 public class Game {
 
-
-    private String creatorNickname;
-
-    private int round;
     private Board board;
     private Phase phase;
     private SelectedCard selectedCard;
@@ -30,22 +26,18 @@ public class Game {
         this.selectedCard = selectedCard;
     }
 
-    public Game(User mainUser, User rivalUser, int round) {
-        this.round = round;
-        this.creatorNickname = mainUser.getNickname();
+    public Game(User mainUser, User rivalUser) {
         this.board = new Board(new Player(mainUser), new Player(rivalUser));
         this.turnLogger = new TurnLogger();
         this.phase = Phase.DRAW_PHASE;
         nextPhase();
     }
-    public JSONObject getGameObject(){
+
+    public JSONObject getGameObject() {
         JSONObject game = new JSONObject();
         game.put("board", board.toString());
         game.put("phase", phase);
         return game;
-    }
-    public int getRound() {
-        return round;
     }
 
     public Phase getPhase() {
@@ -92,12 +84,21 @@ public class Game {
 
 
     private String draw() {
-        if (!board.getMainPlayer().getHand().isFull()){
+        if (!board.getMainPlayer().getHand().isFull()) {
             Card card = board.getMainPlayer().drawCard();
             return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());
         }
         return "";
     }
+
+
+    public void endGame(Player winner, Player loser) {
+
+        Duel.setWinner(winner.getNickname());
+        Duel.setLoser(loser.getNickname());
+
+    }
+
 
     public void deselect() {
         this.selectedCard = null;

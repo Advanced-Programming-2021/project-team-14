@@ -46,7 +46,8 @@ public enum Regexes {
     ATTACK_DIRECT("attack direct"),
     //cheat
     INCREASE_MONEY("increase --money ([\\d]+)"),
-    INCREASE_LIFE_POINT("increase --LP ([\\d]+)");
+    INCREASE_LIFE_POINT("increase --LP ([\\d]+)"),
+    SURRENDER("surrender");
 
 
     public final String label;
