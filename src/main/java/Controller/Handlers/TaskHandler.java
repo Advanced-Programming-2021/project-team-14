@@ -199,10 +199,14 @@ public class TaskHandler extends GameHandler {
 
     private void tribute(int tributeCardAddress1, int tributeCardAddress2, Game game) {
 
-        game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).removeCard();
+        Cell tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1);
+        tributeCell.removeCard();
+        game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
 
         if (tributeCardAddress2 != 1000) {
-            game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).removeCard();
+            tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2);
+            tributeCell.removeCard();
+            game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
         }
     }
 
