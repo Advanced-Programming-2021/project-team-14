@@ -8,7 +8,8 @@ public enum Menus {
     SHOP_MENU("Shop Menu"),
     DUEL_MENU("Duel Menu"),
     GAMEPLAY_MENU("GamePlay Menu"),
-    SCOREBOARD_MENU("Scoreboard Menu");
+    SCOREBOARD_MENU("Scoreboard Menu"),
+    IMPORT_EXPORT_MENU("Import Export Menu");
     public final String label;
 
     Menus(String label) {

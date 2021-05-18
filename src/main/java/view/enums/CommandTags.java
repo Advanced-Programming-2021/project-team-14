@@ -39,6 +39,11 @@ public enum CommandTags {
     BUY_CARD("shop buy"),
     START_DUEL("start duel"),
     SHOP_SHOW_ALL("shop show --all"),
+
+    IMPORT("import card"),
+    EXPORT("export card"),
+
+
     //cheat
     INCREASE_MONEY("increase money"),
     INCREASE_LIFE_POINT("increase --LP ([\\d]+)");

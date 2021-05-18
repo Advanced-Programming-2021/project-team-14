@@ -1,8 +1,10 @@
 package model;
 
+import Controller.enums.DatabaseResponses;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import model.card.Card;
 import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.*;
@@ -18,11 +20,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Database {
+    private static final String spellTrapDirectory = "Resources\\Cards\\SpellTrap.csv";
+    private static final String monsterDirectory = "Resources\\Cards\\Monster.csv";
+    private static final String resourcesDirectory = "Resources";
+    private static final String usersDirectory = "Resources\\Users";
+    private static final String importedCardsDirectory = "Resources\\ImportedCards";
 
     private static void loadUsers() {
 
         // Get all files from Users directory
-        File f = new File("Resources\\Users");
+        File f = new File(usersDirectory);
         File[] matchingFiles = f.listFiles((dir, name) -> name.endsWith(".json"));
 
         if (matchingFiles == null)
@@ -38,7 +45,6 @@ public class Database {
                 e.printStackTrace();
             }
         }
-
     }
 
     public static void readDataLineByLine(String file) {
@@ -73,28 +79,31 @@ public class Database {
     public static void prepareDatabase() {
         createDirectory();
         loadUsers();
+        Database.readDataLineByLine(spellTrapDirectory);
+        Database.readDataLineByLine(monsterDirectory);
     }
-
 
     private static void createDirectory() {
 
         //Creating a File object
-        File resourcesFile = new File("Resources");
-        File usersFile = new File("Resources\\Users");
+        File resourcesFile = new File(resourcesDirectory);
+        File usersFile = new File(usersDirectory);
+        File importedFile = new File(importedCardsDirectory);
 
         //Creating the directory
         if (!resourcesFile.exists() && resourcesFile.mkdirs())
             Logger.log("database", "Resource folder created successfully");
         if (!usersFile.exists() && usersFile.mkdirs())
             Logger.log("database", "User folder created successfully");
+        if (!importedFile.exists() && importedFile.mkdirs())
+            Logger.log("database", "ImportedCards folder created successfully");
     }
 
     public static void saveUserInDatabase(User user) {
-
         String jsonString = new Gson().toJson(user);
 
         //create file address
-        String userFileAddress = "Resources\\Users\\" + user.getUsername() + ".json";
+        String userFileAddress = usersDirectory + "\\" + user.getUsername() + ".json";
 
         try (FileWriter file = new FileWriter(userFileAddress)) {
             //Write any JSONArray or JSONObject instance to the file
@@ -110,6 +119,47 @@ public class Database {
         }
     }
 
+    public static DatabaseResponses importCard(Card card) {
+        String jsonString = new Gson().toJson(card);
 
+        //create file address
+        String cardFileAddress = importedCardsDirectory + "\\" + card.getName() + ".json";
+
+        try (FileWriter file = new FileWriter(cardFileAddress)) {
+            //Write any JSONArray or JSONObject instance to the file
+            file.write(jsonString);
+            return DatabaseResponses.SUCCESSFUL;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return DatabaseResponses.SAVE_ERROR;
+        }
+    }
+
+
+    public static DatabaseResponses exportCard(String cardName) {
+
+        // Get all files from Users directory
+        File f = new File(importedCardsDirectory + "\\" + cardName + ".json");
+        if (!f.exists()) {
+            System.out.println("------------" + DatabaseResponses.NOT_EXIST_ERROR.getLabel());
+            return DatabaseResponses.NOT_EXIST_ERROR;
+        } else {
+            File file = f.getAbsoluteFile();
+
+            String data;
+            try {
+                data = new String(Files.readAllBytes(Paths.get(file.toString())));
+                if (data.contains("Monster")) {
+                    Monster.addCard(new Gson().fromJson(data, Monster.class));
+                } else {
+                    SpellTrap.addCard(new Gson().fromJson(data, SpellTrap.class));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return DatabaseResponses.BAD_FORMAT_ERROR;
+            }
+            return DatabaseResponses.SUCCESSFUL;
+        }
+    }
 
 }
