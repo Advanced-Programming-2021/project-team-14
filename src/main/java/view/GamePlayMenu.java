@@ -79,6 +79,9 @@ public class GamePlayMenu extends Menu {
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET_POSITION.getLabel())) {            // set position
                 Request.setCommandTag(CommandTags.SET_POSITION);
+                if (command.contains("--pos ") && ((command + " ").contains("att ") || (command + " ").contains("def ")))
+                Request.addShortData(command);
+                else
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());
@@ -124,7 +127,11 @@ public class GamePlayMenu extends Menu {
         if (command.matches(Regexes.SELECT_FIELD.getLabel())) {
             Request.addData("area", "field");
         } else {
-            Request.addDataToRequest(Regexes.SELECT_AREA.getLabel(), command, "area");
+            if (command.matches(Regexes.SHORT_SELECT_AREA.getLabel()))
+                Request.addShortData(command);
+            else
+                Request.addDataToRequest(Regexes.SELECT_AREA.getLabel(), command, "area");
+
             Request.addDataToRequest(Regexes.SELECT_POSITION.getLabel(), command, "position");
         }
 
@@ -140,4 +147,5 @@ public class GamePlayMenu extends Menu {
         // select --hand n
 
     }
+
 }

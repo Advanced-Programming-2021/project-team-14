@@ -19,15 +19,24 @@ public class ProfileMenu extends Menu {
                 Console.print(currentMenu);
 
             else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {       // change profile nickname
-
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
-                Request.extractData(command);
+                if (command.contains("--nn "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
                 Request.send();
                 Console.print(Request.getMessage());
 
             } else if (command.matches(Regexes.CHANGE_PROFILE_PASSWORD.getLabel())) {     // change profile password
 
                 Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
+
+                if (command.contains("--cur") && command.contains("--pw "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
                 Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());

@@ -28,7 +28,11 @@ public class RegistrationMenu extends Menu {
 
     private void login(String command) {
         Request.setCommandTag(CommandTags.LOGIN);
-        Request.extractData(command);
+        if (command.contains("--un ") && command.contains("--pw "))
+            Request.addShortData(command);
+        else
+            Request.extractData(command);
+
         Request.send();
         Console.print(Request.getMessage());
         if (Request.isSuccessful()) {
@@ -39,7 +43,10 @@ public class RegistrationMenu extends Menu {
 
     public void register(String command) {
         Request.setCommandTag(CommandTags.REGISTER);
-        Request.extractData(command);
+        if (command.contains("--un ") && command.contains("--nn ") && command.contains("--pw "))
+            Request.addShortData(command);
+        else
+            Request.extractData(command);
         Request.send();
         Console.print(Request.getMessage());
     }

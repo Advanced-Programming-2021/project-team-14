@@ -6,7 +6,7 @@ import view.enums.Menus;
 import view.enums.Regexes;
 import view.enums.Responses;
 
-public class DuelMenu extends Menu{
+public class DuelMenu extends Menu {
 
     public void run() {
 
@@ -17,15 +17,19 @@ public class DuelMenu extends Menu{
                 Console.print(Responses.IMPOSSIBLE_MENU_NAVIGATION.getLabel());
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                    // show current menu
                 Console.print(currentMenu);
-            else if (command.matches(Regexes.START_DUEL.getLabel())){
+            else if (command.matches(Regexes.START_DUEL.getLabel())) {
                 Request.setCommandTag(CommandTags.START_DUEL);
-                Request.extractData(command);
+                if (command.contains("--rou ") && command.contains("--sec-p "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
                 Request.setOption(command, Strings.NEW_OPTION.getLabel());
                 Request.send();
-                if (Request.isSuccessful()){
-                     Console.print(Request.getMessage());
-                     new GamePlayMenu().run();
-                }else
+                if (Request.isSuccessful()) {
+                    Console.print(Request.getMessage());
+                    new GamePlayMenu().run();
+                } else
                     Console.print(Request.getMessage());
             }
         }

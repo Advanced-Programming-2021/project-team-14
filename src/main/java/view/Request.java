@@ -31,9 +31,11 @@ public class Request {
     public static void setOption(String command, String option) { // extract option if available
         request.put(option, command.contains("--" + option));
     }
+
     public static String getMessage() {
         return response.getString("message");
     }
+
     public static void extractData(String command) { // extract data from the input with the "--key value" format
         Pattern pattern = Pattern.compile(Regexes.DATA.getLabel());
         Matcher matcher = pattern.matcher(command);
@@ -69,6 +71,44 @@ public class Request {
         Matcher matcher = pattern.matcher(command);
         if (matcher.find()) {
             Request.addData(key, matcher.group(1));
+        }
+    }
+
+    public static void addShortData(String command) {
+        if (command.contains("--sp "))
+            Request.addData("area", "spell");
+        if (command.contains("--mn "))
+            Request.addData("area", "monster");
+        if (command.contains("--hd "))
+            Request.addData("area", "hand");
+        if (command.contains("--pos ") && command.contains("att"))
+            Request.addData("position", "attack");
+        if (command.contains("--pos ") && command.contains("def"))
+            Request.addData("position", "defense");
+
+        if (command.contains("--un "))
+            extractShortData("--un", command, "username");
+        if (command.contains("--nn "))
+            extractShortData("--nn", command, "nickname");
+        if (command.contains("--pw "))
+            extractShortData("--pw", command, "password");
+        if (command.contains("--cur "))
+            extractShortData("--cur", command, "current");
+        if (command.contains("--new "))
+            extractShortData("--new", command, "new");
+        if (command.contains("--dn "))
+            extractShortData("--dn", command, "deck-name");
+        if (command.contains("--sec-p "))
+            extractShortData("--sec-p", command, "second-player");
+        if (command.contains("--rou "))
+            extractShortData("--rou", command, "rounds");
+    }
+
+    private static void extractShortData(String regex, String command, String key) {
+        Pattern pattern = Pattern.compile(Regexes.EXTRACT_SHORT_DATA.getLabel().replace("--", regex));
+        Matcher matcher = pattern.matcher(command);
+        if (matcher.find()) {
+            Request.addData(key, matcher.group(1).trim());
         }
     }
 }

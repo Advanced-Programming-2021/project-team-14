@@ -62,9 +62,13 @@ public class DeckMenu extends Menu {
                 Console.print(Request.getMessage());
 
             } else if (command.matches(Regexes.SHOW_DECK.getLabel())) {      // show deck ...
-
                 Request.setCommandTag(CommandTags.SHOW_DECK);
-                Request.extractData(command);
+
+                if (command.contains("--dn "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
                 Request.setOption(command, Strings.SIDE_OPTION.getLabel());
                 Request.send();
                 Console.print(Request.getMessage());

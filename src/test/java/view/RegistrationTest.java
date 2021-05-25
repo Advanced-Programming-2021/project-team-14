@@ -26,7 +26,7 @@ public class RegistrationTest {
     public void createUserSuccessfully() {
         JSONObject response = sendRequest(Menus.REGISTER_MENU.getLabel(), CommandTags.REGISTER,
                 "username", "1234", "nickname");
-        Assertions.assertEquals( Responses.REGISTER_SUCCESSFUL.getLabel(), response.getString("message"));
+        Assertions.assertEquals(Responses.REGISTER_SUCCESSFUL.getLabel(), response.getString("message"));
     }
 
     @BeforeEach
