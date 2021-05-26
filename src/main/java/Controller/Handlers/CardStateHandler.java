@@ -4,12 +4,14 @@ import model.Strings;
 import model.card.SelectedCard;
 import model.card.enums.Position;
 import model.card.enums.State;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 
-public class CardStateHandler extends GameHandler{
-    public String handle(JSONObject request, Game game){
+public class CardStateHandler extends GameHandler {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         SelectedCard selectedCard = game.getSelectedCard();
         String command = request.getString(Strings.COMMAND.getLabel());
         if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
@@ -29,6 +31,6 @@ public class CardStateHandler extends GameHandler{
                 return Strings.ALREADY_POSITIONED.getLabel();
         }
 
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 }

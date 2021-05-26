@@ -3,13 +3,15 @@ package Controller.Handlers;
 import Controller.Response;
 import model.Strings;
 import model.card.Monster;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
 
 public class MonsterTributeHandler extends GameHandler {
 
-    public String handle(JSONObject request, Game game) {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         Logger.log("monster tribute handler", "checking ...");
 
         String command = request.getString("command");
@@ -30,7 +32,7 @@ public class MonsterTributeHandler extends GameHandler {
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, game);
                 if (response == null) {
 
-                    return super.handle(request, game);
+                    return super.handle(request, duel);
                 } else {
                     Response.error();
                     return response;
@@ -57,7 +59,7 @@ public class MonsterTributeHandler extends GameHandler {
                         Integer.parseInt(request.getString("tributeCardAddress2")), game);
                 if (response == null) {
 
-                    return super.handle(request, game);
+                    return super.handle(request, duel);
                 } else {
                     Response.error();
                     return response;
@@ -71,7 +73,7 @@ public class MonsterTributeHandler extends GameHandler {
             return response;
         }
 
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 
 

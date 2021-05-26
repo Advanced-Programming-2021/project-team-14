@@ -25,7 +25,7 @@ public class ProfileController {
             if (!currentPassword.equals(newPassword)) {
 
                 Response.success();
-                User user = User.getUserByName(username);
+                User user = User.getUserByUsername(username);
                 user.changePassword(newPassword);
                 user.updateDatabase();
                 return Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel();
@@ -44,7 +44,7 @@ public class ProfileController {
 
         if (!doesNicknameExists(newNickname)) {
             Response.success();
-            User user = User.getUserByName(username);
+            User user = User.getUserByUsername(username);
             user.changeNickname(newNickname);
             user.updateDatabase();
             return Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel();

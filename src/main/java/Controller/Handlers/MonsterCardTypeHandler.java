@@ -3,6 +3,7 @@ package Controller.Handlers;
 import model.Strings;
 import model.card.Monster;
 import model.card.enums.Property;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
@@ -10,7 +11,8 @@ import view.Logger;
 public class MonsterCardTypeHandler extends GameHandler {
 
 
-    public String handle(JSONObject request, Game game) {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         Logger.log("monster card type handler", "checking ...");
 
         String command = request.getString("command");
@@ -24,6 +26,6 @@ public class MonsterCardTypeHandler extends GameHandler {
             }
         }
 
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 }

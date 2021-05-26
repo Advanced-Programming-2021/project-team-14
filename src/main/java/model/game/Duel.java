@@ -2,44 +2,152 @@ package model.game;
 
 import model.User;
 
+import java.util.ArrayList;
+
 public class Duel {
 
-    private static String winner;
-    private static String loser;
+    private static ArrayList<Game> games;
+
+    static {
+        games = new ArrayList<>();
+    }
+
+    private String winner;
+    private String loser;
+    private int winnerLifePoint;
+    private int loserLifePoint;
     private String creatorNickname;
-    private int round;
+    private Player firstPlayer;
     private Game game;
+    private Player secondPlayer;
+    private int numberOfRounds;
 
 
     public Duel(User mainUser, User rivalUser, int round) {
 
-        this.round = round;
-        this.game = new Game(mainUser, rivalUser);
+        this.firstPlayer = new Player(mainUser);
+        this.secondPlayer = new Player(rivalUser);
+        setNumberOfRounds(round);
+        setGame(new Game(firstPlayer, secondPlayer));
     }
 
-    public static String getWinner() {
+    public static void addGame(Game game) {
+        games.add(game);
+    }
+
+    public boolean endDuelChecker() {
+
+        if (this.numberOfRounds == 1) {
+            if (games.size() == 1) {
+                rewardPlayers();
+                return true;
+            }
+        } else {
+
+            if (firstPlayer.getWinningRounds() == 2 || secondPlayer.getWinningRounds() == 2) {
+                rewardPlayers();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void rewardPlayers() {
+        findLoserAndWinner();
+        User winnerUser = User.getUserByNickname(winner);
+        User loserUser = User.getUserByNickname(loser);
+        assert winnerUser != null;
+        assert loserUser != null;
+
+        if (this.numberOfRounds == 1) {
+
+            winnerUser.increaseScore(1000);
+            winnerUser.getWallet().increaseCash(1000 + winnerLifePoint);
+            loserUser.getWallet().increaseCash(100);
+
+        } else {
+
+            winnerUser.increaseScore(3000);
+            winnerUser.getWallet().increaseCash(3000 + 3 * findMaxLifePoint());
+            loserUser.getWallet().increaseCash(300);
+
+        }
+    }
+
+    private int findMaxLifePoint() {
+        int maxLifePoint = 0;
+
+        for (Game game : games) {
+            if (game.getWinnerLifePoint() > maxLifePoint) {
+                maxLifePoint = game.getWinnerLifePoint();
+            }
+        }
+        return maxLifePoint;
+    }
+
+    private void findLoserAndWinner() {
+
+        if (this.numberOfRounds == 1) {
+
+            this.loser = game.getLoser();
+            this.winner = game.getWinner();
+
+        } else {
+
+            if (firstPlayer.getWinningRounds() == 2) {
+                this.winner = firstPlayer.getNickname();
+                this.loser = secondPlayer.getNickname();
+            } else {
+
+                this.winner = secondPlayer.getNickname();
+                this.loser = firstPlayer.getNickname();
+            }
+        }
+    }
+
+    public String getWinner() {
         return winner;
     }
 
-    public static void setWinner(String winner) {
-        winner = winner;
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 
-    public static String getLoser() {
+    public String getLoser() {
         return loser;
     }
 
-    public static void setLoser(String loser) {
-        loser = loser;
+    public void setLoser(String loser) {
+        this.loser = loser;
+    }
 
+    public int getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
+    }
+
+    public String getCreatorNickname() {
+        return creatorNickname;
+    }
+
+    public void setCreatorNickname(String creatorNickname) {
+        this.creatorNickname = creatorNickname;
     }
 
     public Game getGame() {
-        return game;
+        return this.game;
     }
 
-    public int getRound() {
-        return round;
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public String endDuel() {
+
+        return String.format("user %s won Duel and user %s lost!", winner, loser);
     }
 
 }

@@ -2,6 +2,7 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.enums.CardType;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
@@ -10,7 +11,8 @@ import view.enums.CommandTags;
 public class TurnLogHandler extends GameHandler {
 
 
-    public String handle(JSONObject request, Game game) {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
 
         Logger.log("turn log handler", "checking ...");
         String command = request.getString(Strings.COMMAND.getLabel());
@@ -36,6 +38,6 @@ public class TurnLogHandler extends GameHandler {
             if (game.getTurnLogger().hasAdded(game.getSelectedCard().getCard()))
                 return Strings.ALREADY_ACTIVATED.getLabel();
         }
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 }

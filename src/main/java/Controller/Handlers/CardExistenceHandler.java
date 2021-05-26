@@ -1,6 +1,7 @@
 package Controller.Handlers;
 
 import model.Strings;
+import model.game.Duel;
 import model.game.Game;
 import model.game.Player;
 import model.game.Zone;
@@ -9,15 +10,15 @@ import view.Logger;
 import view.enums.CommandTags;
 
 public class CardExistenceHandler extends GameHandler {
-    public String handle(JSONObject request, Game game) {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         Logger.log("card existence handler", "checking ...");
         String command = request.getString(Strings.COMMAND.getLabel());
 
-        if (command.equals(CommandTags.ATTACK.getLabel())){
+        if (command.equals(CommandTags.ATTACK.getLabel())) {
             if (game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel())).isEmpty())
                 return Strings.NO_CARD_TO_ATTACK.getLabel();
-        }
-        else{
+        } else {
             String area = request.getString(Strings.AREA.getLabel());
             boolean isOpponent = request.getBoolean(Strings.OPPONENT_OPTION.getLabel());
             Player player = isOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer();
@@ -40,7 +41,7 @@ public class CardExistenceHandler extends GameHandler {
 
         }
 
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 
 }

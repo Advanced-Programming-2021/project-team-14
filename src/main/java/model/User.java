@@ -97,6 +97,10 @@ public class User {
         return this.score;
     }
 
+    public static User getUserByUsername(String username) {
+        return users.get(username);
+    }
+
     public Wallet getWallet() {
         return wallet;
     }
@@ -114,8 +118,18 @@ public class User {
         return String.format("%-3d | %-20s : %d", rank, nickname, score);
     }
 
-    public static User getUserByName(String username) {
-        return users.get(username);
+    public static User getUserByNickname(String nickname) {
+
+        for (User user : users.values()) {
+            if (user.getNickname().equals(nickname)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public void increaseScore(int amount) {
+        this.score += amount;
     }
 
     public void changePassword(String newPassword) {

@@ -19,7 +19,7 @@ public class DeckController {
     public static void processCommand(JSONObject request) {
 
         String commandTag = request.getString("command");
-        User user = User.getUserByName(request.getString(Strings.TOKEN.getLabel()));
+        User user = User.getUserByUsername(request.getString(Strings.TOKEN.getLabel()));
 
         if (commandTag.equals(CommandTags.CREATE_DECK.getLabel()))
             Response.addMessage(createDeck(request.getString(Strings.DECK.getLabel()), user));

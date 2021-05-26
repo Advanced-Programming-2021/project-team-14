@@ -106,7 +106,7 @@ public class GamePlayMenu extends Menu {
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
-            } else if (command.matches(Regexes.SURRENDER.getLabel())) {            // summon cards
+            } else if (command.matches(Regexes.SURRENDER.getLabel())) {            // surrender
 
                 Request.setCommandTag(CommandTags.SURRENDER);
                 Request.send();

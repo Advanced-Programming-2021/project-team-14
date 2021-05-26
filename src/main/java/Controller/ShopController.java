@@ -27,7 +27,7 @@ public class ShopController {
     }
 
     private static String increaseMoney(String amount, String username) {       //cheat increase money
-        User.getUserByName(username).getWallet().increaseCash(Integer.parseInt(amount));
+        User.getUserByUsername(username).getWallet().increaseCash(Integer.parseInt(amount));
         Response.success();
         return Responses.INCREASE_MONEY.getLabel();
     }
@@ -49,7 +49,7 @@ public class ShopController {
             return Responses.THERE_IS_NO_CARD_WITH_THIS_NAME.getLabel();   // card does not exist
         }
 
-        User user = User.getUserByName(username);
+        User user = User.getUserByUsername(username);
         int price = Card.getCardByName(cardName).getPrice();
         Wallet userWallet = user.getWallet();
         if (!userWallet.isCashEnough(price)) {

@@ -2,13 +2,15 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.enums.Position;
+import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
 import view.Logger;
 import view.enums.CommandTags;
 
-public class CardPositionHandler extends GameHandler{
-    public String handle(JSONObject request, Game game){
+public class CardPositionHandler extends GameHandler {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         Logger.log("card position handler", "checking ...");
 
         String command = request.getString("command");
@@ -32,6 +34,6 @@ public class CardPositionHandler extends GameHandler{
 
         if (!game.getSelectedCard().getPosition().equals(expectedPosition))
             return response;
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 }

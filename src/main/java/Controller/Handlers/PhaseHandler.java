@@ -1,7 +1,7 @@
 package Controller.Handlers;
 
 import model.Strings;
-import model.card.enums.CardType;
+import model.game.Duel;
 import model.game.Game;
 import model.game.Phase;
 import org.json.JSONObject;
@@ -11,7 +11,8 @@ import view.enums.CommandTags;
 import java.util.Objects;
 
 public class PhaseHandler extends GameHandler {
-    public String handle(JSONObject request, Game game) {
+    public String handle(JSONObject request, Duel duel) {
+        Game game = duel.getGame();
         Logger.log("phase handler", "checking ...");
 
         Phase expectedPhase = Phase.MAIN_PHASE;
@@ -36,6 +37,6 @@ public class PhaseHandler extends GameHandler {
 
         if (!game.getPhase().toString().contains(expectedPhase.toString()))
             return response;
-        return super.handle(request, game);
+        return super.handle(request, duel);
     }
 }

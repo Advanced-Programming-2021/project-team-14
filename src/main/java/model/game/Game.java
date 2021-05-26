@@ -1,7 +1,6 @@
 package model.game;
 
 import model.Strings;
-import model.User;
 import model.card.Card;
 import model.card.SelectedCard;
 import org.json.JSONObject;
@@ -13,6 +12,11 @@ public class Game {
     private Phase phase;
     private SelectedCard selectedCard;
     private TurnLogger turnLogger;
+    private String winner;
+    private String loser;
+    private int winnerLifePoint;
+    private int loserLifePoint;
+    private boolean isEnded;
 
     public TurnLogger getTurnLogger() {
         return turnLogger;
@@ -26,10 +30,12 @@ public class Game {
         this.selectedCard = selectedCard;
     }
 
-    public Game(User mainUser, User rivalUser) {
-        this.board = new Board(new Player(mainUser), new Player(rivalUser));
+    public Game(Player mainUser, Player rivalUser) {
+
+        this.board = new Board(mainUser, rivalUser);
         this.turnLogger = new TurnLogger();
         this.phase = Phase.DRAW_PHASE;
+        this.isEnded = false;
         nextPhase();
     }
 
@@ -94,11 +100,46 @@ public class Game {
 
     public void endGame(Player winner, Player loser) {
 
-        Duel.setWinner(winner.getNickname());
-        Duel.setLoser(loser.getNickname());
-
+        setWinner(winner.getNickname());
+        setLoser(loser.getNickname());
+        setLoserLifePoint(loser.getLifePoint());
+        setWinnerLifePoint(winner.getLifePoint());
+        winner.increaseWinningRounds(1);
+        this.isEnded = true;
+        Duel.addGame(this);
     }
 
+    public String getLoser() {
+        return loser;
+    }
+
+    public void setLoser(String loser) {
+        this.loser = loser;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public int getLoserLifePoint() {
+        return loserLifePoint;
+    }
+
+    public void setLoserLifePoint(int loserLifePoint) {
+        this.loserLifePoint = loserLifePoint;
+    }
+
+    public int getWinnerLifePoint() {
+        return winnerLifePoint;
+    }
+
+    public void setWinnerLifePoint(int winnerLifePoint) {
+        this.winnerLifePoint = winnerLifePoint;
+    }
 
     public void deselect() {
         this.selectedCard = null;

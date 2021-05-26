@@ -29,6 +29,8 @@ public class Player {
 
     private FieldZone fieldZone;
 
+    private int winningRounds;
+
     private int lifePoint;
 
     public void addToActiveCards(Card card) {
@@ -36,6 +38,7 @@ public class Player {
     }
 
     public Player(User user) {
+        this.winningRounds = 0;
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         playingDeck = new PlayingDeck(user.getDeck(user.getActiveDeck()));
@@ -90,8 +93,16 @@ public class Player {
         this.lifePoint += lifePoint;
     }
 
+    public void increaseWinningRounds(int amount) {
+        this.winningRounds += amount;
+    }
+
     public void decreaseLifePoint(int lifePoint) {
         this.lifePoint -= lifePoint;
+    }
+
+    public int getWinningRounds() {
+        return winningRounds;
     }
 
     public String getNickname() {
