@@ -131,7 +131,9 @@ public class Player {
 
     public Card drawCard() {
         Card card = playingDeck.drawCard();
-        hand.addCard(card);
+        if (card != null) {
+            hand.addCard(card);
+        }
         return card;
     }
 

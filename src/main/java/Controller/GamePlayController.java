@@ -4,20 +4,16 @@ import Controller.Handlers.*;
 import model.Strings;
 import model.User;
 import model.game.Duel;
-import model.game.Game;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 
 public class GamePlayController {
 
-    private static Game game;
     private static Duel duel;
 
     public static void startAGame(User first, User second, int rounds) {
 
-
         duel = new Duel(first, second, rounds);
-        game = duel.getGame();
     }
 
     public static void processCommand(JSONObject request) {

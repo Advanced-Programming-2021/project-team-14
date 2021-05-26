@@ -28,11 +28,15 @@ public class Duel {
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(rivalUser);
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer));
+        setGame(new Game(firstPlayer, secondPlayer, this));
     }
 
     public static void addGame(Game game) {
         games.add(game);
+    }
+
+    public void startNewRound() {
+        setGame(new Game(firstPlayer, secondPlayer, this));
     }
 
     public boolean endDuelChecker() {
@@ -145,9 +149,9 @@ public class Duel {
         this.game = game;
     }
 
-    public String endDuel() {
+    public String endDuel(String response) {
 
-        return String.format("user %s won Duel and user %s lost!", winner, loser);
+        return String.format("%s\nuser %s won Duel and user %s lost!", response, winner, loser);
     }
 
 }

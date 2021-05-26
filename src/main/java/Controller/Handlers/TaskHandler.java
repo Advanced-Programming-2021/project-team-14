@@ -79,7 +79,8 @@ public class TaskHandler extends GameHandler {
         game.getTurnLogger().cardAttack(card);
         damage(true, damage, duel);
         game.deselect();
-        if (duel.endDuelChecker()) return duel.endDuel();
+        String firstResponse = String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
+        if (duel.endDuelChecker()) return duel.endDuel(firstResponse);
         return String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
     }
 
@@ -106,7 +107,8 @@ public class TaskHandler extends GameHandler {
                 if (damage > 0) {
                     damage(false, damage, duel);
                     game.getTurnLogger().cardAttack(selectedCell.getCard());
-                    if (duel.endDuelChecker()) return duel.endDuel();
+                    String firstResponse = opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
+                    if (duel.endDuelChecker()) return duel.endDuel(firstResponse);
                     return opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
                 }
                 if (damage < 0) {
@@ -122,14 +124,16 @@ public class TaskHandler extends GameHandler {
                     damage(true, damage, duel);
                     game.getBoard().getRivalPlayer().getGraveYard().addCard(rivalCard.getCard());
                     rivalCard.removeCard();
-                    if (duel.endDuelChecker()) return duel.endDuel();
+                    String firstResponse = String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
+                    if (duel.endDuelChecker()) return duel.endDuel(firstResponse);
                     return String.format(Strings.OO_ATTACK_MORE.getLabel(), damage);
                 }
                 if (damage < 0) {
                     damage(false, damage, duel);
                     game.getBoard().getMainPlayer().getGraveYard().addCard(selectedCell.getCard());
                     selectedCell.removeCard();
-                    if (duel.endDuelChecker()) return duel.endDuel();
+                    String firstResponse = String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
+                    if (duel.endDuelChecker()) return duel.endDuel(firstResponse);
                     return String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
                 }
                 selectedCell.removeCard();
@@ -152,6 +156,7 @@ public class TaskHandler extends GameHandler {
             (toOpponent ? rivalPlayer : mainPlayer).setLifePoint(0);
             isEnded = true;
             game.endGame((toOpponent ? mainPlayer : rivalPlayer), (toOpponent ? rivalPlayer : mainPlayer));
+            duel.startNewRound();
         }
 
         if (!isEnded) {

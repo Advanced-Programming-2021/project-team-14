@@ -11,6 +11,8 @@ public class MainMenu extends Menu {
 
             setCurrentMenu(Menus.MAIN_MENU);
 
+            if (command.matches(Regexes.MENU_ENTER.getLabel()))            // menu enter
+                changeMenu(command.substring(11));
             if (command.matches(Regexes.MENU_CURRENT.getLabel()))     // show current menu
                 Console.print(currentMenu);
             else if (command.matches(Regexes.LOGOUT.getLabel()))

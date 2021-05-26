@@ -14,6 +14,7 @@ public class Game {
     private TurnLogger turnLogger;
     private String winner;
     private String loser;
+    private Duel duel;
     private int winnerLifePoint;
     private int loserLifePoint;
     private boolean isEnded;
@@ -30,8 +31,9 @@ public class Game {
         this.selectedCard = selectedCard;
     }
 
-    public Game(Player mainUser, Player rivalUser) {
+    public Game(Player mainUser, Player rivalUser, Duel duel) {
 
+        this.duel = duel;
         this.board = new Board(mainUser, rivalUser);
         this.turnLogger = new TurnLogger();
         this.phase = Phase.DRAW_PHASE;
@@ -92,7 +94,12 @@ public class Game {
     private String draw() {
         if (!board.getMainPlayer().getHand().isFull()) {
             Card card = board.getMainPlayer().drawCard();
-            return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());
+            if (card != null) {
+                return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());
+            }
+            endGame(board.getRivalPlayer(), board.getMainPlayer());
+            duel.startNewRound();
+            if (duel.endDuelChecker()) return duel.endDuel("");
         }
         return "";
     }

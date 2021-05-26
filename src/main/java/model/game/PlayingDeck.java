@@ -36,9 +36,12 @@ public class PlayingDeck {
     }
 
     public Card drawCard() {
-        Card card = cards.get(0);
-        cards.remove(0);
-        return card;          // draw first card from deck
+        if (cards.size() != 0) {
+            Card card = cards.get(0);
+            cards.remove(0);
+            return card;          // draw first card from deck
+        }
+        return null;              // no card to draw
     }
 
     public int getRemainingCardsSize() {
