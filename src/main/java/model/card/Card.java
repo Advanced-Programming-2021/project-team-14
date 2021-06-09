@@ -2,6 +2,7 @@ package model.card;
 
 import model.Strings;
 import model.card.enums.CardType;
+import model.card.enums.Position;
 import model.card.enums.Property;
 import model.card.enums.State;
 import model.game.Hand;
@@ -23,6 +24,24 @@ public abstract class Card {
     protected int price;
     protected State state;
     protected Property property;
+    protected int positionIndex;
+    protected Position position;
+
+    public int getPositionIndex() {
+        return positionIndex;
+    }
+
+    public void setPositionIndex(int positionIndex) {
+        this.positionIndex = positionIndex;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
     public abstract String show();
 
@@ -39,6 +58,8 @@ public abstract class Card {
         this.description = description;
         this.price = price;
         this.cardType = cardType;
+        this.position = Position.DECK;
+        this.positionIndex = -1;
     }
 
     public Card(Card card) {
@@ -47,17 +68,14 @@ public abstract class Card {
         this.cardType = card.getCardType();
         this.price = card.getPrice();
         this.effects = card.getEffects();
+        this.position = Position.DECK;
+        this.positionIndex = -1;
     }
 
     public static ArrayList<Card> getCards() {
         return new ArrayList<>(cards.values());
     }
 
-//    public static String getCard(int index) {
-//        Object[] values = cards.values().toArray();
-//        Card randomValue = (Card) values[index];
-//        return randomValue.getName();
-//    }
 
     public static void addCard(Card card) {
         cards.put(card.getName(), card);

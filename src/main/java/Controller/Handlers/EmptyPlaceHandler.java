@@ -23,7 +23,7 @@ public class EmptyPlaceHandler extends GameHandler {
         String command = request.getString("command");
         switch (Objects.requireNonNull(CommandTags.fromValue(command))) {
             case ACTIVATE_EFFECT:
-                if (game.getBoard().getMainPlayer().getSpellZone().isFull() && selectedCard.getPosition() == Position.HAND)
+                if (game.getBoard().getMainPlayer().getSpellZone().isFull() && selectedCard.getCard().getPosition() == Position.HAND)
                     return Strings.SPELL_ZONE_FULL.getLabel();
             case SUMMON:
                 if (game.getBoard().getMainPlayer().getMonsterZone().isFull())

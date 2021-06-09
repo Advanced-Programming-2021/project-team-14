@@ -1,6 +1,7 @@
 package model.game;
 
 import model.card.Card;
+import model.card.enums.Position;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public class Hand {
     }
 
     public void addCard(Card card) {
+        card.setPosition(Position.HAND);
+        card.setPositionIndex(cards.size());
         cards.add(card);
     }
 

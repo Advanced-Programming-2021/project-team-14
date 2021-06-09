@@ -23,7 +23,7 @@ public class CardStateHandler extends GameHandler {
                 return Strings.CANNOT_FLIP_SUMMON_THIS_CARD.getLabel();
             }
         } else {
-            if (selectedCard.getPosition() != Position.MONSTER_ZONE)
+            if (selectedCard.getCard().getPosition() != Position.MONSTER_ZONE)
                 return Strings.CANNOT_CHANGE_POSITION.getLabel();
             boolean isToAttack = request.getString("position").equals("attack");
             if (isToAttack && selectedCard.getCard().getState() != State.DEFENSIVE_OCCUPIED ||

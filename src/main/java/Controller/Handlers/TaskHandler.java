@@ -24,16 +24,16 @@ public class TaskHandler extends GameHandler {
     public String handle(JSONObject request, Duel duel) {
         Logger.log("task handler", "doing ...");
         switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))) {
-            case SET:
-                return set(request, duel);
             case SELECT:
                 return select(request, duel);
+            case SHOW_SELECTED_CARD:
+                return showSelectedCard(duel);
+            case SET:
+                return set(request, duel);
             case NEXT_PHASE:
                 return nextPhase(duel);
             case SET_POSITION:
                 return setPosition(request, duel);
-            case SHOW_SELECTED_CARD:
-                return showSelectedCard(duel);
             case SHOW_GRAVEYARD:
                 return showGraveyard(duel);
             case DESELECT:
@@ -65,8 +65,8 @@ public class TaskHandler extends GameHandler {
         SelectedCard selectedCard = game.getSelectedCard();
 
         selectedCard.getCard().setState(State.OCCUPIED);
-        selectedCard.setPosition(Position.SPELL_ZONE);
-        game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
+        selectedCard.getCard().setPosition(Position.SPELL_ZONE);
+        game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard.getCard());
         game.getBoard().getMainPlayer().addToActiveCards(selectedCard.getCard());
         game.deselect();
         return Strings.ACTIVATE_SUCCESSFULLY.getLabel();
@@ -94,7 +94,7 @@ public class TaskHandler extends GameHandler {
         Game game = duel.getGame();
 
         Cell rivalCard = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
-        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getPositionIndex());
+        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getCard().getPositionIndex());
         game.getTurnLogger().cardAttack(selectedCell.getCard());
         int damage;
         String opponentCardName = "";
@@ -175,12 +175,12 @@ public class TaskHandler extends GameHandler {
         SelectedCard selectedCard = game.getSelectedCard();
         if (selectedCard.getCard().getCardType() == CardType.MONSTER) {
             selectedCard.getCard().setState(State.DEFENSIVE_HIDDEN);
-            selectedCard.setPosition(Position.MONSTER_ZONE);
-            game.getBoard().getMainPlayer().getMonsterZone().placeCard(selectedCard);
+            selectedCard.getCard().setPosition(Position.MONSTER_ZONE);
+            game.getBoard().getMainPlayer().getMonsterZone().placeCard(selectedCard.getCard());
         } else {
             selectedCard.getCard().setState(State.HIDDEN);
-            selectedCard.setPosition(Position.SPELL_ZONE);
-            game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard);
+            selectedCard.getCard().setPosition(Position.SPELL_ZONE);
+            game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard.getCard());
         }
 
         removeFromHand(selectedCard, duel);
@@ -192,7 +192,7 @@ public class TaskHandler extends GameHandler {
 
     private void removeFromHand(SelectedCard selectedCard, Duel duel) {
         Game game = duel.getGame();
-        game.getBoard().getMainPlayer().getHand().remove(selectedCard.getPositionIndex());
+        game.getBoard().getMainPlayer().getHand().remove(selectedCard.getCard().getPositionIndex());
     }
 
     private String flipSummon(JSONObject request, Duel duel) {
@@ -200,7 +200,7 @@ public class TaskHandler extends GameHandler {
         SelectedCard selectedCard = game.getSelectedCard();
 
         selectedCard.getCard().setState(State.OFFENSIVE_OCCUPIED);
-        selectedCard.setPosition(Position.MONSTER_ZONE);
+        selectedCard.getCard().setPosition(Position.MONSTER_ZONE);
 
         game.deselect();
 
@@ -226,8 +226,8 @@ public class TaskHandler extends GameHandler {
 
         removeFromHand(game.getSelectedCard(), duel);
         game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
-        game.getSelectedCard().setPosition(Position.MONSTER_ZONE);
-        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard());
+        game.getSelectedCard().getCard().setPosition(Position.MONSTER_ZONE);
+        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard().getCard());
         game.getTurnLogger().cardAdded(game.getSelectedCard().getCard());
         game.deselect();
         Response.add("needTribute", "false");
@@ -254,7 +254,7 @@ public class TaskHandler extends GameHandler {
         String area = request.getString(Strings.AREA.getLabel());
         boolean isOpponent = request.getBoolean(Strings.OPPONENT_OPTION.getLabel());
         Player player = isOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer();
-        int position = 1;
+        int position;
         Card card = null;
         switch (area) {
             case "monster":
@@ -274,7 +274,7 @@ public class TaskHandler extends GameHandler {
                 break;
         }
 
-        game.setSelectedCard(new SelectedCard(card, Position.fromValue(area), position, isOpponent));
+        game.setSelectedCard(new SelectedCard(card , isOpponent));
         return Strings.CARD_SELECTED.getLabel();
     }
 

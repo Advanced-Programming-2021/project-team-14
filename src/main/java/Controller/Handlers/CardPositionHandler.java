@@ -32,7 +32,7 @@ public class CardPositionHandler extends GameHandler {
         }
 
 
-        if (!game.getSelectedCard().getPosition().equals(expectedPosition))
+        if (!game.getSelectedCard().getCard().getPosition().equals(expectedPosition))
             return response;
         return super.handle(request, duel);
     }
