@@ -5,6 +5,7 @@ import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,10 @@ public class Zone {
 //        placeCard(new SelectedCard(Card.getCardByName("Axe Raider"), Position.MONSTER_ZONE, 1, false));
 //        placeCard(new SelectedCard(Card.getCardByName("Dark magician"), Position.MONSTER_ZONE, 1, false));
 //        placeCard(new SelectedCard(Card.getCardByName("Flame manipulator"), Position.MONSTER_ZONE, 1, false));
+    }
+
+    public ArrayList<Cell> getCells() {
+        return new ArrayList<>(cells.values());
     }
 
     public Cell getCell(int position) {

@@ -7,11 +7,18 @@ import java.util.HashMap;
 
 public class Monster extends Card {
     private int level;
-    private int attack, defence;
+    private int attack, defence, attackBooster, defenseBooster;
     private Attribute attribute;
     private MonsterType monsterType;
-
+    private ArrayList<Card> affectedCards;
     private static ArrayList<Monster> monsters;
+
+    public void changeAttackBooster(int amount){
+        attackBooster += amount;
+    }
+    public void changeDefenseBooster(int amount){
+        defenseBooster+= amount;
+    }
 
     static {
         monsters = new ArrayList<>();
@@ -26,9 +33,25 @@ public class Monster extends Card {
         this.property = monsterCardType;
         this.monsterType = monsterType;
         this.effects = effects;
+        affectedCards = new ArrayList<>();
         addCard(this);
         monsters.add(this);
     }
+    public void addAffectedCard(Card card){
+        affectedCards.add(card);
+    }
+    public boolean isAffectedBy(Card card){
+        return affectedCards.contains(card);
+    }
+
+    public ArrayList<Card> getAffectedCards() {
+        return affectedCards;
+    }
+
+    public void destroy(){
+        affectedCards.clear();
+    }
+
 
     @Override
     public String show() {
@@ -50,7 +73,7 @@ public class Monster extends Card {
     }
 
     public int getAttack() {
-        return attack;
+        return attack + attackBooster;
     }
 
     public int getLevel() {
@@ -62,7 +85,7 @@ public class Monster extends Card {
     }
 
     public int getDefence() {
-        return defence;
+        return defence + defenseBooster;
     }
 
 

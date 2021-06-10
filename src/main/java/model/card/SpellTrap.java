@@ -11,6 +11,12 @@ public class SpellTrap extends Card {
 
     private Status status;
     private static ArrayList<SpellTrap> spellTraps;
+    private boolean isActivated;
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
 
     static {
         spellTraps = new ArrayList<>();

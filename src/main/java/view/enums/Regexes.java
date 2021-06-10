@@ -29,7 +29,7 @@ public enum Regexes {
     EXPORT("export card ([\\w\\s-]+)"),
 
     MENU_EXIT("menu exit"),
-    MENU_CURRENT("show current menu"),
+    MENU_CURRENT("menu show-current"),
     MENU_ENTER("menu enter (.*)"),
     CREATE_USER("(?:^user create (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+)))(?=.*(--(nickname) (\\w+))).*$)|"+
             "(?:^user create (?=.*(--(un) (\\w+)))(?=.*(--(pw) (\\w+)))(?=.*(--(nn) (\\w+))).*$)"),
@@ -48,8 +48,8 @@ public enum Regexes {
     SHOW_CARDS("deck show --cards"),
     OPTION("--(\\w+)\\b(\\s+--([\\w\\-]+)|$)"),
     DATA("--([\\w-]+) ([\\w ]+)"),
-    LOGOUT("logout"),
-    SHOW_SCOREBOARD("show scoreboard"),
+    LOGOUT("user logout"),
+    SHOW_SCOREBOARD("scoreboard show"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
     START_DUEL("(?:^duel (?=.*(--(second-player) ([\\w\\-]+)))(?=.*(--(rounds) (\\d+))).*$)|" +
             "(?:^duel (?=.*(--(sec-p) ([\\w\\-]+)))(?=.*(--(rou) (\\d+))).*$)"),

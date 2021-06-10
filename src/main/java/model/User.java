@@ -40,6 +40,7 @@ public class User {
 
 
     public User(User user, String username) {
+        nicknames.add(user.getNickname());
         users.put(username, user);
     }
 

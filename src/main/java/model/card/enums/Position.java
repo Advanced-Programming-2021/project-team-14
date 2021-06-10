@@ -5,6 +5,7 @@ public enum Position {
     DECK("deck"),
     GRAVEYARD("graveYard"),
     MONSTER_ZONE("monster"),
+    FIELD_ZONE("monster"),
     SPELL_ZONE("spell");
 
     public final String label;

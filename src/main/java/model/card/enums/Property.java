@@ -5,7 +5,7 @@ public enum Property {
     CONTINUOUS("Continuous"),
     COUNTER("Counter"),
     QUICK_PLAY("Quick-play"),
-    FIELD("Filed"),
+    FIELD("Field"),
     EQUIP("Equip"),
     RITUAL("ritual"),
     EFFECT("Effect");

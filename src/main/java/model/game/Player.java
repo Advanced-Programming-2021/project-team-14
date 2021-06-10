@@ -48,8 +48,10 @@ public class Player {
         spellZone = new Zone();
         lifePoint = 8000;
         hand = new Hand();
-        addNCardsToHand(5);
-        hand.addCard(Card.getCardByName("Magic Cylinder"));
+        addNCardsToHand(2);
+        hand.addCard(Card.getCardByName("Closed Forest"));
+        hand.addCard(Card.getCardByName("Silver Fang"));
+        hand.addCard(Card.getCardByName("Forest"));
         this.activatedCards = new ArrayList<>();
     }
 
