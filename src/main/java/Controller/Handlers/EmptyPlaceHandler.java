@@ -2,8 +2,10 @@ package Controller.Handlers;
 
 import model.Strings;
 import model.card.SelectedCard;
+import model.card.SpellTrap;
 import model.card.enums.CardType;
 import model.card.enums.Position;
+import model.card.enums.Property;
 import model.game.Duel;
 import model.game.Game;
 import org.json.JSONObject;
@@ -23,7 +25,7 @@ public class EmptyPlaceHandler extends GameHandler {
         String command = request.getString("command");
         switch (Objects.requireNonNull(CommandTags.fromValue(command))) {
             case ACTIVATE_EFFECT:
-                if (game.getBoard().getMainPlayer().getSpellZone().isFull() && selectedCard.getCard().getPosition() == Position.HAND)
+                if (game.getBoard().getMainPlayer().getSpellZone().isFull() && selectedCard.getCard().getPosition() == Position.HAND && selectedCard.getCard().getProperty() != Property.FIELD)
                     return Strings.SPELL_ZONE_FULL.getLabel();
             case SUMMON:
                 if (game.getBoard().getMainPlayer().getMonsterZone().isFull())

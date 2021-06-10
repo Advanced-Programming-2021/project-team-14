@@ -1,6 +1,7 @@
 package Controller.Handlers;
 
 import model.Strings;
+import model.card.SpellTrap;
 import model.card.enums.CardType;
 import model.game.Duel;
 import model.game.Game;
@@ -35,8 +36,9 @@ public class TurnLogHandler extends GameHandler {
             if (game.getTurnLogger().hasAttacked(game.getSelectedCard().getCard()))
                 return Strings.ALREADY_ATTACKER.getLabel();
         } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
-            if (game.getTurnLogger().hasAdded(game.getSelectedCard().getCard()))
-                return Strings.ALREADY_ACTIVATED.getLabel();
+            if (((SpellTrap)duel.getGame().getSelectedCard().getCard()).isActivated()){
+                return Strings.ALREADY_ACTIVATED.label;
+            }
         }
         return super.handle(request, duel);
     }
