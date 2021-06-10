@@ -19,6 +19,8 @@ public class GamePlayController {
     public static void processCommand(JSONObject request) {
         String command = request.getString(Strings.COMMAND.getLabel());
 
+        FieldController.handle(duel.getGame());
+
         if (command.equals(CommandTags.SELECT.getLabel())) {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
@@ -62,8 +64,9 @@ public class GamePlayController {
         Handler activateEffect = new SelectedCardHandler();
         activateEffect.linksWith(new CardTypeHandler())
                 .linksWith(new PhaseHandler())
-//                .linksWith(new TurnLogHandler())
-//                .linksWith(new EmptyPlaceHandler()); // remained ...
+                .linksWith(new TurnLogHandler())
+                .linksWith(new EmptyPlaceHandler())
+                .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
         return activateEffect.handle(request, duel);
     }
