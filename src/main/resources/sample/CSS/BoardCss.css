@@ -1,0 +1,25 @@
+.button1 {
+    -fx-background-color: #a8995b;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.button1:hover {
+    -fx-background-color: #54442a;
+}
+
+.button1:pressed {
+    -fx-translate-y: +2;
+}
+
+.title {
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+}
+
+.main {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, #42ac72, #1d4025);
+}
