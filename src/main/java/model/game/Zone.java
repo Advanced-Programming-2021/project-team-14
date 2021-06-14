@@ -3,7 +3,7 @@ package model.game;
 
 import model.Strings;
 import model.card.Card;
-import model.card.SelectedCard;
+import model.card.Monster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +16,11 @@ public class Zone {
 
     public Zone (){
         cells = new HashMap<>();
-        cells.put(5, new Cell());
-        cells.put(3, new Cell());
-        cells.put(1, new Cell());
-        cells.put(2, new Cell());
-        cells.put(4, new Cell());
+        cells.put(5, new Cell(5));
+        cells.put(3, new Cell(3));
+        cells.put(1, new Cell(1));
+        cells.put(2, new Cell(2));
+        cells.put(4, new Cell(4));
 
 //        placeCard(new SelectedCard(Card.getCardByName("Battle OX"), Position.MONSTER_ZONE, 1, false));
 //        placeCard(new SelectedCard(Card.getCardByName("Axe Raider"), Position.MONSTER_ZONE, 1, false));
@@ -78,5 +78,19 @@ public class Zone {
     public String toString(boolean isRotated) {
         if (isRotated) return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(5), cells.get(3), cells.get(1), cells.get(2), cells.get(4));
         return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(4), cells.get(2), cells.get(1), cells.get(3), cells.get(5));
+    }
+
+    public boolean isContained(String type) {
+        for (Cell cell: cells.values()) {
+            if (!cell.isEmpty() && ((Monster)cell.getCard()).getMonsterType().getLabel().matches(type) || ((Monster)cell.getCard()).getAttribute().getLabel().matches(type)) return true;
+        }
+        return false;
+    }
+    public ArrayList<Integer> getCellsByType(String type){
+        ArrayList<Integer> suitableCells = new ArrayList<>();
+        cells.values().forEach(cell -> {
+            if (!cell.isEmpty() && ((Monster)cell.getCard()).getMonsterType().getLabel().matches(type) || ((Monster)cell.getCard()).getAttribute().getLabel().matches(type)) suitableCells.add(cell.getPosition());
+        });
+        return suitableCells;
     }
 }

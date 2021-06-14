@@ -11,7 +11,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20160810</version>
+            <version>20150729</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

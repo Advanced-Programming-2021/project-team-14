@@ -13,7 +13,11 @@ public class Player {
     private String nickname;
 
     private PlayingDeck playingDeck;
+    private TurnLogger turnLogger;
 
+    public TurnLogger getTurnLogger() {
+        return turnLogger;
+    }
     private Hand hand;
 
     private Zone monsterZone;
@@ -46,6 +50,7 @@ public class Player {
         graveYard = new GraveYard();
         monsterZone = new Zone();
         spellZone = new Zone();
+        this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
         addNCardsToHand(2);

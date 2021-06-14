@@ -6,8 +6,10 @@ import model.card.enums.State;
 public class Cell {
 
     private Card card = null;
-
-
+    private int position;
+    public Cell(int position){
+        this.position = position;
+    }
     public Card getCard() {
         return card;
     }
@@ -20,6 +22,9 @@ public class Cell {
         return this.getCard() == null;
     }
 
+    public int getPosition() {
+        return position;
+    }
 
     @Override
     public String toString() {

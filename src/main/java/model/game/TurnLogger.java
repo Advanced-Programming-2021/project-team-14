@@ -8,7 +8,15 @@ public class TurnLogger {
     private ArrayList<Card> changedPositionCards;
     private ArrayList<Card> recentlyAddedCards;
     private ArrayList<Card> attackedCards;
+    private boolean canDrawCard = true;
 
+    public void setCanDrawCard(boolean canDrawCard) {
+        this.canDrawCard = canDrawCard;
+    }
+
+    public boolean canDrawCard() {
+        return canDrawCard;
+    }
 
     public boolean hasSummonedOrSetCards() {
 
