@@ -8,7 +8,16 @@ public class TurnLogger {
     private ArrayList<Card> changedPositionCards;
     private ArrayList<Card> recentlyAddedCards;
     private ArrayList<Card> attackedCards;
+    private ArrayList<Card> changedOwnerCards;
     private boolean canDrawCard = true;
+
+    public void addChangedOwnerCards(Card card) {
+        this.changedOwnerCards.add(card);
+    }
+
+    public ArrayList<Card> getChangedOwnerCards() {
+        return changedOwnerCards;
+    }
 
     public void setCanDrawCard(boolean canDrawCard) {
         this.canDrawCard = canDrawCard;

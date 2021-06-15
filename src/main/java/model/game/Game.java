@@ -5,6 +5,8 @@ import model.card.Card;
 import model.card.SelectedCard;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class Game {
 
@@ -19,14 +21,6 @@ public class Game {
     private boolean isEnded;
 
 
-    public SelectedCard getSelectedCard() {
-        return selectedCard;
-    }
-
-    public void setSelectedCard(SelectedCard selectedCard) {
-        this.selectedCard = selectedCard;
-    }
-
     public Game(Player mainUser, Player rivalUser, Duel duel) {
 
         this.duel = duel;
@@ -35,6 +29,14 @@ public class Game {
         this.phase = Phase.DRAW_PHASE;
         this.isEnded = false;
         nextPhase();
+    }
+
+    public SelectedCard getSelectedCard() {
+        return selectedCard;
+    }
+
+    public void setSelectedCard(SelectedCard selectedCard) {
+        this.selectedCard = selectedCard;
     }
 
     public JSONObject getGameObject() {
@@ -59,7 +61,7 @@ public class Game {
     }
 
     public String nextPhase() {
-        switch (phase){
+        switch (phase) {
             case DRAW_PHASE:
                 phase = Phase.STANDBY_PHASE;
                 break;
@@ -76,6 +78,7 @@ public class Game {
                 phase = Phase.END_PHASE;
                 break;
             case END_PHASE:
+                changeOwnerShips();
                 changeTurn();
                 board.getMainPlayer().getTurnLogger().reset();
                 phase = Phase.DRAW_PHASE;
@@ -84,6 +87,17 @@ public class Game {
 
         }
         return String.format(Strings.PHASE_PRINT.getLabel(), phase);
+    }
+
+    private void changeOwnerShips() {
+        ArrayList<Card> changedOwnershipCards = board.getMainPlayer().getTurnLogger().getChangedOwnerCards();
+        if (changedOwnershipCards.size() > 0) {
+            changedOwnershipCards.forEach(card -> {
+                board.getRivalPlayer().getMonsterZone().placeCard(card);
+                board.getMainPlayer().getMonsterZone().getCell(card.getPositionIndex()).removeCard();
+                changedOwnershipCards.remove(card);
+            });
+        }
     }
 
 

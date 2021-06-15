@@ -80,12 +80,7 @@ public class Zone {
         return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(4), cells.get(2), cells.get(1), cells.get(3), cells.get(5));
     }
 
-    public boolean isContained(String type) {
-        for (Cell cell: cells.values()) {
-            if (!cell.isEmpty() && ((Monster)cell.getCard()).getMonsterType().getLabel().matches(type) || ((Monster)cell.getCard()).getAttribute().getLabel().matches(type)) return true;
-        }
-        return false;
-    }
+
     public ArrayList<Integer> getCellsByType(String type){
         ArrayList<Integer> suitableCells = new ArrayList<>();
         cells.values().forEach(cell -> {

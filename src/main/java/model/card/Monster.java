@@ -50,6 +50,8 @@ public class Monster extends Card {
 
     public void destroy(){
         affectedCards.clear();
+        defenseBooster = 0;
+        attackBooster = 0;
     }
 
 
