@@ -6,6 +6,8 @@ public enum Regexes {
     //username: un, password: pw, nickname: nn, current: cur, deck-name: dn, rounds: rou, second-player: sec-p
     //attack: att, defense: def
 
+
+    SHOP_SHOW_ALL("shop show --all"),
     SELECT("^select (?=.*(--(spell|monster|hand|sp|mn|hd) (\\d+))).*$"),
     SELECT_SPELL("^select (?=.*(--(spell|sp) (\\d+))).*$"),   //no usage found
     DESELECT("select -d"),
@@ -31,13 +33,11 @@ public enum Regexes {
     MENU_EXIT("menu exit"),
     MENU_CURRENT("show current menu"),
     MENU_ENTER("menu enter (.*)"),
-    CREATE_USER("(?:^user create (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+)))(?=.*(--(nickname) (\\w+))).*$)|"+
-            "(?:^user create (?=.*(--(un) (\\w+)))(?=.*(--(pw) (\\w+)))(?=.*(--(nn) (\\w+))).*$)"),
-    LOGIN_USER("(?:^user login (?=.*(--(username) (\\w+)))(?=.*(--(password) (\\w+))).*$)|" +
-            "(?:^user login (?=.*(--(un) (\\w+)))(?=.*(--(pw) (\\w+))).*$)"),
+    CREATE_USER("(?:^user create (?=.*(--(username|un) (\\w+)))(?=.*(--(password|pw) (\\w+)))(?=.*(--(nickname|nn) (\\w+))).*$)"),
+    LOGIN_USER("(?:^user login (?=.*(--(username|un) (\\w+)))(?=.*(--(password|pw) (\\w+))).*$)"),
     CHANGE_PROFILE_NICKNAME("^profile change (?=.*(--(nickname|nn) (\\w+))).*$"),
-    CHANGE_PROFILE_PASSWORD("(?:^profile change (?=.*(--password))(?=.*(--(current) (\\w+)))(?=.*(--(new) (\\w+))).*$)|"+
-            "(?:^profile change (?=.*(--pw))(?=.*(--(cur) (\\w+)))(?=.*(--(new) (\\w+))).*$)"),
+    CHANGE_PROFILE_USERNAME("^profile change (?=.*(--(username|un) (\\w+))).*$"),
+    CHANGE_PROFILE_PASSWORD("(?:^profile change (?=.*(--password|--pw))(?=.*(--(current|cur) (\\w+)))(?=.*(--(new) (\\w+))).*$)"),
     CREATE_DECK("deck create (\\w+)"),
     DELETE_DECK("deck delete (\\w+)"),
     ACTIVATE_DECK("deck set-activate (.*)"),
@@ -51,9 +51,7 @@ public enum Regexes {
     LOGOUT("logout"),
     SHOW_SCOREBOARD("show scoreboard"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
-    START_DUEL("(?:^duel (?=.*(--(second-player) ([\\w\\-]+)))(?=.*(--(rounds) (\\d+))).*$)|" +
-            "(?:^duel (?=.*(--(sec-p) ([\\w\\-]+)))(?=.*(--(rou) (\\d+))).*$)"),
-    SHOP_SHOW_ALL("shop show --all"),
+    START_DUEL("(?:^duel (?=.*(--(second-player|sec-p) ([\\w\\-]+)))(?=.*(--(rounds|rou) (\\d+))).*$)"),
     ATTACK_DIRECT("attack direct"),
     EXTRACT_SHORT_DATA(".*-- ([\\w ]+).*"),
     //cheat

@@ -143,6 +143,12 @@ public class User {
         this.nickname = newNickname;
     }
 
+    public void changeUsername(String newUsername) {
+        users.remove(this.username);        // remove old username
+        users.put(newUsername, this);       // add new username
+        this.username = newUsername;
+    }
+
     public Deck getDeck(String deckName) {
         return decks.get(deckName);
     }
