@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXSnackbar?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+            prefWidth="1065.0" style="-fx-background-color: #20202A;" stylesheets="/sample/CSS/BoardCss.css" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="view.LoginMenuController">
+
+
+    <AnchorPane fx:id="dataBar" layoutX="345.5" layoutY="189" prefHeight="442" prefWidth="374"
+                style="-fx-background-radius: 27; -fx-background-color: #272731;" BorderPane.alignment="CENTER">
+
+        <JFXTextField fx:id="usernameField" layoutX="30" layoutY="100" labelFloat="true" text="Username"
+                      styleClass="text-field"/>
+
+        <JFXPasswordField fx:id="passwordField" layoutX="30" layoutY="200" labelFloat="true" text="Password"
+                          styleClass="text-field"/>
+
+        <JFXButton fx:id="submitButton" layoutX="30" layoutY="350" alignment="CENTER"
+                   onAction="#login" styleClass="submit-button" text="Log in" textFill="#ffffff">
+            <font>
+                <Font name="System Bold" size="20.0"/>
+            </font>
+
+        </JFXButton>
+
+    </AnchorPane>
+
+
+    <JFXButton onAction="#signUpButtonOnAction" alignment="CENTER" layoutX="410" layoutY="70.0" prefWidth="250"
+               prefHeight="0" style="-fx-font-size: 50;" text="Sign up"
+               textAlignment="CENTER" textFill="#8A9EAD" BorderPane.alignment="TOP_CENTER">
+        <font>
+            <Font name="System Bold" size="36.0"/>
+        </font>
+    </JFXButton>
+
+
+    <JFXButton onAction="#signUpButtonOnAction" layoutX="570" layoutY="638.0"
+               text="sign up" textFill="#6D5DD3" prefHeight="0">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </JFXButton>
+
+
+    <Label alignment="CENTER" layoutX="345.5" layoutY="145.0" prefWidth="374" style="-fx-font-size: 60;" text="Log in"
+           textAlignment="CENTER" textFill="#ffffff" BorderPane.alignment="TOP_CENTER">
+        <font>
+            <Font name="System Bold" size="36.0"/>
+        </font>
+    </Label>
+
+
+    <Label layoutX="435" layoutY="642.0"
+           text="Don't have an account?" textFill="#ffffff">
+        <font>
+            <Font name="System Bold" size="12"/>
+        </font>
+    </Label>
+
+
+    <JFXSnackbar fx:id="snackbar" layoutY="750" prefWidth="1065"/>
+
+</AnchorPane>

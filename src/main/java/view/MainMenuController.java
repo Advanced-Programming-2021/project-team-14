@@ -83,7 +83,6 @@ public class MainMenuController implements Initializable {
     @FXML
     public void logoutButton(javafx.event.ActionEvent actionEvent) {
 
-
 //        FxmlLoader object = new FxmlLoader();
 //        Pane view = object.getPage("logout");
 //        borderPane.setCenter(view);

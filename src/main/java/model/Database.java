@@ -79,8 +79,8 @@ public class Database {
     public static void prepareDatabase() {
         createDirectory();
         loadUsers();
-        Database.readDataLineByLine(spellTrapDirectory);
-        Database.readDataLineByLine(monsterDirectory);
+//        Database.readDataLineByLine(spellTrapDirectory);
+//        Database.readDataLineByLine(monsterDirectory);
     }
 
     private static void createDirectory() {
