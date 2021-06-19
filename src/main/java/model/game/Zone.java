@@ -99,7 +99,13 @@ public class Zone {
 
         return suitableCells;
     }
-
+    public ArrayList<Integer> occupiedCells(){
+     ArrayList<Integer> occupiedCells = new ArrayList<>();
+     cells.values().forEach(cell -> {
+         if (!cell.isEmpty()) occupiedCells.add(cell.getPosition());
+     });
+     return occupiedCells;
+    }
     public void remove(String cardName) {
         cells.values().forEach(cell -> {
             if (!cell.isEmpty())

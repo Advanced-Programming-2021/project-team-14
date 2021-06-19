@@ -468,13 +468,10 @@ public class TaskHandler extends GameHandler {
         int level = monster.getLevel();
 
         if (level == 5 || level == 6) {
-
-            tribute(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, duel);
-
+            tribute(Integer.parseInt(request.getString("data")), 0, duel);
         } else if (level == 7 || level == 8) {
-
-            tribute(Integer.parseInt(request.getString("tributeCardAddress1")),
-                    Integer.parseInt(request.getString("tributeCardAddress2")), duel);
+            tribute(Integer.parseInt(request.getString("data").split(" ")[0]),
+                    Integer.parseInt(request.getString("data").split(" ")[1]), duel);
         }
 
         removeFromHand(game.getSelectedCard(), duel);
@@ -488,15 +485,15 @@ public class TaskHandler extends GameHandler {
 
     }
 
-    private void tribute(int tributeCardAddress1, int tributeCardAddress2, Duel duel) {
+    private void tribute(int first, int second, Duel duel) {
         Game game = duel.getGame();
 
-        Cell tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1);
+        Cell tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(first);
         tributeCell.removeCard();
         game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
 
-        if (tributeCardAddress2 != 1000) {
-            tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2);
+        if (second != 0) {
+            tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(second);
             tributeCell.removeCard();
             game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
         }
