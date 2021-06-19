@@ -480,7 +480,6 @@ public class TaskHandler extends GameHandler {
         game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard().getCard());
         game.getBoard().getMainPlayer().getTurnLogger().cardAdded(game.getSelectedCard().getCard());
         game.deselect();
-        Response.add("needTribute", "false");
         return Strings.SUMMON_SUCCESSFULLY.getLabel();
 
     }
