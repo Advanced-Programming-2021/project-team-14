@@ -15,6 +15,7 @@ public enum Responses {
     NOT_NEW_PASSWORD("please enter a new password"),
     SUCCESS("Successful"),
     ERROR("Error"),
+    CHOICE("Choice"),
     DECK_NOT_EXIST("deck with name %s does not exist"),
     DECK_ALREADY_EXIST("deck with name %s already exists"),
     CARD_NOT_EXIST("card with name %s does not exist"),

@@ -21,6 +21,7 @@ public enum Regexes {
     SUMMON("summon"),
     FLIP_SUMMON("flip-summon"),
     SET("set"),
+    CANCEL("cancel"),
     NEXT_PHASE(">"),
     SET_POSITION("(?:set --(position) (attack|defense))|(?:set --(pos) (att|def))"),
     ATTACK_TO("attack (\\d)"),

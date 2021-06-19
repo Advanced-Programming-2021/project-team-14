@@ -17,6 +17,9 @@ public class SpellTrap extends Card {
         return isActivated;
     }
 
+    public void setActivated(boolean activated) {
+        isActivated = activated;
+    }
 
     static {
         spellTraps = new ArrayList<>();

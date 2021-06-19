@@ -4,9 +4,10 @@ public enum Strings {
 
     CARD_NOT_EXIST_IN_HAND_SET("you can’t set this card"),
     CANNOT_ACTIVATE_IN_THIS_TURN("you can’t activate an effect on this turn"),
-    CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card"),
+    CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card (should be in hand)"),
     TRIBUTE_ONE_CARD("tribute one card"),
     TRIBUTE_TWO_CARD("tribute two cards"),
+    NONE("NONE"),
     ACTIVATION_IS_ONLY_FOR_SPELLS("activate effect is only for spell cards."),
     CARD_IS_NOT_VISIBLE("card is not visible"),
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
