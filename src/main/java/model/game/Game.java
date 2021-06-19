@@ -1,5 +1,6 @@
 package model.game;
 
+import Controller.Handlers.ChainHandler;
 import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
@@ -50,7 +51,7 @@ public class Game {
         return phase;
     }
 
-    private void changeTurn() {
+    public void changeTurn() {
         Player temp = board.getMainPlayer();
         board.setMainPlayer(board.getRivalPlayer());
         board.setRivalPlayer(temp);
@@ -95,9 +96,9 @@ public class Game {
             changedOwnershipCards.forEach(card -> {
                 board.getRivalPlayer().getMonsterZone().placeCard(card);
                 board.getMainPlayer().getMonsterZone().getCell(card.getPositionIndex()).removeCard();
-                changedOwnershipCards.remove(card);
             });
         }
+        board.getMainPlayer().getTurnLogger().getChangedOwnerCards().clear();
     }
 
 

@@ -111,4 +111,8 @@ public class Request {
             Request.addData(key, matcher.group(1).trim());
         }
     }
+
+    public static boolean isChoice() {
+        return response.getString("type").equals(Responses.CHOICE.getLabel());
+    }
 }

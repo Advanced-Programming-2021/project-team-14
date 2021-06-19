@@ -70,6 +70,13 @@ public class GamePlayMenu extends Menu {
             } else if (command.matches(Regexes.ACTIVATE_EFFECT.getLabel())) {            // active effect
                 Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
                 Request.send();
+                if (Request.isChoice()){
+                    Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
+                    setCurrentMenu(Menus.GAMEPLAY_MENU);
+                    Console.print(Request.getMessage());
+                    Request.addData("data", Console.scan());
+                    Request.send();
+                }
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.SET.getLabel())) {            // set
@@ -109,6 +116,11 @@ public class GamePlayMenu extends Menu {
             } else if (command.matches(Regexes.SURRENDER.getLabel())) {            // surrender
 
                 Request.setCommandTag(CommandTags.SURRENDER);
+                Request.send();
+                Console.printBoard(Request.getResponse());
+                Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.CANCEL.getLabel())) {            // surrender
+                Request.setCommandTag(CommandTags.CANCEL_ACTIVATION);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());

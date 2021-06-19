@@ -1,5 +1,6 @@
 package model.game;
 
+import Controller.Handlers.ChainHandler;
 import model.User;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class Duel {
 
 
     public Duel(User mainUser, User rivalUser, int round) {
-
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(rivalUser);
         setNumberOfRounds(round);
         setGame(new Game(firstPlayer, secondPlayer, this));
+        ChainHandler.prepare(this);
     }
 
     public static void addGame(Game game) {
