@@ -8,6 +8,7 @@ public enum Strings {
     TRIBUTE_ONE_CARD("tribute one card"),
     TRIBUTE_TWO_CARD("tribute two cards"),
     NONE("NONE"),
+    CANNOT_DIRECT_ATTACK("you cannot attack directly, there are monsters on the field"),
     ACTIVATION_IS_ONLY_FOR_SPELLS("activate effect is only for spell cards."),
     CARD_IS_NOT_VISIBLE("card is not visible"),
     CANNOT_FLIP_SUMMON_THIS_CARD("you can’t flip summon this card"),
