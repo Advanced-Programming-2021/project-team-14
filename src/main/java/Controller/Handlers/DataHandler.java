@@ -5,7 +5,6 @@ import Controller.enums.EffectsEnum;
 import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
-import model.card.enums.CardType;
 import model.card.enums.Property;
 import model.card.enums.State;
 import model.game.Cell;
@@ -13,12 +12,10 @@ import model.game.Duel;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.prefs.PreferenceChangeEvent;
 
 public class DataHandler extends GameHandler {
     public String handle(JSONObject request, Duel duel) {
         SelectedCard selectedCard = duel.getGame().getSelectedCard();
-        String command = request.getString(Strings.COMMAND.getLabel());
         String effectTime = selectedCard.getCard().getEffectValue(EffectsEnum.EFFECT_TIME.getLabel());
             if (!effectTime.matches("entered name exist|" + Strings.NONE.getLabel())){
                 return "preparation is not ready :|";
