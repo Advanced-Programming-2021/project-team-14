@@ -8,9 +8,11 @@ import org.json.JSONObject;
 public class PositionValidityHandler extends GameHandler {
     public String handle(JSONObject request, Duel duel) {
         Game game = duel.getGame();
-
+        int position = 0;
         String area = request.getString(Strings.AREA.getLabel());
-        int position = request.getInt(Strings.POSITION.getLabel());
+        if (!request.getString("area").equals("field")){
+        position = request.getInt(Strings.POSITION.getLabel());
+        }
 
         switch (area) {
             case "monster":

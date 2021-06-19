@@ -20,7 +20,6 @@ public class CardPositionHandler extends GameHandler {
             expectedPosition = Position.HAND;
             response = Strings.CARD_NOT_EXIST_IN_HAND_SET.getLabel();
         } else if (command.equals(CommandTags.SUMMON.getLabel())) {
-
             expectedPosition = Position.HAND;
             response = Strings.CARD_NOT_EXIST_IN_HAND_SUMMON.getLabel();
         } else if (command.equals(CommandTags.SET_POSITION.getLabel()) || command.equals(CommandTags.FLIP_SUMMON.getLabel())) {

@@ -18,6 +18,9 @@ public class Response {
     public static void success() {
         response.put("type", Responses.SUCCESS.getLabel());
     }
+    public static void choice() {
+        response.put("type", Responses.CHOICE.getLabel());
+    }
 
     public static void error() {
         response.put("type", Responses.ERROR.getLabel());
