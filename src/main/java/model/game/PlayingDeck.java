@@ -59,7 +59,6 @@ public class PlayingDeck {
 
 
     public Card getACard(Property property) {
-
         for (Card card : cards) {
             if (card.getProperty() == property) {
                 return card;
@@ -72,5 +71,13 @@ public class PlayingDeck {
     @Override
     public String toString() {
         return String.format(Strings.PLAYING_DECK_PRINT_FORMAT.getLabel(), getRemainingCardsSize());
+    }
+
+    public void remove(String name) {
+        ArrayList<Card> removedCards = new ArrayList<>();
+        cards.forEach(card -> {
+            if (card.getName().equals(name)) removedCards.add(card);
+        });
+        cards.removeAll(removedCards);
     }
 }

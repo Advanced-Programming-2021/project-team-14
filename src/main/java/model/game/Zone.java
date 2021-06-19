@@ -4,17 +4,19 @@ package model.game;
 import model.Strings;
 import model.card.Card;
 import model.card.Monster;
+import model.card.enums.State;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Zone {
     private static final int ZONE_SIZE = 5;
-    
+
     private HashMap<Integer, Cell> cells;
 
-    public Zone (){
+    public Zone() {
         cells = new HashMap<>();
         cells.put(5, new Cell(5));
         cells.put(3, new Cell(3));
@@ -76,16 +78,36 @@ public class Zone {
     }
 
     public String toString(boolean isRotated) {
-        if (isRotated) return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(5), cells.get(3), cells.get(1), cells.get(2), cells.get(4));
+        if (isRotated)
+            return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(5), cells.get(3), cells.get(1), cells.get(2), cells.get(4));
         return String.format(Strings.ZONE_PRINT_FORMAT.getLabel(), cells.get(4), cells.get(2), cells.get(1), cells.get(3), cells.get(5));
     }
 
 
-    public ArrayList<Integer> getCellsByType(String type){
+    public ArrayList<Integer> getCellsByType(String type) {
         ArrayList<Integer> suitableCells = new ArrayList<>();
-        cells.values().forEach(cell -> {
-            if (!cell.isEmpty() && ((Monster)cell.getCard()).getMonsterType().getLabel().matches(type) || ((Monster)cell.getCard()).getAttribute().getLabel().matches(type)) suitableCells.add(cell.getPosition());
-        });
+        for (Cell cell: cells.values()) {
+            if (!cell.isEmpty()) {
+                if (type.matches(Strings.NONE.getLabel())){
+                    suitableCells.add(cell.getPosition());
+                }else if (( (Monster)cell.getCard()).getMonsterType().getLabel().matches(type) || ( (Monster)cell.getCard()).getAttribute().getLabel().toUpperCase(Locale.ROOT).matches(type)) {
+                    suitableCells.add(cell.getPosition());
+                }
+            }
+        }
+
+
         return suitableCells;
+    }
+
+    public void remove(String cardName) {
+        cells.values().forEach(cell -> {
+            if (!cell.isEmpty())
+                if (cell.getCard().getName().equals(cardName)) cell.removeCard();
+        });
+    }
+
+    public int getCellsByState(State state) {
+        return  (int) cells.values().stream().filter(cell -> !cell.isEmpty() && cell.getCard().getState() == state).count();
     }
 }
