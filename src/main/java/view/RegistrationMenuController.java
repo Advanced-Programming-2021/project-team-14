@@ -44,7 +44,7 @@ public class RegistrationMenuController extends Menu {
 
 
     public void loginButtonOnAction() throws Exception {
-       new LoginMenuController().run(stage);
+        new LoginMenuController().run(stage);
     }
 
     public void register() {
@@ -53,7 +53,9 @@ public class RegistrationMenuController extends Menu {
             response.setText("please enter your username, password and nickname");
             response.getStyleClass().add("error-snackbar");
         } else {
-            String command = "--username " + usernameField.getText() + " --password " + passwordField.getText() + " --nickname " + nicknameField.getText();
+            Request.addData("username", usernameField.getText());
+            Request.addData("password", passwordField.getText());
+            Request.addData("nickname", nicknameField.getText());
             Request.setCommandTag(CommandTags.REGISTER);
             Request.extractData(command);
             Request.addData("view", Menus.REGISTER_MENU.getLabel());

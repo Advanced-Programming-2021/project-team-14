@@ -4,7 +4,6 @@ package view;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,7 +49,8 @@ public class LoginMenuController extends Menu {
             response.setText("please enter your username, password and nickname");
             response.getStyleClass().add("error-snackbar");
         } else {
-            String command = "--username " + usernameField.getText() + " --password " + passwordField.getText();
+            Request.addData("username", usernameField.getText());
+            Request.addData("password", passwordField.getText());
             Request.setCommandTag(CommandTags.LOGIN);
             Request.extractData(command);
             Request.addData("view", Menus.REGISTER_MENU.getLabel());
