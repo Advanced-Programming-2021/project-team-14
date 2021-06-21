@@ -3,6 +3,7 @@ package Controller.Handlers;
 import Controller.enums.EffectsEnum;
 import model.card.Card;
 import model.card.Monster;
+import model.card.enums.State;
 import model.game.Cell;
 import model.game.FieldZone;
 import model.game.Game;
@@ -21,6 +22,19 @@ public class FieldController {
         if (!rival.isEmpty()) {
             applyEffect(rival.getCard(), true);
         }
+        handleUpdatingCards();
+    }
+    private static void handleUpdatingCards(){
+        int amount = game.getBoard().getRivalPlayer().getMonsterZone().getCellsByState(State.OFFENSIVE_OCCUPIED);
+        for (Card card : game.getBoard().getRivalPlayer().getMonsterZone().getCards("Update"))
+            update(card, amount);
+        amount = game.getBoard().getMainPlayer().getMonsterZone().getCellsByState(State.OFFENSIVE_OCCUPIED);
+        for (Card card : game.getBoard().getMainPlayer().getMonsterZone().getCards("Update"))
+            update(card, amount);
+    }
+
+    private static void update(Card card, int amount) {
+        ((Monster)card).setAttack(amount * Integer.parseInt(card.getEffectValue(EffectsEnum.CHANGE_AMOUNT.getLabel())));
     }
 
     private static void applyEffect(Card card, boolean activate) {
