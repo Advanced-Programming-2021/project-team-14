@@ -1,11 +1,13 @@
 package model.game;
 
 
+import Controller.enums.EffectsEnum;
 import model.Strings;
 import model.card.Card;
 import model.card.Monster;
 import model.card.enums.State;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -99,7 +101,13 @@ public class Zone {
 
         return suitableCells;
     }
-
+    public ArrayList<Integer> occupiedCells(){
+     ArrayList<Integer> occupiedCells = new ArrayList<>();
+     cells.values().forEach(cell -> {
+         if (!cell.isEmpty()) occupiedCells.add(cell.getPosition());
+     });
+     return occupiedCells;
+    }
     public void remove(String cardName) {
         cells.values().forEach(cell -> {
             if (!cell.isEmpty())
@@ -109,5 +117,13 @@ public class Zone {
 
     public int getCellsByState(State state) {
         return  (int) cells.values().stream().filter(cell -> !cell.isEmpty() && cell.getCard().getState() == state).count();
+    }
+
+    public ArrayList<Card> getCards(String value) {
+        ArrayList<Card> cards = new ArrayList<>();
+        for (Cell cell : cells.values()) {
+            if (!cell.isEmpty() && cell.getCard().getEffectValue(EffectsEnum.ATTACK_DEFENSE.getLabel()).equals(value)) cards.add(cell.getCard());
+        }
+        return cards;
     }
 }

@@ -45,6 +45,10 @@ public class Monster extends Card {
         return affectedCards.contains(card);
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public ArrayList<Card> getAffectedCards() {
         return affectedCards;
     }
