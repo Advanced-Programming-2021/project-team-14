@@ -111,6 +111,7 @@ public class GamePlayController {
         directAttack.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new TurnLogHandler())
+                .linksWith(new CardExistenceHandler())
                 .linksWith(new TaskHandler());
         return directAttack.handle(request, duel);
     }
@@ -122,8 +123,6 @@ public class GamePlayController {
 
     private static String summon(JSONObject request) {
 
-        Response.add("needTribute", "false");
-        Response.add("tributeNumber", "");
         Handler summon = new SelectedCardHandler();
         summon.linksWith(new CardPositionHandler())
                 .linksWith(new CardTypeHandler())
@@ -155,6 +154,7 @@ public class GamePlayController {
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TurnLogHandler())
+                .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
         return set.handle(request, duel);
     }
