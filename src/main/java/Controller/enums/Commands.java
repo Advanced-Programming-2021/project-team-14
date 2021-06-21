@@ -1,17 +1,15 @@
-package view.enums;
+package Controller.enums;
 
-public enum Regexes {
-    //short commands help
-    //spell: sp, monster: mn, hand: hd, field: fd, selected: sl
-    //username: un, password: pw, nickname: nn, current: cur, deck-name: dn, rounds: rou, second-player: sec-p
-    //attack: att, defense: def
+public enum Commands {
+
+    SELECT_HAND("select --hand %d"),   //no usage found
+
 
     SELECT("^select (?=.*(--(spell|monster|hand|sp|mn|hd) (\\d+))).*$"),
     SELECT_SPELL("^select (?=.*(--(spell|sp) (\\d+))).*$"),   //no usage found
     DESELECT("select -d"),
     SELECT_CARD_FROM_BOARD("^select (?=.*(--(monster|spell|sp|mn) (\\d+))).*$"),  //no usage found
     SELECT_FIELD("^select (?=.*(--(field|fd))).*$"),
-    SELECT_HAND("select --(?=hand|hd) \\d+"),   //no usage found
     SELECT_MONSTER("^select (?=.*(--(monster|mn) (\\d+))).*$"),  //no usage found
     SHORT_SELECT_AREA(".*--(mn|hd|sp) (\\d+).*"),
     SELECT_AREA(".*--(monster|hand|spell) (\\d+).*"),
@@ -61,7 +59,7 @@ public enum Regexes {
 
     public final String label;
 
-    Regexes(String label) {
+    Commands(String label) {
         this.label = label;
     }
 

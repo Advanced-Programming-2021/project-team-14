@@ -31,6 +31,21 @@ public class DuelMenu extends Menu {
                     new GamePlayMenu().run();
                 } else
                     Console.print(Request.getMessage());
+            } else if (command.matches(Regexes.START_DUEL_AI.getLabel())) {
+                Request.setCommandTag(CommandTags.START_DUEL_AI);
+                if (command.contains("--rou "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
+                Request.setOption(command, Strings.NEW_OPTION.getLabel());
+                Request.setOption(command, Strings.AI.getLabel());
+                Request.send();
+                if (Request.isSuccessful()) {
+                    Console.print(Request.getMessage());
+                    new GamePlayMenu().run();
+                } else
+                    Console.print(Request.getMessage());
             }
         }
     }

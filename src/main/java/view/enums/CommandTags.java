@@ -38,6 +38,7 @@ public enum CommandTags {
     SHOW_SCOREBOARD("scoreboard show"),
     BUY_CARD("shop buy"),
     START_DUEL("start duel"),
+    START_DUEL_AI("start duel ai"),
     SHOP_SHOW_ALL("shop show --all"),
 
     IMPORT("import card"),

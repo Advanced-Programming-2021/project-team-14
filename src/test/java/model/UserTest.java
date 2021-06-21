@@ -1,6 +1,5 @@
 package model;
 
-import Controller.enums.Responses;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +33,6 @@ class UserTest {
         Request.extractData("profile change --nickname newNickname");
         Request.send();
 
-        Assertions.assertEquals(Request.getResponse(), Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel());
+        Assertions.assertEquals(Request.getResponse().toString(), "{\"type\":\"Successful\",\"message\":\"nickname changed successfully!\",\"token\":\"username\"}");
     }
 }

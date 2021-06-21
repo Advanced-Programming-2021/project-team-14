@@ -16,6 +16,12 @@ public class GamePlayController {
         duel = new Duel(first, second, rounds);
     }
 
+    public static void startGameWithAi(User first, int rounds) {
+
+        duel = new Duel(first, rounds);
+    }
+
+
     public static void processCommand(JSONObject request) {
         String command = request.getString(Strings.COMMAND.getLabel());
 

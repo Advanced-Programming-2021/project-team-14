@@ -21,14 +21,25 @@ public class Duel {
     private Game game;
     private Player secondPlayer;
     private int numberOfRounds;
+    private boolean isAI;
 
 
-    public Duel(User mainUser, User rivalUser, int round) {
+    public Duel(User mainUser, User rivalUser, int round) {       // for 2 players mode
 
+        this.isAI = false;
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(rivalUser);
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this));
+        setGame(new Game(firstPlayer, secondPlayer, this, false));
+    }
+
+    public Duel(User mainUser, int round) {                         // for ai player
+
+        this.isAI = true;
+        this.firstPlayer = new Player(mainUser);
+        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"));
+        setNumberOfRounds(round);
+        setGame(new Game(firstPlayer, secondPlayer, this, true));
     }
 
     public static void addGame(Game game) {
@@ -36,7 +47,10 @@ public class Duel {
     }
 
     public void startNewRound() {
-        setGame(new Game(firstPlayer, secondPlayer, this));
+        if (isAI)
+            setGame(new Game(firstPlayer, secondPlayer, this, true));
+        else
+            setGame(new Game(firstPlayer, secondPlayer, this, false));
     }
 
     public boolean endDuelChecker() {

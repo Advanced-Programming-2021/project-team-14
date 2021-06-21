@@ -18,6 +18,7 @@ public class Game {
     private int winnerLifePoint;
     private int loserLifePoint;
     private boolean isEnded;
+    private boolean isAI;
 
     public TurnLogger getTurnLogger() {
         return turnLogger;
@@ -31,8 +32,9 @@ public class Game {
         this.selectedCard = selectedCard;
     }
 
-    public Game(Player mainUser, Player rivalUser, Duel duel) {
+    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI) {
 
+        this.isAI = isAI;
         this.duel = duel;
         this.board = new Board(mainUser, rivalUser);
         this.turnLogger = new TurnLogger();
@@ -53,9 +55,14 @@ public class Game {
     }
 
     private void changeTurn() {
-        Player temp = board.getMainPlayer();
-        board.setMainPlayer(board.getRivalPlayer());
-        board.setRivalPlayer(temp);
+
+        if (!isAI) {
+            Player temp = board.getMainPlayer();
+            board.setMainPlayer(board.getRivalPlayer());
+            board.setRivalPlayer(temp);
+        } else {
+
+        }
     }
 
     public Board getBoard() {
@@ -80,10 +87,10 @@ public class Game {
                 phase = Phase.END_PHASE;
                 break;
             case END_PHASE:
-                changeTurn();
                 turnLogger.reset();
                 phase = Phase.DRAW_PHASE;
                 deselect();
+                changeTurn();
                 return String.format(Strings.CHANGE_TURN_PRINT.getLabel(), phase, board.getMainPlayer().getNickname(), draw());
 
         }

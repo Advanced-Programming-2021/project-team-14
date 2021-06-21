@@ -91,6 +91,7 @@ public enum Strings {
     SIDE_OPTION("side"),
     NUMBER_OF_ROUNDS_NOT_SUPPORTED("number of rounds is not supported"),
     NEW_OPTION("new"),
+    AI("ai"),
     PLAYER_FORMAT("%s : %s"),
     ZONE_PRINT_FORMAT("\t%s\t%s\t%s\t%s\t%s\t"),
     COLOR_YELLOW_BOLD("\033[1;36m %s \033[0m"),
