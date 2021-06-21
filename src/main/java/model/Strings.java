@@ -4,6 +4,7 @@ public enum Strings {
 
     CARD_NOT_EXIST_IN_HAND_SET("you can’t set this card"),
     CANNOT_ACTIVATE_IN_THIS_TURN("you can’t activate an effect on this turn"),
+    DIRECT_ATTACK_NOT_POSSIBLE("you can’t attack directly, there are monsters on the field"),
     CARD_NOT_EXIST_IN_HAND_SUMMON("you can’t summon this card (should be in hand)"),
     TRIBUTE_ONE_CARD("tribute one card"),
     TRIBUTE_TWO_CARD("tribute two cards"),
