@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="graphic.DeckMenu"
+            prefHeight="400.0" prefWidth="600.0">
+    <Text fill="#d3d3d3" layoutX="372.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="decks menu">
+        <font>
+            <Font size="42.0"/>
+        </font>
+    </Text>
+</AnchorPane>

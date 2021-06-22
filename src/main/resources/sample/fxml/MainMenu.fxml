@@ -1,150 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="/sample/CSS/Style.css"
-            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.MainMenuController">
-    <children>
-        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                    prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #272731;"
-                    stylesheets="/sample/CSS/Style.css">
-            <left>
-                <AnchorPane fx:id="sideBar" BorderPane.alignment="CENTER">
-                    <BorderPane.margin>
-                        <Insets left="15.0"/>
-                    </BorderPane.margin>
-                    <children>
-                        <VBox prefHeight="400.0" prefWidth="115.0">
-                            <children>
-                                <HBox>
-                                    <VBox.margin>
-                                        <Insets top="110.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#duelButton" prefWidth="130.0"
-                                                   styleClass="sidebarItem" text="  Duel" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="FLAG_CHECKERED" size="18"
-                                                                     text=""/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox>
-                                    <VBox.margin>
-                                        <Insets right="1.0" top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#deckButton" prefWidth="130.0"
-                                                   styleClass="sidebarItem" text="  Deck" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="TH" size="18"/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox prefWidth="130.0">
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#shopButton" prefWidth="130.0"
-                                                   styleClass="sidebarItem" text="  Shop" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="SHOPPING_CART"
-                                                                     size="18"/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox>
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#scoreboardButton"
-                                                   prefWidth="130.0" styleClass="sidebarItem" text="  Scoreboard"
-                                                   textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="TROPHY" size="18"/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox prefWidth="130.0">
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#profileButton" prefHeight="26.0"
-                                                   prefWidth="130.0" styleClass="sidebarItem" text="  Profile"
-                                                   textAlignment="JUSTIFY" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="USER" size="18"/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox>
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#importExportButton"
-                                                   prefWidth="130.0" styleClass="sidebarItem" text=" Imp/Exp"
-                                                   textAlignment="CENTER" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="EXCHANGE" size="18"/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                                <HBox onMouseClicked="#logoutButton">
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                    <children>
-                                        <JFXButton alignment="BASELINE_LEFT" onAction="#logoutButton" prefWidth="130.0"
-                                                   styleClass="sidebarItem" text="  Logout" textFill="#8a9ead">
-                                            <font>
-                                                <Font name="System Bold" size="12.0"/>
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView fill="#8a9ead" glyphName="TIMES" size="18"
-                                                                     text=""/>
-                                            </graphic>
-                                        </JFXButton>
-                                    </children>
-                                </HBox>
-                            </children>
-                            <padding>
-                                <Insets right="1.0"/>
-                            </padding>
-                        </VBox>
-                    </children>
-                </AnchorPane>
-            </left>
-        </BorderPane>
-    </children>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/mainMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.MainMenu">
+      <AnchorPane styleClass="sidebar-container">
+            <VBox layoutY="200.0" styleClass="button-container">
+                  <JFXButton text="Duel">
+                     <graphic>
+                        <FontAwesomeIconView styleClass="icon" glyphName="BARS"/>
+                     </graphic>
+                  </JFXButton>
+               <JFXButton text="Deck">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="TH"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton text="Shop">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="SHOPPING_CART"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Scoreboard">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="TROPHY"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Profile" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="USER" />
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Import\Export">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="EXCHANGE"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Logout">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="SIGN_OUT"/>
+                  </graphic>
+               </JFXButton>
+            </VBox>
+      </AnchorPane>
+   <AnchorPane fx:id="view" styleClass="view" layoutX="220"/>
 </AnchorPane>

@@ -1,0 +1,53 @@
+.root{
+    -fx-pref-width: 1200;
+    -fx-pref-height: 800;
+    -fx-side-size: 220px;
+    -fx-gray: #515468;
+    -fx-primary: #6D5DD3;
+    -fx-background: #20202A;
+    -fx-background-light: #272731;
+}
+.sidebar-container{
+    -fx-pref-width: -fx-side-size;
+    -fx-pref-height: 800;
+    -fx-background-color: transparent;
+}
+.button-container{
+    -fx-pref-width: -fx-side-size;
+}
+.button-container > .button{
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-pref-width: -fx-side-size;
+    -fx-pref-height: 40;
+    -fx-padding: 0 0 0 40;
+    -fx-graphic-text-gap: 30;
+    -fx-font-size: 16;
+    -fx-text-fill: -fx-gray;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+.button-container > .button:hover {
+    -fx-background-color: -fx-background-light;
+    -fx-fill: WHITE;
+}
+.button-container > .button:focused .icon{
+    -fx-fill: WHITE;
+}
+.button-container > .button:focused{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+
+}
+
+.icon {
+    -fx-font-family:"FontAwesome";
+    -fx-fill: -fx-gray;
+    -fx-font-size: 17;
+}
+
+.view {
+    -fx-pref-height: 800;
+    -fx-pref-width: 980;
+}
