@@ -1,6 +1,5 @@
 package Controller.Handlers;
 
-import Controller.Response;
 import Controller.enums.EffectsEnum;
 import Controller.enums.Responses;
 import model.Strings;
@@ -14,146 +13,157 @@ import model.card.enums.Property;
 import model.card.enums.State;
 import model.game.*;
 import org.json.JSONObject;
-import view.Logger;
 import view.enums.CommandTags;
 
 import java.util.Objects;
 
 public class TaskHandler extends GameHandler {
-    private Game game;
-    private Duel duel;
+
 
     public String handle(JSONObject request, Duel duel) {
-        this.game = duel.getGame();
-        this.duel = duel;
-        Logger.log("task handler", "doing ...");
+        set(request, duel);
+
         switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))) {
             case SELECT:
-                return select(request, duel);
+                return select();
             case SHOW_SELECTED_CARD:
-                return showSelectedCard(duel);
+                return showSelectedCard();
             case SET:
-                return set(request, duel);
+                return set();
             case NEXT_PHASE:
-                return nextPhase(duel);
+                return nextPhase();
             case SET_POSITION:
-                return setPosition(request, duel);
+                return setPosition();
             case SHOW_GRAVEYARD:
-                return showGraveyard(duel);
+                return showGraveyard();
             case DESELECT:
-                return deselect(duel);
+                return deselect();
             case SUMMON:
-                return summon(request, duel);
+                return summon();
             case ATTACK:
-                return attack(request, duel);
+                return attack();
             case DIRECT_ATTACK:
-                return directAttack(duel);
+                return directAttack();
             case FLIP_SUMMON:
-                return flipSummon(request, duel);
+                return flipSummon();
             case ACTIVATE_EFFECT:
-                return activateEffect(request, duel);
+                return activateEffect();
             case INCREASE_LIFE_POINT:
-                return increaseLifePoint(request, duel);
+                return increaseLifePoint();
         }
-        return "> .... <";
+        return Strings.DONE.getLabel();
     }
 
-    private String increaseLifePoint(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
-        game.getBoard().getMainPlayer().increaseLifePoint(request.getInt(Strings.AMOUNT.getLabel()));
+    private String increaseLifePoint() {
+        main.increaseLifePoint(request.getInt(Strings.AMOUNT.getLabel()));
         return Responses.INCREASE_LIFE_POINT.getLabel();
     }
 
-    private String activateEffect(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
-        SelectedCard selectedCard = game.getSelectedCard();
-        selectedCard.getCard().setState(State.OCCUPIED);
-        if (selectedCard.getCard().getProperty() == Property.EQUIP) {
-            int cardToEquip = Integer.parseInt(request.getString("data"));
-            Monster card = (Monster) game.getBoard().getMainPlayer().getMonsterZone().getCell(cardToEquip).getCard();
-            card.addAffectedCard(selectedCard.getCard());
-            equipCard(selectedCard.getCard(), card);
-            ((SpellTrap) selectedCard.getCard()).setActivated(true);
+    private String activateEffect() {
+
+        selected.getCard().setState(State.OCCUPIED);
+
+        if (selected.getCard().getProperty() == Property.EQUIP) {
+            equipCard(selected.getCard(), (Monster) main.getMonsterZone().getCell(Integer.parseInt(request.getString("data"))).getCard());
+            ((SpellTrap) selected.getCard()).setActivated(true);
         }
-        if (selectedCard.getCard().getProperty() == Property.FIELD) {
-            selectedCard.getCard().setPosition(Position.FIELD_ZONE);
-            if (!game.getBoard().getMainPlayer().getFieldZone().isEmpty()) {
-                FieldController.deActive();
-            }
-            removeFromHand(selectedCard, duel);
-            game.getBoard().getMainPlayer().getFieldZone().setCard(selectedCard.getCard());
+        if (selected.getCard().getProperty() == Property.FIELD) {
+            addCardToFieldZone();
+            ((SpellTrap) selected.getCard()).setActivated(true);
         } else {
-
-            if (specialCaseEffects(game, selectedCard, request) == null) {
-                applyNormalEffect(selectedCard.getCard(), game, request);
+            if (specialCaseEffects() == null) {
+                applyNormalEffect(selected.getCard());
+            }else{
+                ((SpellTrap) selected.getCard()).setActivated(true);
             }
-            if (selectedCard.getCard() != null) {
 
-                selectedCard.getCard().setPosition(Position.SPELL_ZONE);
-                removeFromHand(selectedCard, duel);
-                game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard.getCard());
+            if (selected.getCard() != null && selected.getCard().getPosition() != Position.SPELL_ZONE) {
+                selected.getCard().setPosition(Position.SPELL_ZONE);
+                removeFromHand(selected);
+                main.getSpellZone().placeCard(selected.getCard());
             }
         }
-//        game.getBoard().getMainPlayer().addToActiveCards(selectedCard.getCard());
         game.deselect();
         return Strings.ACTIVATE_SUCCESSFULLY.getLabel();
     }
 
-    private String specialCaseEffects(Game game, SelectedCard card, JSONObject request) {
-        String toDo = card.getCard().getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel());
+    private void addCardToFieldZone() {
+        selected.getCard().setPosition(Position.FIELD_ZONE);
+        if (!main.getFieldZone().isEmpty()) {
+            FieldController.deActive();
+        }
+        removeFromHand(selected);
+        main.getFieldZone().setCard(selected.getCard());
+    }
+
+    private String specialCaseEffects() {
+        final String SUCCESS = "done";
+        String toDo = selected.getCard().getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel());
         if (toDo.equals("change owner")) {
-            Cell rival = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt("data"));
-            game.getBoard().getMainPlayer().getMonsterZone().placeCard(rival.getCard());
-            game.getBoard().getMainPlayer().getTurnLogger().addChangedOwnerCards(rival.getCard());
-            rival.removeCard();
-            ((SpellTrap) card.getCard()).setActivated(true);
+            changeOwner();
+
+            return SUCCESS;
         }
 
         if (toDo.equals("destroy card")) {
-            Card selectedToSpecialSummon = game.getBoard().getRivalPlayer().getSpellZone().getCell(request.getInt("data")).getCard();
-            if (selectedToSpecialSummon != null) {
-                game.getBoard().getRivalPlayer().getSpellZone().remove(selectedToSpecialSummon.getName());
-                game.getBoard().getRivalPlayer().getGraveYard().addCard(selectedToSpecialSummon);
-                ((SpellTrap) card.getCard()).setActivated(true);
-            }
+            destroyACard();
+            return SUCCESS;
         }
 
-        if (card.getCard().getEffectValue(EffectsEnum.EFFECT_TIME.getLabel()).equals("entered name exist")) {
-            if (game.getBoard().getRivalPlayer().getHand().doesHaveCard(request.getString("data"))) {
-                String name = request.getString("data");
-                game.getBoard().getRivalPlayer().getHand().remove(name);
-                game.getBoard().getRivalPlayer().getMonsterZone().remove(name);
-                game.getBoard().getRivalPlayer().getPlayingDeck().remove(name);
-
-            } else {
-                Hand hand = game.getBoard().getMainPlayer().getHand();
-                card.getCard().setPosition(Position.SPELL_ZONE);
-                hand.removeRandomly();
-            }
-            ((SpellTrap) card.getCard()).setActivated(true);
-
+        if (selected.getCard().getEffectValue(EffectsEnum.EFFECT_TIME.getLabel()).equals("entered name exist")) {
+            discardIfIsAbsent();
+            return SUCCESS;
         }
+
         switch (toDo) {
             case "Mirror Force":
                 mirrorForceEffect();
-                break;
+                return SUCCESS;
             case "Magic Cylinder":
                 magicCylinderEffect();
-                break;
+                return SUCCESS;
             case "Negate Attack":
                 negateAttackEffect();
-                break;
+                return SUCCESS;
             case "Magic Jammer":
                 magicJammerEffect();
-                break;
+                return SUCCESS;
         }
         return null;
 
     }
 
+    private void discardIfIsAbsent() {
+        if (rival.getHand().doesHaveCard(request.getString("data"))) {
+            String name = request.getString("data");
+            rival.getHand().remove(name);
+            rival.getMonsterZone().remove(name);
+            rival.getPlayingDeck().remove(name);
+        } else {
+            Hand hand = main.getHand();
+            selected.getCard().setPosition(Position.SPELL_ZONE);
+            hand.removeRandomly();
+        }
+    }
+
+    private void destroyACard() {
+        Card selectedToDestroy = rival.getSpellZone().getCell(request.getInt("data")).getCard();
+        if (selectedToDestroy != null) {
+            rival.getSpellZone().remove(selectedToDestroy.getName());
+            rival.getGraveYard().addCard(selectedToDestroy);
+        }
+    }
+
+    private void changeOwner() {
+        Cell rivalCell = rival.getMonsterZone().getCell(request.getInt("data"));
+        main.getMonsterZone().placeCard(rivalCell.getCard());
+        main.getTurnLogger().addChangedOwnerCards(rivalCell.getCard());
+        rivalCell.removeCard();
+    }
+
     private void magicJammerEffect() {
         Card card = ChainHandler.getLastChain().getSelectedCard().getCard();
-        Cell cell = game.getBoard().getRivalPlayer().getSpellZone().getCell(card.getPositionIndex());
+        Cell cell = rival.getSpellZone().getCell(card.getPositionIndex());
         sendToGraveYard(cell.getCard(), false);
         cell.removeCard();
     }
@@ -175,7 +185,7 @@ public class TaskHandler extends GameHandler {
     }
 
     private void mirrorForceEffect() {
-        game.getBoard().getRivalPlayer().getMonsterZone().getCells().forEach(cell -> {
+        rival.getMonsterZone().getCells().forEach(cell -> {
             if (!cell.isEmpty() && cell.getCard().getState() == State.OFFENSIVE_OCCUPIED) {
                 sendToGraveYard(cell.getCard(), false);
                 cell.removeCard();
@@ -183,65 +193,68 @@ public class TaskHandler extends GameHandler {
         });
     }
 
-    private void applyNormalEffect(Card card, Game game, JSONObject request) {
+    private void applyNormalEffect(Card card) {
         switch (card.getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel())) {
             case "destroy":
                 switch (card.getEffectValue(EffectsEnum.FROM.getLabel())) {
                     case "both":
                         switch (card.getEffectValue(EffectsEnum.FIRST_TARGET.getLabel())) {
                             case "monsters":
-                                for (Cell cell : game.getBoard().getMainPlayer().getMonsterZone().getCells()) {
-                                    if (!cell.isEmpty())
-                                        sendToGraveYard(cell.getCard(), true);
-                                }
+                                destroyAllMonsters(main.getMonsterZone(), true);
                                 break;
                             case "spells/traps":
-                                for (Cell cell : game.getBoard().getMainPlayer().getSpellZone().getCells()) {
-                                    if (!cell.isEmpty())
-                                        sendToGraveYard(cell.getCard(), true);
-                                }
+                                destroyAllMonsters(main.getSpellZone(), true);
                                 break;
                         }
                     case "rival board":
                         switch (card.getEffectValue(EffectsEnum.FIRST_TARGET.getLabel())) {
                             case "monsters":
-                                for (Cell cell : game.getBoard().getRivalPlayer().getMonsterZone().getCells()) {
-                                    if (!cell.isEmpty())
-                                        sendToGraveYard(cell.getCard(), false);
-                                }
+                                destroyAllMonsters(rival.getMonsterZone(), false);
                                 break;
                             case "spells/traps":
-                                for (Cell cell : game.getBoard().getRivalPlayer().getSpellZone().getCells()) {
-                                    if (!cell.isEmpty())
-                                        sendToGraveYard(cell.getCard(), false);
-                                }
+                                destroyAllMonsters(rival.getSpellZone(), false);
                                 break;
                         }
                 }
                 break;
             case "draw":
-                for (int i = 0; i < Integer.parseInt(card.getEffectValue(EffectsEnum.NUMBER_OF_AFFECTED_CARDS.getLabel())); i++) {
-                    game.getBoard().getMainPlayer().drawCard();
-                }
+                drawNCard(Integer.parseInt(card.getEffectValue(EffectsEnum.NUMBER_OF_AFFECTED_CARDS.getLabel())));
                 break;
             case "add": // add from deck to hand
-                for (int i = 0; i < Integer.parseInt(card.getEffectValue(EffectsEnum.NUMBER_OF_AFFECTED_CARDS.getLabel())); i++) {
-                    Card cardToAdd = game.getBoard().getMainPlayer().getPlayingDeck().
-                            getACard(Property.fromValue(card.getEffectValue(EffectsEnum.FIRST_TARGET.getLabel())));
-                    if (cardToAdd != null)
-                        game.getBoard().getMainPlayer().getHand().addCard(cardToAdd);
-                }
+                addFromDeckToHand(Integer.parseInt(card.getEffectValue(EffectsEnum.NUMBER_OF_AFFECTED_CARDS.getLabel())),
+                        Property.fromValue(card.getEffectValue(EffectsEnum.FIRST_TARGET.getLabel())));
                 break;
             case "skip draw phase":
-                game.getBoard().getRivalPlayer().getTurnLogger().setCanDrawCard(false);
+                rival.getTurnLogger().setCanDrawCard(false);
                 break;
-
+            default: return;
         }
+        ((SpellTrap) selected.getCard()).setActivated(true);
+    }
 
+    private void addFromDeckToHand(int numberOfCardsToAdd, Property property) {
+        for (int i = 0; i < numberOfCardsToAdd; i++) {
+            Card cardToAdd = main.getPlayingDeck().getACard(property);
+            if (cardToAdd != null)
+                main.getHand().addCard(cardToAdd);
+        }
+    }
+
+    private void drawNCard(int n) {
+        for (int i = 0; i < n; i++) {
+            main.drawCard();
+        }
+    }
+
+    private void destroyAllMonsters(Zone zone, boolean isMain) {
+        for (Cell cell : zone.getCells()) {
+            if (!cell.isEmpty())
+                sendToGraveYard(cell.getCard(), isMain);
+        }
     }
 
     private void equipCard(Card spell, Monster monster) {
-        System.out.println((EffectsEnum.SECOND_ATTACK_DEFENSE_LIFE_POINT.getLabel()));
+        monster.addAffectedCard(selected.getCard());
         int amount = calculateAmount(spell, monster, EffectsEnum.FIRST_AMOUNT.getLabel());
         changeBoostersToEquip(monster, amount, spell.getEffectValue(EffectsEnum.FIRST_ATTACK_DEFENSE_LIFE_POINT.getLabel()));
         if (!spell.getEffectValue(EffectsEnum.SECOND_TARGET.getLabel()).equals(Strings.NONE.getLabel())) {
@@ -252,21 +265,15 @@ public class TaskHandler extends GameHandler {
 
 
     private int calculateAmount(Card spell, Monster monster, String amountString) {
-        int amount;
-        System.out.println(amountString);
-        System.out.println(spell.getEffectValue(amountString));
         switch (spell.getEffectValue(amountString)) {
             case "player face up monsters each +800":
-                amount = 800 * game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells();
-                break;
+                return 800 * main.getMonsterZone().getNumberOfFullCells();
             case "!=":
-                if (monster.getState() == State.OFFENSIVE_OCCUPIED) amount = monster.getDefence();
-                else amount = monster.getAttack();
-                break;
+                if (monster.getState() == State.OFFENSIVE_OCCUPIED) return monster.getDefence();
+                return monster.getAttack();
             default:
-                amount = Integer.parseInt(spell.getEffectValue(amountString));
+                return Integer.parseInt(spell.getEffectValue(amountString));
         }
-        return amount;
     }
 
     private void changeBoostersToEquip(Monster monster, int amount, String whichFeature) {
@@ -287,11 +294,10 @@ public class TaskHandler extends GameHandler {
         }
     }
 
-    private String directAttack(Duel duel) {
-        Game game = duel.getGame();
-        Monster card = (Monster) game.getSelectedCard().getCard();
+    private String directAttack() {
+        Monster card = (Monster) selected.getCard();
         int damage = card.getAttack();
-        game.getBoard().getMainPlayer().getTurnLogger().cardAttack(card);
+        main.getTurnLogger().cardAttack(card);
         damage(true, damage);
         game.deselect();
         String firstResponse = String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
@@ -299,18 +305,16 @@ public class TaskHandler extends GameHandler {
         return String.format(Strings.DIRECT_ATTACK.getLabel(), damage);
     }
 
-    private String deselect(Duel duel) {
-        Game game = duel.getGame();
+    private String deselect() {
         game.deselect();
         return Strings.CARD_DESELECTED.getLabel();
     }
 
-    private String attack(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
+    private String attack() {
+        Cell rivalCard = rival.getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
+        Cell selectedCell = main.getMonsterZone().getCell(selected.getCard().getPositionIndex());
+        main.getTurnLogger().cardAttack(selectedCell.getCard());
 
-        Cell rivalCard = game.getBoard().getRivalPlayer().getMonsterZone().getCell(request.getInt(Strings.TO.getLabel()));
-        Cell selectedCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(game.getSelectedCard().getCard().getPositionIndex());
-        game.getBoard().getMainPlayer().getTurnLogger().cardAttack(selectedCell.getCard());
         int damage;
         String opponentCardName = "";
         switch (rivalCard.getCard().getState()) {
@@ -321,7 +325,6 @@ public class TaskHandler extends GameHandler {
                          ((Monster) selectedCell.getCard()).getAttack();
                 if (damage > 0) {
                     damage(false, damage);
-                    game.getBoard().getMainPlayer().getTurnLogger().cardAttack(selectedCell.getCard());
                     String firstResponse = opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
                     if (duel.endDuelChecker()) return duel.endDuel(firstResponse);
                     return opponentCardName + String.format(Strings.DO_ATTACK_MORE.getLabel(), damage);
@@ -333,6 +336,7 @@ public class TaskHandler extends GameHandler {
                 }
                 sendToGraveYard(rivalCard.getCard(), false);
                 sendToGraveYard(selectedCell.getCard(), true);
+
                 rivalCard.removeCard();
                 selectedCell.removeCard();
                 return opponentCardName + Strings.DO_ATTACK_EQUAL.getLabel();
@@ -349,6 +353,7 @@ public class TaskHandler extends GameHandler {
                 }
                 if (damage < 0) {
                     damage(false, damage);
+
                     sendToGraveYard(selectedCell.getCard(), true);
                     selectedCell.removeCard();
                     String firstResponse = String.format(Strings.OO_ATTACK_LESS.getLabel(), damage);
@@ -366,8 +371,8 @@ public class TaskHandler extends GameHandler {
         return null;
     }
 
-    private void sendToGraveYard(Card card, boolean main) {
-        Player player = main ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
+    private void sendToGraveYard(Card card, boolean isMain) {
+        Player player = isMain ? main : rival;
         if (card.getCardType() == CardType.MONSTER) {
             for (Card spell : ((Monster) card).getAffectedCards()) {
                 if (spell.getProperty() == Property.EQUIP || "connected".matches(spell.getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel()))) {
@@ -401,8 +406,8 @@ public class TaskHandler extends GameHandler {
     public void damage(boolean toOpponent, int damage) {
         Game game = duel.getGame();
 
-        Player mainPlayer = game.getBoard().getMainPlayer();
-        Player rivalPlayer = game.getBoard().getRivalPlayer();
+        Player mainPlayer = main;
+        Player rivalPlayer = rival;
         boolean isEnded = false;
 
         if ((toOpponent ? rivalPlayer : mainPlayer).getLifePoint() <= damage) {
@@ -418,91 +423,68 @@ public class TaskHandler extends GameHandler {
     }
 
 
-    private String nextPhase(Duel duel) {
-        Game game = duel.getGame();
+    private String nextPhase() {
         return game.nextPhase();
     }
 
-    private String set(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
-        SelectedCard selectedCard = game.getSelectedCard();
+    private String set() {
+        SelectedCard selectedCard = selected;
         if (selectedCard.getCard().getCardType() == CardType.MONSTER) {
             selectedCard.getCard().setState(State.DEFENSIVE_HIDDEN);
             selectedCard.getCard().setPosition(Position.MONSTER_ZONE);
-            game.getBoard().getMainPlayer().getMonsterZone().placeCard(selectedCard.getCard());
+            main.getMonsterZone().placeCard(selectedCard.getCard());
         } else {
             selectedCard.getCard().setState(State.HIDDEN);
             selectedCard.getCard().setPosition(Position.SPELL_ZONE);
-            game.getBoard().getMainPlayer().getSpellZone().placeCard(selectedCard.getCard());
+            main.getSpellZone().placeCard(selectedCard.getCard());
         }
 
-        removeFromHand(selectedCard, duel);
+        removeFromHand(selectedCard);
         if (selectedCard.getCard().getCardType() == CardType.MONSTER)
-            game.getBoard().getMainPlayer().getTurnLogger().cardAdded(selectedCard.getCard());
+            main.getTurnLogger().cardAdded(selectedCard.getCard());
         game.deselect();
         return Strings.SET_SUCCESSFULLY.getLabel();
     }
 
-    private void removeFromHand(SelectedCard selectedCard, Duel duel) {
-        Game game = duel.getGame();
-        game.getBoard().getMainPlayer().getHand().remove(selectedCard.getCard());
+    private void removeFromHand(SelectedCard selectedCard) {
+        main.getHand().remove(selectedCard.getCard());
     }
 
-    private String flipSummon(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
-        SelectedCard selectedCard = game.getSelectedCard();
-
-        selectedCard.getCard().setState(State.OFFENSIVE_OCCUPIED);
-        selectedCard.getCard().setPosition(Position.MONSTER_ZONE);
-
+    private String flipSummon() {
+        selected.getCard().setState(State.OFFENSIVE_OCCUPIED);
+        selected.getCard().setPosition(Position.MONSTER_ZONE);
         game.deselect();
-
         return Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel();
     }
 
-    private String summon(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
+    private String summon() {
+        Monster monster = (Monster) selected.getCard();
 
-        Monster monster = (Monster) game.getSelectedCard().getCard();
-
-        int level = monster.getLevel();
-
-        if (level == 5 || level == 6) {
-            tribute(Integer.parseInt(request.getString("data")), 0, duel);
-        } else if (level == 7 || level == 8) {
-            tribute(Integer.parseInt(request.getString("data").split(" ")[0]),
-                    Integer.parseInt(request.getString("data").split(" ")[1]), duel);
+        if (monster.getLevel() > 4) {
+            for (String data : request.getString("data").split(" ")) {
+                tribute(Integer.parseInt(data));
+            }
         }
 
-        removeFromHand(game.getSelectedCard(), duel);
-        game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
-        game.getSelectedCard().getCard().setPosition(Position.MONSTER_ZONE);
-        game.getBoard().getMainPlayer().getMonsterZone().placeCard(game.getSelectedCard().getCard());
-        game.getBoard().getMainPlayer().getTurnLogger().cardAdded(game.getSelectedCard().getCard());
+        removeFromHand(selected);
+        selected.getCard().setState(State.OFFENSIVE_OCCUPIED);
+        selected.getCard().setPosition(Position.MONSTER_ZONE);
+        main.getMonsterZone().placeCard(selected.getCard());
+        main.getTurnLogger().cardAdded(selected.getCard());
         game.deselect();
         return Strings.SUMMON_SUCCESSFULLY.getLabel();
-
     }
 
-    private void tribute(int first, int second, Duel duel) {
-        Game game = duel.getGame();
-
-        Cell tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(first);
+    private void tribute(int positionIndex) {
+        Cell tributeCell = main.getMonsterZone().getCell(positionIndex);
         tributeCell.removeCard();
-        game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
-
-        if (second != 0) {
-            tributeCell = game.getBoard().getMainPlayer().getMonsterZone().getCell(second);
-            tributeCell.removeCard();
-            game.getBoard().getMainPlayer().getGraveYard().addCard(tributeCell.getCard());
-        }
+        main.getGraveYard().addCard(tributeCell.getCard());
     }
 
-    private String select(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
+    private String select() {
         String area = request.getString(Strings.AREA.getLabel());
         boolean isOpponent = request.getBoolean(Strings.OPPONENT_OPTION.getLabel());
-        Player player = isOpponent ? game.getBoard().getRivalPlayer() : game.getBoard().getMainPlayer();
+        Player player = isOpponent ? rival : main;
         int position;
         Card card = null;
         switch (area) {
@@ -522,28 +504,24 @@ public class TaskHandler extends GameHandler {
                 card = player.getHand().getCard(position);
                 break;
         }
-
         game.setSelectedCard(new SelectedCard(card, isOpponent));
         return Strings.CARD_SELECTED.getLabel();
     }
 
-    private String showSelectedCard(Duel duel) {
-        Game game = duel.getGame();
-        return game.getSelectedCard().getCard().show();
+    private String showSelectedCard() {
+        return selected.getCard().show();
     }
 
-    private String showGraveyard(Duel duel) {
-        Game game = duel.getGame();
-        return game.getBoard().getMainPlayer().getGraveYard().showCards();
+    private String showGraveyard() {
+        return main.getGraveYard().showCards();
     }
 
-    private String setPosition(JSONObject request, Duel duel) {
-        Game game = duel.getGame();
-        game.getBoard().getMainPlayer().getTurnLogger().cardPositionChanged(game.getSelectedCard().getCard());
+    private String setPosition() {
+        main.getTurnLogger().cardPositionChanged(selected.getCard());
         if (request.getString(Strings.POSITION.getLabel()).equals(Strings.ATTACK_OPTION.getLabel())) {
-            game.getSelectedCard().getCard().setState(State.OFFENSIVE_OCCUPIED);
+            selected.getCard().setState(State.OFFENSIVE_OCCUPIED);
         } else
-            game.getSelectedCard().getCard().setState(State.DEFENSIVE_OCCUPIED);
+            selected.getCard().setState(State.DEFENSIVE_OCCUPIED);
         game.deselect();
         return Strings.MONSTER_POSITION_CHANGED.getLabel();
     }

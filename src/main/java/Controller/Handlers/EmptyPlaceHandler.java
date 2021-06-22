@@ -20,11 +20,12 @@ public class EmptyPlaceHandler extends GameHandler {
         Game game = duel.getGame();
 
         Logger.log("empty place handler", "checking ...");
+        Logger.log("empty place handler", game.getBoard().getRivalPlayer().getMonsterZone().getNumberOfFullCells() + " |");
 
         SelectedCard selectedCard = game.getSelectedCard();
         String command = request.getString("command");
         switch (Objects.requireNonNull(CommandTags.fromValue(command))) {
-            case ATTACK_DIRECT:
+            case DIRECT_ATTACK:
                 if (game.getBoard().getRivalPlayer().getMonsterZone().getNumberOfFullCells() > 0)
                     return Strings.DIRECT_ATTACK_NOT_POSSIBLE.getLabel();
                     break;

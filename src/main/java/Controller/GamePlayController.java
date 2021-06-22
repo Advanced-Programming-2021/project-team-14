@@ -111,7 +111,7 @@ public class GamePlayController {
         directAttack.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new TurnLogHandler())
-                .linksWith(new CardExistenceHandler())
+                .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TaskHandler());
         return directAttack.handle(request, duel);
     }
@@ -129,7 +129,7 @@ public class GamePlayController {
                 .linksWith(new MonsterCardTypeHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-                .linksWith(new TurnLogHandler())
+//                .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
@@ -153,7 +153,7 @@ public class GamePlayController {
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-                .linksWith(new TurnLogHandler())
+//                .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
         return set.handle(request, duel);
