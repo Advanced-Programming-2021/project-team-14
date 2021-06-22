@@ -19,7 +19,6 @@ public enum CommandTags {
     SELECT_HAND("select hand"),
     ACTIVATE_EFFECT("activate effect"),
     SHOW_SELECTED_CARD("show card"),
-    ATTACK_DIRECT("attack direct"),
     CANCEL_ACTIVATION("cancel activation"),
     BACK("back"),
 

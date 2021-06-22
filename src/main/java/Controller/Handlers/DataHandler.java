@@ -18,20 +18,20 @@ public class DataHandler extends GameHandler {
         SelectedCard selectedCard = duel.getGame().getSelectedCard();
         String effectTime = selectedCard.getCard().getEffectValue(EffectsEnum.EFFECT_TIME.getLabel());
             if (!effectTime.matches("entered name exist|" + Strings.NONE.getLabel())){
-                return "preparation is not ready :|";
+                return Strings.PREPARATION_NOT_READY.getLabel();
             }
 
 
         if ("Mirror Force".equals(selectedCard.getCard().getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel()))) {
             if (duel.getGame().getBoard().getRivalPlayer().getMonsterZone().getCellsByState(State.OFFENSIVE_OCCUPIED) == 0) {
-                return "preparation is not ready, there is no monster in attacking position to destroy";
+                return Strings.PREPARATION_NOT_READY_MIRROR_FORCE.getLabel();
             }
         }
 
 
         if (request.has("data") && request.getString("data").equals("cancel")) {
             Response.success();
-            return "canceled successfully";
+            return Strings.CANCELED_SUCCESSFULLY.getLabel();
         }
 
         if (selectedCard.getCard().getProperty() == Property.EQUIP) {
@@ -42,7 +42,7 @@ public class DataHandler extends GameHandler {
                     return "So please select a card to equip: " + suitableCards.toString();
                 }
             } else {
-                return "the preparation is not ready yet, there is no suitable card in monster zone to equip.";
+                return Strings.PREPARATION_NOT_READY_EQUIP.getLabel();
             }
         }
         if (selectedCard.getCard().getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel()).equals("change owner")) {
@@ -60,7 +60,7 @@ public class DataHandler extends GameHandler {
                     return "the preparation is not ready yet, your monsterZone is full";
                 }
             } else {
-                return "the preparation is not ready yet, there is no monster to get its control";
+                return Strings.PREPARATION_NOT_READY_OWNERSHIP.getLabel();
             }
         }
         if (selectedCard.getCard().getEffectValue(EffectsEnum.CHANGE_DESTROY_ADD_CARD.getLabel()).equals("destroy card")) {
@@ -76,7 +76,7 @@ public class DataHandler extends GameHandler {
                     return "please choose a spell card to destroy: " + suitableCards.toString();
                 }
             } else {
-                return "the preparation is not ready yet, there is no spell to destroy";
+                return Strings.PREPARATION_NOT_READY_NO_SPELL_TO_DESTROY.getLabel();
             }
         }
 
