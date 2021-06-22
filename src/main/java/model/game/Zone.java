@@ -122,7 +122,7 @@ public class Zone {
     public ArrayList<Card> getCards(String value) {
         ArrayList<Card> cards = new ArrayList<>();
         for (Cell cell : cells.values()) {
-            if (!cell.isEmpty() && cell.getCard().getEffectValue(EffectsEnum.ATTACK_DEFENSE.getLabel()).equals(value)) cards.add(cell.getCard());
+            if (!cell.isEmpty() && cell.getCard().getEffectValue(EffectsEnum.SPECIAL_COMMAND.getLabel()).equals(value)) cards.add(cell.getCard());
         }
         return cards;
     }

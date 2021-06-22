@@ -97,7 +97,7 @@ public class GamePlayMenu extends Menu {
                 Request.send();
                 Console.print(Request.getMessage());
             } else if (command.matches(Regexes.ATTACK_DIRECT.getLabel())) {            // direct attack
-                Request.setCommandTag(CommandTags.ATTACK_DIRECT);
+                Request.setCommandTag(CommandTags.DIRECT_ATTACK);
                 Request.send();
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());

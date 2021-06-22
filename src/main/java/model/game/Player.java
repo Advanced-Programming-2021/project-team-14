@@ -24,9 +24,7 @@ public class Player {
     private Zone monsterZone;
     private ArrayList<Card> activatedCards;
 
-    public ArrayList<Card> getActivatedCards() {
-        return activatedCards;
-    }
+
 
     private Zone spellZone;
 
@@ -38,9 +36,6 @@ public class Player {
 
     private int lifePoint;
 
-    public void addToActiveCards(Card card) {
-        activatedCards.add(card);
-    }
 
     public Player(User user) {
         this.winningRounds = 0;
