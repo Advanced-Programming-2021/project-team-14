@@ -1,10 +1,10 @@
 package Controller;
 
-import Controller.enums.CommandTags;
 import Controller.enums.Responses;
 import model.Database;
 import model.User;
 import org.json.JSONObject;
+import view.enums.CommandTags;
 
 public class ProfileController {
 
@@ -23,31 +23,21 @@ public class ProfileController {
 
 
     private static String changePass(String username, String currentPassword, String newPassword) {
+        if (isPasswordValid(username, currentPassword)) {         // if current password valid
+            if (!currentPassword.equals(newPassword)) {
 
-        if (doesUsernameExists(username)) {
-            if (isPasswordValid(username, currentPassword)) {         // if current password valid
-                if (!currentPassword.equals(newPassword)) {
-
-                    Response.success();
-                    User user = User.getUserByUsername(username);
-                    user.changePassword(newPassword);
-                    user.updateDatabase();
-                    return Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel();
-
-                } else {
-                    Response.error();
-                    return Responses.NOT_NEW_PASSWORD.getLabel();
-                }
+                Response.success();
+                User user = User.getUserByUsername(username);
+                user.changePassword(newPassword);
+                user.updateDatabase();
+                return Responses.CHANGE_PASSWORD_SUCCESSFUL.getLabel();
             }
             Response.error();
-            return Responses.INVALID_CURRENT_PASSWORD.getLabel();
-        } else {
-            Response.error();
-            return Responses.USERNAME_NOT_EXISTS.getLabel();
+            return Responses.NOT_NEW_PASSWORD.getLabel();
         }
+            Response.error();
+            return Responses.INVALID_CURRENT_PASSWORD.getLabel();
     }
-
-
 
     private static String changeNickname(String username, String newNickname) {
 
@@ -63,13 +53,15 @@ public class ProfileController {
     }
 
     private static String changeUsername(String username, String newUsername) {
-
+        System.out.println(username + " | " + doesUsernameExists(username));
         if (!doesUsernameExists(newUsername)) {
             Response.success();
             User user = User.getUserByUsername(username);
             user.changeUsername(newUsername);
+            User.changeUserUsername(username, user);
             Database.deleteFile(username);
             user.updateDatabase();
+            Response.addToken(newUsername);
             return Responses.CHANGE_USERNAME_SUCCESSFUL.getLabel();
         }
         Response.error();

@@ -5,17 +5,17 @@ import java.util.HashMap;
 
 public class User {
 
-    private Wallet wallet;
-    private String activeDeck;
     private static final HashMap<String, User> users;
     private static final ArrayList<String> nicknames;
-    private HashMap<String, Deck> decks;
 
     static {
         users = new HashMap<>();
         nicknames = new ArrayList<>();
     }
 
+    private Wallet wallet;
+    private String activeDeck;
+    private HashMap<String, Deck> decks;
     private String username;
     private String password;
     private String nickname;
@@ -34,48 +34,13 @@ public class User {
         updateDatabase();
     }
 
-    public boolean doesDeckExist(String deckName) {
-        return decks.containsKey(deckName);
-    }
-
-
     public User(User user, String username) {
         nicknames.add(user.getNickname());
         users.put(username, user);
     }
 
-
-    public void removeDeck(String deckName) {
-        decks.remove(deckName);
-    }
-
-
     public static void addUser(User user) {
         new User(user, user.getUsername());
-    }
-
-    public HashMap<String, Deck> getDecks() {
-        return decks;
-    }
-
-    public String getActiveDeck() {
-        return activeDeck;
-    }
-
-    public void addDeck(String deckName) {
-        decks.put(deckName, new Deck(deckName));
-    }
-
-    public void updateDatabase() {
-        Database.saveUserInDatabase(this);
-    }
-
-    public void setActiveDeck(String deckName) {
-        this.activeDeck = deckName;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public static boolean doesUsernameExist(String username) {
@@ -94,12 +59,58 @@ public class User {
         return new ArrayList<>(users.values());
     }
 
-    public int getScore() {
-        return this.score;
-    }
-
     public static User getUserByUsername(String username) {
         return users.get(username);
+    }
+
+    public static User getUserByNickname(String nickname) {
+
+        for (User user : users.values()) {
+            if (user.getNickname().equals(nickname)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public static void changeUserUsername(String username, User UpdatedUser) {
+        users.replace(username, UpdatedUser);
+    }
+
+    public boolean doesDeckExist(String deckName) {
+        return decks.containsKey(deckName);
+    }
+
+    public void removeDeck(String deckName) {
+        decks.remove(deckName);
+    }
+
+    public HashMap<String, Deck> getDecks() {
+        return decks;
+    }
+
+    public String getActiveDeck() {
+        return activeDeck;
+    }
+
+    public void setActiveDeck(String deckName) {
+        this.activeDeck = deckName;
+    }
+
+    public void addDeck(String deckName) {
+        decks.put(deckName, new Deck(deckName));
+    }
+
+    public void updateDatabase() {
+        Database.saveUserInDatabase(this);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public Wallet getWallet() {
@@ -117,16 +128,6 @@ public class User {
     @Override
     public String toString() {
         return String.format("%-3d | %-20s : %d", rank, nickname, score);
-    }
-
-    public static User getUserByNickname(String nickname) {
-
-        for (User user : users.values()) {
-            if (user.getNickname().equals(nickname)) {
-                return user;
-            }
-        }
-        return null;
     }
 
     public void increaseScore(int amount) {
@@ -152,6 +153,10 @@ public class User {
 
     public Deck getDeck(String deckName) {
         return decks.get(deckName);
+    }
+
+    public static void removeUser(String name) {
+        users.remove(name);
     }
 
     public boolean doesHaveActiveDeck() {

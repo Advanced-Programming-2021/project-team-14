@@ -2,6 +2,7 @@ package Controller.enums;
 
 public enum Responses {
     LOGIN_SUCCESSFUL("user logged in successfully!"),
+    USER_DELETE_SUCCESSFUL("user deleted successfully!"),
     WRONG_PASSWORD("Username and password did not match!"),
     REGISTER_SUCCESSFUL("user created successfully!"),
     CREATE_DECK_SUCCESSFUL("deck created successfully!"),

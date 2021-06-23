@@ -20,7 +20,7 @@ public enum CommandTags {
     SHOP_SHOW_ALL("shop show --all"),
     INCREASE_MONEY("increase money"),
     IMPORT("import card"),
-    EXPORT("export card");
+    EXPORT("export card"), DELETE_USER("delete user");
 
     public final String label;
 
