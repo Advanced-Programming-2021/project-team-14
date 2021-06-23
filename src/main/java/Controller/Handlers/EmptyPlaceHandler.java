@@ -20,7 +20,6 @@ public class EmptyPlaceHandler extends GameHandler {
         Game game = duel.getGame();
 
         Logger.log("empty place handler", "checking ...");
-        Logger.log("empty place handler", game.getBoard().getRivalPlayer().getMonsterZone().getNumberOfFullCells() + " |");
 
         SelectedCard selectedCard = game.getSelectedCard();
         String command = request.getString("command");

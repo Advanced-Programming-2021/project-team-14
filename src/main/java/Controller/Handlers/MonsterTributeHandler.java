@@ -74,26 +74,4 @@ public class MonsterTributeHandler extends GameHandler {
         return super.handle(request, duel);
     }
 
-
-    public void tributeChecker(int tributeCardAddress1, int tributeCardAddress2, Game game) {
-
-        if (game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).isEmpty()) {
-            if (tributeCardAddress2 == 1000) {
-                response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE.getLabel();
-            } else if (game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
-
-                response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
-            } else if (!game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
-
-                response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
-            }
-
-        } else if (!game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).isEmpty()) {
-
-            if (tributeCardAddress2 != 1000 && game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
-
-                response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
-            }
-        }
-    }
 }

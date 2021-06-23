@@ -406,19 +406,17 @@ public class TaskHandler extends GameHandler {
     public void damage(boolean toOpponent, int damage) {
         Game game = duel.getGame();
 
-        Player mainPlayer = main;
-        Player rivalPlayer = rival;
         boolean isEnded = false;
 
-        if ((toOpponent ? rivalPlayer : mainPlayer).getLifePoint() <= damage) {
-            (toOpponent ? rivalPlayer : mainPlayer).setLifePoint(0);
+        if ((toOpponent ? rival : main).getLifePoint() <= damage) {
+            (toOpponent ? rival : main).setLifePoint(0);
             isEnded = true;
-            game.endGame((toOpponent ? mainPlayer : rivalPlayer), (toOpponent ? rivalPlayer : mainPlayer));
+            game.endGame((toOpponent ? main : rival), (toOpponent ? rival : main));
             duel.startNewRound();
         }
 
         if (!isEnded) {
-            (toOpponent ? rivalPlayer : mainPlayer).decreaseLifePoint(Math.abs(damage));
+            (toOpponent ? rival : main).decreaseLifePoint(Math.abs(damage));
         }
     }
 
