@@ -1,12 +1,11 @@
 package Controller.Handlers;
 
 import Controller.Response;
-import model.Strings;
 import model.card.SelectedCard;
 import model.card.enums.CardType;
+import model.game.Chain;
 import model.game.Duel;
 import model.game.Game;
-import model.game.Player;
 import model.game.Zone;
 import org.json.JSONObject;
 
@@ -59,24 +58,3 @@ public class ChainHandler {
 
 }
 
-class Chain {
-    private final SelectedCard selectedCard;
-    private final JSONObject request;
-
-    public Chain(SelectedCard selectedCard, JSONObject request) {
-        this.selectedCard = new SelectedCard(selectedCard.getCard(), selectedCard.isOpponent());
-        this.request = new JSONObject(request, JSONObject.getNames(request));
-    }
-
-
-
-    public SelectedCard getSelectedCard() {
-        return selectedCard;
-    }
-
-    public JSONObject getRequest() {
-        return request;
-    }
-
-
-}
