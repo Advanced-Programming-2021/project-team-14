@@ -113,6 +113,20 @@ public class Database {
         }
     }
 
+    public static void saveChangesInFiles(User user, String fileName) {
+        String jsonString = new Gson().toJson(user);
+
+        //create file address
+        String userFileAddress = usersDirectory + "\\" + fileName + ".json";
+
+        try (FileWriter file = new FileWriter(userFileAddress)) {
+            //Write any JSONArray or JSONObject instance to the file
+            file.write(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
         for (int i = n; i < keys.length; i++) {
             effects.put(keys[i], row[i]);
@@ -159,6 +173,17 @@ public class Database {
                 return DatabaseResponses.BAD_FORMAT_ERROR;
             }
             return DatabaseResponses.SUCCESSFUL;
+        }
+    }
+
+    public static void deleteFile(String fileName) {
+
+        String userFileAddress = usersDirectory + "\\" + fileName + ".json";
+
+        File file = new File(userFileAddress);
+
+        if (file.delete()) {
+            Logger.log("database", "File deleted!");
         }
     }
 
