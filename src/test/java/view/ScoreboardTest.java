@@ -84,10 +84,7 @@ public class ScoreboardTest {
         Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
         Request.send();
         String actual = "1   | nick1                : 1000\n" +
-                        "2   | nick2                : 500\n" +
-                        "3   | nickname             : 0\n" +
-                        "3   | nicknameCreate       : 0\n" +
-                        "3   | profileNickname      : 0";
-        Assertions.assertEquals(actual, Request.getMessage());
+                        "2   | nick2                : 500";
+        Assertions.assertTrue(Request.getMessage().startsWith(actual));
     }
 }

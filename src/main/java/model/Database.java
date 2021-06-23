@@ -79,6 +79,10 @@ public class Database {
     public static void prepareDatabase() {
         createDirectory();
         loadUsers();
+        loadCards();
+    }
+
+    public static void loadCards() {
         Database.readDataLineByLine(spellTrapDirectory);
         Database.readDataLineByLine(monsterDirectory);
     }

@@ -29,7 +29,7 @@ public class Request {
     }
 
     public static void setOption(String command, String option) { // extract option if available
-        request.put(option, command.contains("--" + option));
+        addBooleanData(option, command.contains("--" + option));
     }
 
     public static String getMessage() {
@@ -114,5 +114,9 @@ public class Request {
 
     public static boolean isChoice() {
         return response.getString("type").equals(Responses.CHOICE.getLabel());
+    }
+
+    public static void addBooleanData(String option, boolean bool) {
+        request.put(option, bool);
     }
 }
