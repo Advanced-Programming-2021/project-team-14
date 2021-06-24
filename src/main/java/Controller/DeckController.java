@@ -119,7 +119,7 @@ public class DeckController {
                     return String.format(Responses.ENOUGH_CARDS.getLabel(), cardName, deckName);
                 }
                 Response.error();
-                return (isSideDeck ? Responses.MAIN_DECK_IS_FULL : Responses.SIDE_DECK_IS_FULL).getLabel();
+                return (isSideDeck ? Responses.SIDE_DECK_IS_FULL : Responses.MAIN_DECK_IS_FULL).getLabel();
             }
             Response.error();
             return String.format(Responses.DECK_NOT_EXIST.getLabel(), deckName);
