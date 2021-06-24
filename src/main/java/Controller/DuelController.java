@@ -45,6 +45,7 @@ public class DuelController {
         if (!first.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), first.getUsername());
 
         if (!first.getDeck(first.getActiveDeck()).isValid())
+
             return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
 
         int rounds = request.getInt(Strings.ROUNDS_NUMBER.getLabel());

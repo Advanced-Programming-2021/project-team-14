@@ -41,6 +41,6 @@ public int getSize(){
     }
 
     public void remove(int positionIndex) {
-        cards.remove(positionIndex - 1);
+        cards.remove(positionIndex);
     }
 }

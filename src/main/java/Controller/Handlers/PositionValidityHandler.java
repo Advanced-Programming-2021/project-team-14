@@ -10,7 +10,10 @@ public class PositionValidityHandler extends GameHandler {
         Game game = duel.getGame();
 
         String area = request.getString(Strings.AREA.getLabel());
-        int position = request.getInt(Strings.POSITION.getLabel());
+        int position = 0;
+        if (!area.equals("field")) {
+            position = request.getInt(Strings.POSITION.getLabel());
+        }
 
         switch (area) {
             case "monster":

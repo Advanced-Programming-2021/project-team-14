@@ -1,10 +1,6 @@
 package model;
 
-import model.card.Card;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Wallet {
 
@@ -31,6 +27,7 @@ public class Wallet {
     }
 
     public void addCard(String card) {
+
         cards.add(card);
     }
 

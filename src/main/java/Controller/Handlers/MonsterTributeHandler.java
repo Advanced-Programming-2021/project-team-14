@@ -21,7 +21,7 @@ public class MonsterTributeHandler extends GameHandler {
 
         if (level == 5 || level == 6) {
 
-            if (!request.getString("tributeCardAddress1").equals("")) {
+            if (request.getString("tributeCardAddress1").equals("")) {
 
                 if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
                     response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
@@ -47,7 +47,7 @@ public class MonsterTributeHandler extends GameHandler {
 
         } else if (level == 7 || level == 8) {
 
-            if (!request.getString("tributeCardAddress1").equals("")) {
+            if (request.getString("tributeCardAddress1").equals("")) {
 
                 if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
                     response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();

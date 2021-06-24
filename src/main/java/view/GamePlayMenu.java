@@ -64,8 +64,6 @@ public class GamePlayMenu extends Menu {
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             }
-
-
         } else if (inputCommand.matches(Regexes.FLIP_SUMMON.getLabel())) {             // summon cards
 
             Request.setCommandTag(CommandTags.FLIP_SUMMON);

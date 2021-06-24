@@ -59,6 +59,7 @@ public class ShopController {
 
         userWallet.addCard(cardName);
         userWallet.decreaseCash(price);
+        user.updateDatabase();
         Response.success();
         return Responses.CARD_BOUGHT_SUCCESSFULLY.getLabel();   // card bought successfully
 
