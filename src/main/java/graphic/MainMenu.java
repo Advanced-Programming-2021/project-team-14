@@ -2,13 +2,11 @@ package graphic;
 
 
 import com.jfoenix.controls.JFXButton;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import sample.MainGraphic;
 
-public class MainMenu {
+public class MainMenu extends Menu{
 
     public AnchorPane view;
 
@@ -19,8 +17,9 @@ public class MainMenu {
     }
 
     public void initialize() {
-        setView("ProfileMenu");
+        setView("DeckMenu");
     }
+
 
     public void change(MouseEvent mouseEvent) {
         String nextView;

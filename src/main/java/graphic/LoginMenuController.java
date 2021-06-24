@@ -12,11 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-public class LoginMenuController{
+public class LoginMenuController extends Menu{
     @FXML
     public JFXButton changeState, mainButton;
     @FXML
@@ -70,8 +71,8 @@ public class LoginMenuController{
                 response.setText(Request.getMessage());
                 response.getStyleClass().add("successful-snackbar");
             }
-        }
         new JFXSnackbar(root).enqueue(new JFXSnackbar.SnackbarEvent(response, Duration.seconds(2), null));
+        }
     }
     public void login() {
         Label response = new Label();
@@ -92,6 +93,8 @@ public class LoginMenuController{
                 response.setText(Request.getMessage());
                 Request.getToken();
                 response.getStyleClass().add("successful-snackbar");
+                setCurrentUser(usernameField.getText());
+                MainGraphic.setRoot("MainMenu");
             }
         }
         new JFXSnackbar(root).enqueue(new JFXSnackbar.SnackbarEvent(response, Duration.seconds(2), null));
