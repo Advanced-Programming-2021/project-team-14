@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Circle?>
+<fx:root prefHeight="50.0" prefWidth="488.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane layoutX="27.0" prefWidth="494.0" styleClass="deckListItem" stylesheets="@deckListItem.css">
+        <JFXButton fx:id="delete" layoutX="429.0" layoutY="12.0"/>
+        <JFXButton fx:id="edit" layoutX="400.0" layoutY="12.0"/>
+        <Text id="deckName" fx:id="deckName" fill="WHITE" layoutX="36.0" layoutY="31.0" text="deckName" />
+    </AnchorPane>
+    <Circle fx:id="validity"  layoutX="27.0" layoutY="26.0" radius="17.0" />
+    <Text id="deckCardSize" fx:id="cardsNum" fill="WHITE" layoutX="20.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="53" />
+</fx:root>

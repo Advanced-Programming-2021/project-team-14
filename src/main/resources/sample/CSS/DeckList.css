@@ -1,0 +1,20 @@
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-pref-width: 600;
+}
+
+.list-view .list-cell {
+    -fx-skin: none;
+
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:focused {
+    -fx-background-color: transparent;
+}
+
