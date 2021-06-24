@@ -27,10 +27,12 @@ public class MainGraphic extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    public static FXMLLoader fxmlLoader(String fxml) {
+        return new FXMLLoader(MainGraphic.class.getResource("/sample/fxml/" + fxml + ".fxml"));
+    }
 
     public static Parent loadFXML(String fxml) {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainGraphic.class.getResource("/sample/fxml/" + fxml + ".fxml"));
+        FXMLLoader fxmlLoader = fxmlLoader(fxml);
 
         try {
             return fxmlLoader.load();
