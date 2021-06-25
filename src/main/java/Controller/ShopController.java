@@ -24,7 +24,21 @@ public class ShopController {
 
         else if (commandTag.equals(CommandTags.INCREASE_MONEY.getLabel()))
             Response.addMessage(increaseMoney(request.getString("amount"), request.getString("token")));
+
+        else if (commandTag.equals(view.enums.CommandTags.SHOW_CARD.getLabel()))
+            Response.addMessage(showCard(request));
+
     }
+
+
+    private static String showCard(JSONObject request) {
+
+        if (Card.doesCardExist(request.getString("card"))) {
+            return Card.getCardByName(request.getString("card")).show();
+        }
+        return view.enums.CommandTags.CARD_NOT_FOUND.getLabel();
+    }
+
 
     private static String increaseMoney(String amount, String username) {       //cheat increase money
         User.getUserByUsername(username).getWallet().increaseCash(Integer.parseInt(amount));

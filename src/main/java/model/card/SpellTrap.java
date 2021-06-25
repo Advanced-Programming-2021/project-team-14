@@ -53,6 +53,7 @@ public class SpellTrap extends Card {
 
     @Override
     public String show() {
+
         return showCard.getHorizontalLine() + showCard.getTypeLine(getCardType().getLabel()) +
                 showCard.getFreeLine() + showCard.getNameLine(getName()) +
                 showCard.getPriceLine(getPrice()) +

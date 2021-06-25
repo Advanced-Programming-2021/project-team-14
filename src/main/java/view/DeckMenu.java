@@ -25,6 +25,11 @@ public class DeckMenu extends Menu {
                 Request.send();
                 Console.print(Request.getMessage());
 
+            } else if (command.matches(Regexes.SHOW_CARD.getLabel())) {             //show selected card
+                Request.setCommandTag(CommandTags.SHOW_CARD);
+                Request.addDataToRequest(Regexes.SHOW_CARD.getLabel(), command, "card");
+                Request.send();
+                Console.print(Request.getMessage());
             } else if (command.matches(Regexes.DELETE_DECK.getLabel())) {   // delete deck ...
 
                 Request.setCommandTag(CommandTags.DELETE_DECK);

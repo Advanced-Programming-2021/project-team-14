@@ -6,22 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="94e61c3d-89a0-40bd-8728-67270785ade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/CardTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/CardTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/PositionValidityHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/PositionValidityHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/TaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/TaskHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/enums/CommandTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/enums/CommandTags.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Strings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/card/SpellTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/card/SpellTrap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/DeckMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Console.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/RegistrationMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Request.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/CommandTags.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Menus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Regexes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Responses.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624607098414</updated>
-      <workItem from="1624607103535" duration="2893000" />
+      <workItem from="1624607103535" duration="30632000" />
     </task>
     <task id="LOCAL-00001" summary="merge Master with AIPlayer">
       <created>1624608063940</created>
@@ -93,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624608063940</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix some bugs">
+      <created>1624610602124</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624610602124</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,9 +109,72 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge Master with AIPlayer" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge Master with AIPlayer" />
+    <MESSAGE value="fix some bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some bugs" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/GraveYard.java</url>
+          <line>24</line>
+          <properties class="model.game.GraveYard" method="showCards">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
+          <line>59</line>
+          <properties class="model.game.Duel" method="endDuelChecker">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
+          <line>51</line>
+          <properties class="model.game.Duel" method="startNewRound">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
+          <line>76</line>
+          <properties class="model.game.Duel" method="rewardPlayers">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
+          <line>109</line>
+          <properties class="model.game.Duel" method="findLoserAndWinner">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
+          <line>98</line>
+          <properties class="model.game.Duel" method="findMaxLifePoint">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Game.java</url>
+          <line>123</line>
+          <properties class="model.game.Game" method="endGame">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

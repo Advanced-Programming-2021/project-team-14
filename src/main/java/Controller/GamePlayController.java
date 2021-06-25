@@ -3,6 +3,7 @@ package Controller;
 import Controller.Handlers.*;
 import model.Strings;
 import model.User;
+import model.card.Card;
 import model.game.Duel;
 import org.json.JSONObject;
 import view.enums.CommandTags;
@@ -49,6 +50,8 @@ public class GamePlayController {
             Response.addMessage(showSelectedCard(request));
         } else if (command.equals(CommandTags.SHOW_GRAVEYARD.getLabel())) {
             Response.addMessage(showGraveyard(request));
+        } else if (command.equals(CommandTags.SHOW_CARD.getLabel())) {
+            Response.addMessage(showCard(request));
         } else if (command.equals(CommandTags.SELECT.getLabel())) {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.DESELECT.getLabel())) {
@@ -66,6 +69,15 @@ public class GamePlayController {
         }
 
         Response.addObject("game", duel.getGame().getGameObject());
+    }
+
+    private static String showCard(JSONObject request) {
+
+        if (Card.doesCardExist(request.getString("card"))) {
+            return Card.getCardByName(request.getString("card")).show();
+        }
+
+        return CommandTags.CARD_NOT_FOUND.getLabel();
     }
 
     private static void activationCanceled(JSONObject request) {

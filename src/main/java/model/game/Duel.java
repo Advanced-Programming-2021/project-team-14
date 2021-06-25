@@ -22,11 +22,13 @@ public class Duel {
     private Player secondPlayer;
     private int numberOfRounds;
     private boolean isAI;
+    private int round;
 
 
     public Duel(User mainUser, User rivalUser, int round) {
 
         this.isAI = false;
+        this.round = 1;
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(rivalUser);
         setNumberOfRounds(round);
@@ -36,6 +38,7 @@ public class Duel {
     public Duel(User mainUser, int round) {                         // for ai player
 
         this.isAI = true;
+        this.round = 1;
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"));
         setNumberOfRounds(round);
@@ -47,6 +50,7 @@ public class Duel {
     }
 
     public void startNewRound() {
+        round++;
         if (isAI)
             setGame(new Game(firstPlayer, secondPlayer, this, true));
         else
@@ -149,6 +153,10 @@ public class Duel {
 
     public String getCreatorNickname() {
         return creatorNickname;
+    }
+
+    public int getRound() {
+        return this.round;
     }
 
     public void setCreatorNickname(String creatorNickname) {

@@ -3,10 +3,12 @@ package view.enums;
 public enum CommandTags {
 
     SURRENDER("surrender"),
+    CARD_NOT_FOUND("card not found!"),
     SET("set"),
     SELECT("select"),
     NEXT_PHASE("next phase"),
     SET_POSITION("set position"),
+    SHOW_CARD("show card everywhere"),
     SUMMON("summon"),
     ATTACK("attack"),
     DIRECT_ATTACK("attack direct"),
@@ -49,7 +51,9 @@ public enum CommandTags {
 
     //cheat
     INCREASE_MONEY("increase money"),
+    SELECT_FORCE("select force"),
     INCREASE_LIFE_POINT("increase --LP ([\\d]+)");
+
 
     public final String label;
 

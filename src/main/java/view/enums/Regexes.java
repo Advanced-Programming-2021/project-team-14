@@ -8,6 +8,7 @@ public enum Regexes {
 
 
     SHOP_SHOW_ALL("shop show --all"),
+    SHOW_CARD("^card show ([\\w\\s-]+)"),
     SELECT("^select (?=.*(--(spell|monster|hand|sp|mn|hd) (\\d+))).*$"),
     SELECT_SPELL("^select (?=.*(--(spell|sp) (\\d+))).*$"),   //no usage found
     DESELECT("select -d"),
@@ -59,6 +60,7 @@ public enum Regexes {
     //cheat
     INCREASE_MONEY("increase --money ([\\d]+)"),
     INCREASE_LIFE_POINT("increase --LP ([\\d]+)"),
+    SELECT_FORCE("select --hand ([\\w\\s-]+) --force"),
     SURRENDER("surrender");
 
 

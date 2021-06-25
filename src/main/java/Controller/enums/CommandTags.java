@@ -3,8 +3,10 @@ package Controller.enums;
 public enum CommandTags {
 
     LOGIN("login"),
+    SHOW_CARD("show card everywhere"),
     REGISTER("register"),
     CREATE_DECK("create-deck"),
+    CARD_NOT_FOUND("card not found!"),
     DELETE_DECK("delete-deck"),
     ACTIVATE_DECK("activate-deck"),
     ADD_CARD("add-card"),

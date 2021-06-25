@@ -475,8 +475,8 @@ public class TaskHandler extends GameHandler {
 
     private void tribute(int positionIndex) {
         Cell tributeCell = main.getMonsterZone().getCell(positionIndex);
-        tributeCell.removeCard();
         main.getGraveYard().addCard(tributeCell.getCard());
+        tributeCell.removeCard();
     }
 
     private String select() {

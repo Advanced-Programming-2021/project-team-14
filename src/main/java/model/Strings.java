@@ -57,6 +57,7 @@ public enum Strings {
     CARD_SELECTED("card selected"),
     CARD_DESELECTED("card deselected"),
     OPPONENT_OPTION("opponent"),
+    FORCE("force"),
     NO_CARD_FOUND("no card found in the given position"),
     AREA("area"),
     POSITION("position"),

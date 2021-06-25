@@ -49,6 +49,9 @@ public class Player {
         this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
+        hand.addCard(Card.getCardByName("Battle OX"));
+        hand.addCard(Card.getCardByName("Leotron"));
+//        hand.addCard(Card.getCardByName("Skull Guardian"));
         addNCardsToHand(6);
         this.activatedCards = new ArrayList<>();
     }

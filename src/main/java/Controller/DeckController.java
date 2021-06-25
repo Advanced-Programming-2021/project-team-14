@@ -10,7 +10,6 @@ import model.card.Card;
 import model.card.enums.CardType;
 import org.json.JSONObject;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,7 +47,23 @@ public class DeckController {
 
         else if (commandTag.equals(CommandTags.SHOW_DECK.getLabel()))
             Response.addMessage(showDeck(request.getString(Strings.DECK_NAME.getLabel()), request.getBoolean(Strings.SIDE_OPTION.getLabel()), user));
+
+        else if (commandTag.equals(CommandTags.SHOW_CARD.getLabel())) {
+            Response.addMessage(showCard(request));
+        }
+
     }
+
+
+    private static String showCard(JSONObject request) {
+
+        if (Card.doesCardExist(request.getString("card"))) {
+            return Card.getCardByName(request.getString("card")).show();
+        }
+
+        return CommandTags.CARD_NOT_FOUND.getLabel();
+    }
+
 
     private static String showAllDecks(User user) {
         HashMap<String, Deck> decks = new HashMap<>(user.getDecks());

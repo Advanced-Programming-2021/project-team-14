@@ -30,8 +30,14 @@ public class GamePlayMenu extends Menu {
             Request.setCommandTag(CommandTags.SHOW_SELECTED_CARD);
             Request.send();
             Console.print(Request.getMessage());
+        } else if (inputCommand.matches(Regexes.SHOW_CARD.getLabel())) {             //show selected card
+            Request.setCommandTag(CommandTags.SHOW_CARD);
+            Request.addDataToRequest(Regexes.SHOW_CARD.getLabel(), command, "card");
+            Request.send();
+            Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.SHOW_GRAVEYARD.getLabel())) {
             while (!inputCommand.equals(CommandTags.BACK.getLabel())) {
+                setCurrentMenu(Menus.GAMEPLAY_MENU);
                 Request.setCommandTag(CommandTags.SHOW_GRAVEYARD);
                 Request.send();
                 Console.printBoard(Request.getResponse());
@@ -116,9 +122,9 @@ public class GamePlayMenu extends Menu {
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
-        } else if (inputCommand.matches(Regexes.INCREASE_LIFE_POINT.getLabel())) {            // attack to
+        } else if (inputCommand.matches(Regexes.INCREASE_LIFE_POINT.getLabel())) {            // increase life point
             Request.setCommandTag(CommandTags.INCREASE_LIFE_POINT);
-            Request.addDataToRequest(Regexes.INCREASE_LIFE_POINT.getLabel(), inputCommand, "increase life point");
+            Request.addDataToRequest(Regexes.INCREASE_LIFE_POINT.getLabel(), inputCommand, "amount");
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());

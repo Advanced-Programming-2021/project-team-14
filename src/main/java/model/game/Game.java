@@ -26,6 +26,7 @@ public class Game {
 
         this.isAI = isAI;
         this.board = new Board(mainUser, rivalUser);
+        this.duel = duel;
         this.phase = Phase.DRAW_PHASE;
         this.isEnded = false;
         nextPhase();
@@ -43,6 +44,7 @@ public class Game {
         JSONObject game = new JSONObject();
         game.put("board", board.toString());
         game.put("phase", phase);
+        game.put("round", duel.getRound());
         return game;
     }
 
@@ -125,6 +127,8 @@ public class Game {
         setLoser(loser.getNickname());
         setLoserLifePoint(loser.getLifePoint());
         setWinnerLifePoint(winner.getLifePoint());
+        winner.setLifePoint(8000);
+        loser.setLifePoint(8000);
         winner.increaseWinningRounds(1);
         this.isEnded = true;
         Duel.addGame(this);
