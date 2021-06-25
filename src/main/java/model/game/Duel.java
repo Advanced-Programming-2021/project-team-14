@@ -1,6 +1,5 @@
 package model.game;
 
-import Controller.Handlers.ChainHandler;
 import model.User;
 
 import java.util.ArrayList;
@@ -22,14 +21,25 @@ public class Duel {
     private Game game;
     private Player secondPlayer;
     private int numberOfRounds;
+    private boolean isAI;
 
 
     public Duel(User mainUser, User rivalUser, int round) {
+
+        this.isAI = false;
         this.firstPlayer = new Player(mainUser);
         this.secondPlayer = new Player(rivalUser);
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this));
-        ChainHandler.prepare(this);
+        setGame(new Game(firstPlayer, secondPlayer, this, false));
+    }
+
+    public Duel(User mainUser, int round) {                         // for ai player
+
+        this.isAI = true;
+        this.firstPlayer = new Player(mainUser);
+        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"));
+        setNumberOfRounds(round);
+        setGame(new Game(firstPlayer, secondPlayer, this, true));
     }
 
     public static void addGame(Game game) {
@@ -37,7 +47,10 @@ public class Duel {
     }
 
     public void startNewRound() {
-        setGame(new Game(firstPlayer, secondPlayer, this));
+        if (isAI)
+            setGame(new Game(firstPlayer, secondPlayer, this, true));
+        else
+            setGame(new Game(firstPlayer, secondPlayer, this, false));
     }
 
     public boolean endDuelChecker() {

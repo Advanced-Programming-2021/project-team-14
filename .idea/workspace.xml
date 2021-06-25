@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94e61c3d-89a0-40bd-8728-67270785ade8" name="Default Changelist" comment="" />
+    <list default="true" id="94e61c3d-89a0-40bd-8728-67270785ade8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Strings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Console.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/RegistrationMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Request.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/CommandTags.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Menus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Regexes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/enums/Responses.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +51,31 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="project-team-14" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -41,11 +84,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624607098414</updated>
-      <workItem from="1624607103535" duration="871000" />
+      <workItem from="1624607103535" duration="2893000" />
     </task>
+    <task id="LOCAL-00001" summary="merge Master with AIPlayer">
+      <created>1624608063940</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624608063940</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merge Master with AIPlayer" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge Master with AIPlayer" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

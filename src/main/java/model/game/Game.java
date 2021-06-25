@@ -1,6 +1,5 @@
 package model.game;
 
-import Controller.Handlers.ChainHandler;
 import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
@@ -20,13 +19,13 @@ public class Game {
     private int winnerLifePoint;
     private int loserLifePoint;
     private boolean isEnded;
+    private boolean isAI;
 
 
-    public Game(Player mainUser, Player rivalUser, Duel duel) {
+    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI) {
 
-        this.duel = duel;
+        this.isAI = isAI;
         this.board = new Board(mainUser, rivalUser);
-
         this.phase = Phase.DRAW_PHASE;
         this.isEnded = false;
         nextPhase();
@@ -52,9 +51,13 @@ public class Game {
     }
 
     public void changeTurn() {
-        Player temp = board.getMainPlayer();
-        board.setMainPlayer(board.getRivalPlayer());
-        board.setRivalPlayer(temp);
+        if (!isAI) {
+            Player temp = board.getMainPlayer();
+            board.setMainPlayer(board.getRivalPlayer());
+            board.setRivalPlayer(temp);
+        } else {
+
+        }
     }
 
     public Board getBoard() {
@@ -80,10 +83,10 @@ public class Game {
                 break;
             case END_PHASE:
                 changeOwnerShips();
-                changeTurn();
                 board.getMainPlayer().getTurnLogger().reset();
                 phase = Phase.DRAW_PHASE;
                 deselect();
+                changeTurn();
                 return String.format(Strings.CHANGE_TURN_PRINT.getLabel(), phase, board.getMainPlayer().getNickname(), draw());
 
         }

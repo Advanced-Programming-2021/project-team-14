@@ -53,6 +53,7 @@ public enum Regexes {
     SHOW_SCOREBOARD("scoreboard show"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
     START_DUEL("(?:^duel (?=.*(--(second-player|sec-p) ([\\w\\-]+)))(?=.*(--(rounds|rou) (\\d+))).*$)"),
+    START_DUEL_AI("(?:^duel (?=.*(--(ai)))(?=.*(--(rounds|rou) (\\d+))).*$)"),
     ATTACK_DIRECT("attack direct"),
     EXTRACT_SHORT_DATA(".*-- ([\\w ]+).*"),
     //cheat
