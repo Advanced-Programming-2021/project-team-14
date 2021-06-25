@@ -120,7 +120,6 @@ public class GamePlayControllerTest {
     }
 
 
-
 //    @Test
 //    public void setSpell() {
 //        login("main", "123", "admin1");
@@ -133,13 +132,14 @@ public class GamePlayControllerTest {
 //        Assertions.assertEquals(Strings.CARD_SELECTED.getLabel(), Request.getMessage());
 //    }
 
-//    @Test
+    //    @Test
 //    public void attack() {
 //        login("MonsterTest", "123", "AdminTest");
 //        startDuel();
 //        setMain1Phase();
 //        selectHandCard();
 //        summonAMonster();
+//       selectHandCard();
 //        Request.setCommandTag(CommandTags.ATTACK);
 //        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
 //        Request.send();
