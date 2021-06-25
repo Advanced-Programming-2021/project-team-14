@@ -96,10 +96,4 @@ class ProfileMenuTest {
         Request.getToken();
         System.out.println(sendRequest(CommandTags.CHANGE_USERNAME, Menus.PROFILE_MENU));
     }
-
-
-
-
-
-
 }
