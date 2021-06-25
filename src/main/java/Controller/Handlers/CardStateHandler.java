@@ -27,7 +27,7 @@ public class CardStateHandler extends GameHandler {
                 return Strings.CANNOT_CHANGE_POSITION.getLabel();
             boolean isToAttack = request.getString("position").equals("attack");
             if (isToAttack && selectedCard.getCard().getState() != State.DEFENSIVE_OCCUPIED ||
-                    (!isToAttack && selectedCard.getCard().getState() == State.OFFENSIVE_OCCUPIED))
+                    (!isToAttack && selectedCard.getCard().getState() != State.OFFENSIVE_OCCUPIED))
                 return Strings.ALREADY_POSITIONED.getLabel();
         }
 

@@ -19,7 +19,7 @@ public class Hand {
 
     public void addCard(Card card) {
         card.setPosition(Position.HAND);
-        card.setPositionIndex(cards.size());
+        card.setPositionIndex(cards.size() + 1);
         cards.add(card);
     }
 
@@ -41,6 +41,6 @@ public int getSize(){
     }
 
     public void remove(int positionIndex) {
-        cards.remove(positionIndex);
+        cards.remove(positionIndex - 1);
     }
 }

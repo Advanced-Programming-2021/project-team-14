@@ -87,6 +87,7 @@ public class GamePlayMenu extends Menu {
             else
                 Request.extractData(inputCommand);
             Request.send();
+            Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.DESELECT.getLabel())) {            // deselect
             Request.setCommandTag(CommandTags.DESELECT);

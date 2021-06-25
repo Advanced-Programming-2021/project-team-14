@@ -21,13 +21,13 @@ public class MonsterTributeHandler extends GameHandler {
 
         if (level == 5 || level == 6) {
 
-            if (request.getString("tributeCardAddress1").equals("")) {
+            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
+                response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
+                Response.error();
+                return response;
+            }
 
-                if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
-                    response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
-                    Response.error();
-                    return response;
-                }
+            if (!request.getString("tributeCardAddress1").equals("")) {
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")), 1000, game);
                 if (response == null) {
@@ -47,13 +47,13 @@ public class MonsterTributeHandler extends GameHandler {
 
         } else if (level == 7 || level == 8) {
 
-            if (request.getString("tributeCardAddress1").equals("")) {
+            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
+                response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
+                Response.error();
+                return response;
+            }
 
-                if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
-                    response = Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
-                    Response.error();
-                    return response;
-                }
+            if (!request.getString("tributeCardAddress1").equals("")) {
 
                 tributeChecker(Integer.parseInt(request.getString("tributeCardAddress1")),
                         Integer.parseInt(request.getString("tributeCardAddress2")), game);
@@ -83,13 +83,10 @@ public class MonsterTributeHandler extends GameHandler {
             if (tributeCardAddress2 == 1000) {
                 response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_ONE_TRIBUTE.getLabel();
             } else if (game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
-
                 response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
             } else if (!game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
-
                 response = Strings.NO_MONSTERS_ON_THIS_ADDRESS_TWO_TRIBUTE.getLabel();
             }
-
         } else if (!game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress1).isEmpty()) {
 
             if (tributeCardAddress2 != 1000 && game.getBoard().getMainPlayer().getMonsterZone().getCell(tributeCardAddress2).isEmpty()) {
