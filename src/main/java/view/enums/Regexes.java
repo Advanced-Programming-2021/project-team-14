@@ -6,6 +6,8 @@ public enum Regexes {
     //username: un, password: pw, nickname: nn, current: cur, deck-name: dn, rounds: rou, second-player: sec-p
     //attack: att, defense: def
 
+
+    SHOP_SHOW_ALL("shop show --all"),
     SELECT("^select (?=.*(--(spell|monster|hand|sp|mn|hd) (\\d+))).*$"),
     SELECT_SPELL("^select (?=.*(--(spell|sp) (\\d+))).*$"),   //no usage found
     DESELECT("select -d"),
@@ -21,6 +23,7 @@ public enum Regexes {
     SUMMON("summon"),
     FLIP_SUMMON("flip-summon"),
     SET("set"),
+    CANCEL("cancel"),
     NEXT_PHASE(">"),
     SET_POSITION("(?:set --(position) (attack|defense))|(?:set --(pos) (att|def))"),
     ATTACK_TO("attack (\\d)"),
@@ -34,7 +37,8 @@ public enum Regexes {
     CREATE_USER("(?:^user create (?=.*(--(username|un) (\\w+)))(?=.*(--(password|pw) (\\w+)))(?=.*(--(nickname|nn) (\\w+))).*$)"),
     LOGIN_USER("(?:^user login (?=.*(--(username|un) (\\w+)))(?=.*(--(password|pw) (\\w+))).*$)"),
     CHANGE_PROFILE_NICKNAME("^profile change (?=.*(--(nickname|nn) (\\w+))).*$"),
-    CHANGE_PROFILE_PASSWORD("(?:^profile change (?=.*(--password|pw))(?=.*(--(current|cur) (\\w+)))(?=.*(--(new) (\\w+))).*$)"),
+    CHANGE_PROFILE_USERNAME("^profile change (?=.*(--(username|un) (\\w+))).*$"),
+    CHANGE_PROFILE_PASSWORD("(?:^profile change (?=.*(--password|--pw))(?=.*(--(current|cur) (\\w+)))(?=.*(--(new) (\\w+))).*$)"),
     CREATE_DECK("deck create (\\w+)"),
     DELETE_DECK("deck delete (\\w+)"),
     ACTIVATE_DECK("deck set-activate (.*)"),
@@ -49,8 +53,6 @@ public enum Regexes {
     SHOW_SCOREBOARD("scoreboard show"),
     SHOP_BUY("shop buy ([\\w\\s-]+)"),
     START_DUEL("(?:^duel (?=.*(--(second-player|sec-p) ([\\w\\-]+)))(?=.*(--(rounds|rou) (\\d+))).*$)"),
-    START_DUEL_AI("(?:^duel (?=.*(--(ai)))(?=.*(--(rounds|rou) (\\d+))).*$)"),
-    SHOP_SHOW_ALL("shop show --all"),
     ATTACK_DIRECT("attack direct"),
     EXTRACT_SHORT_DATA(".*-- ([\\w ]+).*"),
     //cheat

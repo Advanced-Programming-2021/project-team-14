@@ -1,5 +1,7 @@
 package model.card.enums;
 
+import java.util.Locale;
+
 public enum Attribute {
     EARTH("Earth"),
     WATER("Water"),
@@ -15,9 +17,10 @@ public enum Attribute {
     }
 
     public static Attribute fromValue(String givenName) {
-        for (Attribute direction : values())
-            if (direction.label.equals(givenName))
-                return direction;
+        for (Attribute attribute : values()){
+            if (attribute.label.toLowerCase(Locale.ROOT).equals(givenName.toLowerCase(Locale.ROOT)))
+                return attribute;
+        }
         return null;
     }
 

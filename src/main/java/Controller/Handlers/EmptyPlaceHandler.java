@@ -24,12 +24,18 @@ public class EmptyPlaceHandler extends GameHandler {
         SelectedCard selectedCard = game.getSelectedCard();
         String command = request.getString("command");
         switch (Objects.requireNonNull(CommandTags.fromValue(command))) {
+            case DIRECT_ATTACK:
+                if (game.getBoard().getRivalPlayer().getMonsterZone().getNumberOfFullCells() > 0)
+                    return Strings.DIRECT_ATTACK_NOT_POSSIBLE.getLabel();
+                    break;
             case ACTIVATE_EFFECT:
                 if (game.getBoard().getMainPlayer().getSpellZone().isFull() && selectedCard.getCard().getPosition() == Position.HAND && selectedCard.getCard().getProperty() != Property.FIELD)
                     return Strings.SPELL_ZONE_FULL.getLabel();
+                break;
             case SUMMON:
                 if (game.getBoard().getMainPlayer().getMonsterZone().isFull())
                     return Strings.MONSTER_ZONE_FULL.getLabel();
+                break;
             case SET:
                 if (selectedCard.getCard().getCardType() == CardType.MONSTER &&
                     game.getBoard().getMainPlayer().getMonsterZone().isFull())
@@ -37,6 +43,7 @@ public class EmptyPlaceHandler extends GameHandler {
                 if ((selectedCard.getCard().getCardType() == CardType.SPELL || selectedCard.getCard().getCardType() == CardType.TRAP) &&
                     game.getBoard().getMainPlayer().getMonsterZone().isFull())
                     return Strings.MONSTER_ZONE_FULL.getLabel();
+                break;
         }
 
 

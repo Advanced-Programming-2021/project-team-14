@@ -24,44 +24,67 @@ public class GamePlayController {
 
     public static void processCommand(JSONObject request) {
         String command = request.getString(Strings.COMMAND.getLabel());
-
         FieldController.handle(duel.getGame());
 
-        if (command.equals(CommandTags.SELECT.getLabel())) {
-            Response.addMessage(select(request));
-        } else if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
+        if (!duel.getGame().getBoard().getMainPlayer().getTurnLogger().isTemporarilyChanged()) {
+            if (command.equals(CommandTags.SET_POSITION.getLabel())) {
+                Response.addMessage(setPosition(request));
+            } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
+                Response.addMessage(flipSummon(request));
+            } else if (command.equals(CommandTags.SUMMON.getLabel())) {
+                Response.addMessage(summon(request));
+            } else if (command.equals(CommandTags.SET.getLabel())) {
+                Response.addMessage(set(request));
+            } else if (command.equals(CommandTags.NEXT_PHASE.getLabel())) {
+                Response.addMessage(nextPhase(request));
+            } else if (command.equals(CommandTags.ATTACK.getLabel())) {
+                Response.addMessage(attack(request));
+            } else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
+                Response.addMessage(directAttack(request));
+            }
+        } else {
+            Response.addMessage("its not your turn to do such an action :(");
+        }
+        if (command.equals(CommandTags.SHOW_SELECTED_CARD.getLabel())) {
             Response.addMessage(showSelectedCard(request));
         } else if (command.equals(CommandTags.SHOW_GRAVEYARD.getLabel())) {
             Response.addMessage(showGraveyard(request));
-        } else if (command.equals(CommandTags.SET_POSITION.getLabel())) {
-            Response.addMessage(setPosition(request));
-        } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
-            Response.addMessage(flipSummon(request));
-        } else if (command.equals(CommandTags.SUMMON.getLabel())) {
-            Response.addMessage(summon(request));
-        } else if (command.equals(CommandTags.SET.getLabel())) {
-            Response.addMessage(set(request));
-        } else if (command.equals(CommandTags.NEXT_PHASE.getLabel())) {
-            Response.addMessage(nextPhase(request));
-        } else if (command.equals(CommandTags.ATTACK.getLabel())) {
-            Response.addMessage(attack(request));
-        } else if (command.equals(CommandTags.DIRECT_ATTACK.getLabel())) {
-            Response.addMessage(directAttack(request));
+        } else if (command.equals(CommandTags.SELECT.getLabel())) {
+            Response.addMessage(select(request));
         } else if (command.equals(CommandTags.DESELECT.getLabel())) {
             Response.addMessage(deselect(request));
         } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
-            Response.addMessage(activateEffect(request));
-        }else if (command.equals(CommandTags.INCREASE_LIFE_POINT.getLabel())) {
+            if (duel.getGame().getBoard().getMainPlayer().getTurnLogger().isTemporarilyChanged()) {
+                Response.addMessage(activateEffectOnRivalsTurn(request));
+            } else {
+                Response.addMessage(activateEffect(request));
+            }
+        } else if (command.equals(CommandTags.INCREASE_LIFE_POINT.getLabel())) {
             Response.addMessage(increaseLifePoint(request));
+        } else if (command.equals(CommandTags.CANCEL_ACTIVATION.getLabel())) {
+            activationCanceled(request);
         }
 
-//        endGame(game);
         Response.addObject("game", duel.getGame().getGameObject());
+    }
+
+    private static void activationCanceled(JSONObject request) {
+        ChainHandler.run();
+        duel.getGame().getBoard().getRivalPlayer().getTurnLogger().setTemporarilyChanged(false);
+    }
+
+    private static String activateEffectOnRivalsTurn(JSONObject request) {
+        Handler activateEffect = new SelectedCardHandler();
+        activateEffect.linksWith(new CardTypeHandler())
+                .linksWith(new TurnLogHandler())
+                .linksWith(new DataHandler())
+                .linksWith(new TaskHandler());
+        return activateEffect.handle(request, duel);
     }
 
 
     private static String increaseLifePoint(JSONObject request) {
-       Handler taskHandler = new TaskHandler();
+        Handler taskHandler = new TaskHandler();
         return taskHandler.handle(request, duel);
     }
 
@@ -73,6 +96,7 @@ public class GamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new EmptyPlaceHandler())
                 .linksWith(new EffectHandler())
+                .linksWith(new DataHandler())
                 .linksWith(new TaskHandler());
         return activateEffect.handle(request, duel);
     }
@@ -93,6 +117,7 @@ public class GamePlayController {
         directAttack.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new TurnLogHandler())
+                .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TaskHandler());
         return directAttack.handle(request, duel);
     }
@@ -104,16 +129,15 @@ public class GamePlayController {
 
     private static String summon(JSONObject request) {
 
-        Response.add("needTribute", "false");
-        Response.add("tributeNumber", "");
         Handler summon = new SelectedCardHandler();
         summon.linksWith(new CardPositionHandler())
                 .linksWith(new CardTypeHandler())
                 .linksWith(new MonsterCardTypeHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-                .linksWith(new TurnLogHandler())
+//                .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
+                .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
         return summon.handle(request, duel);
     }
@@ -135,7 +159,8 @@ public class GamePlayController {
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-                .linksWith(new TurnLogHandler())
+//                .linksWith(new TurnLogHandler())
+                .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
         return set.handle(request, duel);
     }

@@ -17,7 +17,7 @@ public class Monster extends Card {
         attackBooster += amount;
     }
     public void changeDefenseBooster(int amount){
-        defenseBooster+= amount;
+        defenseBooster += amount;
     }
 
     static {
@@ -33,6 +33,7 @@ public class Monster extends Card {
         this.property = monsterCardType;
         this.monsterType = monsterType;
         this.effects = effects;
+        this.attribute = attribute;
         affectedCards = new ArrayList<>();
         addCard(this);
         monsters.add(this);
@@ -44,12 +45,18 @@ public class Monster extends Card {
         return affectedCards.contains(card);
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public ArrayList<Card> getAffectedCards() {
         return affectedCards;
     }
 
     public void destroy(){
         affectedCards.clear();
+        defenseBooster = 0;
+        attackBooster = 0;
     }
 
 
@@ -98,6 +105,8 @@ public class Monster extends Card {
         this.property = card.getProperty();
         this.monsterType = card.getMonsterType();
         this.effects = card.getEffects();
+        affectedCards = new ArrayList<>();
+
     }
 
 

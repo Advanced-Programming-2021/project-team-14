@@ -3,7 +3,7 @@ package Controller.enums;
 public enum EffectsEnum {
     NUMBER_OF_AFFECTED_CARDS("number of affected cards"),
     EFFECT_TIME("effect time"),
-    CHANGE_DESTROY_ADD_CARD("change/;destroy/add card"),
+    CHANGE_DESTROY_ADD_CARD("change/destroy/add card"),
     FROM("from"),
     TO("to"),
     SPECIAL_SUMMON("special summon"),

@@ -2,8 +2,12 @@ package Controller;
 
 import Controller.enums.CommandTags;
 import Controller.enums.Responses;
+import model.Database;
 import model.User;
 import org.json.JSONObject;
+import view.Logger;
+
+import java.time.LocalDate;
 
 public class RegistrationController {
 
@@ -18,6 +22,8 @@ public class RegistrationController {
             Response.addMessage(register(request.getString("username"), request.getString("password"), request.getString("nickname")));
 
     }
+
+
 
     private static String login(String username, String password) {
 

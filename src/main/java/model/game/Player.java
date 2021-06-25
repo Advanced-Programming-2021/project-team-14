@@ -3,6 +3,7 @@ package model.game;
 import model.Strings;
 import model.User;
 import model.card.Card;
+import model.card.enums.Position;
 
 import java.util.ArrayList;
 
@@ -13,15 +14,17 @@ public class Player {
     private String nickname;
 
     private PlayingDeck playingDeck;
+    private TurnLogger turnLogger;
 
+    public TurnLogger getTurnLogger() {
+        return turnLogger;
+    }
     private Hand hand;
 
     private Zone monsterZone;
     private ArrayList<Card> activatedCards;
 
-    public ArrayList<Card> getActivatedCards() {
-        return activatedCards;
-    }
+
 
     private Zone spellZone;
 
@@ -33,9 +36,6 @@ public class Player {
 
     private int lifePoint;
 
-    public void addToActiveCards(Card card) {
-        activatedCards.add(card);
-    }
 
     public Player(User user) {
         this.winningRounds = 0;
@@ -46,12 +46,10 @@ public class Player {
         graveYard = new GraveYard();
         monsterZone = new Zone();
         spellZone = new Zone();
+        this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
         addNCardsToHand(6);
-//        hand.addCard(Card.getCardByName("Closed Forest"));
-//        hand.addCard(Card.getCardByName("Silver Fang"));
-//        hand.addCard(Card.getCardByName("Forest"));
         this.activatedCards = new ArrayList<>();
     }
 
@@ -133,9 +131,8 @@ public class Player {
 
     public Card drawCard() {
         Card card = playingDeck.drawCard();
-        if (card != null) {
-            hand.addCard(card);
-        }
+        card.setPosition(Position.HAND);
+        hand.addCard(card);
         return card;
     }
 

@@ -6,6 +6,7 @@ import model.card.Card;
 import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.CardType;
+import model.card.enums.Property;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,30 +57,10 @@ public class PlayingDeck {
     }
 
 
-    public Monster getMonsterByName(String monsterName) {
 
-        for (Monster monster : monsters) {
-            if (monster.getName().equals(monsterName)) {
-                return monster;
-            }
-        }
-        return null;
-    }
-
-    public SpellTrap getSpellTrapByName(String spellTrapName) {
-
-        for (SpellTrap spellTrap : spellTraps) {
-            if (spellTrap.getName().equals(spellTrapName)) {
-                return spellTrap;
-            }
-        }
-        return null;
-    }
-
-    public Card getCardByName(String cardName) {
-
+    public Card getACard(Property property) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
+            if (card.getProperty() == property) {
                 return card;
             }
         }
@@ -90,5 +71,13 @@ public class PlayingDeck {
     @Override
     public String toString() {
         return String.format(Strings.PLAYING_DECK_PRINT_FORMAT.getLabel(), getRemainingCardsSize());
+    }
+
+    public void remove(String name) {
+        ArrayList<Card> removedCards = new ArrayList<>();
+        cards.forEach(card -> {
+            if (card.getName().equals(name)) removedCards.add(card);
+        });
+        cards.removeAll(removedCards);
     }
 }

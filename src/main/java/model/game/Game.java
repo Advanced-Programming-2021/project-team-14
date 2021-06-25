@@ -1,9 +1,12 @@
 package model.game;
 
+import Controller.Handlers.ChainHandler;
 import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class Game {
@@ -11,17 +14,22 @@ public class Game {
     private Board board;
     private Phase phase;
     private SelectedCard selectedCard;
-    private TurnLogger turnLogger;
     private String winner;
     private String loser;
     private Duel duel;
     private int winnerLifePoint;
     private int loserLifePoint;
     private boolean isEnded;
-    private boolean isAI;
 
-    public TurnLogger getTurnLogger() {
-        return turnLogger;
+
+    public Game(Player mainUser, Player rivalUser, Duel duel) {
+
+        this.duel = duel;
+        this.board = new Board(mainUser, rivalUser);
+
+        this.phase = Phase.DRAW_PHASE;
+        this.isEnded = false;
+        nextPhase();
     }
 
     public SelectedCard getSelectedCard() {
@@ -30,17 +38,6 @@ public class Game {
 
     public void setSelectedCard(SelectedCard selectedCard) {
         this.selectedCard = selectedCard;
-    }
-
-    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI) {
-
-        this.isAI = isAI;
-        this.duel = duel;
-        this.board = new Board(mainUser, rivalUser);
-        this.turnLogger = new TurnLogger();
-        this.phase = Phase.DRAW_PHASE;
-        this.isEnded = false;
-        nextPhase();
     }
 
     public JSONObject getGameObject() {
@@ -54,15 +51,10 @@ public class Game {
         return phase;
     }
 
-    private void changeTurn() {
-
-        if (!isAI) {
-            Player temp = board.getMainPlayer();
-            board.setMainPlayer(board.getRivalPlayer());
-            board.setRivalPlayer(temp);
-        } else {
-
-        }
+    public void changeTurn() {
+        Player temp = board.getMainPlayer();
+        board.setMainPlayer(board.getRivalPlayer());
+        board.setRivalPlayer(temp);
     }
 
     public Board getBoard() {
@@ -70,7 +62,7 @@ public class Game {
     }
 
     public String nextPhase() {
-        switch (phase){
+        switch (phase) {
             case DRAW_PHASE:
                 phase = Phase.STANDBY_PHASE;
                 break;
@@ -87,19 +79,31 @@ public class Game {
                 phase = Phase.END_PHASE;
                 break;
             case END_PHASE:
-                turnLogger.reset();
+                changeOwnerShips();
+                changeTurn();
+                board.getMainPlayer().getTurnLogger().reset();
                 phase = Phase.DRAW_PHASE;
                 deselect();
-                changeTurn();
                 return String.format(Strings.CHANGE_TURN_PRINT.getLabel(), phase, board.getMainPlayer().getNickname(), draw());
 
         }
         return String.format(Strings.PHASE_PRINT.getLabel(), phase);
     }
 
+    private void changeOwnerShips() {
+        ArrayList<Card> changedOwnershipCards = board.getMainPlayer().getTurnLogger().getChangedOwnerCards();
+        if (changedOwnershipCards.size() > 0) {
+            changedOwnershipCards.forEach(card -> {
+                board.getRivalPlayer().getMonsterZone().placeCard(card);
+                board.getMainPlayer().getMonsterZone().getCell(card.getPositionIndex()).removeCard();
+            });
+        }
+        board.getMainPlayer().getTurnLogger().getChangedOwnerCards().clear();
+    }
+
 
     private String draw() {
-        if (!board.getMainPlayer().getHand().isFull()) {
+        if (!board.getMainPlayer().getHand().isFull() && board.getMainPlayer().getTurnLogger().canDrawCard()) {
             Card card = board.getMainPlayer().drawCard();
             if (card != null) {
                 return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());

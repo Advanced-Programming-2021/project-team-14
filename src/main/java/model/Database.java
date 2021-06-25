@@ -79,6 +79,10 @@ public class Database {
     public static void prepareDatabase() {
         createDirectory();
         loadUsers();
+        loadCards();
+    }
+
+    public static void loadCards() {
         Database.readDataLineByLine(spellTrapDirectory);
         Database.readDataLineByLine(monsterDirectory);
     }
@@ -104,6 +108,20 @@ public class Database {
 
         //create file address
         String userFileAddress = usersDirectory + "\\" + user.getUsername() + ".json";
+
+        try (FileWriter file = new FileWriter(userFileAddress)) {
+            //Write any JSONArray or JSONObject instance to the file
+            file.write(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveChangesInFiles(User user, String fileName) {
+        String jsonString = new Gson().toJson(user);
+
+        //create file address
+        String userFileAddress = usersDirectory + "\\" + fileName + ".json";
 
         try (FileWriter file = new FileWriter(userFileAddress)) {
             //Write any JSONArray or JSONObject instance to the file
@@ -159,6 +177,17 @@ public class Database {
                 return DatabaseResponses.BAD_FORMAT_ERROR;
             }
             return DatabaseResponses.SUCCESSFUL;
+        }
+    }
+
+    public static void deleteFile(String fileName) {
+
+        String userFileAddress = usersDirectory + "\\" + fileName + ".json";
+
+        File file = new File(userFileAddress);
+
+        if (file.delete()) {
+            Logger.log("database", "File deleted!");
         }
     }
 

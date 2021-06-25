@@ -18,9 +18,19 @@ public class ProfileMenu extends Menu {
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))                    // show current menu
                 Console.print(currentMenu);
 
-            else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {       // change profile nickname
+            else if (command.matches(Regexes.CHANGE_PROFILE_NICKNAME.getLabel())) {        // change profile nickname
                 Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
                 if (command.contains("--nn "))
+                    Request.addShortData(command);
+                else
+                    Request.extractData(command);
+
+                Request.send();
+                Console.print(Request.getMessage());
+
+            } else if (command.matches(Regexes.CHANGE_PROFILE_USERNAME.getLabel())) {       // change profile username
+                Request.setCommandTag(CommandTags.CHANGE_USERNAME);
+                if (command.contains("--un "))
                     Request.addShortData(command);
                 else
                     Request.extractData(command);
@@ -37,7 +47,6 @@ public class ProfileMenu extends Menu {
                 else
                     Request.extractData(command);
 
-                Request.extractData(command);
                 Request.send();
                 Console.print(Request.getMessage());
             } else Console.print(Responses.INVALID_COMMAND.getLabel());

@@ -14,12 +14,13 @@ public enum CommandTags {
     SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
     CHANGE_NICKNAME("change-nickname"),
+    CHANGE_USERNAME("change-username"),
     SIDE("side"),
     BUY_CARD("shop buy"),
     SHOP_SHOW_ALL("shop show --all"),
     INCREASE_MONEY("increase money"),
     IMPORT("import card"),
-    EXPORT("export card");
+    EXPORT("export card"), DELETE_USER("delete user");
 
     public final String label;
 

@@ -4,6 +4,7 @@ import model.card.Card;
 import model.card.enums.Position;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Hand {
 
@@ -40,7 +41,30 @@ public int getSize(){
         return result.toString();
     }
 
-    public void remove(int positionIndex) {
-        cards.remove(positionIndex - 1);
+    public void remove(Card card) {
+        cards.remove(card);
+    }
+
+    public boolean doesHaveCard(String cardName) {
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) return true;
+        }
+        return false;
+    }
+    public void remove(String cardName){
+        ArrayList<Card> toRemove = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)){
+                toRemove.add(card);
+            }
+        }
+        cards.removeAll(toRemove);
+    }
+
+    public int getRemainedPlaces(){
+        return 6 - getSize();
+    }
+    public void removeRandomly() {
+        cards.remove(new Random().nextInt(cards.size() - 1));
     }
 }

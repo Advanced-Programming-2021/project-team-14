@@ -19,11 +19,12 @@ public enum CommandTags {
     SELECT_HAND("select hand"),
     ACTIVATE_EFFECT("activate effect"),
     SHOW_SELECTED_CARD("show card"),
-    ATTACK_DIRECT("attack direct"),
+    CANCEL_ACTIVATION("cancel activation"),
     BACK("back"),
 
 
     LOGIN("login"),
+    USER_DELETE("delete user"),
     REGISTER("register"),
     CREATE_DECK("create-deck"),
     DELETE_DECK("delete-deck"),
@@ -35,6 +36,7 @@ public enum CommandTags {
     SHOW_CARDS("show-cards"),
     CHANGE_PASSWORD("change-password"),
     CHANGE_NICKNAME("change-nickname"),
+    CHANGE_USERNAME("change-username"),
     SHOW_SCOREBOARD("scoreboard show"),
     BUY_CARD("shop buy"),
     START_DUEL("start duel"),
