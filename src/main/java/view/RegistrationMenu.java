@@ -24,6 +24,8 @@ public class RegistrationMenu extends Menu {
             else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
 
         }
+
+        System.exit(0);
     }
 
     private void login(String command) {

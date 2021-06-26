@@ -9,6 +9,7 @@ public enum CommandTags {
     NEXT_PHASE("next phase"),
     SET_POSITION("set position"),
     SHOW_CARD("show card everywhere"),
+    CARD_ADDED_SUCCESSFULLY("card added successfully"),
     SUMMON("summon"),
     ATTACK("attack"),
     DIRECT_ATTACK("attack direct"),

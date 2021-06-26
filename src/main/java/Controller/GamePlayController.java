@@ -24,6 +24,8 @@ public class GamePlayController {
 
 
     public static void processCommand(JSONObject request) {
+
+        Response.add("isDuelEnded", "false");
         String command = request.getString(Strings.COMMAND.getLabel());
         FieldController.handle(duel.getGame());
 
@@ -54,6 +56,8 @@ public class GamePlayController {
             Response.addMessage(showCard(request));
         } else if (command.equals(CommandTags.SELECT.getLabel())) {
             Response.addMessage(select(request));
+        } else if (command.equals(CommandTags.SELECT_FORCE.getLabel())) {
+            Response.addMessage(selectForce(request));
         } else if (command.equals(CommandTags.DESELECT.getLabel())) {
             Response.addMessage(deselect(request));
         } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
@@ -69,6 +73,15 @@ public class GamePlayController {
         }
 
         Response.addObject("game", duel.getGame().getGameObject());
+    }
+
+    private static String selectForce(JSONObject request) {
+
+        if (Card.doesCardExist((request.getString("card")).trim())) {
+            duel.getGame().getBoard().getMainPlayer().getHand().addCard(Card.getCardByName((request.getString("card")).trim()));
+            return CommandTags.CARD_ADDED_SUCCESSFULLY.getLabel();
+        }
+        return CommandTags.CARD_NOT_FOUND.getLabel();
     }
 
     private static String showCard(JSONObject request) {

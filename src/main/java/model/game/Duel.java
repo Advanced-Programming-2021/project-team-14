@@ -1,5 +1,6 @@
 package model.game;
 
+import Controller.Response;
 import model.User;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class Duel {
 
     private String winner;
     private String loser;
-    private int winnerLifePoint;
-    private int loserLifePoint;
+    private int winnerScore;
+    private int loserScore;
     private String creatorNickname;
     private Player firstPlayer;
     private Game game;
@@ -29,8 +30,8 @@ public class Duel {
 
         this.isAI = false;
         this.round = 1;
-        this.firstPlayer = new Player(mainUser);
-        this.secondPlayer = new Player(rivalUser);
+        this.firstPlayer = new Player(mainUser, 0);
+        this.secondPlayer = new Player(rivalUser, 0);
         setNumberOfRounds(round);
         setGame(new Game(firstPlayer, secondPlayer, this, false));
     }
@@ -39,8 +40,8 @@ public class Duel {
 
         this.isAI = true;
         this.round = 1;
-        this.firstPlayer = new Player(mainUser);
-        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"));
+        this.firstPlayer = new Player(mainUser, 0);
+        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
         setNumberOfRounds(round);
         setGame(new Game(firstPlayer, secondPlayer, this, true));
     }
@@ -49,8 +50,17 @@ public class Duel {
         games.add(game);
     }
 
+    public static void emptyGames() {
+
+        for (int i = 0; i < games.size(); i++) {
+            games.remove(i);
+        }
+    }
+
     public void startNewRound() {
         round++;
+        this.firstPlayer = new Player(User.getUserByUsername(firstPlayer.getUsername()), firstPlayer.getWinningRounds());
+        this.secondPlayer = new Player(User.getUserByUsername(secondPlayer.getUsername()), secondPlayer.getWinningRounds());
         if (isAI)
             setGame(new Game(firstPlayer, secondPlayer, this, true));
         else
@@ -84,7 +94,7 @@ public class Duel {
         if (this.numberOfRounds == 1) {
 
             winnerUser.increaseScore(1000);
-            winnerUser.getWallet().increaseCash(1000 + winnerLifePoint);
+            winnerUser.getWallet().increaseCash(1000 + findMaxLifePoint());
             loserUser.getWallet().increaseCash(100);
 
         } else {
@@ -94,6 +104,11 @@ public class Duel {
             loserUser.getWallet().increaseCash(300);
 
         }
+
+        winnerScore = winnerUser.getScore();
+        loserScore = loserUser.getScore();
+        winnerUser.updateDatabase();
+        loserUser.updateDatabase();
     }
 
     private int findMaxLifePoint() {
@@ -111,8 +126,13 @@ public class Duel {
 
         if (this.numberOfRounds == 1) {
 
-            this.loser = game.getLoser();
-            this.winner = game.getWinner();
+            if (firstPlayer.getWinningRounds() == 1) {
+                this.winner = firstPlayer.getNickname();
+                this.loser = secondPlayer.getNickname();
+            } else {
+                this.winner = secondPlayer.getNickname();
+                this.loser = firstPlayer.getNickname();
+            }
 
         } else {
 
@@ -173,7 +193,11 @@ public class Duel {
 
     public String endDuel(String response) {
 
-        return String.format("%s\nuser %s won Duel and user %s lost!", response, winner, loser);
-    }
+        Duel.emptyGames();
+        Response.add("isDuelEnded", "true");
 
+        return String.format("%s\nuser %s won Duel with score %d" +
+                " and user %s lost with score %d!\n", response, winner, winnerScore, loser, loserScore);
+
+    }
 }

@@ -49,6 +49,12 @@ public class GamePlayMenu extends Menu {
             select(inputCommand);
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
+        } else if (inputCommand.matches(Regexes.SELECT_FORCE.getLabel())) {
+            Request.setCommandTag(CommandTags.SELECT_FORCE);
+            Request.addDataToRequest(Regexes.SELECT_FORCE.getLabel(), inputCommand, "card");
+            Request.send();
+            Console.printBoard(Request.getResponse());
+            Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.NEXT_PHASE.getLabel())) {
             Request.setCommandTag(CommandTags.NEXT_PHASE);
             Request.send();
@@ -114,12 +120,14 @@ public class GamePlayMenu extends Menu {
         } else if (inputCommand.matches(Regexes.ATTACK_DIRECT.getLabel())) {            // direct attack
             Request.setCommandTag(CommandTags.DIRECT_ATTACK);
             Request.send();
+            endDuelChecker();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.ATTACK_TO.getLabel())) {            // attack to
             Request.setCommandTag(CommandTags.ATTACK);
             Request.addDataToRequest(Regexes.ATTACK_TO.getLabel(), inputCommand, Strings.TO.getLabel());
             Request.send();
+            endDuelChecker();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.INCREASE_LIFE_POINT.getLabel())) {            // increase life point
@@ -140,6 +148,14 @@ public class GamePlayMenu extends Menu {
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
         } else Console.print(Responses.INVALID_COMMAND.getLabel()); // invalid command
+    }
+
+    private void endDuelChecker() {
+
+        if (Request.getResponse().getString("isDuelEnded").equals("true")) {
+            Console.print(Request.getMessage());
+            new MainMenu().run();
+        }
     }
 
 

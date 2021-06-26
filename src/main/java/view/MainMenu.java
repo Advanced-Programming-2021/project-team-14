@@ -16,10 +16,9 @@ public class MainMenu extends Menu {
             else if (command.matches(Regexes.MENU_CURRENT.getLabel()))     // show current menu
                 Console.print(currentMenu);
             else if (command.matches(Regexes.LOGOUT.getLabel()))
-                break;
+                new RegistrationMenu().run();
             else Console.print(Responses.INVALID_COMMAND.getLabel());
         }
-
     }
 
     private void changeMenu(String destinationMenu) {

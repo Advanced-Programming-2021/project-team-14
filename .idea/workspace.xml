@@ -6,23 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="94e61c3d-89a0-40bd-8728-67270785ade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Users/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Users/main.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Users/rival.json" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Users/rival.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Users/username.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/CardTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/CardTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/PositionValidityHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/PositionValidityHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Handlers/TaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Handlers/TaskHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/enums/CommandTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/enums/CommandTags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Strings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/card/SpellTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/card/SpellTrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/aiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/DeckMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/RegistrationMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RegistrationMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/Regexes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/DeckControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/ProfileControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/UserTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/DeckTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/ProfileMenuTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/RegistrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/ScoreboardTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.All in project-team-14">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="project-team-14" />
@@ -60,19 +62,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in project-team-14" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project-team-14" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in project-team-14" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -85,7 +98,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624607098414</updated>
-      <workItem from="1624607103535" duration="30632000" />
+      <workItem from="1624607103535" duration="30731000" />
+      <workItem from="1624679169489" duration="25151000" />
     </task>
     <task id="LOCAL-00001" summary="merge Master with AIPlayer">
       <created>1624608063940</created>
@@ -101,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624610602124</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix some bugs">
+      <created>1624650372983</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624650372983</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +149,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
-          <line>59</line>
+          <line>69</line>
           <properties class="model.game.Duel" method="endDuelChecker">
             <option name="EMULATED" value="true" />
           </properties>
@@ -136,7 +157,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
-          <line>51</line>
+          <line>59</line>
           <properties class="model.game.Duel" method="startNewRound">
             <option name="EMULATED" value="true" />
           </properties>
@@ -144,7 +165,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
-          <line>76</line>
+          <line>86</line>
           <properties class="model.game.Duel" method="rewardPlayers">
             <option name="EMULATED" value="true" />
           </properties>
@@ -152,7 +173,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
-          <line>109</line>
+          <line>124</line>
           <properties class="model.game.Duel" method="findLoserAndWinner">
             <option name="EMULATED" value="true" />
           </properties>
@@ -160,7 +181,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Duel.java</url>
-          <line>98</line>
+          <line>113</line>
           <properties class="model.game.Duel" method="findMaxLifePoint">
             <option name="EMULATED" value="true" />
           </properties>
@@ -168,13 +189,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Game.java</url>
-          <line>123</line>
+          <line>124</line>
           <properties class="model.game.Game" method="endGame">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/model/game/Game.java</url>
+          <line>25</line>
+          <properties class="model.game.Game" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/project_team_14$All_in_project_team_14.ic" NAME="All in project-team-14 Coverage Results" MODIFIED="1624723017711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

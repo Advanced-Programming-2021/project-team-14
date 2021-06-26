@@ -37,8 +37,8 @@ public class Player {
     private int lifePoint;
 
 
-    public Player(User user) {
-        this.winningRounds = 0;
+    public Player(User user, Integer winningRounds) {
+        this.winningRounds = winningRounds;
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         playingDeck = new PlayingDeck(user.getDeck(user.getActiveDeck()));
@@ -49,8 +49,8 @@ public class Player {
         this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
-        hand.addCard(Card.getCardByName("Battle OX"));
-        hand.addCard(Card.getCardByName("Leotron"));
+//        hand.addCard(Card.getCardByName("Battle OX"));
+//        hand.addCard(Card.getCardByName("Leotron"));
 //        hand.addCard(Card.getCardByName("Skull Guardian"));
         addNCardsToHand(6);
         this.activatedCards = new ArrayList<>();

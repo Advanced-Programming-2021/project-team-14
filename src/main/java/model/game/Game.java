@@ -1,5 +1,6 @@
 package model.game;
 
+import Controller.AiController;
 import model.Strings;
 import model.card.Card;
 import model.card.SelectedCard;
@@ -58,7 +59,7 @@ public class Game {
             board.setMainPlayer(board.getRivalPlayer());
             board.setRivalPlayer(temp);
         } else {
-
+            AiController.run(this);
         }
     }
 
@@ -127,8 +128,7 @@ public class Game {
         setLoser(loser.getNickname());
         setLoserLifePoint(loser.getLifePoint());
         setWinnerLifePoint(winner.getLifePoint());
-        winner.setLifePoint(8000);
-        loser.setLifePoint(8000);
+
         winner.increaseWinningRounds(1);
         this.isEnded = true;
         Duel.addGame(this);
