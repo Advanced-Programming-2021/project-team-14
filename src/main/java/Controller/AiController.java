@@ -12,11 +12,23 @@ public class AiController {
         String inputCommand;
 
         GamePlayMenu commandChecker = new GamePlayMenu();
-        Player mainPlayer = game.getBoard().getMainPlayer();
         Player aiPlayer = game.getBoard().getMainPlayer();
+        Player rivalPlayer = game.getBoard().getRivalPlayer();
 
         commandChecker.commandCheckers("select --hand 1");
-        commandChecker.commandCheckers("");
-        commandChecker.commandCheckers("select --hand 1");
+        commandChecker.commandCheckers(">");
+        commandChecker.commandCheckers(">");
+        if (!aiPlayer.getMonsterZone().isFull()) {
+            commandChecker.commandCheckers("summon");
+        }
+        commandChecker.commandCheckers(">");
+        if (!rivalPlayer.getMonsterZone().isEmpty()) {
+            commandChecker.commandCheckers("attack 1");
+        } else {
+            commandChecker.commandCheckers("attack direct");
+        }
+        commandChecker.commandCheckers(">");
+        commandChecker.commandCheckers(">");
+
     }
 }

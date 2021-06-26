@@ -6,25 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="94e61c3d-89a0-40bd-8728-67270785ade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Users/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Users/main.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Users/rival.json" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Users/rival.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Users/username.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/GamePlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/aiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Duel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/game/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Zone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GamePlayMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/RegistrationMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/RegistrationMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/CommandTags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/DeckControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/ProfileControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/UserTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/DeckTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/ProfileMenuTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/RegistrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/ScoreboardTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +40,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="JUnit.All in project-team-14">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="project-team-14" />
@@ -85,8 +71,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in project-team-14" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.All in project-team-14" />
       </list>
     </recent_temporary>
   </component>
@@ -99,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1624607098414</updated>
       <workItem from="1624607103535" duration="30731000" />
-      <workItem from="1624679169489" duration="25151000" />
+      <workItem from="1624679169489" duration="34733000" />
     </task>
     <task id="LOCAL-00001" summary="merge Master with AIPlayer">
       <created>1624608063940</created>
@@ -122,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624650372983</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix some bugs">
+      <created>1624726259542</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624726259542</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,19 +182,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/model/game/Game.java</url>
-          <line>124</line>
+          <line>130</line>
           <properties class="model.game.Game" method="endGame">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/model/game/Game.java</url>
-          <line>25</line>
-          <properties class="model.game.Game" method="&lt;init&gt;">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/AiController.java</url>
+          <line>10</line>
+          <properties class="Controller.AiController" method="run">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="17" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -59,7 +59,13 @@ public class Game {
             board.setMainPlayer(board.getRivalPlayer());
             board.setRivalPlayer(temp);
         } else {
+            Player temp = board.getMainPlayer();
+            board.setMainPlayer(board.getRivalPlayer());
+            board.setRivalPlayer(temp);
             AiController.run(this);
+            temp = board.getMainPlayer();
+            board.setMainPlayer(board.getRivalPlayer());
+            board.setRivalPlayer(temp);
         }
     }
 

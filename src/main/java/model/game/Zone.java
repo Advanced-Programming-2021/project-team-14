@@ -7,7 +7,6 @@ import model.card.Card;
 import model.card.Monster;
 import model.card.enums.State;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -70,6 +69,10 @@ public class Zone {
 
     public boolean isFull() {
         return getSize() == ZONE_SIZE;
+    }
+
+    public boolean isEmpty() {
+        return getSize() == 0;
     }
 
     private int getSize() {
