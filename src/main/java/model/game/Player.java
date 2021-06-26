@@ -19,11 +19,11 @@ public class Player {
     public TurnLogger getTurnLogger() {
         return turnLogger;
     }
+
     private Hand hand;
 
     private Zone monsterZone;
     private ArrayList<Card> activatedCards;
-
 
 
     private Zone spellZone;
@@ -49,7 +49,15 @@ public class Player {
         this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
-        addNCardsToHand(6);
+        if (username.equals("TributeTest")) {
+            hand.addCard(Card.getCardByName("Marshmallon"));
+            hand.addCard(Card.getCardByName("Crawling dragon"));
+            hand.addCard(Card.getCardByName("Marshmallon"));
+            addNCardsToHand(3);
+        }else {
+            addNCardsToHand(6);
+        }
+
         this.activatedCards = new ArrayList<>();
     }
 

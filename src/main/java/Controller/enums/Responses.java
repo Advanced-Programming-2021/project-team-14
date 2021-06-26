@@ -33,9 +33,7 @@ public enum Responses {
     NOT_ENOUGH_MONEY("not enough money"),
     CARD_BOUGHT_SUCCESSFULLY("card added to your wallet successfully!"),
     INCREASE_MONEY("cash increased successfully!"),
-    INCREASE_LIFE_POINT("life point increased successfully!"),
-    IMPORT("%s imports successfully!"),
-    EXPORT("%s exports successfully!");
+    INCREASE_LIFE_POINT("life point increased successfully!");
 
 
     public final String label;

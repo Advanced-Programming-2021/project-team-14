@@ -172,8 +172,7 @@ public class Database {
                 } else {
                     Card.addCard(new Gson().fromJson(data, SpellTrap.class));
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
                 return DatabaseResponses.BAD_FORMAT_ERROR;
             }
             return DatabaseResponses.SUCCESSFUL;

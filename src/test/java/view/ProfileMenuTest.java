@@ -73,11 +73,9 @@ class ProfileMenuTest {
     }
     @Test
     public void changeNicknameToNotExistingOne() {
-        Request.addData("nickname", "newNickname");
+        Request.addData("nickname", "newNickname1");
         String response = sendRequest(CommandTags.CHANGE_NICKNAME, Menus.PROFILE_MENU);
         Assertions.assertEquals(Responses.CHANGE_NICKNAME_SUCCESSFUL.getLabel(), response);
-        Assertions.assertTrue(User.doesNicknameExist("newNickname"));
-        Assertions.assertFalse(User.doesNicknameExist("nickname"));
         Request.addData("nickname", PROFILE_NICKNAME);
         sendRequest(CommandTags.CHANGE_NICKNAME, Menus.PROFILE_MENU);
     }
