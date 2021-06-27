@@ -24,6 +24,10 @@ public class Response {
         response.put("type", Responses.CHOICE.getLabel());
     }
 
+    public static void add(String key, String value) {
+        response.put(key, value);
+    }
+
     public static void error() {
         response.put("type", Responses.ERROR.getLabel());
     }

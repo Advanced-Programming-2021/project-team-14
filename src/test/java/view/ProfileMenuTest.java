@@ -1,16 +1,12 @@
 package view;
 
-import Controller.Response;
 import Controller.enums.Responses;
-import model.Database;
 import model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view.enums.CommandTags;
 import view.enums.Menus;
-
-import javax.xml.crypto.Data;
 
 
 class ProfileMenuTest {

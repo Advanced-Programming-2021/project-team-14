@@ -3,7 +3,6 @@ package Controller;
 import Controller.enums.DatabaseResponses;
 import Controller.enums.Responses;
 import model.Database;
-import model.card.Card;
 import model.card.Monster;
 import model.card.enums.Attribute;
 import model.card.enums.MonsterType;

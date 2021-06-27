@@ -85,6 +85,7 @@ public class Duel {
     }
 
     private void rewardPlayers() {
+
         findLoserAndWinner();
         User winnerUser = User.getUserByNickname(winner);
         User loserUser = User.getUserByNickname(loser);
@@ -93,20 +94,22 @@ public class Duel {
 
         if (this.numberOfRounds == 1) {
 
+            winnerScore = 1000;
             winnerUser.increaseScore(1000);
             winnerUser.getWallet().increaseCash(1000 + findMaxLifePoint());
             loserUser.getWallet().increaseCash(100);
 
         } else {
 
+            winnerScore = 3000;
             winnerUser.increaseScore(3000);
             winnerUser.getWallet().increaseCash(3000 + 3 * findMaxLifePoint());
             loserUser.getWallet().increaseCash(300);
 
         }
 
-        winnerScore = winnerUser.getScore();
-        loserScore = loserUser.getScore();
+
+        loserScore = 0;
         winnerUser.updateDatabase();
         loserUser.updateDatabase();
     }
@@ -147,40 +150,12 @@ public class Duel {
         }
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
-    public String getLoser() {
-        return loser;
-    }
-
-    public void setLoser(String loser) {
-        this.loser = loser;
-    }
-
-    public int getNumberOfRounds() {
-        return numberOfRounds;
-    }
-
     public void setNumberOfRounds(int numberOfRounds) {
         this.numberOfRounds = numberOfRounds;
     }
 
-    public String getCreatorNickname() {
-        return creatorNickname;
-    }
-
     public int getRound() {
         return this.round;
-    }
-
-    public void setCreatorNickname(String creatorNickname) {
-        this.creatorNickname = creatorNickname;
     }
 
     public Game getGame() {
@@ -193,8 +168,13 @@ public class Duel {
 
     public String endDuel(String response) {
 
+
         Duel.emptyGames();
         Response.add("isDuelEnded", "true");
+
+        if (response.startsWith("Unexpectedly")) {
+            return response;
+        }
 
         return String.format("%s\nuser %s won Duel with score %d" +
                 " and user %s lost with score %d!\n", response, winner, winnerScore, loser, loserScore);

@@ -26,6 +26,40 @@ public class ShopControllerTest {
     }
 
     @Test
+    public void showCardShopMenu() {
+        login("main");
+        Request.addData("view", Menus.SHOP_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SHOW_CARD);
+        Request.addData("card", "Bitron");
+        Request.send();
+        Assertions.assertEquals("--------------------------------------\n" +
+                "|type: Monster                       |\n" +
+                "|monster type: Cyberse               |\n" +
+                "|                                    |\n" +
+                "|name: Bitron                        |\n" +
+                "|price: 1000      |level: 2          |\n" +
+                "|attack: 200      |defense: 2000     |\n" +
+                "|                                    |\n" +
+                "|description:                        |\n" +
+                "|A new species found in electronic   |\n" +
+                "|space. There's not much information |\n" +
+                "|on it                               |\n" +
+                "--------------------------------------\n", Request.getMessage());
+    }
+
+
+    @Test
+    public void showCardShopMenuNotFound() {
+        login("main");
+        Request.addData("view", Menus.SHOP_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SHOW_CARD);
+        Request.addData("card", "alakidfdfadfsdf");
+        Request.send();
+        Assertions.assertEquals("card not found!", Request.getMessage());
+    }
+
+
+    @Test
     public void buyCard() {
         login("main");
         Request.addData("view", Menus.SHOP_MENU.getLabel());

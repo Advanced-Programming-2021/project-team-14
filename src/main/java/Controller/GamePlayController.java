@@ -34,6 +34,10 @@ public class GamePlayController {
                 Response.addMessage(setPosition(request));
             } else if (command.equals(CommandTags.FLIP_SUMMON.getLabel())) {
                 Response.addMessage(flipSummon(request));
+            } else if (command.equals(CommandTags.RITUAL_SUMMON.getLabel())) {
+                Response.addMessage(ritualSummon(request));
+            } else if (command.equals(CommandTags.SPECIAL_SUMMON.getLabel())) {
+                Response.addMessage(specialSummon(request));
             } else if (command.equals(CommandTags.SUMMON.getLabel())) {
                 Response.addMessage(summon(request));
             } else if (command.equals(CommandTags.SET.getLabel())) {
@@ -58,6 +62,8 @@ public class GamePlayController {
             Response.addMessage(select(request));
         } else if (command.equals(CommandTags.SELECT_FORCE.getLabel())) {
             Response.addMessage(selectForce(request));
+        } else if (command.equals(CommandTags.WIN_GAME.getLabel())) {
+            Response.addMessage(winGame(request));
         } else if (command.equals(CommandTags.DESELECT.getLabel())) {
             Response.addMessage(deselect(request));
         } else if (command.equals(CommandTags.ACTIVATE_EFFECT.getLabel())) {
@@ -75,6 +81,21 @@ public class GamePlayController {
         Response.addObject("game", duel.getGame().getGameObject());
     }
 
+    private static String specialSummon(JSONObject request) {
+        return "there is no way you could special summon a monster";
+    }
+
+    private static String ritualSummon(JSONObject request) {
+
+        return "there is no way you could ritual summon a monster";
+    }
+
+    private static String winGame(JSONObject request) {
+
+        String string = String.format("Unexpectedly user %s won!", duel.getGame().getBoard().getMainPlayer().getNickname());
+        return duel.endDuel(string);
+    }
+
     private static String selectForce(JSONObject request) {
 
         if (Card.doesCardExist((request.getString("card")).trim())) {
@@ -89,7 +110,6 @@ public class GamePlayController {
         if (Card.doesCardExist(request.getString("card"))) {
             return Card.getCardByName(request.getString("card")).show();
         }
-
         return CommandTags.CARD_NOT_FOUND.getLabel();
     }
 
@@ -151,7 +171,6 @@ public class GamePlayController {
         return new TaskHandler().handle(request, duel);
     }
 
-
     private static String summon(JSONObject request) {
 
         Handler summon = new SelectedCardHandler();
@@ -160,7 +179,7 @@ public class GamePlayController {
                 .linksWith(new MonsterCardTypeHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-//                .linksWith(new TurnLogHandler())
+                .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
@@ -184,7 +203,7 @@ public class GamePlayController {
         set.linksWith(new CardPositionHandler())
                 .linksWith(new PhaseHandler())
                 .linksWith(new EmptyPlaceHandler())
-//                .linksWith(new TurnLogHandler())
+                .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
         return set.handle(request, duel);

@@ -23,6 +23,8 @@ public enum Regexes {
     SHOW_GRAVEYARD("show graveyard"),
     SUMMON("summon"),
     FLIP_SUMMON("flip-summon"),
+    RITUAL_SUMMON("ritual-summon"),
+    SPECIAL_SUMMON("special-summon"),
     SET("set"),
     CANCEL("cancel"),
     NEXT_PHASE(">"),
@@ -58,6 +60,7 @@ public enum Regexes {
     ATTACK_DIRECT("attack direct"),
     EXTRACT_SHORT_DATA(".*-- ([\\w ]+).*"),
     //cheat
+    WIN_GAME("win game"),
     INCREASE_MONEY("increase --money ([\\d]+)"),
     INCREASE_LIFE_POINT("increase --LP ([\\d]+)"),
     SELECT_FORCE("select --hand ([\\w\\s-]+) --force"),

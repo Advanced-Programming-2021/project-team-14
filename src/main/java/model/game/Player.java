@@ -37,8 +37,8 @@ public class Player {
     private int lifePoint;
 
 
-    public Player(User user) {
-        this.winningRounds = 0;
+    public Player(User user, Integer winningRounds) {
+        this.winningRounds = winningRounds;
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         playingDeck = new PlayingDeck(user.getDeck(user.getActiveDeck()));
@@ -85,10 +85,6 @@ public class Player {
         return hand;
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
-    }
-
     public int getLifePoint() {
         return lifePoint;
     }
@@ -117,16 +113,8 @@ public class Player {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Zone getMonsterZone() {

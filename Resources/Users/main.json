@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 100000,
+    "cash": 90100,
     "cards": [
       "Terraforming",
       "Marshmallon",
@@ -55,7 +55,17 @@
       "Marshmallon",
       "Trap Hole",
       "Battle warrior",
-      "Wattkid"
+      "Wattkid",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron",
+      "Bitron"
     ]
   },
   "activeDeck": "first",

@@ -62,7 +62,9 @@ public class Game {
             Player temp = board.getMainPlayer();
             board.setMainPlayer(board.getRivalPlayer());
             board.setRivalPlayer(temp);
+            draw();
             AiController.run(this);
+            phase = Phase.DRAW_PHASE;
             temp = board.getMainPlayer();
             board.setMainPlayer(board.getRivalPlayer());
             board.setRivalPlayer(temp);

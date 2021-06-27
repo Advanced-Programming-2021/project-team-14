@@ -55,6 +55,12 @@ public class GamePlayMenu extends Menu {
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
+        } else if (inputCommand.matches(Regexes.WIN_GAME.getLabel())) {
+            Request.setCommandTag(CommandTags.WIN_GAME);
+            Request.send();
+            endDuelChecker();
+            Console.printBoard(Request.getResponse());
+            Console.print(Request.getMessage());
         } else if (inputCommand.matches(Regexes.NEXT_PHASE.getLabel())) {
             Request.setCommandTag(CommandTags.NEXT_PHASE);
             Request.send();
@@ -77,6 +83,18 @@ public class GamePlayMenu extends Menu {
         } else if (inputCommand.matches(Regexes.FLIP_SUMMON.getLabel())) {            // summon cards
 
             Request.setCommandTag(CommandTags.FLIP_SUMMON);
+            Request.send();
+            Console.printBoard(Request.getResponse());
+            Console.print(Request.getMessage());
+        } else if (inputCommand.matches(Regexes.RITUAL_SUMMON.getLabel())) {            // summon cards
+
+            Request.setCommandTag(CommandTags.RITUAL_SUMMON);
+            Request.send();
+            Console.printBoard(Request.getResponse());
+            Console.print(Request.getMessage());
+        } else if (inputCommand.matches(Regexes.SPECIAL_SUMMON.getLabel())) {            // summon cards
+
+            Request.setCommandTag(CommandTags.SPECIAL_SUMMON);
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());

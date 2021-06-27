@@ -3,17 +3,13 @@ package Controller;
 import Controller.enums.Responses;
 import model.Database;
 import model.Strings;
-import model.User;
 import model.card.Card;
-import model.game.Board;
 import model.game.Phase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
-
-import java.net.UnknownServiceException;
 
 
 public class GamePlayControllerTest {
@@ -110,8 +106,17 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(Strings.SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
 
+
     @Test
-    public void flipSummon() {
+    public void checkAi() {
+        login("MonsterTest");
+        startDuel("aiPlayer");
+        changeSomePhases(5);
+    }
+
+
+    @Test
+    public void flipSummonWrong() {
         login("MonsterTest");
         startDuel("rival");
         setMain1Phase();
@@ -132,6 +137,27 @@ public class GamePlayControllerTest {
 
 
     @Test
+    public void flipSummon() {
+        login("MonsterTest");
+        startDuel("rival");
+        setMain1Phase();
+
+        selectHandCard();
+        setCard();
+
+        for (int i = 0; i < 12; i++) {
+            changePhase();
+        }
+
+        selectCard("--monster 1", "monster");
+        Request.setCommandTag(CommandTags.FLIP_SUMMON);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+        Assertions.assertEquals(Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
+    }
+
+
+    @Test
     public void setSpellTest() {
         login("SpellTest");
         startDuel("rival");
@@ -140,6 +166,43 @@ public class GamePlayControllerTest {
         setCard();
         Assertions.assertEquals(Strings.SET_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
+
+
+    @Test
+    public void winGame() {
+        login("main");
+        startDuel("rival");
+        changePhase();
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.WIN_GAME);
+        Request.send();
+        Assertions.assertEquals("Unexpectedly user admin1 won!", Request.getMessage());
+    }
+
+
+    @Test
+    public void ritualSummon() {
+        login("main");
+        startDuel("rival");
+        changePhase();
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.RITUAL_SUMMON);
+        Request.send();
+        Assertions.assertEquals("there is no way you could ritual summon a monster", Request.getMessage());
+    }
+
+
+    @Test
+    public void speicalSummon() {
+        login("main");
+        startDuel("rival");
+        changePhase();
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SPECIAL_SUMMON);
+        Request.send();
+        Assertions.assertEquals("there is no way you could special summon a monster", Request.getMessage());
+    }
+
 
     private void setCard() {
         Request.setCommandTag(CommandTags.SET);
@@ -239,7 +302,47 @@ public class GamePlayControllerTest {
         Request.addData("data", "1");
         summonAMonster();
 
-        Assertions.assertEquals(Strings.SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
+        Assertions.assertEquals(Strings.ALREADY_SUMMONED.getLabel(), Request.getMessage());
+    }
+
+
+    @Test
+    public void selectForce() {
+        login("main");
+        startDuel("rival");
+
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SELECT_FORCE);
+        Request.addData("card", "Haniwa");
+        Request.send();
+
+        Assertions.assertEquals("card added successfully", Request.getMessage());
+    }
+
+
+    @Test
+    public void selectForceWithInvalidCard() {
+        login("main");
+        startDuel("rival");
+
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SELECT_FORCE);
+        Request.addData("card", "sdferwdfsdfs");
+        Request.send();
+
+        Assertions.assertEquals("card not found!", Request.getMessage());
+    }
+
+
+    @Test
+    public void showCardShopMenuNotFound() {
+        login("main");
+        startDuel("rival");
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SHOW_CARD);
+        Request.addData("card", "alakidfdfadfsdf");
+        Request.send();
+        Assertions.assertEquals("card not found!", Request.getMessage());
     }
 
 
@@ -277,14 +380,38 @@ public class GamePlayControllerTest {
         changePhase();
         selectCard("--hand1", "hand");
         summonAMonster();
-      changeSomePhases(12);
+        changeSomePhases(12);
         selectCard("--monster 1", "monster");
 
         Request.setCommandTag(CommandTags.SET_POSITION);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.addData("position", "defence");
         Request.send();
-        Assertions.assertEquals("this card is already in the wanted position", Request.getMessage());
+        Assertions.assertEquals("monster position changed successfully", Request.getMessage());
+    }
+
+
+    @Test
+    public void showCardGameplayMenu() {
+        login("main");
+        startDuel("rival");
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.setCommandTag(CommandTags.SHOW_CARD);
+        Request.addData("card", "Bitron");
+        Request.send();
+        Assertions.assertEquals("--------------------------------------\n" +
+                "|type: Monster                       |\n" +
+                "|monster type: Cyberse               |\n" +
+                "|                                    |\n" +
+                "|name: Bitron                        |\n" +
+                "|price: 1000      |level: 2          |\n" +
+                "|attack: 200      |defense: 2000     |\n" +
+                "|                                    |\n" +
+                "|description:                        |\n" +
+                "|A new species found in electronic   |\n" +
+                "|space. There's not much information |\n" +
+                "|on it                               |\n" +
+                "--------------------------------------\n", Request.getMessage());
     }
 
 

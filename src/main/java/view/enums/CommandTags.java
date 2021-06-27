@@ -14,6 +14,8 @@ public enum CommandTags {
     ATTACK("attack"),
     DIRECT_ATTACK("attack direct"),
     FLIP_SUMMON("flip-summon"),
+    RITUAL_SUMMON("ritual-summon"),
+    SPECIAL_SUMMON("special-summon"),
     SHOW_GRAVEYARD("show graveyard"),
     SELECT_CARD_MONSTER("select monster"),
     SELECT_CARD_SPELL("select spell"),
@@ -51,6 +53,7 @@ public enum CommandTags {
 
 
     //cheat
+    WIN_GAME("win game"),
     INCREASE_MONEY("increase money"),
     SELECT_FORCE("select force"),
     INCREASE_LIFE_POINT("increase --LP ([\\d]+)");

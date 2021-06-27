@@ -22,6 +22,7 @@ public class AiController {
             commandChecker.commandCheckers("summon");
         }
         commandChecker.commandCheckers(">");
+        commandChecker.commandCheckers("select --monster 1");
         if (!rivalPlayer.getMonsterZone().isEmpty()) {
             commandChecker.commandCheckers("attack 1");
         } else {
@@ -29,6 +30,7 @@ public class AiController {
         }
         commandChecker.commandCheckers(">");
         commandChecker.commandCheckers(">");
+        aiPlayer.getTurnLogger().reset();
 
     }
 }

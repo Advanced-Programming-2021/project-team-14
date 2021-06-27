@@ -2,7 +2,6 @@ package model.game;
 
 import model.Strings;
 import model.card.Card;
-import model.card.enums.CardType;
 
 import java.util.ArrayList;
 
@@ -33,21 +32,6 @@ public class GraveYard {
     }
 
 
-    public boolean isEmpty() {
-        return cards.size() == 0;
-    }
-
-
-    public Card getCard(String cardName) {
-
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                return card;
-            }
-        }
-        return null;
-    }
-
     @Override
     public String toString() {
         return String.format(Strings.GRAVEYARD_PRINT_FORMAT.getLabel(), getSize());
@@ -57,19 +41,4 @@ public class GraveYard {
         cards.remove(card);
     }
 
-    public boolean isEmpty(CardType type) {
-        if (isEmpty()) return true;
-        for (Card card : cards) {
-            if (card.getCardType() == type) return false;
-        }
-        return true;
-    }
-
-    public ArrayList<Card> getCards(CardType type) {
-        ArrayList<Card> suitableCards = new ArrayList<>();
-        cards.forEach(card -> {
-            if (card.getCardType() == type) suitableCards.add(card);
-        });
-        return suitableCards;
-    }
 }

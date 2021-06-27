@@ -28,7 +28,6 @@ public class DuelController {
         if (!first.getDeck(first.getActiveDeck()).isValid())
             return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
         if (!second.getDeck(second.getActiveDeck()).isValid())
-
             return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
         int rounds = request.getInt(Strings.ROUNDS_NUMBER.getLabel());
         if (rounds != 1 && rounds != 3)
@@ -40,23 +39,15 @@ public class DuelController {
 
     private static String startGameAi(JSONObject request) {
         Response.error();
-
         User first = User.getUserByUsername(request.getString(Strings.TOKEN.getLabel()));
-
         if (!first.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), first.getUsername());
-
         if (!first.getDeck(first.getActiveDeck()).isValid())
-
             return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
-
         int rounds = request.getInt(Strings.ROUNDS_NUMBER.getLabel());
-
         if (rounds != 1 && rounds != 3)
             return Strings.NUMBER_OF_ROUNDS_NOT_SUPPORTED.getLabel();
-
         Response.success();
         GamePlayController.startGameWithAi(first, rounds);
-
         return String.format(Strings.START_DUEL.getLabel(), first.getUsername(), "AI");
     }
 }
