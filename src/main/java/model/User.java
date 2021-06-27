@@ -159,10 +159,6 @@ public class User {
         return decks.get(deckName);
     }
 
-    public static void removeUser(String name) {
-        users.remove(name);
-    }
-
     public boolean doesHaveActiveDeck() {
         return activeDeck != null;
     }

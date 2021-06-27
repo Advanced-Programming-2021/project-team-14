@@ -31,11 +31,6 @@ public class Wallet {
         cards.add(card);
     }
 
-    public ArrayList<String> getCards() {
-        return cards;
-    }
-
-
     public int getCash() {
         return this.cash;
     }

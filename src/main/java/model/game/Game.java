@@ -142,24 +142,13 @@ public class Game {
         Duel.addGame(this);
     }
 
-    public String getLoser() {
-        return loser;
-    }
 
     public void setLoser(String loser) {
         this.loser = loser;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
     public void setWinner(String winner) {
         this.winner = winner;
-    }
-
-    public int getLoserLifePoint() {
-        return loserLifePoint;
     }
 
     public void setLoserLifePoint(int loserLifePoint) {

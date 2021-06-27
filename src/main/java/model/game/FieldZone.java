@@ -11,9 +11,6 @@ public class FieldZone {
     public Card getCard() {
         return card;
     }
-    public void removeCard(){
-        card = null;
-    }
     public void setCard(Card card) {
         this.card = card;
     }

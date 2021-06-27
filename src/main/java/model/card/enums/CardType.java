@@ -20,6 +20,4 @@ public enum CardType {
                 return direction;
         return null;
     }
-
-
 }

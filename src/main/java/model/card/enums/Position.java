@@ -13,15 +13,4 @@ public enum Position {
     Position(String label) {
         this.label = label;
     }
-
-    public static Position fromValue(String givenName) {
-        for (Position direction : values())
-            if (direction.label.equals(givenName))
-                return direction;
-        return null;
-    }
-
-    public String getLabel() {
-        return label;
-    }
 }

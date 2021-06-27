@@ -16,8 +16,4 @@ public enum Status {
                 return direction;
         return null;
     }
-
-    public String getLabel() {
-        return label;
-    }
 }
