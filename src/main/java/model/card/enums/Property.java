@@ -22,9 +22,4 @@ public enum Property {
                 return direction;
         return null;
     }
-
-    public String getLabel() {
-        return label;
-    }
-
 }

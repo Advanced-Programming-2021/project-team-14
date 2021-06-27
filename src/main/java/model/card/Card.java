@@ -5,7 +5,6 @@ import model.card.enums.CardType;
 import model.card.enums.Position;
 import model.card.enums.Property;
 import model.card.enums.State;
-import model.game.Hand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,10 +105,6 @@ public abstract class Card {
 
     public HashMap<String, String> getEffects() {
         return effects;
-    }
-
-    public boolean hasEffect(String key) {
-        return getEffects().containsKey(key) && !getEffects().get(key).equals("*");
     }
 
     public String getEffectValue(String key){

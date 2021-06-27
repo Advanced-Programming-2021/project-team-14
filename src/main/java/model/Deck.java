@@ -35,11 +35,6 @@ public class Deck {
         return Collections.frequency(mainCards, cardName) + Collections.frequency(sideCards, cardName);
     }
 
-    public String getName() {
-        return name;
-    }
-
-
     public ArrayList<String> getCards(boolean option) {
         return option ? sideCards : mainCards;
     }

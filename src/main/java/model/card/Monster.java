@@ -1,6 +1,9 @@
 package model.card;
 
-import model.card.enums.*;
+import model.card.enums.Attribute;
+import model.card.enums.CardType;
+import model.card.enums.MonsterType;
+import model.card.enums.Property;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,6 +111,4 @@ public class Monster extends Card {
         affectedCards = new ArrayList<>();
 
     }
-
-
 }

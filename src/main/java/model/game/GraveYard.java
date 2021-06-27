@@ -36,9 +36,4 @@ public class GraveYard {
     public String toString() {
         return String.format(Strings.GRAVEYARD_PRINT_FORMAT.getLabel(), getSize());
     }
-
-    public void remove(Card card) {
-        cards.remove(card);
-    }
-
 }
