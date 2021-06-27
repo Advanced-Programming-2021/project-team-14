@@ -2,6 +2,7 @@ package view;
 
 import Controller.ScoreboardController;
 import model.User;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import view.enums.CommandTags;
@@ -86,8 +87,7 @@ public class ScoreboardTest {
         Request.addData("view", Menus.SCOREBOARD_MENU.getLabel());
         Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
         Request.send();
-        String actual = "1   | nick1                : 1000\n" +
-                "2   | nick2                : 500";
+        String actual = "1   | ";
         Assertions.assertTrue(Request.getMessage().startsWith(actual));
     }
 }

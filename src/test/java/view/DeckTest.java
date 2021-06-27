@@ -15,11 +15,6 @@ import view.enums.Menus;
 public class DeckTest {
     private User user;
 
-    @BeforeAll
-    public static void prepareDataBase() {
-        Database.loadCards();
-    }
-
     @BeforeEach
     public void prepare() {
         user = new User("user", "pass", "nikoo");
@@ -27,7 +22,10 @@ public class DeckTest {
         login();
         Request.getToken();
     }
-
+    @BeforeAll
+    public static void prepareDataBase(){
+        Database.loadCards();
+    }
     private void login() {
         Request.addData("view", Menus.REGISTER_MENU.getLabel());
         Request.setCommandTag(CommandTags.LOGIN);
@@ -117,7 +115,6 @@ public class DeckTest {
         String response = sendRequestForCardFeatures(CommandTags.ADD_CARD, "Battle OX", "fullDeck", false);
         Assertions.assertEquals(Responses.MAIN_DECK_IS_FULL.getLabel(), response);
     }
-
     @Test
     void addCardToFullDeckSide() {
         createDeck("fullDeck");
@@ -136,7 +133,6 @@ public class DeckTest {
         String response = sendRequestForCardFeatures(CommandTags.ADD_CARD, "Battle OX", "threeCardDeck", false);
         Assertions.assertEquals(String.format(Responses.ENOUGH_CARDS.getLabel(), "Battle OX", "threeCardDeck"), response);
     }
-
     @Test
     void addCard() {
         createDeck("simpleDeck");
@@ -152,13 +148,11 @@ public class DeckTest {
         String response = sendRequestForCardFeatures(CommandTags.REMOVE_CARD, "Battle OX", "deckToRemoveCardFrom", false);
         Assertions.assertEquals(Responses.REMOVE_CARD_SUCCESSFUL.getLabel(), response);
     }
-
     @Test
     void removeCardFromNotExistingDeck() {
         String response = sendRequestForCardFeatures(CommandTags.REMOVE_CARD, "Battle OX", "notExistingDeck", false);
         Assertions.assertEquals(String.format(Responses.DECK_NOT_EXIST.getLabel(), "notExistingDeck"), response);
     }
-
     @Test
     void removeNotExistingCard() {
         createDeck("emptyDeck");
@@ -175,11 +169,11 @@ public class DeckTest {
         Request.addData("view", Menus.DECK_MENU.getLabel());
         Request.send();
         String expected = "Decks:\n" +
-                "َActive Deck:\n" +
-                "Other Decks:\n" +
-                "#3: main deck 0, side deck 0, invalid\n" +
-                "#1: main deck 0, side deck 0, invalid\n" +
-                "#2: main deck 0, side deck 0, invalid";
+                          "َActive Deck:\n" +
+                          "Other Decks:\n" +
+                          "#3: main deck 0, side deck 0, invalid\n" +
+                          "#1: main deck 0, side deck 0, invalid\n" +
+                          "#2: main deck 0, side deck 0, invalid";
         Assertions.assertEquals(expected, Request.getMessage());
     }
 
@@ -193,12 +187,11 @@ public class DeckTest {
         Request.addBooleanData(Strings.SIDE_OPTION.getLabel(), false);
         Request.send();
         String expected = "Deck: insideDeck\n" +
-                "main Deck:\n" +
-                "Monsters:\n" +
-                "Spells and Traps:";
+                          "main Deck:\n" +
+                          "Monsters:\n" +
+                          "Spells and Traps:";
         Assertions.assertEquals(expected, Request.getMessage());
     }
-
     @Test
     void showFilledDeck() {
         createDeck("insideFilledDeck");
@@ -212,14 +205,13 @@ public class DeckTest {
         Request.addBooleanData(Strings.SIDE_OPTION.getLabel(), false);
         Request.send();
         String expected = "Deck: insideFilledDeck\n" +
-                "main Deck:\n" +
-                "Monsters:\n" +
-                "Battle OX : A monster with tremendous power, it destroys enemies with a swing of its axe.\n" +
-                "Spells and Traps:\n" +
-                "Trap Hole : When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.";
+                          "main Deck:\n" +
+                          "Monsters:\n" +
+                          "Battle OX : A monster with tremendous power, it destroys enemies with a swing of its axe.\n" +
+                          "Spells and Traps:\n" +
+                          "Trap Hole : When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.";
         Assertions.assertEquals(expected, Request.getMessage());
     }
-
     @Test
     void showNotExistingDeck() {
         Request.setCommandTag(CommandTags.SHOW_DECK);
@@ -231,7 +223,7 @@ public class DeckTest {
     }
 
     @Test
-    void monsterSpellSeparatorTest() {
+    void monsterSpellSeparatorTest(){
 
     }
 

@@ -3,13 +3,17 @@ package Controller;
 import Controller.enums.Responses;
 import model.Database;
 import model.Strings;
+import model.User;
 import model.card.Card;
+import model.game.Board;
 import model.game.Phase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
+
+import java.net.UnknownServiceException;
 
 
 public class GamePlayControllerTest {
@@ -46,7 +50,7 @@ public class GamePlayControllerTest {
 
         login("main");
         startDuel("rival");
-        setMain1Phase();
+        changePhase();
         setCard();
         Assertions.assertEquals("no card is selected yet", Request.getMessage());
     }
@@ -55,10 +59,22 @@ public class GamePlayControllerTest {
     public void setMonsterSelectedCard() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
-        selectHandCard();
+        changePhase();
+        selectCard("--hand 1", "hand");
         setCard();
         Assertions.assertEquals("set successfully", Request.getMessage());
+    }
+
+    @Test
+    public void setMonsterError() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        summonAMonster();
+        selectCard("--monster 1", "monster");
+        setCard();
+        Assertions.assertEquals("you can’t set this card", Request.getMessage());
     }
 
     @Test
@@ -76,7 +92,7 @@ public class GamePlayControllerTest {
     public void selectHandCard() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
+        changePhase();
         selectCard("--hand1", "hand");
         Assertions.assertEquals(Strings.CARD_SELECTED.getLabel(), Request.getMessage());
     }
@@ -85,7 +101,7 @@ public class GamePlayControllerTest {
     public void deselectCard() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
+        changePhase();
         selectCard("--field 1", "field");
         selectCard("--spell 1", "spell");
         selectCard("--hand 1", "hand");
@@ -95,59 +111,143 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(Strings.CARD_DESELECTED.getLabel(), Request.getMessage());
     }
 
+    @Test
+    public void winGameCheat() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        Request.setCommandTag(CommandTags.WIN_GAME);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+        Assertions.assertEquals("Unexpectedly user AdminTest1 won!", Request.getMessage());
+    }
+
+    @Test
+    public void playAI() {
+        login("main");
+        Request.addData("view", Menus.DUEL_MENU.getLabel());
+        Request.addData("command", CommandTags.START_DUEL_AI.getLabel());
+        Request.addData("rounds", "1");
+        Request.send();
+        changePhase();
+        selectCard("--hand 1", "hand");
+        summonAMonster();
+        changeSomePhases(5);
+        Assertions.assertEquals("phase: STANDBY_PHASE", Request.getMessage());
+    }
+
+    @Test
+    public void forceSelect() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        Request.setCommandTag(CommandTags.SELECT_FORCE);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.addData("card", "Spell Absorption");
+        Request.send();
+        Assertions.assertEquals("card added successfully", Request.getMessage());
+    }
 
     @Test
     public void summon() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
-        selectHandCard();
+        changePhase();
+        selectCard("--hand 1", "hand");
         summonAMonster();
         Assertions.assertEquals(Strings.SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
 
-
     @Test
-    public void checkAi() {
-        login("MonsterTest");
-        startDuel("aiPlayer");
-        changeSomePhases(5);
-    }
-
-
-    @Test
-    public void flipSummonWrong() {
+    public void ritualSummon() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
-
-        selectHandCard();
-        summon();
-
-        for (int i = 0; i < 12; i++) {
-            changePhase();
-        }
-
-        selectCard("--monster 1", "monster");
-        Request.setCommandTag(CommandTags.FLIP_SUMMON);
+        changePhase();
+        selectCard("--hand 1", "hand");
+        Request.setCommandTag(CommandTags.RITUAL_SUMMON);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.send();
-        Assertions.assertEquals(Strings.CANNOT_FLIP_SUMMON_THIS_CARD.getLabel(), Request.getMessage());
+        Assertions.assertEquals("there is no way you could ritual summon a monster", Request.getMessage());
     }
 
+    @Test
+    public void specialSummon() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        Request.setCommandTag(CommandTags.SPECIAL_SUMMON);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+        Assertions.assertEquals("there is no way you could special summon a monster", Request.getMessage());
+    }
+
+    @Test
+    public void summonError1() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        summonAMonster();
+        Assertions.assertEquals("no card is selected yet", Request.getMessage());
+    }
+
+    @Test
+    public void summonError2() {
+        login("SpellTest");
+        startDuel("TrapTest");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        summonAMonster();
+        Assertions.assertEquals("you can’t summon this card", Request.getMessage());
+    }
+
+    @Test
+    public void summonError3() {
+        login("MonsterTest");
+        startDuel("rival");
+        selectCard("--hand 1", "hand");
+        summonAMonster();
+        Assertions.assertEquals("action not allowed in this phase", Request.getMessage());
+    }
+
+    @Test
+    public void summonError4() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        for (int i = 0; i < 6; i++) {
+            changeSomePhases(12);
+            selectCard("--hand 1", "hand");
+            summonAMonster();
+
+        }
+        Assertions.assertEquals("monster card zone is full", Request.getMessage());
+    }
+
+    @Test
+    public void summonError5() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand 1", "hand");
+        summonAMonster();
+        selectCard("--monster 1", "monster");
+        summonAMonster();
+        Assertions.assertEquals("you can’t summon this card (should be in hand)", Request.getMessage());
+    }
 
     @Test
     public void flipSummon() {
         login("MonsterTest");
         startDuel("rival");
-        setMain1Phase();
+        changePhase();
 
-        selectHandCard();
+        selectCard("--hand 1", "hand");
         setCard();
 
-        for (int i = 0; i < 12; i++) {
-            changePhase();
-        }
+        changeSomePhases(12);
 
         selectCard("--monster 1", "monster");
         Request.setCommandTag(CommandTags.FLIP_SUMMON);
@@ -156,6 +256,23 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(Strings.FLIP_SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
 
+    @Test
+    public void flipSummonError() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+
+        selectCard("--hand 1", "hand");
+        summon();
+
+        changeSomePhases(12);
+
+        selectCard("--monster 1", "monster");
+        Request.setCommandTag(CommandTags.FLIP_SUMMON);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+        Assertions.assertEquals(Strings.CANNOT_FLIP_SUMMON_THIS_CARD.getLabel(), Request.getMessage());
+    }
 
     @Test
     public void setSpellTest() {
@@ -167,49 +284,11 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(Strings.SET_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
 
-
-    @Test
-    public void winGame() {
-        login("main");
-        startDuel("rival");
-        changePhase();
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.WIN_GAME);
-        Request.send();
-        Assertions.assertEquals("Unexpectedly user admin1 won!", Request.getMessage());
-    }
-
-
-    @Test
-    public void ritualSummon() {
-        login("main");
-        startDuel("rival");
-        changePhase();
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.RITUAL_SUMMON);
-        Request.send();
-        Assertions.assertEquals("there is no way you could ritual summon a monster", Request.getMessage());
-    }
-
-
-    @Test
-    public void speicalSummon() {
-        login("main");
-        startDuel("rival");
-        changePhase();
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.SPECIAL_SUMMON);
-        Request.send();
-        Assertions.assertEquals("there is no way you could special summon a monster", Request.getMessage());
-    }
-
-
     private void setCard() {
         Request.setCommandTag(CommandTags.SET);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.send();
     }
-
 
     @Test
     public void increaseLifePoint() {
@@ -229,6 +308,32 @@ public class GamePlayControllerTest {
         startDuel("MonsterRival");
         attackAMonster();
         Assertions.assertEquals("both you and your opponent monster cards are destroyed and one receives damage", Request.getMessage());
+    }
+
+    @Test
+    public void attackError() {
+        login("MonsterTest");
+        startDuel("MonsterRival");
+
+        changePhase();
+
+        selectCard("--hand1", "hand");
+        summonAMonster();
+
+        changeSomePhases(6);
+
+        selectCard("--hand1", "hand");
+        summonAMonster();
+
+        changePhase();
+
+        selectCard("--monster 1", "monster");
+
+        Request.setCommandTag(CommandTags.ATTACK);
+        Request.addData("to", "3");
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+        Assertions.assertEquals("there is no card to attack here", Request.getMessage());
     }
 
     @Test
@@ -254,7 +359,6 @@ public class GamePlayControllerTest {
 
         Assertions.assertEquals(Strings.ACTIVATE_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
-
 
     @Test
     public void effectTest2() {
@@ -287,8 +391,6 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(Strings.ACTIVATE_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
 
-
-
     @Test
     public void tributeMonster() {
         login("TributeTest");
@@ -298,53 +400,14 @@ public class GamePlayControllerTest {
         selectCard("--hand 1", "hand");
         summonAMonster();
 
+        changeSomePhases(12);
+
         selectCard("--hand 1", "hand");
         Request.addData("data", "1");
         summonAMonster();
 
-        Assertions.assertEquals(Strings.ALREADY_SUMMONED.getLabel(), Request.getMessage());
+        Assertions.assertEquals(Strings.SUMMON_SUCCESSFULLY.getLabel(), Request.getMessage());
     }
-
-
-    @Test
-    public void selectForce() {
-        login("main");
-        startDuel("rival");
-
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.SELECT_FORCE);
-        Request.addData("card", "Haniwa");
-        Request.send();
-
-        Assertions.assertEquals("card added successfully", Request.getMessage());
-    }
-
-
-    @Test
-    public void selectForceWithInvalidCard() {
-        login("main");
-        startDuel("rival");
-
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.SELECT_FORCE);
-        Request.addData("card", "sdferwdfsdfs");
-        Request.send();
-
-        Assertions.assertEquals("card not found!", Request.getMessage());
-    }
-
-
-    @Test
-    public void showCardShopMenuNotFound() {
-        login("main");
-        startDuel("rival");
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.SHOW_CARD);
-        Request.addData("card", "alakidfdfadfsdf");
-        Request.send();
-        Assertions.assertEquals("card not found!", Request.getMessage());
-    }
-
 
     @Test
     public void directAttack() {
@@ -361,6 +424,19 @@ public class GamePlayControllerTest {
         Assertions.assertEquals("you opponent receives 300 battle damage", Request.getMessage());
     }
 
+    @Test
+    public void winTheGame() {
+        login("MonsterTest");
+        startDuel("MonsterRival");
+        changePhase();
+        directAttackForWin();
+        for (int i=0; i<26;i++) {
+            changeSomePhases(11);
+            directAttackForWin();
+        }
+        Assertions.assertEquals("you opponent receives 300 battle damage\n" +
+                "user AdminTest1 won Duel with score 1000 and user AdminTest1 lost with score 0!\n", Request.getMessage());
+    }
 
     @Test
     public void showGraveYard() {
@@ -374,15 +450,30 @@ public class GamePlayControllerTest {
     }
 
     @Test
-    public void setPosition() {
+    public void setPositionError() {
         login("MonsterRival");
         startDuel("MonsterTest");
         changePhase();
         selectCard("--hand1", "hand");
         summonAMonster();
-        changeSomePhases(12);
+
         selectCard("--monster 1", "monster");
 
+        Request.setCommandTag(CommandTags.SET_POSITION);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.addData("position", "attack");
+        Request.send();
+        Assertions.assertEquals("this card is already in the wanted position", Request.getMessage());
+    }
+
+    @Test
+    public void setPosition() {
+        login("MonsterTest");
+        startDuel("rival");
+        changePhase();
+        selectCard("--hand1", "hand");
+        summonAMonster();
+        selectCard("--monster 1", "monster");
         Request.setCommandTag(CommandTags.SET_POSITION);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.addData("position", "defence");
@@ -390,37 +481,12 @@ public class GamePlayControllerTest {
         Assertions.assertEquals("monster position changed successfully", Request.getMessage());
     }
 
-
-    @Test
-    public void showCardGameplayMenu() {
-        login("main");
-        startDuel("rival");
-        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
-        Request.setCommandTag(CommandTags.SHOW_CARD);
-        Request.addData("card", "Bitron");
-        Request.send();
-        Assertions.assertEquals("--------------------------------------\n" +
-                "|type: Monster                       |\n" +
-                "|monster type: Cyberse               |\n" +
-                "|                                    |\n" +
-                "|name: Bitron                        |\n" +
-                "|price: 1000      |level: 2          |\n" +
-                "|attack: 200      |defense: 2000     |\n" +
-                "|                                    |\n" +
-                "|description:                        |\n" +
-                "|A new species found in electronic   |\n" +
-                "|space. There's not much information |\n" +
-                "|on it                               |\n" +
-                "--------------------------------------\n", Request.getMessage());
-    }
-
-
     @Test
     public void showSelectedMonsterCard() {
         login("MonsterTest");
-        setMain1Phase();
+        startDuel("rival");
         selectCard("--hand1", "hand");
-
+        changePhase();
         Request.setCommandTag(CommandTags.SHOW_SELECTED_CARD);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.send();
@@ -430,11 +496,26 @@ public class GamePlayControllerTest {
     }
 
     @Test
+    public void showCard() {
+        login("MonsterTest");
+        startDuel("rival");
+        selectCard("--hand1", "hand");
+        changePhase();
+        Request.setCommandTag(CommandTags.SHOW_CARD);
+        Request.addData("card", "Wattaildragon");
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+
+        String showCard = Card.getCardByName("Wattaildragon").show();
+        Assertions.assertEquals(showCard, Request.getMessage());
+    }
+
+    @Test
     public void showSelectedSpellCard() {
         login("SpellTest");
-        setMain1Phase();
+        startDuel("rival");
         selectCard("--hand1", "hand");
-
+        changePhase();
         Request.setCommandTag(CommandTags.SHOW_SELECTED_CARD);
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.send();
@@ -457,14 +538,12 @@ public class GamePlayControllerTest {
         Assertions.assertEquals(String.format(Strings.NO_ACTIVE_DECK.getLabel(), "NotExistDeckUser"), Request.getMessage());
     }
 
-
     @Test
     public void sameSecondPlayer() {
         login("main");
         startDuel("main");
         Assertions.assertEquals(Strings.SAME_SECOND_PLAYER.getLabel(), Request.getMessage());
     }
-
 
     private void setMain1Phase() {
         startDuel("rival");
@@ -484,6 +563,15 @@ public class GamePlayControllerTest {
             Request.getToken();
     }
 
+    private void directAttackForWin() {
+        selectCard("--hand 1", "hand");
+        setCard();
+        changePhase();
+        selectCard("--monster 1", "monster");
+        Request.setCommandTag(CommandTags.DIRECT_ATTACK);
+        Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+        Request.send();
+    }
 
     private void attackAMonster() {
         changePhase();
@@ -506,7 +594,6 @@ public class GamePlayControllerTest {
         Request.send();
     }
 
-
     private void changeSomePhases(int count) {
         for (int i = 0; i < count; i++) {
             changePhase();
@@ -526,7 +613,6 @@ public class GamePlayControllerTest {
         Request.addData("rounds", "1");
         Request.send();
     }
-
 
     private String selectCard(String option, String area) {
         Request.setCommandTag(CommandTags.SELECT);
@@ -549,6 +635,5 @@ public class GamePlayControllerTest {
         Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
         Request.send();
     }
-
 
 }
