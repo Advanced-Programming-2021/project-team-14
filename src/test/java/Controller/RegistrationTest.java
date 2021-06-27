@@ -14,7 +14,6 @@ import view.enums.Menus;
 
 public class RegistrationTest {
 
-
     @BeforeEach
     @Test
     public void createUserForTests() {
