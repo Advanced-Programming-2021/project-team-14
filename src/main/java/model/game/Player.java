@@ -19,11 +19,11 @@ public class Player {
     public TurnLogger getTurnLogger() {
         return turnLogger;
     }
+
     private Hand hand;
 
     private Zone monsterZone;
     private ArrayList<Card> activatedCards;
-
 
 
     private Zone spellZone;
@@ -37,8 +37,8 @@ public class Player {
     private int lifePoint;
 
 
-    public Player(User user, Integer winningRounds) {
-        this.winningRounds = winningRounds;
+    public Player(User user) {
+        this.winningRounds = 0;
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         playingDeck = new PlayingDeck(user.getDeck(user.getActiveDeck()));
@@ -49,10 +49,15 @@ public class Player {
         this.turnLogger = new TurnLogger();
         lifePoint = 8000;
         hand = new Hand();
-        hand.addCard(Card.getCardByName("Battle OX"));
-//        hand.addCard(Card.getCardByName("Leotron"));
-//        hand.addCard(Card.getCardByName("Crawling dragon"));
-        addNCardsToHand(6);
+        if (username.equals("TributeTest")) {
+            hand.addCard(Card.getCardByName("Marshmallon"));
+            hand.addCard(Card.getCardByName("Crawling dragon"));
+            hand.addCard(Card.getCardByName("Marshmallon"));
+            addNCardsToHand(3);
+        }else {
+            addNCardsToHand(6);
+        }
+
         this.activatedCards = new ArrayList<>();
     }
 

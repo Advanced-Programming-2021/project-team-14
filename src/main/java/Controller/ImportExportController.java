@@ -31,7 +31,7 @@ public class ImportExportController {
 
         if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
             Response.success();
-            return String.format(Responses.EXPORT.getLabel(), cardName);
+            return String.format(DatabaseResponses.EXPORT.getLabel(), cardName);
         } else {
             Response.error();
             return DatabaseResponses.SORRY.getLabel();
@@ -50,7 +50,7 @@ public class ImportExportController {
                 return DatabaseResponses.BAD_FORMAT_RESPONSE.getLabel();
             case SUCCESSFUL:
                 Response.success();
-                return String.format(Responses.IMPORT.getLabel(), cardName);
+                return String.format(DatabaseResponses.IMPORT.getLabel(), cardName);
         }
 
         return null;
