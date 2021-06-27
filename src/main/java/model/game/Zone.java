@@ -39,9 +39,6 @@ public class Zone {
         return cells.get(position);
     }
 
-    public void emptyCell(int position) {
-        cells.get(position).removeCard();                         // here null means empty
-    }
 
     public void placeCard(Card card) {
         int position = firstEmptyPlace();
@@ -111,6 +108,7 @@ public class Zone {
      });
      return occupiedCells;
     }
+
     public void remove(String cardName) {
         cells.values().forEach(cell -> {
             if (!cell.isEmpty())
