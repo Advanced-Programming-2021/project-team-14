@@ -35,10 +35,9 @@ public class DeckInside extends Menu {
     public TilePane sideCardContainer;
     public ScrollPane main;
     public ScrollPane side;
-    private String deckName;
     @FXML
     public void initialize() {
-        deckName = getData();
+        deckTitle.setText(getData());
         main.setVisible(false);
         side.setVisible(false);
         new Thread(() -> {
