@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="main" stylesheets="@../CSS/loginRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.LoginMenuController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="main" stylesheets="@../CSS/loginRegister.css, @../CSS/snackbar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.LoginMenuController">
 
     <AnchorPane layoutX="413.0" layoutY="200.0" prefHeight="442" prefWidth="374" styleClass="container">
         <JFXTextField fx:id="usernameField" labelFloat="true" layoutX="63.0" layoutY="95.0" promptText="Username" styleClass="text-field" />

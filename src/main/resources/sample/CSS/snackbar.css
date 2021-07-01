@@ -1,0 +1,18 @@
+.successful-snackbar {
+    -fx-background-color: #00C57B;
+    -fx-min-width: 1200;
+    -fx-min-height: 40;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+}
+.error-snackbar {
+    -fx-background-color: #DF295A;
+    -fx-min-width: 1200;
+    -fx-min-height: 40;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+}

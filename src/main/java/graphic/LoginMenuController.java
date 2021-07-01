@@ -5,7 +5,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
-import graphic.ComponentsText;
+import graphic.component.ResultState;
+import graphic.component.SnackBarComponent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-public class LoginMenuController extends Menu{
+public class LoginMenuController extends Menu {
     @FXML
     public JFXButton changeState, mainButton;
     @FXML
@@ -32,17 +33,18 @@ public class LoginMenuController extends Menu{
     private boolean isLoginMenu;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         isLoginMenu = true;
         loadAppropriateState();
     }
+
     private void loadAppropriateState() {
-        if (isLoginMenu){
+        if (isLoginMenu) {
             title.setText(ComponentsText.LOGIN_TITLE.getContent());
             changeState.setText(ComponentsText.SIGNUP_BUTTON.getContent());
             mainButton.setText(ComponentsText.LOGIN_TITLE.getContent());
             textGuide.setText(ComponentsText.DONT_HAVE_ACCOUNT.getContent());
-        }else{
+        } else {
             title.setText(ComponentsText.SIGNUP_TITLE.getContent());
             changeState.setText(ComponentsText.LOGIN_BUTTON.getContent());
             mainButton.setText(ComponentsText.SIGNUP_TITLE.getContent());
@@ -52,10 +54,8 @@ public class LoginMenuController extends Menu{
     }
 
     public void register() {
-        Label response = new Label();
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || nicknameField.getText().isEmpty()) {
-            response.setText("please enter your username, password and nickname");
-            response.getStyleClass().add("error-snackbar");
+            new SnackBarComponent("please enter your username, password and nickname", ResultState.SUCCESS, root);
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -65,20 +65,16 @@ public class LoginMenuController extends Menu{
             Request.send();
 
             if (!Request.isSuccessful()) {
-                response.setText(Request.getMessage());
-                response.getStyleClass().add("error-snackbar");
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
             } else {
-                response.setText(Request.getMessage());
-                response.getStyleClass().add("successful-snackbar");
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, root);
             }
-        new JFXSnackbar(root).enqueue(new JFXSnackbar.SnackbarEvent(response, Duration.seconds(2), null));
         }
     }
+
     public void login() {
-        Label response = new Label();
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            response.setText("please enter your username, password and nickname");
-            response.getStyleClass().add("error-snackbar");
+            new SnackBarComponent("please enter your username, password and nickname", ResultState.SUCCESS, root);
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -87,17 +83,13 @@ public class LoginMenuController extends Menu{
             Request.send();
 
             if (!Request.isSuccessful()) {
-                response.setText(Request.getMessage());
-                response.getStyleClass().add("error-snackbar");
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
             } else {
-                response.setText(Request.getMessage());
                 Request.getToken();
-                response.getStyleClass().add("successful-snackbar");
                 setCurrentUser(usernameField.getText());
                 MainGraphic.setRoot("MainMenu");
             }
         }
-        new JFXSnackbar(root).enqueue(new JFXSnackbar.SnackbarEvent(response, Duration.seconds(2), null));
     }
 
     public void changeState(MouseEvent mouseEvent) {
