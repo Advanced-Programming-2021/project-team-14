@@ -1,13 +1,17 @@
 
 .deckListItem {
-    -fx-pref-width: 470;
-    -fx-pref-height: 50;
+    -fx-pref-width: 520;
+    -fx-pref-height: 60;
     -fx-background-color: #272731;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
 
-.deckListItem #deckName, #deckCardSize {
+.deckListItem #deckName {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+.deckListItem #deckCardSize{
     -fx-font-size: 14;
     -fx-font-weight: bold;
 }

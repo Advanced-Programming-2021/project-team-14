@@ -26,7 +26,7 @@ public class DeckListItem extends AnchorPane implements ComponentLoader{
         load("DeckList");
         cardsNum.setText(String.valueOf(deck.getSize()));
         deckName.setText(deck.getName());
-        if (deck.getSize() > 50) {
+        if (deck.getSize() > 40) {
             validity.setFill(Colors.SUCCESS.getColor());
         }else{
             validity.setFill(Colors.WARNING.getColor());
@@ -43,6 +43,10 @@ public class DeckListItem extends AnchorPane implements ComponentLoader{
 
     public JFXButton getEdit() {
         return edit;
+    }
+
+    public String getDeckName() {
+        return deckName.getText();
     }
 
     private FontAwesomeIconView generateIcon(FontAwesomeIcon fontAwesomeIcon) {
