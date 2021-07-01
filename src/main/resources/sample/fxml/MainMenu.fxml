@@ -6,7 +6,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/mainMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.MainMenu">
+<AnchorPane fx:id="root" stylesheets="@../CSS/mainMenu.css, @../CSS/snackbar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.MainMenu">
       <AnchorPane styleClass="sidebar-container">
             <VBox layoutY="200.0" styleClass="button-container">
                   <JFXButton text="Duel" onMouseClicked="#change">

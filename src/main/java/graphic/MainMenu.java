@@ -4,11 +4,14 @@ package graphic;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import sample.MainGraphic;
 
 public class MainMenu extends Menu{
 
     public AnchorPane view;
+    public AnchorPane root;
+
 
     private void setView(String view) {
         if (this.view.getChildren().size() > 0)
@@ -17,6 +20,7 @@ public class MainMenu extends Menu{
     }
 
     public void initialize() {
+        setRoot(root);
         setView("DeckMenu");
     }
 
