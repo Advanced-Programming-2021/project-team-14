@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.util.Duration;
 import model.Deck;
 import model.Strings;
+import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
@@ -42,7 +43,7 @@ public class DeckMenu extends Menu {
         });
         deckListItem.getEdit().setOnMouseClicked(e -> {
             addData(deckListItem.getDeckName());
-//            MainGraphic.setRoot("deckInside"); TODO: create the deckInside fxml
+            MainGraphic.setRoot("DeckInside");
         });
         listView.getItems().add(deckListItem);
     }

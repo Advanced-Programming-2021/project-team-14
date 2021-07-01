@@ -23,6 +23,10 @@ public class Menu {
         return root;
     }
 
+    public static String getData() {
+        return data;
+    }
+
     public static void setCurrentUser(String username) {
         currentUser = User.getUserByUsername(username);
     }
