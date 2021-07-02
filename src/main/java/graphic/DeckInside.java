@@ -1,9 +1,12 @@
 package graphic;
 
-import com.jfoenix.controls.JFXBadge;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import graphic.component.Card;
 import graphic.component.Colors;
+import graphic.component.ResultState;
+import graphic.component.SnackBarComponent;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
@@ -17,9 +20,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Deck;
 import model.Strings;
-import model.game.Game;
+import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
+import view.enums.Menus;
 
 
 public class DeckInside extends Menu {
@@ -35,6 +39,8 @@ public class DeckInside extends Menu {
     public TilePane sideCardContainer;
     public ScrollPane main;
     public ScrollPane side;
+    public JFXButton activateDeck;
+
     @FXML
     public void initialize() {
         deckTitle.setText(getData());
@@ -51,7 +57,7 @@ public class DeckInside extends Menu {
             sideCardContainer.setHgap(10);
             sideCardContainer.setVgap(10);
             for (int i = 0; i < deck.getCards(true).size(); i++) {
-                sideCardContainer.getChildren().add( new Card(deck.getCards(true).get(i), true));
+                sideCardContainer.getChildren().add(new Card(deck.getCards(true).get(i), true));
             }
             main.setVisible(true);
 
@@ -63,7 +69,12 @@ public class DeckInside extends Menu {
 
         initRadioButtons();
         initAreas();
+        initActivateDeckButton();
 
+    }
+
+    private void initActivateDeckButton() {
+        activateDeck.setDisable(!currentUser.getDeck(deckTitle.getText()).isValid());
     }
 
     private void initRadioButtons() {
@@ -75,16 +86,16 @@ public class DeckInside extends Menu {
         mainRadioButton.setUnSelectedColor(Color.TRANSPARENT);
         sideRadioButton.setUnSelectedColor(Color.TRANSPARENT);
         sideRadioButton.setOnMouseClicked(e -> {
-            mainCardContainer.setDisable(true);
-            mainCardContainer.setVisible(false);
-            sideCardContainer.setDisable(false);
-            sideCardContainer.setVisible(true);
+            main.setDisable(true);
+            main.setVisible(false);
+            side.setDisable(false);
+            side.setVisible(true);
         });
         mainRadioButton.setOnMouseClicked(e -> {
-            mainCardContainer.setDisable(false);
-            mainCardContainer.setVisible(true);
-            sideCardContainer.setDisable(true);
-            sideCardContainer.setVisible(false);
+            main.setDisable(false);
+            main.setVisible(true);
+            side.setDisable(true);
+            side.setVisible(false);
         });
 
     }
@@ -112,30 +123,43 @@ public class DeckInside extends Menu {
     }
 
     private void removeCardFromDeck(DragEvent e) {
-        Card card = ((Card)e.getGestureSource());
-        if (!card.getParent().equals(allCardsList)){
-            System.out.println(deckTitle);
-            System.out.println("deleting the " + card.getName() + "from " + (mainRadioButton.isSelected() ? "main" : "side"));
+        Card card = ((Card) e.getGestureSource());
+        if (!card.getParent().equals(allCardsList)) {
+            setView(Menus.DECK_MENU);
+            Request.setCommandTag(CommandTags.REMOVE_CARD);
+            Request.addData(Strings.DECK.getLabel(), deckTitle.getText());
+            Request.addData(Strings.CARD.getLabel(), card.getName());
+            Request.addBooleanData(Strings.SIDE_OPTION.getLabel(), sideRadioButton.isSelected());
+            Request.send();
+            if (Request.isSuccessful()) {
+                (sideRadioButton.isSelected() ? sideCardContainer : mainCardContainer).getChildren().remove(card);
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
+            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
         }
     }
 
     private void addCardToDeck(DragEvent e) {
-        Card card = ((Card)e.getGestureSource());
+        Card card = ((Card) e.getGestureSource());
         System.out.println(card.getParent().toString() + allCardsList);
-        if (card.getParent().equals(allCardsList)){
-            System.out.println(deckTitle);
-            System.out.println("adding the " + card.getName() + "to " + (mainRadioButton.isSelected() ? "main" : "side"));
+        if (card.getParent().equals(allCardsList)) {
+            setView(Menus.DECK_MENU);
+            Request.setCommandTag(CommandTags.ADD_CARD);
+            Request.addData(Strings.DECK.getLabel(), deckTitle.getText());
+            Request.addData(Strings.CARD.getLabel(), card.getName());
+            Request.addBooleanData(Strings.SIDE_OPTION.getLabel(), sideRadioButton.isSelected());
+            Request.send();
+            if (Request.isSuccessful()) {
             (mainRadioButton.isSelected() ? mainCardContainer : sideCardContainer).getChildren().add(new Card(card.getName(), true));
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
+            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
         }
     }
 
     private void removeCardAreaOnDragDropped() {
-        //TODO: delete the card. NOTICE: check the event resource
         removeCardArea.setOnDragDropped(this::removeCardFromDeck);
     }
 
     private void addAreaOnDragDropped() {
-        //TODO: add card to deck. NOTICE: check the event resource
         addCardArea.setOnDragDropped(this::addCardToDeck);
     }
 
@@ -144,6 +168,13 @@ public class DeckInside extends Menu {
     }
 
     public void setAsActiveDeck(MouseEvent mouseEvent) {
-        //TODO: set as active deck
+        setView(Menus.DECK_MENU);
+        Request.setCommandTag(CommandTags.ACTIVATE_DECK);
+        Request.addData(Strings.DECK.getLabel(), deckTitle.getText());
+        Request.send();
+    }
+
+    public void back(ActionEvent actionEvent) {
+        MainGraphic.setRoot("MainMenu");
     }
 }
