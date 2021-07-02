@@ -1,10 +1,7 @@
 package graphic.component;
 
 import javafx.fxml.FXMLLoader;
-import sample.Main;
 import sample.MainGraphic;
-import view.Request;
-import view.enums.Menus;
 
 import java.io.IOException;
 
@@ -20,6 +17,4 @@ public interface ComponentLoader {
             e.printStackTrace();
         }
     }
-
-
 }

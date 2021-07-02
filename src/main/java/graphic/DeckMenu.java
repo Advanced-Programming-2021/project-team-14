@@ -1,18 +1,15 @@
 package graphic;
 
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXSnackbar;
-import graphic.component.DeckListItem;
+import graphic.component.ListItem;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import javafx.util.Duration;
 import model.Deck;
 import model.Strings;
 import sample.MainGraphic;
@@ -33,7 +30,7 @@ public class DeckMenu extends Menu {
     }
 
     private void addItem(Deck deck) {
-        DeckListItem deckListItem = new DeckListItem(deck);
+        ListItem deckListItem = new ListItem(deck);
         deckListItem.getDelete().setOnMouseClicked(e -> {
             listView.getItems().remove(deckListItem);
             Request.addData(Strings.DECK.getLabel(), deck.getName());

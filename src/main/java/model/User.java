@@ -113,6 +113,10 @@ public class User {
         this.rank = rank;
     }
 
+    public int getRank() {
+        return this.rank;
+    }
+
     @Override
     public String toString() {
         return String.format("%-3d | %-20s : %d", rank, nickname, score);

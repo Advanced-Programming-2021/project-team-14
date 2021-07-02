@@ -36,6 +36,14 @@ public class ScoreBoard {
         return users.toString().substring(1, users.toString().length() - 1).replace(", ", "\n");
     }
 
+
+    public ArrayList<User> getSortedUsers() {
+        users = User.getUsers();
+        sortUsers();
+        return users;
+    }
+
+
     private void sortUsers() {
         users.sort((user1, user2) -> {
             if (user1.getScore() == user2.getScore())
