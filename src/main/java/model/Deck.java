@@ -22,6 +22,10 @@ public class Deck {
         this.name = deckName;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isCardAvailableInDeck(String cardName, boolean isSideDeck) {
         return (isSideDeck ? sideCards : mainCards).contains(cardName);
     }

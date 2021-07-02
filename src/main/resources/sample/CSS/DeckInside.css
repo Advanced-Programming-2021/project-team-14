@@ -1,0 +1,45 @@
+.root {
+    -fx-theme-color: #6D5DD3;
+    -fx-menu-background: #20202A;
+    -fx-dark-gray: #515468;
+}
+
+
+.Menu {
+    -fx-background-color: -fx-menu-background;
+}
+
+.jfx-radio-button {
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-size: 14;
+}
+
+.jfx-radio-button:selected {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 18;
+}
+
+#title {
+    -fx-font-size: 50;
+    -fx-fill: WHITE;
+}
+
+.verticalButton {
+    -fx-rotate: 90;
+    -fx-background-color: -fx-theme-color;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 16;
+    -fx-translate-x: -58;
+    -fx-background-radius: 0;
+}
+.area {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-dark-gray;
+    -fx-border-radius: 8;
+    -fx-pref-height: 110;
+    -fx-pref-width: 85;
+}
+
+.text {
+    -fx-fill: -fx-dark-gray;
+}

@@ -7,11 +7,11 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="Menu" stylesheets="@../CSS/deckInside.css"
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="graphic.DeckInside">
     <ScrollPane fx:id="allCardsContainer" styleClass="scroll-pane" layoutX="980.0" prefHeight="800.0" prefWidth="220.0"
-                stylesheets="@../CSS/scroll.css">
+                stylesheets="@../CSS/Scroll.css">
         <VBox fx:id="allCardsList" styleClass="cardList"/>
         <padding>
             <Insets bottom="30.0" left="50.0" top="30.0"/>

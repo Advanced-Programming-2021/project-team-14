@@ -12,6 +12,9 @@ public class Wallet {
         this.cash = 100000;
     }
 
+    public ArrayList<String> getCards() {
+        return cards;
+    }
 
     public void decreaseCash(int amount) {
         this.cash -= amount;

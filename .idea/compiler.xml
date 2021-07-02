@@ -18,11 +18,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="project-team-14" />
         <module name="APProjectPhase2" />
+        <module name="Yu-Gi-Oh" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="APProjectPhase2" target="8" />
       <module name="project-team-14" target="8" />
+      <module name="Yu-Gi-Oh" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
