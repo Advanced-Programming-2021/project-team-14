@@ -10,8 +10,6 @@ import view.enums.Responses;
 public class DeckMenu extends Menu {
 
     public void run() {
-
-
         while (!(command = Console.scan()).equals(Regexes.MENU_EXIT.getLabel())) {
             setCurrentMenu(Menus.DECK_MENU);
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="800" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.ProfileMenu">
+      <Text fill="#d3d3d3" layoutX="372.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="profile menu">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Text>
+</AnchorPane>

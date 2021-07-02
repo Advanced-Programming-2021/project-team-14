@@ -1,0 +1,48 @@
+
+/* ------ ----------- ------------   - --------------*/
+.root{
+    -fx-gray: #8A9EAD;
+    -fx-primary: #6D5DD3;
+    -fx-background: #20202A;
+    -fx-background-light: #272731;
+}
+.container{
+    -fx-background-color: -fx-background-light;
+    -fx-pref-width: 360;
+    -fx-pref-height: 390;
+    -fx-background-radius: 25;
+}
+.text-field {
+    -fx-font-size: 17;
+    -fx-text-fill: -fx-gray;
+    -fx-pref-width: 250;
+}
+
+.text-guide {
+    -fx-font-size: 13;
+    -fx-text-fill: -fx-gray;
+    -fx-text-alignment: CENTER;
+    -fx-padding: 0 5 0 0;
+}
+.small-button{
+    -fx-font-size: 13;
+    -fx-text-fill: -fx-primary;
+}
+
+.main-button {
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-pref-width: 250;
+    -fx-background-radius: 20;
+}
+.title {
+    -fx-font-weight: bold;
+    -fx-font-size: 70px;
+    -fx-text-fill: WHITE;
+}
+.main {
+    -fx-background-color: -fx-background;
+}
+

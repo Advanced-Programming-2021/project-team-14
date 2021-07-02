@@ -1,9 +1,10 @@
 package view;
 
 
+import javafx.application.Application;
 import view.enums.Menus;
 
-public abstract class Menu {
+public abstract class Menu{
 
     protected String command, currentMenu, response;
 

@@ -1,0 +1,33 @@
+.root{
+    -fx-primary: #6D5DD3;
+}
+.list-view {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-pref-width: 600;
+    -fx-pref-height: 600;
+}
+
+.list-view .list-cell {
+    -fx-skin: none;
+
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:focused {
+    -fx-background-color: transparent;
+}
+
+.add-button {
+    -fx-pref-width: 50;
+    -fx-background-radius: 25;
+    -fx-pref-height: 50;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: center;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+}

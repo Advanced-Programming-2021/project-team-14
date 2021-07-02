@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<AnchorPane fx:id="root" stylesheets="@../CSS/mainMenu.css, @../CSS/snackbar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.MainMenu">
+      <AnchorPane styleClass="sidebar-container">
+            <VBox layoutY="200.0" styleClass="button-container">
+                  <JFXButton text="Duel" onMouseClicked="#change">
+                     <graphic>
+                        <FontAwesomeIconView styleClass="icon" glyphName="BARS"/>
+                     </graphic>
+                  </JFXButton>
+               <JFXButton text="Deck" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="TH"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton text="Shop" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="SHOPPING_CART"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Scoreboard" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="TROPHY"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Profile" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="USER" />
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Import\Export" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="EXCHANGE"/>
+                  </graphic>
+               </JFXButton>
+               <JFXButton  text="Logout" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="SIGN_OUT"/>
+                  </graphic>
+               </JFXButton>
+            </VBox>
+      </AnchorPane>
+   <AnchorPane fx:id="view" styleClass="view" layoutX="220"/>
+</AnchorPane>

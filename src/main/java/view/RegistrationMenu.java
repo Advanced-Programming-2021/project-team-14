@@ -43,6 +43,7 @@ public class RegistrationMenu extends Menu {
         }
     }
 
+
     public void register(String command) {
         Request.setCommandTag(CommandTags.REGISTER);
         if (command.contains("--un ") && command.contains("--nn ") && command.contains("--pw "))

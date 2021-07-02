@@ -61,4 +61,8 @@ public class Deck {
         return String.format(Strings.DECK_PRINT_FORMAT.getLabel(), name, mainCards.size(),
                 sideCards.size(), isValid() ? Strings.VALID.getLabel() : Strings.INVALID.getLabel());
     }
+
+    public int getSize() {
+        return mainCards.size();
+    }
 }
