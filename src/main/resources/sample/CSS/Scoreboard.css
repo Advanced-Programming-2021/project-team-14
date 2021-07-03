@@ -1,0 +1,9 @@
+.root {
+    -fx-pref-width: 1200;
+    -fx-pref-height: 800;
+    -fx-side-size: 220px;
+    -fx-gray: #515468;
+    -fx-primary: #6D5DD3;
+    -fx-background: #20202A;
+    -fx-background-light: #272731;
+}
