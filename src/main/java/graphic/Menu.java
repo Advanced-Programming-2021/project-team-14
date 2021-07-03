@@ -11,7 +11,7 @@ public class Menu {
     private static String data;
     private static Pane root;
     protected static User currentUser;
-    protected static void setView(Menus menus){
+    public static void setView(Menus menus){
         Request.addData("view", menus.getLabel());
     }
     protected static void addData(String data){

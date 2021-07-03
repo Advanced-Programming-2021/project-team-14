@@ -24,7 +24,9 @@ public class Hand {
         cardLoaders.add(card);
     }
 
-
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 
     public Card getCard(int position) {
         return cardLoaders.get(position - 1);

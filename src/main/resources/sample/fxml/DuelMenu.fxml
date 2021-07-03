@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="800" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.DuelMenu">
+      <JFXButton layoutX="454.0" layoutY="388.0" onMouseClicked="#startGame" text="start game" style="-fx-font-size: 25; -fx-text-fill: WHITE;" />
+</AnchorPane>
