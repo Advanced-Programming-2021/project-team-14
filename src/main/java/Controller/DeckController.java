@@ -170,9 +170,9 @@ public class DeckController {
         }
         Response.success();
         Deck deck = user.getDeck(deckName);
-        ArrayList<ArrayList<Card>> cards = separateCards(deck, isSideDeck);
+        ArrayList<ArrayList<Card>> cardLoaders = separateCards(deck, isSideDeck);
         return String.format(Strings.DECK_CARDS_PRINT_FORMAT.getLabel(), deckName, isSideDeck ? Strings.SIDE.getLabel() : Strings.MAIN.getLabel(),
-                stringifyCards(ShopController.sort(cards.get(0))), stringifyCards(ShopController.sort(cards.get(1))));
+                stringifyCards(ShopController.sort(cardLoaders.get(0))), stringifyCards(ShopController.sort(cardLoaders.get(1))));
     }
 
     private static String stringifyDecks(ArrayList<Deck> arrayList) {

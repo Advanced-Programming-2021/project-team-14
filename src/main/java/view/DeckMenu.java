@@ -77,7 +77,7 @@ public class DeckMenu extends Menu {
                 Request.send();
                 Console.print(Request.getMessage());
 
-            } else if (command.matches(Regexes.SHOW_CARDS.getLabel())) {     // show cards ...
+            } else if (command.matches(Regexes.SHOW_CARDS.getLabel())) {     // show cardLoaders ...
 
                 Request.setCommandTag(CommandTags.SHOW_CARDS);
                 Request.send();

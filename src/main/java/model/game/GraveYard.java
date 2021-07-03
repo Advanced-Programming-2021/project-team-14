@@ -7,26 +7,26 @@ import java.util.ArrayList;
 
 public class GraveYard {
 
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cardLoaders;
 
     public GraveYard() {
-        cards = new ArrayList<>();
+        cardLoaders = new ArrayList<>();
     }
 
     public int getSize() {
-        return cards.size();
+        return cardLoaders.size();
     }
 
     public void addCard(Card card) {
-        cards.add(card);
+        cardLoaders.add(card);
     }
 
     public String showCards() {
-        if (cards.isEmpty()) return Strings.GRAVEYARD_IS_EMPTY.getLabel();
+        if (cardLoaders.isEmpty()) return Strings.GRAVEYARD_IS_EMPTY.getLabel();
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < cards.size(); i++) {
+        for (int i = 0; i < cardLoaders.size(); i++) {
 
-            result.append(i + 1).append(". ").append(cards.get(i).toString()).append("\n");
+            result.append(i + 1).append(". ").append(cardLoaders.get(i).toString()).append("\n");
         }
         return result.toString();
     }

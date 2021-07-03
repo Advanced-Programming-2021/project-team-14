@@ -66,7 +66,7 @@ public class GamePlayMenu extends Menu {
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
-        } else if (inputCommand.matches(Regexes.SUMMON.getLabel())) {            // summon cards
+        } else if (inputCommand.matches(Regexes.SUMMON.getLabel())) {            // summon cardLoaders
 
             Request.setCommandTag(CommandTags.SUMMON);
             Request.send();
@@ -80,19 +80,19 @@ public class GamePlayMenu extends Menu {
                 Console.printBoard(Request.getResponse());
                 Console.print(Request.getMessage());
             }
-        } else if (inputCommand.matches(Regexes.FLIP_SUMMON.getLabel())) {            // summon cards
+        } else if (inputCommand.matches(Regexes.FLIP_SUMMON.getLabel())) {            // summon cardLoaders
 
             Request.setCommandTag(CommandTags.FLIP_SUMMON);
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
-        } else if (inputCommand.matches(Regexes.RITUAL_SUMMON.getLabel())) {            // summon cards
+        } else if (inputCommand.matches(Regexes.RITUAL_SUMMON.getLabel())) {            // summon cardLoaders
 
             Request.setCommandTag(CommandTags.RITUAL_SUMMON);
             Request.send();
             Console.printBoard(Request.getResponse());
             Console.print(Request.getMessage());
-        } else if (inputCommand.matches(Regexes.SPECIAL_SUMMON.getLabel())) {            // summon cards
+        } else if (inputCommand.matches(Regexes.SPECIAL_SUMMON.getLabel())) {            // summon cardLoaders
 
             Request.setCommandTag(CommandTags.SPECIAL_SUMMON);
             Request.send();

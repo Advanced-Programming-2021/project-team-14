@@ -2,12 +2,7 @@
   "wallet": {
     "cash": 87100,
     "cards": [
-      "Terraforming",
       "Marshmallon",
-      "Wattaildragon",
-      "Marshmallon",
-      "Slot Machine",
-      "Dark Hole",
       "Magic Cylinder",
       "Blue-Eyes white dragon",
       "Skull Guardian",
@@ -68,17 +63,26 @@
       "Bitron",
       "Bitron",
       "Bitron",
-      "Bitron"
+      "Bitron",
+      "Leotron",
+      "Terraforming",
+      "Marshmallon",
+      "Wattkid",
+      "Battle warrior",
+      "Warrior Dai Grepher"
     ]
   },
   "activeDeck": "first",
   "decks": {
     "first": {
       "name": "first",
-      "sideCards": [],
-      "mainCards": [
-        "Terraforming",
+      "sideCards": [
         "Marshmallon",
+        "Terraforming",
+        "Wattaildragon",
+        "Slot Machine"
+      ],
+      "mainCards": [
         "Marshmallon",
         "Slot Machine",
         "Dark Hole",
@@ -91,7 +95,6 @@
         "Alexandrite Dragon",
         "Negate Attack",
         "Axe Raider",
-        "Leotron",
         "Gate Guardian",
         "Ring of defense",
         "Change of Heart",
@@ -103,7 +106,6 @@
         "United We Stand",
         "Terraforming",
         "Beast King Barbaros",
-        "Warrior Dai Grepher",
         "Beast King Barbaros",
         "Scanner",
         "Battle OX",
@@ -117,7 +119,6 @@
         "Herald of Creation",
         "Sword of dark destruction",
         "Exploder Dragon",
-        "Wattkid",
         "Call of The Haunted",
         "Terraforming",
         "Twin Twisters",
@@ -125,8 +126,8 @@
         "Black Pendant",
         "Marshmallon",
         "Trap Hole",
-        "Battle warrior",
-        "Wattkid"
+        "Wattkid",
+        "Dark Hole"
       ]
     }
   },
@@ -134,5 +135,5 @@
   "password": "123",
   "nickname": "admin1",
   "score": 0,
-  "rank": 0
+  "rank": 2
 }

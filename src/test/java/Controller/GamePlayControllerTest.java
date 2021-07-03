@@ -3,17 +3,13 @@ package Controller;
 import Controller.enums.Responses;
 import model.Database;
 import model.Strings;
-import model.User;
 import model.card.Card;
-import model.game.Board;
 import model.game.Phase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
-
-import java.net.UnknownServiceException;
 
 
 public class GamePlayControllerTest {
@@ -307,7 +303,7 @@ public class GamePlayControllerTest {
         login("MonsterTest");
         startDuel("MonsterRival");
         attackAMonster();
-        Assertions.assertEquals("both you and your opponent monster cards are destroyed and one receives damage", Request.getMessage());
+        Assertions.assertEquals("both you and your opponent monster cardLoaders are destroyed and one receives damage", Request.getMessage());
     }
 
     @Test

@@ -8,63 +8,63 @@ import java.util.Random;
 
 public class Hand {
 
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cardLoaders;
 
     public Hand() {
-        cards = new ArrayList<>();
+        cardLoaders = new ArrayList<>();
     }
 
     public boolean isFull() {
-        return cards.size() == 6;
+        return cardLoaders.size() == 6;
     }
 
     public void addCard(Card card) {
         card.setPosition(Position.HAND);
-        card.setPositionIndex(cards.size() + 1);
-        cards.add(card);
+        card.setPositionIndex(cardLoaders.size() + 1);
+        cardLoaders.add(card);
     }
 
 
 
     public Card getCard(int position) {
-        return cards.get(position - 1);
+        return cardLoaders.get(position - 1);
     }
 public int getSize(){
-        return cards.size();
+    return cardLoaders.size();
 }
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < cards.size(); i++) {
+        for (int i = 0; i < cardLoaders.size(); i++) {
             result.append("c\t");
         }
         return result.toString();
     }
 
     public void remove(Card card) {
-        cards.remove(card);
+        cardLoaders.remove(card);
     }
 
     public boolean doesHaveCard(String cardName) {
-        for (Card card : cards) {
+        for (Card card : cardLoaders) {
             if (card.getName().equals(cardName)) return true;
         }
         return false;
     }
     public void remove(String cardName){
         ArrayList<Card> toRemove = new ArrayList<>();
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)){
+        for (Card card : cardLoaders) {
+            if (card.getName().equals(cardName)) {
                 toRemove.add(card);
             }
         }
-        cards.removeAll(toRemove);
+        cardLoaders.removeAll(toRemove);
     }
 
     public int getRemainedPlaces(){
         return 6 - getSize();
     }
     public void removeRandomly() {
-        cards.remove(new Random().nextInt(cards.size() - 1));
+        cardLoaders.remove(new Random().nextInt(cardLoaders.size() - 1));
     }
 }

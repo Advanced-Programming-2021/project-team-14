@@ -48,8 +48,8 @@ public class ShopController {
 
 
     private static String showAllCards() {
-        ArrayList<Card> cards = Card.getCards();
-        return sort(cards).toString().substring(1, cards.toString().length() - 1).replace("., ", ".\n");
+        ArrayList<Card> cardLoaders = Card.getCards();
+        return sort(cardLoaders).toString().substring(1, cardLoaders.toString().length() - 1).replace("., ", ".\n");
     }
 
     public static ArrayList<Card> sort(ArrayList<Card> array) {

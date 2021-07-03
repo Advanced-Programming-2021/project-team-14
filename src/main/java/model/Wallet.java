@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Wallet {
 
     private int cash;
-    private ArrayList<String> cards;
+    private ArrayList<String> cardLoaders;
 
-    public Wallet() {  // add some random cards to the wallet
-        this.cards = new ArrayList<>();
+    public Wallet() {  // add some random cardLoaders to the wallet
+        this.cardLoaders = new ArrayList<>();
         this.cash = 100000;
     }
 
     public ArrayList<String> getCards() {
-        return cards;
+        return cardLoaders;
     }
 
     public void decreaseCash(int amount) {
@@ -31,7 +31,7 @@ public class Wallet {
 
     public void addCard(String card) {
 
-        cards.add(card);
+        cardLoaders.add(card);
     }
 
     public int getCash() {
@@ -39,11 +39,11 @@ public class Wallet {
     }
 
     public void removeCard(String card) {
-        cards.remove(card);
+        cardLoaders.remove(card);
     }
 
     public boolean doesCardExist(String cardName) {
-        return cards.contains(cardName);
+        return cardLoaders.contains(cardName);
     }
 
 }

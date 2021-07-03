@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="graphic.ShopMenu">
+   <children>
+      <AnchorPane prefHeight="740.0" prefWidth="733.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css">
+         <children>
+            <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;"/>
+            <HBox layoutX="137.0" layoutY="68.0" prefHeight="103.0" prefWidth="512.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SHOP" wrappingWidth="131.662109375">
+                     <font>
+                        <Font name="System Bold" size="48.0"/>
+                     </font>
+                     <HBox.margin>
+                        <Insets top="20.0"/>
+                     </HBox.margin>
+                  </Text>
+                  <AnchorPane fx:id="buyCardArea" prefHeight="103.0" prefWidth="289.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="93.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="text" text="drag here to buy">
+                           <font>
+                              <Font name="System Bold" size="12.0"/>
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="127.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="text" text="+">
+                           <font>
+                              <Font name="System Bold" size="36.0"/>
+                           </font>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="50.0"/>
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <ScrollPane layoutX="116.0" layoutY="224.0" prefHeight="463.0" prefWidth="634.0"
+                        style="-fx-background-color: transparent;">
+               <content>
+                  <TilePane fx:id="allCards" prefHeight="200.0" prefWidth="628.0"/>
+               </content>
+            </ScrollPane>
+            <VBox fx:id="sideCard" layoutX="803.0" layoutY="153.0" prefHeight="597.0" prefWidth="313.0"/>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

@@ -25,10 +25,10 @@ public class Zone {
         cells.put(2, new Cell(2));
         cells.put(4, new Cell(4));
 
-//        placeCard(new SelectedCard(Card.getCardByName("Battle OX"), Position.MONSTER_ZONE, 1, false));
-//        placeCard(new SelectedCard(Card.getCardByName("Axe Raider"), Position.MONSTER_ZONE, 1, false));
-//        placeCard(new SelectedCard(Card.getCardByName("Dark magician"), Position.MONSTER_ZONE, 1, false));
-//        placeCard(new SelectedCard(Card.getCardByName("Flame manipulator"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(CardLoader.getCardByName("Battle OX"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(CardLoader.getCardByName("Axe Raider"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(CardLoader.getCardByName("Dark magician"), Position.MONSTER_ZONE, 1, false));
+//        placeCard(new SelectedCard(CardLoader.getCardByName("Flame manipulator"), Position.MONSTER_ZONE, 1, false));
     }
 
     public ArrayList<Cell> getCells() {
@@ -119,10 +119,11 @@ public class Zone {
     }
 
     public ArrayList<Card> getCards(String value) {
-        ArrayList<Card> cards = new ArrayList<>();
+        ArrayList<Card> cardLoaders = new ArrayList<>();
         for (Cell cell : cells.values()) {
-            if (!cell.isEmpty() && cell.getCard().getEffectValue(EffectsEnum.SPECIAL_COMMAND.getLabel()).equals(value)) cards.add(cell.getCard());
+            if (!cell.isEmpty() && cell.getCard().getEffectValue(EffectsEnum.SPECIAL_COMMAND.getLabel()).equals(value))
+                cardLoaders.add(cell.getCard());
         }
-        return cards;
+        return cardLoaders;
     }
 }

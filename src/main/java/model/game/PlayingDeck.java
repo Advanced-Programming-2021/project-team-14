@@ -13,53 +13,53 @@ import java.util.Collections;
 
 public class PlayingDeck {
 
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cardLoaders;
     private ArrayList<Monster> monsters = new ArrayList<>();
     private ArrayList<SpellTrap> spellTraps = new ArrayList<>();
 
     public PlayingDeck(Deck activeDeck) {
-        cards = new ArrayList<>();
+        cardLoaders = new ArrayList<>();
         loadCards(activeDeck);
         shuffle();
     }
 
     private void loadCards(Deck activeDeck) {
-        for (String cardName : activeDeck.getCards(true))   // load side cards
+        for (String cardName : activeDeck.getCards(true))   // load side cardLoaders
             loadCard(Card.getCardByName(cardName));
-        for (String cardName : activeDeck.getCards(false))   // load main cards
+        for (String cardName : activeDeck.getCards(false))   // load main cardLoaders
             loadCard(Card.getCardByName(cardName));
         monsters = Monster.getMonsters();
         spellTraps = SpellTrap.getSpellTraps();
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(cardLoaders);
     }
 
     public Card drawCard() {
-        if (cards.size() != 0) {
-            Card card = cards.get(0);
-            cards.remove(0);
+        if (cardLoaders.size() != 0) {
+            Card card = cardLoaders.get(0);
+            cardLoaders.remove(0);
             return card;          // draw first card from deck
         }
         return null;              // no card to draw
     }
 
     public int getRemainingCardsSize() {
-        return cards.size();
+        return cardLoaders.size();
     }
 
     public void loadCard(Card card) {
         if (card.getCardType() == CardType.MONSTER)
-            cards.add(new Monster((Monster) card));
+            cardLoaders.add(new Monster((Monster) card));
         else
-            cards.add(new SpellTrap((SpellTrap) card));
+            cardLoaders.add(new SpellTrap((SpellTrap) card));
     }
 
 
 
     public Card getACard(Property property) {
-        for (Card card : cards) {
+        for (Card card : cardLoaders) {
             if (card.getProperty() == property) {
                 return card;
             }
@@ -75,9 +75,9 @@ public class PlayingDeck {
 
     public void remove(String name) {
         ArrayList<Card> removedCards = new ArrayList<>();
-        cards.forEach(card -> {
+        cardLoaders.forEach(card -> {
             if (card.getName().equals(name)) removedCards.add(card);
         });
-        cards.removeAll(removedCards);
+        cardLoaders.removeAll(removedCards);
     }
 }
