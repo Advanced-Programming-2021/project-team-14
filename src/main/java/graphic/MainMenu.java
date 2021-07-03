@@ -4,7 +4,6 @@ package graphic;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import sample.MainGraphic;
 
 public class MainMenu extends Menu{
@@ -30,6 +29,9 @@ public class MainMenu extends Menu{
         switch (((JFXButton)mouseEvent.getSource()).getText()){
             case "Profile":
                 nextView = "ProfileMenu";
+                break;
+            case "Scoreboard":
+                nextView = "ScoreboardMenu";
                 break;
             case "Duel":
                 nextView = "DuelMenu";
