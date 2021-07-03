@@ -6,7 +6,7 @@ import model.User;
 import java.util.ArrayList;
 
 public class Duel {
-
+    private static Duel currentDuel;
     private static ArrayList<Game> games;
 
     static {
@@ -34,6 +34,7 @@ public class Duel {
         this.secondPlayer = new Player(rivalUser, 0);
         setNumberOfRounds(round);
         setGame(new Game(firstPlayer, secondPlayer, this, false));
+        currentDuel = this;
     }
 
     public Duel(User mainUser, int round) {                         // for ai player
@@ -44,6 +45,8 @@ public class Duel {
         this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
         setNumberOfRounds(round);
         setGame(new Game(firstPlayer, secondPlayer, this, true));
+        currentDuel = this;
+
     }
 
     public static void addGame(Game game) {
@@ -55,6 +58,10 @@ public class Duel {
         for (int i = 0; i < games.size(); i++) {
             games.remove(i);
         }
+    }
+
+    public static Duel getCurrentDuel() {
+        return currentDuel;
     }
 
     public void startNewRound() {

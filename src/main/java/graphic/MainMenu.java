@@ -31,6 +31,9 @@ public class MainMenu extends Menu{
             case "Profile":
                 nextView = "ProfileMenu";
                 break;
+            case "Duel":
+                nextView = "DuelMenu";
+                break;
             default:
                 nextView = "DeckMenu";
         }
