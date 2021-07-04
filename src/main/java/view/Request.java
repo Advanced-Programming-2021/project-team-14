@@ -1,7 +1,6 @@
 package view;
 
 import Controller.MainController;
-import model.Strings;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 import view.enums.Regexes;
@@ -18,6 +17,10 @@ public class Request {
 
     public static void getToken() {
         token = response.getString("token");
+    }
+
+    public static String giveToken() {
+        return token;
     }
 
     public static void addData(String key, String value) { // adding data with key and value

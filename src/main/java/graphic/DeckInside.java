@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Deck;
 import model.Strings;
+import model.card.Card;
 import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
@@ -48,20 +49,20 @@ public class DeckInside extends Menu {
             mainCardContainer.setHgap(10);
             mainCardContainer.setVgap(10);
             for (int i = 0; i < deck.getCards(false).size(); i++) {
-                mainCardContainer.getChildren().add(new CardLoader(deck.getCards(false).get(i), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
+                mainCardContainer.getChildren().add(new CardLoader(Card.getCardByName(deck.getCards(false).get(i)), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
             }
 
             sideCardContainer.setHgap(10);
             sideCardContainer.setVgap(10);
             for (int i = 0; i < deck.getCards(true).size(); i++) {
-                sideCardContainer.getChildren().add(new CardLoader(deck.getCards(true).get(i), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
+                sideCardContainer.getChildren().add(new CardLoader(Card.getCardByName(deck.getCards(true).get(i)), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
             }
             main.setVisible(true);
 
         }).start();
 
         allCardsList.setSpacing(10);
-        currentUser.getWallet().getCards().forEach(card -> allCardsList.getChildren().add(new CardLoader(card, CardSize.MEDIUM.getLabel(), MenuNames.DECK.getLabel())));
+        currentUser.getWallet().getCards().forEach(card -> allCardsList.getChildren().add(new CardLoader(Card.getCardByName(card), CardSize.MEDIUM.getLabel(), MenuNames.DECK.getLabel())));
 
 
         initRadioButtons();
@@ -145,7 +146,7 @@ public class DeckInside extends Menu {
             Request.addBooleanData(Strings.SIDE_OPTION.getLabel(), sideRadioButton.isSelected());
             Request.send();
             if (Request.isSuccessful()) {
-                (mainRadioButton.isSelected() ? mainCardContainer : sideCardContainer).getChildren().add(new CardLoader(cardLoader.getName(), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
+                (mainRadioButton.isSelected() ? mainCardContainer : sideCardContainer).getChildren().add(new CardLoader(Card.getCardByName(cardLoader.getName()), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
             } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
         }

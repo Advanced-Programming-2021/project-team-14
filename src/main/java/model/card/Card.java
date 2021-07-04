@@ -44,6 +44,8 @@ public abstract class Card {
 
     public abstract String show();
 
+    public abstract String getDescriptionGraphic();
+
     public void setState(State state) {
         this.state = state;
     }
@@ -51,6 +53,7 @@ public abstract class Card {
     public State getState() {
         return state;
     }
+
     public Card(String name, String description, CardType cardType, int price) {
         this.name = name;
         this.description = description;

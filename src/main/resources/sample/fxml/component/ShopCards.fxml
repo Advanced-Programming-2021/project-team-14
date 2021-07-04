@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" prefHeight="82.0" prefWidth="98.0" type="AnchorPane"
          xmlns="http://javafx.com/javafx/8.0.171">
     <children>
@@ -12,7 +13,12 @@
             <ImageView fx:id="image" pickOnBounds="true" preserveRatio="true"
                        style="-fx-background-radius: 20; -fx-border-radius: 50"/>
         </javafx.scene.layout.AnchorPane>
-        <Circle fx:id="cardFreq" fill="DODGERBLUE" layoutX="98.0" layoutY="13.0" radius="12.0" stroke="BLACK"
+        <Circle fx:id="cardFreqCircle" fill="DODGERBLUE" layoutX="98.0" layoutY="13.0" radius="12.0" stroke="BLACK"
                 strokeType="INSIDE"/>
+        <Text fx:id="cardFreq" fill="WHITE" layoutX="95.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Text>
     </children>
 </fx:root>
