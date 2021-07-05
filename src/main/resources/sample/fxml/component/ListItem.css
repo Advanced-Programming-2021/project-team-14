@@ -16,3 +16,40 @@
     -fx-font-weight: bold;
 }
 
+.scoreboardListItem {
+    -fx-pref-width: 500;
+    -fx-pref-height: 50;
+    -fx-background-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-stroke: #31313b;
+    -fx-stroke-width: 1.5;
+    -fx-stroke-dash-array: 3 5 3 5;
+    -fx-stroke-dash-offset: 3;
+    -fx-stroke-line-cap: round;
+}
+
+
+.ranking {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-fill: white;
+}
+
+.content{
+    -fx-font-size: 18;
+    -fx-fill: white;
+}
+
+.scoreboardListItemRectangle:hover {
+    -fx-pref-width: 520;
+    -fx-pref-height: 50;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-stroke: yellow;
+    -fx-stroke-width: 1.5;
+    -fx-stroke-dash-array: 3 5 3 5;
+    -fx-stroke-dash-offset: 3;
+    -fx-stroke-line-cap: round;
+}

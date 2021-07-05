@@ -40,10 +40,7 @@ public class Scoreboard extends Menu {
 
 
     private ListItem addItem(User user) {
-        ListItem deckListItem = new ListItem(user);
-        deckListItem.getDelete().setOnMouseClicked(e -> listView.getItems().remove(deckListItem));
-        deckListItem.getEdit().setOnMouseClicked(e -> deckListItem.getCardsNum().setText("21"));
 
-        return deckListItem;
+        return new ListItem(user);
     }
 }

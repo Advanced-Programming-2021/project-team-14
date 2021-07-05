@@ -13,9 +13,9 @@ import model.User;
 public class ListItem extends AnchorPane implements ComponentLoader {
 
     @FXML
-    Circle validity, score;
+    Circle validity;
     @FXML
-    Text cardsNum, deckName, nickName;
+    Text cardsNum, deckName, nickName, rank, score;
     @FXML
     JFXButton delete, edit;
     @FXML
@@ -43,20 +43,11 @@ public class ListItem extends AnchorPane implements ComponentLoader {
 
     public ListItem(User user) {
         load("ScoreboardListItem");
-
-        cardsNum.setText(String.valueOf(user.getRank()));
+        rank.setText(String.valueOf(user.getRank()));
+        score.setText(String.valueOf(user.getScore()));
         nickName.setText(user.getNickname());
-        deckName.setText(String.valueOf(user.getScore()));
-        if (Integer.parseInt(cardsNum.getText()) < 3) {
-            validity.setFill(Colors.SUCCESS.getColor());
-            score.setFill(Colors.SUCCESS.getColor());
-        } else {
-            validity.setFill(Colors.WARNING.getColor());
-            score.setFill(Colors.WARNING.getColor());
-        }
-
-        delete.setGraphic(generateIcon(FontAwesomeIcon.TRASH));
-        edit.setGraphic(generateIcon(FontAwesomeIcon.EDIT));
+        container.setOnMouseEntered(e -> container.setStyle("-fx-background-color: red;"));
+        container.setOnMouseExited(e -> container.setStyle("-fx-background-color: transparent;"));
     }
 
 
