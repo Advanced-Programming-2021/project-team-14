@@ -3,6 +3,7 @@ package graphic;
 import graphic.component.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -45,8 +46,9 @@ public class ShopMenu extends Menu {
     public void initialize() {
 
         ArrayList<Card> cards = Card.getCards();
-        allCards.setHgap(10);
-        allCards.setVgap(10);
+        allCards.setHgap(15);
+        allCards.setVgap(15);
+        allCards.setPadding(new Insets(20, 0, 0, 0));
         for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
             cardLoader.setOnMouseEntered(e -> {

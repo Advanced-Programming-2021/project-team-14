@@ -3,6 +3,5 @@
 
 <?import javafx.scene.layout.*?>
 
-<fx:root alignment="CENTER" layoutX="200" layoutY="600" spacing="35.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-
-</fx:root>
+<fx:root alignment="CENTER" layoutX="200" layoutY="700" spacing="35.0" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"/>

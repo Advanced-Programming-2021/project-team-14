@@ -79,12 +79,12 @@ public class Hand extends HBox implements ComponentLoader {
             else {
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 Request.addData("area", "hand");
-                Request.addData(Strings.POSITION.getLabel(), String.valueOf(cardInHand.getCard().getPositionIndex()));
+                Request.addData(Strings.POSITION.getLabel(), String.valueOf(game.getBoard().getMainPlayer().getHand().getCards().indexOf(card) + 1));
                 Request.addBooleanData(Strings.OPPONENT_OPTION.getLabel(), false);
                 Request.setCommandTag(CommandTags.SELECT);
                 Request.send();
-                Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
 
+                Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 if (isSet) {
                     Request.setCommandTag(CommandTags.SET);
                     Request.send();
