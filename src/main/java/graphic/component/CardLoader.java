@@ -27,8 +27,9 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
 
     @FXML
     private Text cardFreq;
-
+    private Card card;
     public CardLoader(Card card, String size, String menu) {
+        this.card = card;
         this.cardName = card.getName();
         if (!menu.equals("shop")) {
             load("CardLoader");
@@ -90,6 +91,10 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
 
     public String getName() {
         return cardName;
+    }
+
+    public Card getCard() {
+        return card;
     }
 }
 

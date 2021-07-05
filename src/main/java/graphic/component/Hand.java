@@ -26,7 +26,7 @@ public class Hand extends HBox implements ComponentLoader {
         this.root = root;
         this.game = game;
         load("Hand");
-        this.setSpacing(-20);
+        this.setSpacing(-30);
         addAllCards();
         update();
         isSet = false;
@@ -60,7 +60,7 @@ public class Hand extends HBox implements ComponentLoader {
             else {
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 Request.addData("area", "hand");
-                Request.addData(Strings.POSITION.getLabel(), "1");   //TODO: set index based on card inside the Card
+                Request.addData(Strings.POSITION.getLabel(), String.valueOf(cardInHand.getCard().getPositionIndex()));
                 Request.addBooleanData(Strings.OPPONENT_OPTION.getLabel(), false);
                 Request.setCommandTag(CommandTags.SELECT);
                 Request.send();
