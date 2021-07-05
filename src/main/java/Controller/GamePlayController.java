@@ -28,7 +28,7 @@ public class GamePlayController {
         Response.add("isDuelEnded", "false");
         String command = request.getString(Strings.COMMAND.getLabel());
         FieldController.handle(duel.getGame());
-
+        Response.error();
         if (!duel.getGame().getBoard().getMainPlayer().getTurnLogger().isTemporarilyChanged()) {
             if (command.equals(CommandTags.SET_POSITION.getLabel())) {
                 Response.addMessage(setPosition(request));
