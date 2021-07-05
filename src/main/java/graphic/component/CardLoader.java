@@ -36,7 +36,7 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
             load("ShopCards");
             setCardFreq();
         }
-        setImage(size);
+        setImage(size, card.getName());
 
         this.setOnDragDetected((MouseEvent event) -> {
             System.out.println("dragged");
@@ -82,8 +82,8 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
         return image;
     }
 
-    private void setImage(String size) {
-        image.setImage(new Image(MainGraphic.class.getResource("PNG/back.png").toString())); //TODO: set the actual images
+    private void setImage(String size, String cardName) {
+        image.setImage(new Image(MainGraphic.class.getResource("PNG/Cards/" + cardName + ".jpg").toString()));
         image.setPreserveRatio(true);
         setImageHeightAndWidth(size);
     }
