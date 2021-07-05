@@ -6,10 +6,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sample.MainGraphic;
 import view.Request;
@@ -53,7 +51,7 @@ public class LoginMenuController extends Menu {
 
     public void register() {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || nicknameField.getText().isEmpty()) {
-            new SnackBarComponent("please enter your username, password and nickname", ResultState.SUCCESS, root);
+            new SnackBarComponent("please enter your username, password and nickname", ResultState.ERROR, root);
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -72,7 +70,7 @@ public class LoginMenuController extends Menu {
 
     public void login() {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            new SnackBarComponent("please enter your username, password and nickname", ResultState.SUCCESS, root);
+            new SnackBarComponent("please enter your username, password and nickname", ResultState.ERROR, root);
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -90,12 +88,12 @@ public class LoginMenuController extends Menu {
         }
     }
 
-    public void changeState(MouseEvent mouseEvent) {
+    public void changeState() {
         isLoginMenu = !isLoginMenu;
         loadAppropriateState();
     }
 
-    public void perform(ActionEvent actionEvent) {
+    public void perform() {
         if (isLoginMenu)
             login();
         else

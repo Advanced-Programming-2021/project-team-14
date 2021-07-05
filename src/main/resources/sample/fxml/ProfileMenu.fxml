@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane fx:id="mainPane" prefHeight="800" prefWidth="980.0" stylesheets="@../CSS/ProfileMenu.css" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.ProfileMenu">
+
+    <VBox fx:id="userDataVBox" alignment="CENTER" layoutY="160" prefWidth="980">
+        <Label fx:id="usernameLabel" alignment="CENTER" styleClass="username" />
+        <Label fx:id="nicknameLabel" alignment="CENTER" styleClass="nickname" />
+    </VBox>
 
 
-<AnchorPane prefHeight="800" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.ProfileMenu">
-      <Text fill="#d3d3d3" layoutX="372.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="profile menu">
-         <font>
-            <Font size="42.0" />
-         </font>
-      </Text>
+    <HBox fx:id="userDataHBox" layoutX="265" layoutY="300" prefHeight="61.0" prefWidth="980">
+
+        <VBox alignment="CENTER" prefWidth="150.0">
+            <Label fx:id="scoreValue" styleClass="value" textAlignment="CENTER" />
+            <Label alignment="CENTER" styleClass="key" text="Score" />
+        </VBox>
+
+        <VBox alignment="CENTER" prefWidth="150.0">
+            <Label fx:id="cashValue" styleClass="value" />
+            <Label alignment="CENTER" styleClass="key" text="Cash" />
+        </VBox>
+
+        <VBox alignment="CENTER" prefWidth="150.0">
+            <Label fx:id="gamesPlayedValue" styleClass="value" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="key" text="Games played" />
+        </VBox>
+
+    </HBox>
+
+
+    <JFXTextField  labelFloat="true" layoutX="170.0" layoutY="520.0" prefHeight="26.0" prefWidth="250.0" styleClass="text-field"
+                  promptText="new nickname" fx:id="nicknameField"/>
+
+    <JFXButton alignment="CENTER" layoutX="170.0" layoutY="600.0" onAction="#changeNickname" styleClass="buttons"
+               text="CHANGE NICKNAME"/>
+
+
+    <JFXTextField  labelFloat="true" layoutX="570.0" layoutY="460.0" prefWidth="250.0" styleClass="text-field"
+                   promptText="current pass" fx:id="currentPassField"/>
+
+    <JFXTextField  labelFloat="true" layoutX="570.0" layoutY="520.0" prefWidth="250.0" styleClass="text-field"
+                  promptText="new Pass" fx:id="newPassField"/>
+
+    <JFXButton alignment="CENTER" layoutX="570.0" layoutY="600.0" onAction="#changePassword" styleClass="buttons"
+               text="CHANGE PASSWORD"/>
+
+
 </AnchorPane>

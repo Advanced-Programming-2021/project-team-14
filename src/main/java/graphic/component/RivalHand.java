@@ -18,6 +18,6 @@ public class RivalHand extends HBox implements ComponentLoader{
         game.getBoard().getRivalPlayer().getHand().getCards().forEach(this::addNode);
     }
     private void addNode(Card card) {
-        this.getChildren().add(new RivalCard());
+        this.getChildren().add(new RivalCardGraphic());
     }
 }

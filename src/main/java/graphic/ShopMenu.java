@@ -61,7 +61,8 @@ public class ShopMenu extends Menu {
         allCards.setPadding(new Insets(20, 0, 0, 0));
         for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
-            cardLoader.setOnMouseClicked(e -> {
+            cardLoader.setOnMouseEntered(e -> {
+
                 Image image = cardLoader.getImage().getImage();
                 setImage(image);
                 setSpecification(cardLoader);
