@@ -3,6 +3,7 @@ package graphic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import graphic.component.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -44,7 +45,7 @@ public class DeckInside extends Menu {
         deckTitle.setText(getData());
         main.setVisible(false);
         side.setVisible(false);
-        new Thread(() -> {
+        Platform.runLater(() -> {
             Deck deck = currentUser.getDeck(getData());
             mainCardContainer.setHgap(10);
             mainCardContainer.setVgap(10);
@@ -59,7 +60,8 @@ public class DeckInside extends Menu {
             }
             main.setVisible(true);
 
-        }).start();
+        });
+
 
         allCardsList.setSpacing(10);
         currentUser.getWallet().getCards().forEach(card -> allCardsList.getChildren().add(new CardLoader(Card.getCardByName(card), CardSize.MEDIUM.getLabel(), MenuNames.DECK.getLabel())));
