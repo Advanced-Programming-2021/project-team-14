@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="Menu" xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="graphic.ShopMenu">
+    <children>
+        <HBox styleClass="Menu" stylesheets="@../CSS/DeckInside.css">
+            <children>
+                <AnchorPane prefHeight="740.0" prefWidth="733.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css">
+                    <children>
+                        <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;"/>
+                        <HBox layoutX="137.0" layoutY="68.0" prefHeight="103.0" prefWidth="512.0">
+                            <children>
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SHOP"
+                                      wrappingWidth="131.662109375">
+                                    <font>
+                                        <Font name="System Bold" size="48.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="20.0"/>
+                                    </HBox.margin>
+                                </Text>
+                                <AnchorPane fx:id="buyCardArea" prefHeight="103.0" prefWidth="289.0">
+                                    <children>
+                                        <Text fill="WHITE" layoutX="93.0" layoutY="85.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" styleClass="text" text="drag here to buy">
+                                            <font>
+                                                <Font name="System Bold" size="12.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" layoutX="127.0" layoutY="66.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" styleClass="text" text="+">
+                                            <font>
+                                                <Font name="System Bold" size="36.0"/>
+                                            </font>
+                                        </Text>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="50.0"/>
+                                    </HBox.margin>
+                                </AnchorPane>
+                            </children>
+                        </HBox>
+                        <ScrollPane layoutX="116.0" layoutY="194.0" prefHeight="455.0" prefWidth="634.0"
+                                    style="-fx-background-color: transparent; -fx-border-color: #20202A;">
+                            <content>
+                                <TilePane fx:id="allCards" prefHeight="215.0" prefWidth="628.0"/>
+                            </content>
+                        </ScrollPane>
+                        <VBox fx:id="sideCard" layoutX="803.0" layoutY="58.0" prefHeight="583.0" prefWidth="360.0">
+                            <children>
+                                <ImageView fx:id="selectedCardImage" fitHeight="320.0" fitWidth="240.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <VBox.margin>
+                                        <Insets left="60.0" right="60.0" top="40.0"/>
+                                    </VBox.margin>
+                                </ImageView>
+                                <HBox prefHeight="59.0" prefWidth="320.0">
+                                    <children>
+                                        <VBox prefHeight="100.0" prefWidth="80.0">
+                                            <children>
+                                                <HBox>
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text"
+                                                              text="Atk:">
+                                                            <font>
+                                                                <Font name="System Bold" size="14.0"/>
+                                                            </font>
+                                                        </Text>
+                                                        <Text fx:id="attack" fill="WHITE" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0">
+                                                            <font>
+                                                                <Font name="System Bold" size="14.0"/>
+                                                            </font>
+                                                            <HBox.margin>
+                                                                <Insets left="5.0"/>
+                                                            </HBox.margin>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+                                                <HBox>
+                                                    <VBox.margin>
+                                                        <Insets top="10.0"/>
+                                                    </VBox.margin>
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text"
+                                                              text="Def:">
+                                                            <font>
+                                                                <Font name="System Bold" size="14.0"/>
+                                                            </font>
+                                                        </Text>
+                                                        <Text fx:id="defense" fill="WHITE" strokeType="OUTSIDE"
+                                                              strokeWidth="0.0">
+                                                            <font>
+                                                                <Font name="System Bold" size="14.0"/>
+                                                            </font>
+                                                            <HBox.margin>
+                                                                <Insets left="5.0"/>
+                                                            </HBox.margin>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets left="60.0"/>
+                                            </HBox.margin>
+                                        </VBox>
+                                        <HBox prefHeight="100.0" prefWidth="103.0">
+                                            <HBox.margin>
+                                                <Insets left="40.0"/>
+                                            </HBox.margin>
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text"
+                                                      text="Price:">
+                                                    <font>
+                                                        <Font name="System Bold" size="14.0"/>
+                                                    </font>
+                                                </Text>
+                                                <Text fx:id="price" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="14.0"/>
+                                                    </font>
+                                                    <HBox.margin>
+                                                        <Insets left="5.0"/>
+                                                    </HBox.margin>
+                                                </Text>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets top="30.0"/>
+                                    </VBox.margin>
+                                </HBox>
+                                <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      styleClass="text">
+                                    <VBox.margin>
+                                        <Insets left="60.0" right="60.0" top="20.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font name="System Bold" size="12.0"/>
+                                    </font>
+                                </Text>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </HBox>
+    </children>
+    <stylesheets>
+        <URL value="@../CSS/DeckInside.css"/>
+        <URL value="@../CSS/snackbar.css"/>
+    </stylesheets>
+</AnchorPane>

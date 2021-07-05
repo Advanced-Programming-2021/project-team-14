@@ -35,6 +35,18 @@ public abstract class showCard {
     }
 
 
+    public static String getDescriptionGraphic(String description) {
+
+        StringBuilder stringBuilder = new StringBuilder(description);
+
+        int i = 0;
+        while ((i = stringBuilder.indexOf(" ", i + 30)) != -1) {
+            stringBuilder.replace(i, i + 1, "\n");
+        }
+        return stringBuilder.toString();
+    }
+
+
     public static String getTypeLine(String type) {
         return getString(ShowCardTags.TYPE.getLabel(), type, 37) + ShowCardTags.NEXT_LINE.getLabel();
     }

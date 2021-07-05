@@ -20,25 +20,25 @@ public class MainMenu extends Menu{
 
     public void initialize() {
         setRoot(root);
-        setView("DeckMenu");
     }
 
-
     public void change(MouseEvent mouseEvent) {
-        String nextView;
-        switch (((JFXButton)mouseEvent.getSource()).getText()){
+        String nextView = null;
+        switch (((JFXButton)mouseEvent.getSource()).getText()) {
             case "Profile":
                 nextView = "ProfileMenu";
                 break;
             case "Scoreboard":
                 nextView = "ScoreboardMenu";
                 break;
-            case "Duel":
-                nextView = "DuelMenu";
+            case "Shop":
+                MainGraphic.setRoot("ShopMenu");
                 break;
             default:
                 nextView = "DeckMenu";
         }
-        setView(nextView);
+        if (nextView != null) {
+            setView(nextView);
+        }
     }
 }

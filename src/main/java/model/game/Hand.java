@@ -32,7 +32,7 @@ public class Hand {
         return cards.get(position - 1);
     }
 public int getSize(){
-        return cards.size();
+    return cards.size();
 }
     @Override
     public String toString() {
@@ -56,7 +56,7 @@ public int getSize(){
     public void remove(String cardName){
         ArrayList<Card> toRemove = new ArrayList<>();
         for (Card card : cards) {
-            if (card.getName().equals(cardName)){
+            if (card.getName().equals(cardName)) {
                 toRemove.add(card);
             }
         }

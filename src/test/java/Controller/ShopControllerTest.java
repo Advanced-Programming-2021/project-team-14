@@ -97,8 +97,8 @@ public class ShopControllerTest {
         Request.addData("view", Menus.SHOP_MENU.getLabel());
         Request.setCommandTag(CommandTags.SHOP_SHOW_ALL);
         Request.send();
-        ArrayList<Card> cards = Card.getCards();
-        String response = ShopController.sort(cards).toString().substring(1, cards.toString().length() - 1).replace("., ", ".\n");
+        ArrayList<Card> cardLoaders = Card.getCards();
+        String response = ShopController.sort(cardLoaders).toString().substring(1, cardLoaders.toString().length() - 1).replace("., ", ".\n");
 
         Assertions.assertEquals(response, Request.getMessage());
     }

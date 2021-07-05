@@ -60,4 +60,9 @@ public class SpellTrap extends Card {
                 showCard.getFreeLine() + showCard.getDescriptionLine(getDescription()) +
                 showCard.getHorizontalLine();
     }
+
+    @Override
+    public String getDescriptionGraphic() {
+        return showCard.getDescriptionGraphic(getDescription());
+    }
 }

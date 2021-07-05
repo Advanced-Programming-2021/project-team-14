@@ -7,7 +7,7 @@ public class Wallet {
     private int cash;
     private ArrayList<String> cards;
 
-    public Wallet() {  // add some random cards to the wallet
+    public Wallet() {  // add some random cardLoaders to the wallet
         this.cards = new ArrayList<>();
         this.cash = 100000;
     }
@@ -27,6 +27,16 @@ public class Wallet {
 
     public boolean isCashEnough(int amount) {
         return getCash() >= amount;
+    }
+
+    public int getCardFreq(String cardName) {
+        int counter = 0;
+        for (String card : cards) {
+            if (card.equals(cardName)) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     public void addCard(String card) {

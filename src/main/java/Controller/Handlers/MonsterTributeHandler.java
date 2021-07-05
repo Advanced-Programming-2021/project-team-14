@@ -25,14 +25,14 @@ public class MonsterTributeHandler extends GameHandler {
         }
 
         if (level == 5 || level == 6) {
-            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cards
+            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 1) { // check for tribute cardLoaders
                 Response.error();
                 return Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
             }
-            if (!request.has("data")){
+            if (!request.has("data")) {
                 Response.choice();
                 return "please select 1 monster to tribute. " + game.getBoard().getMainPlayer().getMonsterZone().occupiedCells();
-            }else {
+            } else {
                 try {
                     int card = Integer.parseInt(request.getString("data"));
                     if (game.getBoard().getMainPlayer().getMonsterZone().getCell(card).isEmpty()) {
@@ -46,14 +46,14 @@ public class MonsterTributeHandler extends GameHandler {
             }
 
         } else if (level == 7 || level == 8) {
-            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cards
+            if (game.getBoard().getMainPlayer().getMonsterZone().getNumberOfFullCells() < 2) { // check for tribute cardLoaders
                 Response.error();
                 return Strings.NOT_ENOUGH_CARDS_FOR_TRIBUTE.getLabel();
             }
-            if (!request.has("data")){
+            if (!request.has("data")) {
                 Response.choice();
                 return "please select 2 monster to tribute. <first> <second>" + game.getBoard().getMainPlayer().getMonsterZone().occupiedCells();
-            }else {
+            } else {
 
                 try {
                     int firstCard = Integer.parseInt(request.getString("data").split(" ")[0]);

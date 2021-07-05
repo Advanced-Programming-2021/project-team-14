@@ -38,7 +38,7 @@ public class Hand extends HBox implements ComponentLoader {
     }
 
     private void addNode(Card card) {
-        graphic.component.Card cardInHand = new graphic.component.Card(card.getName(), false);
+        graphic.component.CardLoader cardInHand = new graphic.component.CardLoader(card, CardSize.MEDIUM.getLabel(), "Hand");
         TranslateTransition transition = new TranslateTransition(Duration.millis(100), cardInHand);
         transition.setAutoReverse(true);
         transition.setByY(-10);

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Card {
-    private static final HashMap<String, Card> cards;
+    private static final HashMap<String, Card> cardLoaders;
 
     static {
-        cards = new HashMap<>();
+        cardLoaders = new HashMap<>();
     }
 
     protected HashMap<String, String> effects;
@@ -44,6 +44,8 @@ public abstract class Card {
 
     public abstract String show();
 
+    public abstract String getDescriptionGraphic();
+
     public void setState(State state) {
         this.state = state;
     }
@@ -51,6 +53,7 @@ public abstract class Card {
     public State getState() {
         return state;
     }
+
     public Card(String name, String description, CardType cardType, int price) {
         this.name = name;
         this.description = description;
@@ -71,20 +74,20 @@ public abstract class Card {
     }
 
     public static ArrayList<Card> getCards() {
-        return new ArrayList<>(cards.values());
+        return new ArrayList<>(cardLoaders.values());
     }
 
 
     public static void addCard(Card card) {
-        cards.put(card.getName(), card);
+        cardLoaders.put(card.getName(), card);
     }
 
     public static Card getCardByName(String cardName) {
-        return cards.get(cardName);
+        return cardLoaders.get(cardName);
     }
 
     public static boolean doesCardExist(String cardName) {
-        return cards.get(cardName) != null;
+        return cardLoaders.get(cardName) != null;
     }
 
     public String getDescription() {
