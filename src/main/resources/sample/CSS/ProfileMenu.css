@@ -1,0 +1,88 @@
+.buttons {
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-pref-width: 250;
+    -fx-background-radius: 20;
+}
+
+.profile_photo {
+    -fx-background-radius: 25;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-border-color: #ffffff;
+    -fx-fill: #ffffff;
+
+}
+
+.username {
+    -fx-font-size: 55;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+}
+
+.profile_username {
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-font-size: 45;
+    -fx-font-weight: bold;
+}
+
+
+.nickname {
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-gray;
+    -fx-text-alignment: CENTER;
+}
+
+.key {
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-gray;
+    -fx-text-alignment: CENTER;
+}
+
+.value {
+    -fx-font-size: 35;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: CENTER;
+}
+
+.circle {
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-font-size: 50;
+    -fx-alignment: center;
+}
+
+.text-field {
+    -fx-font-size: 17;
+    -fx-text-fill: -fx-gray;
+    -fx-pref-width: 250;
+}
+
+.profile_button {
+    -fx-font-size: 20;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-pref-height: 45;
+    -fx-min-height: 45;
+    -fx-max-height: 45;
+    -fx-pref-width: 45;
+    -fx-min-width: 45;
+    -fx-max-width: 45;
+    -fx-background-radius: 22.5;
+}
+
+.profile_image {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    -fx-border-radius: 50%;
+    background-size: cover;
+}

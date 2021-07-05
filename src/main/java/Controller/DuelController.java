@@ -33,6 +33,8 @@ public class DuelController {
         if (rounds != 1 && rounds != 3)
             return Strings.NUMBER_OF_ROUNDS_NOT_SUPPORTED.getLabel();
         Response.success();
+        first.increaseGamesPlayed();
+        second.increaseGamesPlayed();
         GamePlayController.startAGame(first, second, rounds);
         return String.format(Strings.START_DUEL.getLabel(), first.getUsername(), second.getUsername());
     }
@@ -47,6 +49,7 @@ public class DuelController {
         if (rounds != 1 && rounds != 3)
             return Strings.NUMBER_OF_ROUNDS_NOT_SUPPORTED.getLabel();
         Response.success();
+        first.increaseGamesPlayed();
         GamePlayController.startGameWithAi(first, rounds);
         return String.format(Strings.START_DUEL.getLabel(), first.getUsername(), "AI");
     }

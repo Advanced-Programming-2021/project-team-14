@@ -1,9 +1,11 @@
 package model;
 
+import Controller.Response;
 import Controller.enums.DatabaseResponses;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import javafx.scene.image.Image;
 import model.card.Card;
 import model.card.Monster;
 import model.card.SpellTrap;
@@ -25,6 +27,7 @@ public class Database {
     private static final String resourcesDirectory = "Resources";
     private static final String usersDirectory = "Resources\\Users";
     private static final String SavedCardsDirectory = "Resources\\SavedCards";
+    private static final String profileImagesDirectory = "Resources\\ProfileImages";
 
     private static void loadUsers() {
 
@@ -47,9 +50,43 @@ public class Database {
         }
     }
 
+    public static DatabaseResponses saveProfilePhoto(String path, String username) {
+        File f = new File(path);
+        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+
+        try {
+            Files.copy(f.toPath(), file.toPath());
+            return DatabaseResponses.SUCCESSFUL;
+        } catch (IOException ex) {
+            Response.error();
+            return DatabaseResponses.NOT_EXIST_ERROR;
+        }
+    }
+
+    public static Image getProfilePhoto(String username) {
+        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+        if (file.exists()) {
+            try {
+                return new Image(String.valueOf(file.toURL()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static DatabaseResponses removeProfilePhoto(String username) {
+        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+        boolean hasDeleted = file.delete();
+        if (hasDeleted)
+            return DatabaseResponses.SUCCESSFUL;
+        else
+            return DatabaseResponses.NOT_EXIST_ERROR;
+
+    }
+
     public static void readDataLineByLine(String file) {
         try {
-
             FileReader filereader = new FileReader(file);
             // create csvReader object and skip first Line
             CSVReader csvReader = new CSVReaderBuilder(filereader).build();
@@ -93,6 +130,7 @@ public class Database {
         File resourcesFile = new File(resourcesDirectory);
         File usersFile = new File(usersDirectory);
         File importedFile = new File(SavedCardsDirectory);
+        File profileImagesFile = new File(profileImagesDirectory);
 
         //Creating the directory
         if (!resourcesFile.exists() && resourcesFile.mkdirs())
@@ -101,6 +139,8 @@ public class Database {
             Logger.log("database", "User folder created successfully!");
         if (!importedFile.exists() && importedFile.mkdirs())
             Logger.log("database", "SavedCards folder created successfully!");
+        if (!profileImagesFile.exists() && profileImagesFile.mkdirs())
+            Logger.log("database", "profileImages folder created successfully!");
     }
 
     public static void saveUserInDatabase(User user) {

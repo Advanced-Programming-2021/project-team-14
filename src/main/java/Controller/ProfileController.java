@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.enums.DatabaseResponses;
 import Controller.enums.Responses;
 import model.Database;
 import model.User;
@@ -18,7 +19,35 @@ public class ProfileController {
             Response.addMessage(changeUsername(request.getString("token"), request.getString("username")));
         else if (commandTag.equals(CommandTags.CHANGE_NICKNAME.getLabel()))
             Response.addMessage(changeNickname(request.getString("token"), request.getString("nickname")));
+        else if (commandTag.equals(CommandTags.SET_PROFILE_PHOTO.getLabel()))
+            Response.addMessage(setProfile(request.getString("token"), request.getString("path")));
+        else if (commandTag.equals(CommandTags.REMOVE_PROFILE_PHOTO.getLabel()))
+            Response.addMessage(deleteProfile(request.getString("token")));
 
+    }
+
+    private static String deleteProfile(String username) {
+        DatabaseResponses responses = Database.removeProfilePhoto(username);
+
+        if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
+            User.getUserByUsername(username).setHasProfilePhoto(false);
+            Response.success();
+            return "profile photo deleted successfully!";
+        }
+        Response.error();
+        return "please try later";
+    }
+
+    private static String setProfile(String username, String path) {
+        DatabaseResponses responses = Database.saveProfilePhoto(path, username);
+
+        if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
+            User.getUserByUsername(username).setHasProfilePhoto(true);
+            Response.success();
+            return "profile photo set successfully!";
+        }
+        Response.error();
+        return "please try later";
     }
 
 
@@ -35,8 +64,8 @@ public class ProfileController {
             Response.error();
             return Responses.NOT_NEW_PASSWORD.getLabel();
         }
-            Response.error();
-            return Responses.INVALID_CURRENT_PASSWORD.getLabel();
+        Response.error();
+        return Responses.INVALID_CURRENT_PASSWORD.getLabel();
     }
 
     private static String changeNickname(String username, String newNickname) {
