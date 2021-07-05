@@ -23,10 +23,10 @@
 
 
     <AnchorPane fx:id="addCardArea" layoutX="881.0" layoutY="227.0" styleClass="area">
-        <Text layoutX="31.0" layoutY="85.0" styleClass="text" text="add"/>
+        <Text layoutX="31.0" layoutY="85.0" styleClass="simple-text" text="add"/>
     </AnchorPane>
     <AnchorPane fx:id="removeCardArea" layoutX="881.0" layoutY="356.0" styleClass="area">
-        <Text layoutX="20.0" layoutY="83.0" styleClass="text" text="remove"/>
+        <Text layoutX="20.0" layoutY="83.0" styleClass="simple-text" text="remove"/>
     </AnchorPane>
 
     <ScrollPane fx:id="main" layoutX="169.0" layoutY="177.0" prefHeight="490.0" prefWidth="665.0"
