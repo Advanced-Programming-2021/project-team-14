@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -18,7 +19,6 @@ import sample.MainGraphic;
 
 
 public class GamePlay extends Menu {
-
 
     @FXML
     private AnchorPane view;
@@ -47,20 +47,19 @@ public class GamePlay extends Menu {
     @FXML
     private Text downPlayerLifePoint;
     @FXML
-    private AnchorPane upperPlayerHand;
+    private HBox phases;
     @FXML
-    private AnchorPane upperPlayerSpellZone;
+    private HBox upperPlayerHand;
     @FXML
-    private AnchorPane upperPlayerMonsterZone;
+    private HBox upperPlayerSpellZone;
     @FXML
-    private AnchorPane phases;
+    private HBox upperPlayerMonsterZone;
     @FXML
-    private AnchorPane downPlayerMonsterZone;
+    private HBox downPlayerHand;
     @FXML
-    private AnchorPane downPlayerSpellZone;
+    private HBox downPlayerSpellZone;
     @FXML
-    private AnchorPane downPlayerHand;
-
+    private HBox downPlayerMonsterZone;
 
     public Pane root;
     public AnchorPane addCardArea;
@@ -77,16 +76,16 @@ public class GamePlay extends Menu {
 
 
     private void initDuelistInfo() {
-        upperPlayerNickname.setText(game.getBoard().getMainPlayer().getNickname());
-        upperPlayerLifePoint.setText(String.valueOf(game.getBoard().getMainPlayer().getLifePoint()));
-        upperPlayerPhoto.setStroke(Color.TRANSPARENT);
-//        Image image = game.getBoard().getMainPlayer().getProfileImage();
-//        upperPlayerPhoto.setFill(new ImagePattern(image));
-        downPlayerNickname.setText(game.getBoard().getRivalPlayer().getNickname());
-        downPlayerLifePoint.setText(String.valueOf(game.getBoard().getRivalPlayer().getLifePoint()));
+        downPlayerNickname.setText(game.getBoard().getMainPlayer().getNickname());
+        downPlayerLifePoint.setText(String.valueOf(game.getBoard().getMainPlayer().getLifePoint()));
         downPlayerPhoto.setStroke(Color.TRANSPARENT);
-//        image = game.getBoard().getRivalPlayer().getProfileImage();
+//        Image image = Database.getProfilePhoto(game.getBoard().getMainPlayer().getUsername());
 //        downPlayerPhoto.setFill(new ImagePattern(image));
+        upperPlayerNickname.setText(game.getBoard().getRivalPlayer().getNickname());
+        upperPlayerLifePoint.setText(String.valueOf(game.getBoard().getRivalPlayer().getLifePoint()));
+        upperPlayerPhoto.setStroke(Color.TRANSPARENT);
+//        image = Database.getProfilePhoto(game.getBoard().getRivalPlayer().getUsername());
+//        upperPlayerPhoto.setFill(new ImagePattern(image));
     }
 
     private void initZones() {

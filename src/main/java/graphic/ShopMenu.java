@@ -25,32 +25,22 @@ public class ShopMenu extends Menu {
 
     @FXML
     private AnchorPane buyCardArea;
-
     @FXML
     private TilePane allCards;
-
     @FXML
     private VBox sideCard;
-
     @FXML
     private AnchorPane root;
-
-
     @FXML
     private Text attack;
-
     @FXML
     private Text defense;
-
     @FXML
     private Text price;
-
     @FXML
     private ImageView selectedCardImage;
-
     @FXML
     private Text description;
-
 
     public void initialize() {
 

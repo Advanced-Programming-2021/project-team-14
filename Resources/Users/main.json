@@ -21,8 +21,6 @@
       ],
       "mainCards": [
         "Marshmallon",
-        "Slot Machine",
-        "Dark Hole",
         "Magic Cylinder",
         "Mystical space typhoon",
         "Herald of Creation",
@@ -67,7 +65,9 @@
         "The Calculator",
         "Sword of dark destruction",
         "Terratiger, the Empowered Warrior",
-        "Blue-Eyes white dragon"
+        "Blue-Eyes white dragon",
+        "Dark Hole",
+        "Slot Machine"
       ]
     }
   },
@@ -75,5 +75,7 @@
   "password": "123",
   "nickname": "admin1",
   "score": 0,
-  "rank": 2
+  "rank": 2,
+  "hasProfilePhoto": true,
+  "gamesPlayed": 2
 }

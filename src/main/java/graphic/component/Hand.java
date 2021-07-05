@@ -1,14 +1,18 @@
 package graphic.component;
 
 import graphic.Cursor;
-import graphic.GamePlay;
 import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Strings;
 import model.card.Card;
+import model.card.Monster;
 import model.card.enums.CardType;
 import model.game.Game;
 import view.Request;
@@ -30,7 +34,6 @@ public class Hand extends HBox implements ComponentLoader {
         addAllCards();
         update();
         isSet = false;
-
     }
 
     private void addAllCards() {
@@ -46,6 +49,22 @@ public class Hand extends HBox implements ComponentLoader {
         cardInHand.setOnMouseEntered(e -> {
             transition.play();
             changeCursor(card);
+            Image image = cardInHand.getImage().getImage();
+            ((ImageView) ((VBox) root.getChildren().get(1)).getChildren().get(1)).setImage(image);
+            if (card.getCardType() == CardType.MONSTER) {
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(0)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getAttack()));
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(1)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getDefence()));
+            } else {
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(0)).getChildren().get(1)).setText("");
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(1)).getChildren().get(1)).setText("");
+            }
+            ((Text) ((HBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(1)).
+                    getChildren().get(1)).setText(String.valueOf(card.getPrice()));
+            ((Text) ((VBox) root.getChildren().get(1)).getChildren().get(3)).setText(card.getDescriptionGraphic());
         });
         cardInHand.setOnMouseExited(e -> {
             transition.stop();
