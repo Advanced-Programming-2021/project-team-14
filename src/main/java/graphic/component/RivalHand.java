@@ -5,8 +5,9 @@ import javafx.scene.layout.HBox;
 import model.card.Card;
 import model.game.Game;
 
-public class RivalHand extends HBox {
+public class RivalHand extends HBox implements ComponentLoader{
     public RivalHand(Game game) {
+        load("Hand");
         addAllCards(game);
         this.setSpacing(-20);
         this.setLayoutX(200);
@@ -14,7 +15,7 @@ public class RivalHand extends HBox {
     }
 
     private void addAllCards(Game game) {
-        game.getBoard().getMainPlayer().getHand().getCards().forEach(this::addNode);
+        game.getBoard().getRivalPlayer().getHand().getCards().forEach(this::addNode);
     }
     private void addNode(Card card) {
         this.getChildren().add(new RivalCard());

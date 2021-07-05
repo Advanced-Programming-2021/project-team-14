@@ -12,7 +12,7 @@ public class RivalCard extends AnchorPane implements ComponentLoader{
     private ImageView image;
 
     public RivalCard() {
-        load("Card");
+        load("CardLoader");
         image.setImage(new Image(MainGraphic.class.getResource("PNG/hiddenCard.png").toString()));
         image.setPreserveRatio(true);
         image.setFitHeight(160);

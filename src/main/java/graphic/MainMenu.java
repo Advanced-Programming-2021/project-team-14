@@ -34,6 +34,9 @@ public class MainMenu extends Menu{
             case "Shop":
                 MainGraphic.setRoot("ShopMenu");
                 break;
+            case "Duel":
+                nextView = "DuelMenu";
+                break;
             default:
                 nextView = "DeckMenu";
         }
