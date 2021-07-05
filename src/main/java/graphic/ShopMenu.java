@@ -59,8 +59,7 @@ public class ShopMenu extends Menu {
         allCards.setVgap(10);
         for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
-            cardLoader.setOnMouseClicked(e -> {
-
+            cardLoader.setOnMouseEntered(e -> {
 
                 Image image = cardLoader.getImage().getImage();
                 setImage(image);
