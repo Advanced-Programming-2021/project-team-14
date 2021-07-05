@@ -3,7 +3,6 @@ package graphic;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
@@ -12,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
