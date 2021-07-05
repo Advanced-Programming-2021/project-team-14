@@ -74,6 +74,11 @@ public class Monster extends Card {
                 showCard.getHorizontalLine();
     }
 
+    @Override
+    public String getDescriptionGraphic() {
+        return showCard.getDescriptionGraphic(getDescription());
+    }
+
     public static ArrayList<Monster> getMonsters() {
         return monsters;
     }

@@ -40,7 +40,7 @@
     -fx-pref-width: 85;
 }
 
-.text {
+.simple-text {
     -fx-fill: -fx-dark-gray;
 }
 

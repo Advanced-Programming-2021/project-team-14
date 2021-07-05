@@ -21,6 +21,10 @@ public class MainGraphic extends Application {
         launch(args);
     }
 
+    public static Scene getScene() {
+        return scene;
+    }
+
     @Override
     public void start(Stage stage){
         MainGraphic.stage = stage;

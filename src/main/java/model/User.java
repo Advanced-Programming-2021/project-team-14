@@ -144,7 +144,7 @@ public class User {
     }
 
     public int getRank() {
-        return rank;
+        return this.rank;
     }
 
     public void increaseGamesPlayed(){

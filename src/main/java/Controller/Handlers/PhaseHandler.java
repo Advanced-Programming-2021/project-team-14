@@ -1,11 +1,13 @@
 package Controller.Handlers;
 
+import Controller.Response;
 import model.Strings;
 import model.game.Duel;
 import model.game.Game;
 import model.game.Phase;
 import org.json.JSONObject;
 import view.Logger;
+import view.Request;
 import view.enums.CommandTags;
 
 import java.util.Objects;
@@ -35,8 +37,9 @@ public class PhaseHandler extends GameHandler {
         }
 
 
-        if (!game.getPhase().toString().contains(expectedPhase.toString()))
+        if (!game.getPhase().toString().contains(expectedPhase.toString())){
             return response;
+        }
         return super.handle(request, duel);
     }
 }

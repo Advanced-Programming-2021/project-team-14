@@ -1,5 +1,7 @@
 package graphic;
 
+import graphic.component.Colors;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import model.User;
 import view.Request;
@@ -9,7 +11,7 @@ public class Menu {
     private static String data;
     private static Pane root;
     protected static User currentUser;
-    protected static void setView(Menus menus){
+    public static void setView(Menus menus){
         Request.addData("view", menus.getLabel());
     }
     protected static void addData(String data){
@@ -29,5 +31,9 @@ public class Menu {
 
     public static void setCurrentUser(String username) {
         currentUser = User.getUserByUsername(username);
+    }
+
+    public void onDragExited(AnchorPane area) {
+        area.setOnDragExited(e -> area.setStyle("-fx-border-color: " + Colors.DARK_GRAY.getHexCode() + ";"));
     }
 }

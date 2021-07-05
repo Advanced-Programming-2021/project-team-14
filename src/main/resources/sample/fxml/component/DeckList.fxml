@@ -4,11 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
-
 <fx:root prefHeight="60.0" prefWidth="540.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane layoutX="27.0" prefWidth="504.0" styleClass="deckListItem" stylesheets="@deckListItem.css">
-        <JFXButton fx:id="delete" layoutX="445.0" layoutY="17.0" />
-        <JFXButton fx:id="edit" layoutX="416.0" layoutY="17.0" />
+    <AnchorPane layoutX="27.0" prefWidth="504.0" styleClass="deckListItem" stylesheets="@ListItem.css">
+        <JFXButton fx:id="delete" layoutX="445.0" layoutY="17.0"/>
+        <JFXButton fx:id="edit" layoutX="416.0" layoutY="17.0"/>
         <Text id="deckName" fx:id="deckName" fill="WHITE" layoutX="38.0" layoutY="35.0"/>
     </AnchorPane>
     <Circle fx:id="validity" layoutX="27.0" layoutY="30.0" radius="20.0" />
