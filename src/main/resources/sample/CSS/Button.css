@@ -1,7 +1,7 @@
 .button {
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-pref-width: -fx-side-size;
+    -fx-pref-width: 300px;
     -fx-pref-height: 40;
     -fx-padding: 0 0 0 75;
     -fx-graphic-text-gap: 30;
