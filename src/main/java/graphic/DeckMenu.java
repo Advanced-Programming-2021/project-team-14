@@ -30,7 +30,7 @@ public class DeckMenu extends Menu {
     }
 
     private void addItem(Deck deck) {
-        ListItem deckListItem = new ListItem(deck);
+        ListItem deckListItem = new ListItem(deck, deck.getName().equals(currentUser.getActiveDeck()));
         deckListItem.getDelete().setOnMouseClicked(e -> {
             listView.getItems().remove(deckListItem);
             Request.addData(Strings.DECK.getLabel(), deck.getName());

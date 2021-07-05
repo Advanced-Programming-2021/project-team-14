@@ -5,6 +5,7 @@ import graphic.component.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.game.Duel;
 import model.game.Game;
+import sample.MainGraphic;
 
 
 public class GamePlay extends Menu{
@@ -29,7 +31,7 @@ public class GamePlay extends Menu{
     @FXML
     public void initialize(){
         game = Duel.getCurrentDuel().getGame();
-//        initZones();
+        initZones();
         initPhases();
         initHands();
         initDuelistInfo();
@@ -38,10 +40,10 @@ public class GamePlay extends Menu{
 
     private void initDuelistInfo() {
 
-
     }
 
     private void initZones() {
+        view.getChildren().add(new MonsterZone(game));
 //        initFieldZone();
     }
 
@@ -69,6 +71,9 @@ public class GamePlay extends Menu{
 
     private void initPhases() {
         view.getChildren().add(new Phases(game));
+    }
+    public void back(ActionEvent actionEvent) {
+        MainGraphic.setRoot("MainMenu");
     }
 
 }

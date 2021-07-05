@@ -18,8 +18,10 @@ public class ListItem extends AnchorPane implements ComponentLoader {
     Text cardsNum, deckName, nickName;
     @FXML
     JFXButton delete, edit;
+    @FXML
+    AnchorPane container;
 
-    public ListItem(Deck deck) {
+    public ListItem(Deck deck, boolean isActiveDeck) {
         load("DeckList");
         cardsNum.setText(String.valueOf(deck.getSize()));
         deckName.setText(deck.getName());
@@ -28,6 +30,10 @@ public class ListItem extends AnchorPane implements ComponentLoader {
         } else {
             validity.setFill(Colors.WARNING.getColor());
         }
+        if (isActiveDeck)
+            container.setStyle("-fx-border-color: GOLD; -fx-border-width: 1;");
+        else
+            container.setStyle("-fx-border-color: #46464f; -fx-border-width: 1;");
 
         delete.setGraphic(generateIcon(FontAwesomeIcon.TRASH));
         edit.setGraphic(generateIcon(FontAwesomeIcon.EDIT));

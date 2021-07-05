@@ -22,7 +22,7 @@ public class Scoreboard extends Menu {
     @FXML
     private JFXListView<ListItem> listView;
 
-    private List<User> users = ScoreBoard.getSortedUsers();
+    private List<User> users;
 
 
     @FXML
@@ -30,9 +30,10 @@ public class Scoreboard extends Menu {
         Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
         setView(Menus.SCOREBOARD_MENU);
         Request.send();
+        users = ScoreBoard.getSortedUsers();
         listView.setBackground(Background.EMPTY);
-        for (int i = 0; i < users.size(); i++) {
-            listView.getItems().add(addItem(users.get(i)));
+        for (User user : users) {
+            listView.getItems().add(addItem(user));
         }
         listView.setVerticalGap(10.0);
     }
@@ -40,12 +41,8 @@ public class Scoreboard extends Menu {
 
     private ListItem addItem(User user) {
         ListItem deckListItem = new ListItem(user);
-        deckListItem.getDelete().setOnMouseClicked(e -> {
-            listView.getItems().remove(deckListItem);
-        });
-        deckListItem.getEdit().setOnMouseClicked(e -> {
-            deckListItem.getCardsNum().setText("21");
-        });
+        deckListItem.getDelete().setOnMouseClicked(e -> listView.getItems().remove(deckListItem));
+        deckListItem.getEdit().setOnMouseClicked(e -> deckListItem.getCardsNum().setText("21"));
 
         return deckListItem;
     }
