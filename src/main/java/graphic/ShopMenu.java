@@ -58,7 +58,7 @@ public class ShopMenu extends Menu {
         allCards.setHgap(10);
         allCards.setVgap(10);
         for (Card card : cards) {
-            CardLoader cardLoader = new CardLoader(card, CardSize.MEDIUM.getLabel(), MenuNames.SHOP.getLabel());
+            CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
             cardLoader.setOnMouseClicked(e -> {
 
 

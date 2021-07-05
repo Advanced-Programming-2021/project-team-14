@@ -65,12 +65,12 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
     public void setImageHeightAndWidth(String size) {
         switch (size) {
             case "small":
-                image.setFitHeight(120);
-                image.setFitWidth(85);
-                break;
-            case "medium":
                 image.setFitHeight(160);
                 image.setFitWidth(120);
+                break;
+            case "medium":
+                image.setFitHeight(200);
+                image.setFitWidth(160);
                 break;
             case "large":
                 image.setFitHeight(260);
