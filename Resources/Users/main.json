@@ -4,10 +4,7 @@
     "cards": [
       "The Calculator",
       "The Calculator",
-      "Sword of dark destruction",
-      "The Calculator",
-      "Terratiger, the Empowered Warrior",
-      "Blue-Eyes white dragon"
+      "The Calculator"
     ]
   },
   "activeDeck": "first",
@@ -18,14 +15,15 @@
         "Marshmallon",
         "Terraforming",
         "Wattaildragon",
-        "Slot Machine"
+        "Slot Machine",
+        "Skull Guardian",
+        "Sword of dark destruction"
       ],
       "mainCards": [
         "Marshmallon",
         "Slot Machine",
         "Dark Hole",
         "Magic Cylinder",
-        "Skull Guardian",
         "Mystical space typhoon",
         "Herald of Creation",
         "Crawling dragon",
@@ -54,7 +52,6 @@
         "Flame manipulator",
         "Mystical space typhoon",
         "Herald of Creation",
-        "Sword of dark destruction",
         "Exploder Dragon",
         "Call of The Haunted",
         "Terraforming",
@@ -67,7 +64,10 @@
         "Dark Hole",
         "The Calculator",
         "The Calculator",
-        "The Calculator"
+        "The Calculator",
+        "Sword of dark destruction",
+        "Terratiger, the Empowered Warrior",
+        "Blue-Eyes white dragon"
       ]
     }
   },
