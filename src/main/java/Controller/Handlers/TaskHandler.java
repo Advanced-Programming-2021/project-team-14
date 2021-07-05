@@ -1,5 +1,6 @@
 package Controller.Handlers;
 
+import Controller.Response;
 import Controller.enums.EffectsEnum;
 import Controller.enums.Responses;
 import model.Strings;
@@ -22,7 +23,7 @@ public class TaskHandler extends GameHandler {
 
     public String handle(JSONObject request, Duel duel) {
         set(request, duel);
-
+        Response.success();
         switch (Objects.requireNonNull(CommandTags.fromValue(request.getString(Strings.COMMAND.getLabel())))) {
             case SELECT:
                 return select();
