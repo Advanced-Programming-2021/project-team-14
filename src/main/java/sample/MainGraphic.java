@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MainGraphic extends Application {
     private static Scene scene;
-
+    private static Stage stage;
     public static void setRoot(String fxml) {
         scene.setRoot(loadFXML(fxml));
     }
@@ -23,10 +23,16 @@ public class MainGraphic extends Application {
 
     @Override
     public void start(Stage stage){
+        MainGraphic.stage = stage;
         scene = new Scene(loadFXML("LoginMenu"));
         stage.setScene(scene);
         stage.show();
     }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
     public static FXMLLoader fxmlLoader(String fxml) {
         return new FXMLLoader(MainGraphic.class.getResource("/sample/fxml/" + fxml + ".fxml"));
     }

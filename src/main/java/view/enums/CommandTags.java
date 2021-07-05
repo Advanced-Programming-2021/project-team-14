@@ -50,7 +50,8 @@ public enum CommandTags {
 
     IMPORT("import card"),
     EXPORT("export card"),
-
+    SET_PROFILE_PHOTO("set profile photo"),
+    REMOVE_PROFILE_PHOTO("remove profile photo"),
 
     //cheat
     WIN_GAME("win game"),

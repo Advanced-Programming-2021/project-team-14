@@ -13,6 +13,7 @@ public class User {
         nicknames = new ArrayList<>();
     }
 
+
     private Wallet wallet;
     private String activeDeck;
     private HashMap<String, Deck> decks;
@@ -21,6 +22,8 @@ public class User {
     private String nickname;
     private int score;
     private int rank;
+    private boolean hasProfilePhoto;
+    private int gamesPlayed;
 
     public User(String username, String password, String nickname) {
         this.username = username;
@@ -31,6 +34,8 @@ public class User {
         nicknames.add(nickname);
         this.decks = new HashMap<>();
         this.activeDeck = null;
+        hasProfilePhoto = false;
+        gamesPlayed = 0;
         updateDatabase();
     }
 
@@ -75,6 +80,19 @@ public class User {
 
     public static void changeUserUsername(String username, User UpdatedUser) {
         users.replace(username, UpdatedUser);
+    }
+
+    public void setHasProfilePhoto(boolean hasProfilePhoto) {
+        this.hasProfilePhoto = hasProfilePhoto;
+        this.updateDatabase();
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public boolean hasProfilePhoto() {
+        return hasProfilePhoto;
     }
 
     public boolean doesDeckExist(String deckName) {
@@ -127,6 +145,10 @@ public class User {
 
     public int getRank() {
         return rank;
+    }
+
+    public void increaseGamesPlayed(){
+        gamesPlayed++;
     }
 
     @Override
