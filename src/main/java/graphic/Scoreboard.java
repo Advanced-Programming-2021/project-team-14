@@ -1,8 +1,10 @@
 package graphic;
 
 import com.jfoenix.controls.JFXListView;
+import graphic.component.Colors;
 import graphic.component.ListItem;
 import javafx.fxml.FXML;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -54,6 +56,10 @@ public class Scoreboard extends Menu {
                 break;
         }
         listItem.getContainer().setStyle("-fx-border-color: " + color);
+        if (currentUser.equals(user)){
+            listItem.setEffect(new DropShadow());
+            listItem.getContainer().setStyle("-fx-background-color: " + Colors.SUCCESS.getHexCode() + "; -fx-background-radius: 10;");
+        }
         return listItem;
     }
 }
