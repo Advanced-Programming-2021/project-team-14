@@ -15,7 +15,7 @@ public class MainGraphic extends Application {
     public static void setRoot(String fxml) {
         scene.setRoot(loadFXML(fxml));
     }
-
+//0935 1379 407
     public static void main(String[] args) {
         Database.prepareDatabase();
         launch(args);

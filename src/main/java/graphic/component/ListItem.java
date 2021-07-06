@@ -42,14 +42,15 @@ public class ListItem extends AnchorPane implements ComponentLoader {
 
 
     public ListItem(User user) {
-        load("ScoreboardListItem");
+        load("ScoreboardItem");
         rank.setText(String.valueOf(user.getRank()));
         score.setText(String.valueOf(user.getScore()));
         nickName.setText(user.getNickname());
-        container.setOnMouseEntered(e -> container.setStyle("-fx-background-color: red;"));
-        container.setOnMouseExited(e -> container.setStyle("-fx-background-color: transparent;"));
     }
 
+    public AnchorPane getContainer() {
+        return container;
+    }
 
     public JFXButton getDelete() {
         return delete;

@@ -51,19 +51,29 @@ public class ShopMenu extends Menu {
         allCards.setPadding(new Insets(20, 0, 0, 0));
         for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
+            if (currentUser.getWallet().getCash() < card.getPrice()){
+                cardLoader.setOpacity(0.4);
+            }
             cardLoader.setOnMouseEntered(e -> {
 
                 Image image = cardLoader.getImage().getImage();
                 setImage(image);
                 setSpecification(cardLoader);
+
+
             });
             allCards.getChildren().add(cardLoader);
         }
 
         buyCardArea.setOnDragOver(e -> {
             if (e.getDragboard().hasString()) {
-                e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                buyCardArea.setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode() + ";");
+                CardLoader cardLoader = ((CardLoader) e.getGestureSource());
+                if (cardLoader.getCard().getPrice() > currentUser.getWallet().getCash()) {
+                    buyCardArea.setStyle("-fx-border-color: " + Colors.WARNING.getHexCode() + ";");
+                } else {
+                    e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    buyCardArea.setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode() + ";");
+                }
             }
         });
 
