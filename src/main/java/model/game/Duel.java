@@ -19,8 +19,10 @@ public class Duel {
     private int loserScore;
     private String creatorNickname;
     private Player firstPlayer;
-    private Game game;
+    private User mainUser;
     private Player secondPlayer;
+    private User rivalUser;
+    private Game game;
     private int numberOfRounds;
     private boolean isAI;
     private int round;
@@ -30,10 +32,12 @@ public class Duel {
 
         this.isAI = false;
         this.round = 1;
-        this.firstPlayer = new Player(mainUser, 0);
-        this.secondPlayer = new Player(rivalUser, 0);
+//        this.firstPlayer = new Player(mainUser, 0);
+//        this.secondPlayer = new Player(rivalUser, 0);
+        this.mainUser = mainUser;
+        this.rivalUser = rivalUser;
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this, false));
+//        setGame(new Game(firstPlayer, secondPlayer, this, false));
         currentDuel = this;
     }
 
@@ -41,12 +45,20 @@ public class Duel {
 
         this.isAI = true;
         this.round = 1;
-        this.firstPlayer = new Player(mainUser, 0);
-        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
+//        this.firstPlayer = new Player(mainUser, 0);
+//        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
+        this.mainUser = mainUser;
+        this.rivalUser = User.getUserByUsername("aiPlayer");
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this, true));
+//        setGame(new Game(firstPlayer, secondPlayer, this, true));
         currentDuel = this;
 
+    }
+
+    public void setPlayers(User firstUser, User secondUser) {
+
+        this.firstPlayer = new Player(firstUser, 0);
+        this.secondPlayer = new Player(secondUser, 0);
     }
 
     public static void addGame(Game game) {
@@ -167,6 +179,27 @@ public class Duel {
 
     public Game getGame() {
         return this.game;
+    }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
+    }
+
+    public Player getSecondPlayer() {
+        return secondPlayer;
+    }
+
+    public User getMainUser() {
+        return mainUser;
+    }
+
+    public boolean isAI() {
+        return this.isAI;
+    }
+
+
+    public User getRivalUser() {
+        return rivalUser;
     }
 
     public void setGame(Game game) {

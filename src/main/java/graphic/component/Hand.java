@@ -64,7 +64,7 @@ public class Hand extends HBox implements ComponentLoader {
             }
             ((Text) ((HBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(1)).
                     getChildren().get(1)).setText(String.valueOf(card.getPrice()));
-            ((Text) ((VBox) root.getChildren().get(1)).getChildren().get(3)).setText(card.getDescriptionGraphic());
+            ((Text) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(3)).getChildren().get(0)).setText(card.getDescriptionGraphic());
         });
         cardInHand.setOnMouseExited(e -> {
             transition.stop();

@@ -11,17 +11,17 @@
             fx:controller="graphic.GamePlay">
    <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;"/>
    <VBox fx:id="sideCard" layoutX="803.0" layoutY="16.0" prefHeight="714.0" prefWidth="360.0">
-      <HBox prefHeight="100.0" prefWidth="310.0">
+      <HBox prefHeight="71.0" prefWidth="240.0">
          <VBox.margin>
             <Insets left="60.0" right="60.0"/>
          </VBox.margin>
          <children>
             <Circle fx:id="upperPlayerPhoto" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
-                  <Insets left="10.0" top="40.0"/>
+                  <Insets left="10.0" top="15.0"/>
                </HBox.margin>
             </Circle>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="38.0" prefWidth="94.0">
                <children>
                   <Text fx:id="upperPlayerNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                      <VBox.margin>
@@ -41,14 +41,14 @@
                   </Text>
                </children>
                <HBox.margin>
-                  <Insets top="40.0"/>
+                  <Insets top="15.0"/>
                </HBox.margin>
             </VBox>
          </children>
       </HBox>
-      <ImageView fx:id="selectedCardImage" fitHeight="320.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="selectedCardImage" fitHeight="292.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
-            <Insets left="60.0" right="60.0" top="40.0"/>
+            <Insets left="60.0" right="60.0" top="30.0"/>
          </VBox.margin>
       </ImageView>
       <HBox prefHeight="59.0" prefWidth="320.0">
@@ -112,22 +112,26 @@
             <Insets top="30.0"/>
          </VBox.margin>
       </HBox>
-      <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text">
+      <HBox prefHeight="100.0" prefWidth="240.0">
          <VBox.margin>
-            <Insets bottom="30.0" left="60.0" right="60.0" top="20.0"/>
+            <Insets bottom="10.0" left="60.0" right="60.0" top="20.0"/>
          </VBox.margin>
-         <font>
-            <Font name="System Bold" size="12.0"/>
-         </font>
-      </Text>
-      <HBox layoutX="70.0" layoutY="10.0" prefHeight="100.0" prefWidth="310.0">
+         <children>
+            <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text">
+               <font>
+                  <Font name="System Bold" size="12.0"/>
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox layoutX="70.0" layoutY="10.0" prefHeight="87.0" prefWidth="240.0">
          <children>
             <Circle fx:id="downPlayerPhoto" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
-                  <Insets bottom="50.0" left="10.0" top="40.0"/>
+                  <Insets bottom="50.0" left="10.0" top="20.0"/>
                </HBox.margin>
             </Circle>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="69.0" prefWidth="100.0">
                <children>
                   <Text fx:id="downPlayerNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                      <VBox.margin>
@@ -147,7 +151,7 @@
                   </Text>
                </children>
                <HBox.margin>
-                  <Insets top="40.0"/>
+                  <Insets bottom="50.0" top="20.0"/>
                </HBox.margin>
             </VBox>
          </children>
