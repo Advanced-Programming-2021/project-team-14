@@ -3,6 +3,7 @@ package graphic;
 import com.jfoenix.controls.JFXListView;
 import graphic.component.ListItem;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import model.ScoreBoard;
@@ -15,10 +16,8 @@ import java.util.List;
 
 public class Scoreboard extends Menu {
 
-
     @FXML
-    private AnchorPane root;
-
+    public ImageView image;
     @FXML
     private JFXListView<ListItem> listView;
 
@@ -35,12 +34,26 @@ public class Scoreboard extends Menu {
         for (User user : users) {
             listView.getItems().add(addItem(user));
         }
-        listView.setVerticalGap(10.0);
+        listView.setVerticalGap(5.0);
+//        image.setImage();
     }
 
 
     private ListItem addItem(User user) {
-
-        return new ListItem(user);
+        ListItem listItem = new ListItem(user);
+        String color = "#403c45";
+        switch (user.getRank()) {
+            case 1:
+                color = "GOLD";
+                break;
+            case 2:
+                color = "SILVER";
+                break;
+            case 3:
+                color = "#cd7f32";
+                break;
+        }
+        listItem.getContainer().setStyle("-fx-border-color: " + color);
+        return listItem;
     }
 }

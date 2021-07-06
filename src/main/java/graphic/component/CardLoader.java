@@ -96,5 +96,6 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
     public Card getCard() {
         return card;
     }
+
 }
 

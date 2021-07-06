@@ -5,7 +5,7 @@
     -fx-background-color: transparent;
     -fx-alignment: center;
     -fx-pref-width: 600;
-    -fx-pref-height: 600;
+    -fx-pref-height: 500;
 }
 
 .list-view .list-cell {
