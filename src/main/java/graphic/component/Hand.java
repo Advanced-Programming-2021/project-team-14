@@ -77,7 +77,7 @@ public class Hand extends HBox implements ComponentLoader {
                     Request.send();
                 }
                 if (Request.isSuccessful()) {
-//                    playMenu.update();
+                    gamePlay.update();
                     this.getChildren().remove(cardInHand);
                 }
                 else {

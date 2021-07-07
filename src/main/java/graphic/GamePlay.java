@@ -1,10 +1,7 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
-import graphic.component.CardLoader;
-import graphic.component.Hand;
-import graphic.component.Phases;
-import graphic.component.RivalHand;
+import graphic.component.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -174,7 +171,7 @@ public class GamePlay extends Menu {
             popupStage.show();
         });
 
-//        initZones();
+        initZones();
         initPhases();
         initHands();
         initDuelistInfo();
@@ -214,8 +211,11 @@ public class GamePlay extends Menu {
     }
 
     private void initZones() {
+        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
+        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
 //        initFieldZone();
     }
+
 
 //    private void initFieldZone() {
 //        ZoneCell fieldZone = new ZoneCell();
@@ -249,5 +249,10 @@ public class GamePlay extends Menu {
 
     public void back(ActionEvent actionEvent) {
         MainGraphic.setRoot("MainMenu");
+    }
+
+    public void update() {
+        ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
+        ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
     }
 }
