@@ -9,6 +9,7 @@ import view.enums.Menus;
 
 public class DuelMenu extends Menu {
     public void startGame(MouseEvent mouseEvent) {
+//        Medias.START_DUEL_CLICK.play(1);
         setView(Menus.DUEL_MENU);
         Request.setCommandTag(CommandTags.START_DUEL_AI);
         Request.addData("rounds", "1");

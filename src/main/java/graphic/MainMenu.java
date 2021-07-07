@@ -35,6 +35,7 @@ public class MainMenu extends Menu{
                 MainGraphic.setRoot("ShopMenu");
                 break;
             case "Duel":
+//                Medias.BACKGROUND.pause();
                 nextView = "DuelMenu";
                 break;
             default:

@@ -9,7 +9,14 @@ import java.net.URL;
 
 public enum Medias {
     BACKGROUND("background.wav"),
-    CHOMP("chomp.wav"),
+    COIN_FLIP("coinflip.mp3"),
+    ATTACK("attack.mp3"),
+    BUY_ITEM("buyitem.mp3"),
+    HOVER("hover.wav"),
+    PUT_CARD("putcard.mp3"),
+    SNACKBAR_ERROR("snackbarError.wav"),
+    START_DUEL_CLICK("startDuelClick.wav"),
+    USUAL_CLICK("usualClick.wav"),
     INTRO("intro.wav");
 
 
@@ -35,13 +42,14 @@ public enum Medias {
             clip.open(audioIn);
             this.clip = clip;
         } catch (Exception ignored) {
+            System.out.println("Exception");
         }
     }
 
 
-    public void play() {
+    public void play(int count) {
         if (!mute)
-            clip.loop(-1);
+            clip.loop(count);
     }
 
     public void pause() {

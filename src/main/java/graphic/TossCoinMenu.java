@@ -43,6 +43,7 @@ public class TossCoinMenu {
         tossButton.setOnMouseClicked(e -> {
             RotateTransition rotator = createRotator(coinCircle);
             rotator.play();
+//            Medias.COIN_FLIP.play(5);
             User mainUser = Duel.getCurrentDuel().getMainUser();
             User rivalUser = Duel.getCurrentDuel().getRivalUser();
             rotator.setOnFinished(new EventHandler<ActionEvent>() {

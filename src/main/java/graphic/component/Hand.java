@@ -1,18 +1,13 @@
 package graphic.component;
 
 import graphic.Cursor;
+import graphic.GamePlay;
 import javafx.animation.TranslateTransition;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Strings;
 import model.card.Card;
-import model.card.Monster;
 import model.card.enums.CardType;
 import model.game.Game;
 import view.Request;
@@ -24,19 +19,20 @@ public class Hand extends HBox implements ComponentLoader {
 
     private Game game;
     private boolean isSet;
-    private Pane root;
+    private GamePlay gamePlay;
 
-    public Hand(Game game, Pane root) {
-        this.root = root;
+    public Hand(Game game, GamePlay gamePlay) {
+        this.gamePlay = gamePlay;
         this.game = game;
         load("Hand");
-        this.setSpacing(-55);
+        this.setSpacing(-30);
         addAllCards();
         update();
         isSet = false;
     }
 
     private void addAllCards() {
+        System.out.println(game);
         game.getBoard().getMainPlayer().getHand().getCards().forEach(this::addNode);
     }
 
@@ -44,27 +40,13 @@ public class Hand extends HBox implements ComponentLoader {
         graphic.component.CardLoader cardInHand = new graphic.component.CardLoader(card, CardSize.MEDIUM.getLabel(), "Hand");
         TranslateTransition transition = new TranslateTransition(Duration.millis(100), cardInHand);
         transition.setAutoReverse(true);
-        transition.setByY(-15);
+        transition.setByY(-10);
         transition.setNode(cardInHand);
         cardInHand.setOnMouseEntered(e -> {
             transition.play();
             changeCursor(card);
-            Image image = cardInHand.getImage().getImage();
-            ((ImageView) ((VBox) root.getChildren().get(1)).getChildren().get(1)).setImage(image);
-            if (card.getCardType() == CardType.MONSTER) {
-                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
-                        getChildren().get(0)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getAttack()));
-                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
-                        getChildren().get(1)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getDefence()));
-            } else {
-                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
-                        getChildren().get(0)).getChildren().get(1)).setText("");
-                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
-                        getChildren().get(1)).getChildren().get(1)).setText("");
-            }
-            ((Text) ((HBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(1)).
-                    getChildren().get(1)).setText(String.valueOf(card.getPrice()));
-            ((Text) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(3)).getChildren().get(0)).setText(card.getDescriptionGraphic());
+            gamePlay.setSpecification(cardInHand);
+            gamePlay.setImage(cardInHand.getImage().getImage());
         });
         cardInHand.setOnMouseExited(e -> {
             transition.stop();
@@ -95,18 +77,16 @@ public class Hand extends HBox implements ComponentLoader {
                     Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
                     Request.send();
                 }
-                if (Request.isSuccessful()) {
-                    playMenu.update();
-                    this.getChildren().remove(cardInHand);
-                }
+                if (Request.isSuccessful()) this.getChildren().remove(cardInHand);
                 else {
                     System.out.println("snackbar");
-                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
+                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, gamePlay.getView());
                 }
             }
         });
         this.getChildren().add(cardInHand);
     }
+
 
     private void removeAllCards() {
         this.getChildren().remove(0, this.getChildren().size());

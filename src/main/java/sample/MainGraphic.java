@@ -28,7 +28,7 @@ public class MainGraphic extends Application {
 
     @Override
     public void start(Stage stage){
-        Medias.BACKGROUND.play();
+        Medias.BACKGROUND.loop();
         MainGraphic.stage = stage;
         scene = new Scene(loadFXML("LoginMenu"));
         stage.setScene(scene);

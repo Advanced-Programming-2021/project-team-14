@@ -1,6 +1,7 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
+import graphic.component.CardLoader;
 import graphic.component.Hand;
 import graphic.component.Phases;
 import graphic.component.RivalHand;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -27,6 +29,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.card.Card;
+import model.card.Monster;
+import model.card.enums.CardType;
 import model.game.Duel;
 import model.game.Game;
 import sample.MainGraphic;
@@ -188,6 +193,25 @@ public class GamePlay extends Menu {
 //        upperPlayerPhoto.setFill(new ImagePattern(image));
     }
 
+    public void setImage(Image image) {
+        selectedCardImage.setImage(image);
+    }
+
+
+    public void setSpecification(CardLoader cardLoader) {
+
+        Card card = Card.getCardByName(cardLoader.getName());
+        if (card.getCardType() == CardType.MONSTER) {
+            attack.setText(String.valueOf(((Monster) card).getAttack()));
+            defense.setText(String.valueOf(((Monster) card).getDefence()));
+        } else {
+            attack.setText("");
+            defense.setText("");
+        }
+        price.setText(String.valueOf(card.getPrice()));
+        description.setText(card.getDescriptionGraphic());
+    }
+
     private void initZones() {
 //        initFieldZone();
     }
@@ -211,7 +235,11 @@ public class GamePlay extends Menu {
 
     private void initHands() {
         upperPlayerHand.getChildren().add(new RivalHand(game));
-        downPlayerHand.getChildren().add(new Hand(game, view));
+        downPlayerHand.getChildren().add(new Hand(game, this));
+    }
+
+    public AnchorPane getView() {
+        return view;
     }
 
     private void initPhases() {
