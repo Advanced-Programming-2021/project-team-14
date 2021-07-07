@@ -1,5 +1,6 @@
 package sample;
 
+import graphic.Medias;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,7 @@ public class MainGraphic extends Application {
 
     @Override
     public void start(Stage stage){
+        Medias.BACKGROUND.play();
         MainGraphic.stage = stage;
         scene = new Scene(loadFXML("LoginMenu"));
         stage.setScene(scene);

@@ -1,13 +1,14 @@
 {
   "wallet": {
-    "cash": 1020,
+    "cash": 820,
     "cards": [
       "The Calculator",
       "The Calculator",
       "The Calculator",
       "Magnum Shield",
       "Haniwa",
-      "Haniwa"
+      "Haniwa",
+      "Texchanger"
     ]
   },
   "activeDeck": "first",
@@ -80,5 +81,5 @@
   "score": 0,
   "rank": 2,
   "hasProfilePhoto": true,
-  "gamesPlayed": 8
+  "gamesPlayed": 9
 }

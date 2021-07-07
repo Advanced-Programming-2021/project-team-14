@@ -1,7 +1,6 @@
 package graphic.component;
 
 import graphic.Cursor;
-import graphic.PlayMenu;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,10 +24,10 @@ public class Hand extends HBox implements ComponentLoader {
 
     private Game game;
     private boolean isSet;
-    private PlayMenu playMenu;
+    private Pane root;
 
-    public Hand(Game game, PlayMenu playMenu) {
-        this.playMenu = playMenu;
+    public Hand(Game game, Pane root) {
+        this.root = root;
         this.game = game;
         load("Hand");
         this.setSpacing(-30);
@@ -38,7 +37,6 @@ public class Hand extends HBox implements ComponentLoader {
     }
 
     private void addAllCards() {
-        System.out.println(game);
         game.getBoard().getMainPlayer().getHand().getCards().forEach(this::addNode);
     }
 
@@ -51,8 +49,22 @@ public class Hand extends HBox implements ComponentLoader {
         cardInHand.setOnMouseEntered(e -> {
             transition.play();
             changeCursor(card);
-            playMenu.setSpecification(cardInHand);
-            playMenu.setImage(cardInHand.getImage().getImage());
+            Image image = cardInHand.getImage().getImage();
+            ((ImageView) ((VBox) root.getChildren().get(1)).getChildren().get(1)).setImage(image);
+            if (card.getCardType() == CardType.MONSTER) {
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(0)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getAttack()));
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(1)).getChildren().get(1)).setText(String.valueOf(((Monster) card).getDefence()));
+            } else {
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(0)).getChildren().get(1)).setText("");
+                ((Text) ((HBox) ((VBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(0)).
+                        getChildren().get(1)).getChildren().get(1)).setText("");
+            }
+            ((Text) ((HBox) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(2)).getChildren().get(1)).
+                    getChildren().get(1)).setText(String.valueOf(card.getPrice()));
+            ((Text) ((HBox) ((VBox) root.getChildren().get(1)).getChildren().get(3)).getChildren().get(0)).setText(card.getDescriptionGraphic());
         });
         cardInHand.setOnMouseExited(e -> {
             transition.stop();
@@ -86,13 +98,12 @@ public class Hand extends HBox implements ComponentLoader {
                 if (Request.isSuccessful()) this.getChildren().remove(cardInHand);
                 else {
                     System.out.println("snackbar");
-                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, playMenu.view);
+                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
                 }
             }
         });
         this.getChildren().add(cardInHand);
     }
-
 
     private void removeAllCards() {
         this.getChildren().remove(0, this.getChildren().size());
