@@ -3,3 +3,11 @@
     -fx-menu-background: #20202A;
     -fx-dark-gray: #515468;
 }
+
+.showCardArea {
+    -fx-background-color: -fx-menu-background;
+}
+
+.simple-text{
+    -fx-fill: -fx-dark-gray;
+}

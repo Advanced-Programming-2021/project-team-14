@@ -8,14 +8,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="view" stylesheets="@../CSS/Snackbar.css" prefHeight="800.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="view" stylesheets="@../CSS/Snackbar.css, @../CSS/GamePlay.css" prefHeight="800.0"
             prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="graphic.PlayMenu">
     <JFXButton layoutX="7.0" layoutY="14.0" onAction="#back" styleClass="backButton" text="&lt;"/>
-    <VBox fx:id="sideCard" layoutX="803.0" layoutY="58.0" prefHeight="583.0" prefWidth="360.0">
+    <VBox alignment="CENTER" styleClass="showCardArea" fx:id="sideCard" layoutX="870" prefHeight="800" prefWidth="330.0">
         <ImageView fx:id="selectedCardImage" fitHeight="320.0" fitWidth="240.0"
                    pickOnBounds="true" preserveRatio="true">
             <VBox.margin>
-                <Insets left="60.0" right="60.0" top="40.0"/>
+                <Insets left="50" right="50" top="50"/>
             </VBox.margin>
         </ImageView>
         <HBox prefHeight="59.0" prefWidth="320.0">
@@ -84,14 +84,10 @@
                 <Insets top="30.0"/>
             </VBox.margin>
         </HBox>
-        <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-              styleClass="simple-text">
+        <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
             <VBox.margin>
-                <Insets left="60.0" right="60.0" top="20.0"/>
+                <Insets left="30.0" right="30.0" top="20.0"/>
             </VBox.margin>
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
         </Text>
     </VBox>
 </AnchorPane>
