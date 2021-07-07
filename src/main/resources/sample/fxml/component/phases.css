@@ -1,0 +1,16 @@
+.root {
+    -fx-theme-color: #6D5DD3;
+    -fx-menu-background: #20202A;
+    -fx-dark-gray: #515468;
+}
+
+.jfx-radio-button {
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-size: 14;
+}
+
+.jfx-radio-button:selected {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
