@@ -31,7 +31,7 @@ public class Hand extends HBox implements ComponentLoader {
         this.playMenu = playMenu;
         this.game = game;
         load("Hand");
-        this.setSpacing(-30);
+        this.setSpacing(-55);
         addAllCards();
         update();
         isSet = false;
@@ -46,7 +46,7 @@ public class Hand extends HBox implements ComponentLoader {
         graphic.component.CardLoader cardInHand = new graphic.component.CardLoader(card, CardSize.MEDIUM.getLabel(), "Hand");
         TranslateTransition transition = new TranslateTransition(Duration.millis(100), cardInHand);
         transition.setAutoReverse(true);
-        transition.setByY(-10);
+        transition.setByY(-15);
         transition.setNode(cardInHand);
         cardInHand.setOnMouseEntered(e -> {
             transition.play();
@@ -83,7 +83,10 @@ public class Hand extends HBox implements ComponentLoader {
                     Request.setCommandTag(CommandTags.ACTIVATE_EFFECT);
                     Request.send();
                 }
-                if (Request.isSuccessful()) this.getChildren().remove(cardInHand);
+                if (Request.isSuccessful()) {
+                    playMenu.update();
+                    this.getChildren().remove(cardInHand);
+                }
                 else {
                     System.out.println("snackbar");
                     new SnackBarComponent(Request.getMessage(), ResultState.ERROR, playMenu.view);
