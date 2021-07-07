@@ -89,6 +89,7 @@ public class GamePlay extends Menu {
 
     @FXML
     public void initialize() {
+
         KeyCombination cheat = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
         game = Duel.getCurrentDuel().getGame();
 

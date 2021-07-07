@@ -75,7 +75,7 @@ public class TossCoinMenu {
                                         Duel.getCurrentDuel(), false));
                             }
 
-                            MainGraphic.setRoot("GamePlay2");
+                            MainGraphic.setRoot("GamePlay3");
 
                         }
                     });
