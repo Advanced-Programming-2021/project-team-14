@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -9,7 +10,8 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="view" styleClass="Menu"
             stylesheets="@../CSS/DeckInside.css, @../CSS/Snackbar.css" xmlns="http://javafx.com/javafx/8.0.171"
             fx:controller="graphic.GamePlay">
-   <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;"/>
+   <JFXButton layoutX="31.0" layoutY="24.0" onAction="#back" prefHeight="19.0" prefWidth="43.0" styleClass="backButton"
+              text="&lt;"/>
    <VBox fx:id="sideCard" layoutX="803.0" layoutY="16.0" prefHeight="714.0" prefWidth="360.0">
       <HBox prefHeight="71.0" prefWidth="240.0">
          <VBox.margin>
@@ -167,4 +169,13 @@
    <HBox fx:id="downPlayerHand" layoutX="120.0" layoutY="636.0" prefHeight="100.0" prefWidth="200.0"/>
    <HBox fx:id="downPlayerSpellZone" layoutX="77.0" layoutY="500.0" prefHeight="100.0" prefWidth="200.0"/>
    <HBox fx:id="downPlayerMonsterZone" layoutX="77.0" layoutY="410.0" prefHeight="100.0" prefWidth="200.0"/>
+   <JFXButton fx:id="pauseButton" layoutX="27.0" layoutY="74.0" prefHeight="50.0" prefWidth="36.0" text=".">
+      <graphic>
+         <FontAwesomeIconView fill="#515468" glyphName="GEARS" size="30" text="" wrappingWidth="27.056627944111824">
+            <font>
+               <Font name="System Bold" size="26.0"/>
+            </font>
+         </FontAwesomeIconView>
+      </graphic>
+   </JFXButton>
 </AnchorPane>

@@ -1,10 +1,16 @@
 package graphic;
 
+import com.jfoenix.controls.JFXButton;
 import graphic.component.Hand;
 import graphic.component.Phases;
 import graphic.component.RivalHand;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -13,6 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.game.Duel;
 import model.game.Game;
 import sample.MainGraphic;
@@ -60,6 +69,8 @@ public class GamePlay extends Menu {
     private HBox downPlayerSpellZone;
     @FXML
     private HBox downPlayerMonsterZone;
+    @FXML
+    private JFXButton pauseButton;
 
     public Pane root;
     public AnchorPane addCardArea;
@@ -68,7 +79,44 @@ public class GamePlay extends Menu {
     @FXML
     public void initialize() {
         game = Duel.getCurrentDuel().getGame();
-//        initZones();
+
+        pauseButton.setOnAction(e -> {
+
+            view.setEffect(new GaussianBlur());
+
+            VBox pauseRoot = new VBox(5);
+            pauseRoot.setStyle("-fx-background-color: rgba(81, 84, 104, 0.8);");
+
+            pauseRoot.setAlignment(Pos.CENTER);
+            pauseRoot.setPadding(new Insets(20));
+
+            Button resume = new JFXButton("Resume");
+            String style = MainGraphic.class.getResource("CSS/GamePlay.css").toString();
+            resume.setStyle(style);
+            Button exit = new JFXButton("Exit");
+            exit.setStyle(style);
+            pauseRoot.getChildren().add(resume);
+            pauseRoot.getChildren().add(exit);
+
+            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+//            popupStage.initOwner(primaryStage);
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setScene(new Scene(pauseRoot, Color.DARKGREY));
+
+            exit.setOnAction(event -> {
+                view.setEffect(null);
+                popupStage.hide();
+                MainGraphic.setRoot("MainMenu");
+            });
+
+            resume.setOnAction(event -> {
+                view.setEffect(null);
+                popupStage.hide();
+            });
+
+            popupStage.show();
+        });
+        initZones();
         initPhases();
         initHands();
         initDuelistInfo();
