@@ -26,7 +26,7 @@ public class Phases extends HBox implements ComponentLoader{
             ((JFXRadioButton) this.getChildren().get(i)).setSelectedColor(Colors.THEME_COLOR.getColor());
             ((JFXRadioButton) this.getChildren().get(i)).setUnSelectedColor(Color.TRANSPARENT);
         }
-        nextPhase.setStyle("-fx-text-fill:  " + Colors.THEME_COLOR.getHexCode() + "; -fx-font-weight: bold;");
+        nextPhase.setStyle("-fx-text-fill:  " + Colors.GOLD.getHexCode() + ";");
         nextPhase.setOnMouseClicked(event -> nextPhase());
 
     }

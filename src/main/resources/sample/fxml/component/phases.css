@@ -6,11 +6,11 @@
 
 .jfx-radio-button {
     -fx-text-fill: -fx-dark-gray;
-    -fx-font-size: 14;
+    -fx-font-size: 13;
 }
 
 .jfx-radio-button:selected {
     -fx-text-fill: WHITE;
-    -fx-font-size: 18;
+    -fx-font-size: 15;
     -fx-font-weight: bold;
 }
