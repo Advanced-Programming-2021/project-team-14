@@ -23,14 +23,13 @@ public class DuelistInfo extends AnchorPane implements ComponentLoader {
         username.setText(user.getUsername());
         nickname.setText(user.getNickname());
         this.setLayoutX(900);
-        this.setLayoutY(700);
+        this.setLayoutY(720);
         if (isOpponent) {
-            this.setLayoutY(10);
+            this.setLayoutY(5);
         }
         if (user.hasProfilePhoto()) {
             Image image = Database.getProfilePhoto(user.getUsername());
             profilePhoto.setImage(image);
-            System.out.println("here");
         } else {
             profilePhoto.setStyle("-fx-background-color: BLUE;");
         }
