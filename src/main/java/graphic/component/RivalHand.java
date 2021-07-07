@@ -9,9 +9,10 @@ public class RivalHand extends HBox implements ComponentLoader{
     public RivalHand(Game game) {
         load("Hand");
         addAllCards(game);
-        this.setSpacing(-20);
+        this.setSpacing(-60);
         this.setLayoutX(200);
-        this.setLayoutY(50);
+        this.setLayoutY(0);
+        this.setTranslateY(-60);
     }
 
     private void addAllCards(Game game) {

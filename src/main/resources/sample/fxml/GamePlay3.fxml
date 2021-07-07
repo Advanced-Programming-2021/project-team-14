@@ -164,10 +164,10 @@
         </HBox>
     </VBox>
     <HBox fx:id="phases" layoutX="77.0" layoutY="341.0" prefHeight="69.0" prefWidth="642.0"/>
-    <HBox fx:id="upperPlayerHand" layoutX="120.0" layoutY="-26.0" prefHeight="100.0" prefWidth="200.0"/>
+    <HBox fx:id="upperPlayerHand" layoutX="120.0" layoutY="-50" prefHeight="100.0" prefWidth="200.0"/>
     <HBox fx:id="upperPlayerSpellZone" layoutX="77.0" layoutY="126.0" prefHeight="100.0" prefWidth="200.0"/>
     <HBox fx:id="upperPlayerMonsterZone" layoutX="77.0" layoutY="226.0" prefHeight="100.0" prefWidth="200.0"/>
-    <HBox fx:id="downPlayerHand" layoutX="120.0" layoutY="636.0" prefHeight="100.0" prefWidth="200.0"/>
+    <HBox fx:id="downPlayerHand" layoutX="120.0" layoutY="700.0" prefHeight="100.0" prefWidth="200.0"/>
     <HBox fx:id="downPlayerSpellZone" layoutX="77.0" layoutY="500.0" prefHeight="100.0" prefWidth="200.0"/>
     <HBox fx:id="downPlayerMonsterZone" layoutX="77.0" layoutY="410.0" prefHeight="100.0" prefWidth="200.0"/>
     <JFXButton fx:id="pauseButton" layoutX="27.0" layoutY="74.0" prefHeight="50.0" prefWidth="36.0" text=".">
