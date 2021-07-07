@@ -9,15 +9,14 @@ import java.net.URL;
 
 public enum Medias {
     BACKGROUND("background.wav"),
-    COIN_FLIP("coinflip.mp3"),
-    ATTACK("attack.mp3"),
-    BUY_ITEM("buyitem.mp3"),
+    COIN_FLIP("coinflip.wav"),
+    ATTACK("attack.wav"),
+    BUY_ITEM("buyitem.wav"),
     HOVER("hover.wav"),
-    PUT_CARD("putcard.mp3"),
+    PUT_CARD("putcard.wav"),
     SNACKBAR_ERROR("snackbarError.wav"),
     START_DUEL_CLICK("startDuelClick.wav"),
-    USUAL_CLICK("usualClick.wav"),
-    INTRO("intro.wav");
+    USUAL_CLICK("usualClick.wav");
 
 
     private static boolean mute = false;
