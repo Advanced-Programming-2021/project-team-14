@@ -6,6 +6,7 @@ public enum Colors {
     DARK_GRAY(Color.rgb(81, 84, 104), "#515468"),
     SUCCESS(Color.rgb(27, 215, 112), "#00C57B"),
     WARNING(Color.rgb(215, 27, 86), "#DF295A"),
+    GOLD(Color.rgb(226, 200, 139), "#E2C88B"),
     THEME_COLOR(Color.rgb(109, 93, 211));
 
 
