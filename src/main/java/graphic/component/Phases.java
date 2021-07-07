@@ -2,6 +2,7 @@ package graphic.component;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
+import graphic.GamePlay;
 import graphic.Menu;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
@@ -18,7 +19,7 @@ public class Phases extends HBox implements ComponentLoader{
 
     private Game game;
 
-    public Phases(Game game){
+    public Phases(Game game, GamePlay gamePlay){
         load("Phases");
         this.game = game;
         deactivateAll();
@@ -27,15 +28,16 @@ public class Phases extends HBox implements ComponentLoader{
             ((JFXRadioButton) this.getChildren().get(i)).setUnSelectedColor(Color.TRANSPARENT);
         }
         nextPhase.setStyle("-fx-text-fill:  " + Colors.GOLD.getHexCode() + ";");
-        nextPhase.setOnMouseClicked(event -> nextPhase());
-
+        nextPhase.setOnMouseClicked(event -> nextPhase(gamePlay));
     }
 
-    private void nextPhase() {
+    private void nextPhase(GamePlay gamePlay) {
         Menu.setView(Menus.GAMEPLAY_MENU);
         Request.setCommandTag(CommandTags.NEXT_PHASE);
         Request.send();
         updatePhases();
+        gamePlay.update();
+
     }
 
     private void updatePhases() {

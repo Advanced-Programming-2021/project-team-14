@@ -37,6 +37,8 @@ import view.GamePlayMenu;
 
 public class GamePlay extends Menu {
 
+    public AnchorPane downPlayerFieldZone;
+    public ImageView background;
     @FXML
     private AnchorPane view;
     @FXML
@@ -171,9 +173,9 @@ public class GamePlay extends Menu {
             popupStage.show();
         });
 
+        initHands();
         initZones();
         initPhases();
-        initHands();
         initDuelistInfo();
     }
 
@@ -213,6 +215,7 @@ public class GamePlay extends Menu {
     private void initZones() {
         downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
         upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
+        downPlayerFieldZone.getChildren().add(new FieldZone());
 //        initFieldZone();
     }
 
@@ -229,7 +232,7 @@ public class GamePlay extends Menu {
 ////        });
 ////        fieldZone.setOnDragDropped(e -> {
 ////                e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-////                System.out.println("added to container area: " + ((Card)e.getSource()).getName()); //TODO: do the task
+////                System.out.println("added to container area: " + ((Card)e.getSource()).getName());
 ////        });
 //        view.getChildren().add(fieldZone);
 //    }
@@ -244,7 +247,7 @@ public class GamePlay extends Menu {
     }
 
     private void initPhases() {
-        phases.getChildren().add(new Phases(game));
+        phases.getChildren().add(new Phases(game, this));
     }
 
     public void back(ActionEvent actionEvent) {
@@ -254,5 +257,12 @@ public class GamePlay extends Menu {
     public void update() {
         ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
+        ((Hand) downPlayerHand.getChildren().get(0)).update();
+        ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
+    }
+
+    public void updateFieldZone(Card card) {
+        ((FieldZone) downPlayerFieldZone.getChildren().get(0)).setCard(card);
+        background.setImage(new Image(MainGraphic.class.getResource("PNG/background/" + card.getName() + ".png").toString()));
     }
 }

@@ -6,7 +6,9 @@ import model.card.Card;
 import model.game.Game;
 
 public class RivalHand extends HBox implements ComponentLoader{
+    private Game game;
     public RivalHand(Game game) {
+        this.game = game;
         load("Hand");
         addAllCards(game);
         this.setSpacing(-60);
@@ -20,5 +22,10 @@ public class RivalHand extends HBox implements ComponentLoader{
     }
     private void addNode(Card card) {
         this.getChildren().add(new RivalCardGraphic());
+    }
+
+    public void update() {
+        this.getChildren().remove(0, this.getChildren().size());
+        addAllCards(game);
     }
 }

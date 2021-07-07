@@ -9,6 +9,7 @@ import javafx.util.Duration;
 import model.Strings;
 import model.card.Card;
 import model.card.enums.CardType;
+import model.card.enums.Property;
 import model.game.Game;
 import view.Request;
 import view.enums.CommandTags;
@@ -78,6 +79,9 @@ public class Hand extends HBox implements ComponentLoader {
                 }
                 if (Request.isSuccessful()) {
                     gamePlay.update();
+                    if (card.getProperty() == Property.FIELD){
+                        gamePlay.updateFieldZone(card);
+                    }
                     this.getChildren().remove(cardInHand);
                 }
                 else {
