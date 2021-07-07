@@ -32,12 +32,12 @@ public class Duel {
 
         this.isAI = false;
         this.round = 1;
-//        this.firstPlayer = new Player(mainUser, 0);
-//        this.secondPlayer = new Player(rivalUser, 0);
+        this.firstPlayer = new Player(mainUser, 0);
+        this.secondPlayer = new Player(rivalUser, 0);
         this.mainUser = mainUser;
         this.rivalUser = rivalUser;
         setNumberOfRounds(round);
-//        setGame(new Game(firstPlayer, secondPlayer, this, false));
+        setGame(new Game(firstPlayer, secondPlayer, this, false));
         currentDuel = this;
     }
 
@@ -45,12 +45,12 @@ public class Duel {
 
         this.isAI = true;
         this.round = 1;
-//        this.firstPlayer = new Player(mainUser, 0);
-//        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
+        this.firstPlayer = new Player(mainUser, 0);
+        this.secondPlayer = new Player(User.getUserByUsername("aiPlayer"), 0);
         this.mainUser = mainUser;
         this.rivalUser = User.getUserByUsername("aiPlayer");
         setNumberOfRounds(round);
-//        setGame(new Game(firstPlayer, secondPlayer, this, true));
+        setGame(new Game(firstPlayer, secondPlayer, this, true));
         currentDuel = this;
 
     }

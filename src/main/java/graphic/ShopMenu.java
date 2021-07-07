@@ -46,6 +46,7 @@ public class ShopMenu extends Menu {
     public void initialize() {
 
         ArrayList<Card> cards = Card.getCards();
+
         allCards.setHgap(15);
         allCards.setVgap(15);
         allCards.setPadding(new Insets(20, 0, 0, 0));
@@ -55,11 +56,9 @@ public class ShopMenu extends Menu {
                 cardLoader.setOpacity(0.4);
             }
             cardLoader.setOnMouseEntered(e -> {
-
                 Image image = cardLoader.getImage().getImage();
                 setImage(image);
                 setSpecification(cardLoader);
-
 
             });
             allCards.getChildren().add(cardLoader);

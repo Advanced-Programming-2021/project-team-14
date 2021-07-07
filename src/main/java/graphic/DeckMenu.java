@@ -10,6 +10,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import model.Deck;
 import model.Strings;
 import sample.MainGraphic;
@@ -42,6 +43,7 @@ public class DeckMenu extends Menu {
             addData(deckListItem.getDeckName());
             MainGraphic.setRoot("DeckInside");
         });
+
         listView.getItems().add(deckListItem);
     }
 
