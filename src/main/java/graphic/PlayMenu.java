@@ -1,7 +1,9 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
-import graphic.component.*;
+import graphic.component.CardLoader;
+import graphic.component.DuelistInfo;
+import graphic.component.Phases;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -148,8 +150,8 @@ public class PlayMenu extends Menu{
     }
 
     private void initHands() {
-        view.getChildren().add(new RivalHand(game));
-        view.getChildren().add(new Hand(game, this));
+//        view.getChildren().add(new RivalHand(game));
+//        view.getChildren().add(new Hand(game, this));
     }
 
     private void initPhases() {
