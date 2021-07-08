@@ -43,7 +43,7 @@ public class DuelController {
         Response.error();
         User first = User.getUserByUsername(request.getString(Strings.TOKEN.getLabel()));
         if (!first.doesHaveActiveDeck()) return String.format(Strings.NO_ACTIVE_DECK.getLabel(), first.getUsername());
-        if (!first.getDeck(first.getActiveDeck()).isValid())
+         if (!first.getDeck(first.getActiveDeck()).isValid())
             return String.format(Strings.INVALID_DECK.getLabel(), first.getUsername());
         int rounds = request.getInt(Strings.ROUNDS_NUMBER.getLabel());
         if (rounds != 1 && rounds != 3)

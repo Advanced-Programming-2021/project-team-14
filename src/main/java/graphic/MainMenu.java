@@ -28,6 +28,9 @@ public class MainMenu extends Menu{
             case "Profile":
                 nextView = "ProfileMenu";
                 break;
+            case "ImportExport":
+                nextView = "ImportExportMenu";
+                break;
             case "Scoreboard":
                 nextView = "ScoreboardMenu";
                 break;
