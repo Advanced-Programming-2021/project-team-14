@@ -37,6 +37,9 @@ public class MainMenu extends Menu{
             case "Shop":
                 MainGraphic.setRoot("ShopMenu");
                 break;
+            case "Import\\Export":
+                MainGraphic.setRoot("ImportExportMenu");
+                break;
             case "Duel":
                 Medias.BACKGROUND.pause();
                 nextView = "DuelMenu";
