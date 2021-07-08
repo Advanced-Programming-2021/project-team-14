@@ -1,7 +1,6 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import graphic.component.*;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -36,8 +34,6 @@ import model.game.Duel;
 import model.game.Game;
 import sample.MainGraphic;
 import view.GamePlayMenu;
-
-import java.security.Key;
 
 
 public class GamePlay extends Menu {
@@ -131,6 +127,7 @@ public class GamePlay extends Menu {
                     if (event.getCode() == KeyCode.ENTER){
                         System.out.println("enter");
                         new GamePlayMenu().commandCheckers(textField.getText());
+                        update();
                         view.setEffect(null);
                         cheatStage.hide();
                     }else if (event.getCode() == KeyCode.ESCAPE){
@@ -225,6 +222,8 @@ public class GamePlay extends Menu {
         downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
         upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
         downPlayerFieldZone.getChildren().add(new FieldZone());
+        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true));
+        downPlayerSpellZone.getChildren().add(new SpellZone(game, false));
 //        initFieldZone();
     }
 
@@ -266,8 +265,11 @@ public class GamePlay extends Menu {
     public void update() {
         ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
+        ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update();
+        ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
+        initDuelistInfo();
     }
 
     public void updateFieldZone(Card card) {
