@@ -40,6 +40,7 @@ public class GamePlay extends Menu {
 
     public AnchorPane downPlayerFieldZone;
     public ImageView background;
+    public AnchorPane downPlayerDeckZone, upperPlayerDeckZone;
     @FXML
     private AnchorPane view;
     @FXML
@@ -224,6 +225,8 @@ public class GamePlay extends Menu {
         downPlayerFieldZone.getChildren().add(new FieldZone());
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, true));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, false));
+        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
+        upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
 //        initFieldZone();
     }
 
@@ -269,6 +272,9 @@ public class GamePlay extends Menu {
         ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
+        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
+        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update();
+
         initDuelistInfo();
     }
 
