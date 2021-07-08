@@ -206,8 +206,11 @@ public class GamePlay extends Menu {
 
 
     public void setSpecification(CardLoader cardLoader) {
-
         Card card = Card.getCardByName(cardLoader.getName());
+        setSpecificationForCard(card);
+    }
+
+    public void setSpecificationForCard(Card card) {
         if (card.getCardType() == CardType.MONSTER) {
             attack.setText(String.valueOf(((Monster) card).getAttack()));
             defense.setText(String.valueOf(((Monster) card).getDefence()));
@@ -220,11 +223,11 @@ public class GamePlay extends Menu {
     }
 
     private void initZones() {
-        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
-        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
-        downPlayerFieldZone.getChildren().add(new FieldZone());
-        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true));
-        downPlayerSpellZone.getChildren().add(new SpellZone(game, false));
+        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
+        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
+        downPlayerFieldZone.getChildren().add(new FieldZone(this));
+        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
+        downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
         downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
         upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
 //        initFieldZone();
