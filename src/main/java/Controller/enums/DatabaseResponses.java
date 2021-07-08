@@ -5,6 +5,7 @@ import com.sun.net.httpserver.Authenticator;
 public enum DatabaseResponses {
     NOT_EXIST_ERROR("NotExistError"),
     BAD_FORMAT_ERROR("BadFormatError"),
+    CARD_ALREADY_EXIST("card already exist"),
     SAVE_ERROR("SaveError"),
     SUCCESSFUL("Successful"),
     SORRY("Sorry, there was a problem with your request. Please try later."),
