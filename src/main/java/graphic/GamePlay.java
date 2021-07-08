@@ -42,7 +42,7 @@ import java.security.Key;
 
 public class GamePlay extends Menu {
 
-    public AnchorPane downPlayerFieldZone;
+    public AnchorPane downPlayerFieldZone, downPlayerDeckZone;
     public ImageView background;
     @FXML
     private AnchorPane view;
@@ -101,6 +101,7 @@ public class GamePlay extends Menu {
             if (cheat.match(e)) {
 
                 view.setEffect(new GaussianBlur());
+
 
                 HBox pauseRoot = new HBox(20);
                 pauseRoot.setEffect(new DropShadow());
@@ -225,6 +226,7 @@ public class GamePlay extends Menu {
         downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
         upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
         downPlayerFieldZone.getChildren().add(new FieldZone());
+        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
 //        initFieldZone();
     }
 
@@ -268,6 +270,7 @@ public class GamePlay extends Menu {
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
+        ((DeckZone)downPlayerDeckZone.getChildren().get(0)).update();
     }
 
     public void updateFieldZone(Card card) {
