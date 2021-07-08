@@ -13,6 +13,8 @@ import model.card.enums.*;
 import org.json.JSONObject;
 import view.Logger;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -101,6 +103,15 @@ public class Database {
         }
     }
 
+    public static void saveProfileCircle(BufferedImage rawImage, String username) {
+        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+        try {
+            ImageIO.write(rawImage, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Image getProfilePhoto(String username) {
         File file = new File(profileImagesDirectory + "\\" + username + ".png");
         if (file.exists()) {
@@ -111,6 +122,17 @@ public class Database {
             }
         }
         return null;
+    }
+
+
+    public static BufferedImage getMainProfileBufferedImage(BufferedImage rawImage) {
+        try {
+            File f = new File(profileImagesDirectory + "\\main.png");
+            rawImage = ImageIO.read(f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rawImage;
     }
 
     public static Image getCardImage(String path) {

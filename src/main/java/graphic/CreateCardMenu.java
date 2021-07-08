@@ -24,7 +24,6 @@ import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.*;
 
-import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -71,14 +70,14 @@ public class CreateCardMenu extends Menu {
     }
 
     private void setPrice(int amount) {
-        price = price + amount / 5;
+        price = price + amount;
         priceLabel.setText("PRICE: " + price);
     }
 
 
     private void setSaveScene() {
-        currentCircleIndex = 1;
-        circles.get(1).setFill(Color.DARKRED);
+        currentCircleIndex = 2;
+        circles.get(2).setFill(Color.DARKRED);
 
         if (cardType.equals(CardType.MONSTER)) {
 
@@ -94,12 +93,12 @@ public class CreateCardMenu extends Menu {
             ImageCreator.setName(graphics, name);
             ImageCreator.setLevel(graphics, String.valueOf(level));
             ImageCreator.setAttackAneDefence(graphics, String.valueOf(attack), String.valueOf(defence));
-            ImageCreator.setMonsterTypeAndCardType(graphics, monsterType.getLabel(), cardType.getLabel());
+            ImageCreator.setMonsterTypeAndCardType(graphics, monsterType.getLabel());
             ImageCreator.setDescription(graphics, description);
 
 
             cardPane.setMinWidth(bufferedImage.getWidth() / 3 + 8);
-             cardPane.setMinHeight(bufferedImage.getHeight() / 3 + 8);
+            cardPane.setMinHeight(bufferedImage.getHeight() / 3 + 8);
 
             cardImageView.setFitHeight(bufferedImage.getHeight() / 3);
             cardImageView.setFitWidth(bufferedImage.getWidth() / 3);
@@ -136,28 +135,26 @@ public class CreateCardMenu extends Menu {
         JFXButton saveButton = new JFXButton();
         saveButton.setText("Save");
         saveButton.setLayoutX(100);
-        saveButton.setLayoutY(250);
+        saveButton.setLayoutY(300);
         saveButton.getStyleClass().add("button");
 
         saveButton.setOnAction(event -> {
             if (!currentUser.getWallet().isCashEnough(price / 10)) {
                 new SnackBarComponent("no enough money!", ResultState.ERROR);
-                //go to import export menu
+                // TODO : go to import export menu
             } else {
                 DatabaseResponses responses = Database.exportCard(currentUser.getUsername(), card);
                 if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
                     currentUser.getWallet().decreaseCash(price / 10);
                     new SnackBarComponent("card saved successfully!", ResultState.SUCCESS);
-                    //go to import export menu
+                    //TODO : go to import export menu
                 }
             }
         });
 
 
         mainPane.getChildren().add(saveButton);
-
         sceneNodes.add(saveButton);
-
     }
 
     private void setSpecialScene() {
@@ -380,7 +377,7 @@ public class CreateCardMenu extends Menu {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ImageCreator.setMonsterTypeAndCardType(graphics, "    ", "Monster");
+
             } else if (newValue.toString().contains("Spell")) {
                 cardType = CardType.SPELL;
                 try {
@@ -392,7 +389,6 @@ public class CreateCardMenu extends Menu {
                     e.printStackTrace();
                 }
 
-                ImageCreator.setPropertyAndCardType(graphics, "     ", "Spell");
             } else {
                 try {
 
@@ -404,7 +400,6 @@ public class CreateCardMenu extends Menu {
                     e.printStackTrace();
                 }
                 cardType = CardType.TRAP;
-                ImageCreator.setPropertyAndCardType(graphics, "     ", "Trap");
             }
 
             updateImage();
@@ -468,7 +463,7 @@ public class CreateCardMenu extends Menu {
             else if (newValue.toString().contains("Spellcaster"))
                 monsterType = MonsterType.SPELLCASTER;
 
-            ImageCreator.setMonsterTypeAndCardType(graphics, monsterType.label, "Monster");
+            ImageCreator.setMonsterTypeAndCardType(graphics, monsterType.label);
             updateImage();
             setPrice(100);
         });
@@ -563,8 +558,7 @@ public class CreateCardMenu extends Menu {
                 attack = Integer.parseInt(newText);
                 if (defence != -1)
                     ImageCreator.setAttackAneDefence(graphics, newText, String.valueOf(defence));
-                else
-                    ImageCreator.setAttackAneDefence(graphics, newText, "     ");
+
                 updateImage();
 
                 if (attack < 1000)
@@ -584,8 +578,9 @@ public class CreateCardMenu extends Menu {
         descriptionField.setLabelFloat(true);
         descriptionField.textProperty().addListener((obs, oldText, newText) -> {
             description = newText;
-            ImageCreator.setName(graphics, newText);
+            ImageCreator.setDescription(graphics, newText);
             updateImage();
+
             if (description.length() > 250)
                 setPrice(10000);
             else
@@ -633,8 +628,6 @@ public class CreateCardMenu extends Menu {
                 defence = Integer.parseInt(newText);
                 if (attack != -1)
                     ImageCreator.setAttackAneDefence(graphics, String.valueOf(attack), newText);
-                else
-                    ImageCreator.setAttackAneDefence(graphics, "     ", newText);
 
 
                 updateImage();
@@ -649,6 +642,7 @@ public class CreateCardMenu extends Menu {
     }
 
     private void updateImage() {
+
         cardImageView.setFitHeight(bufferedImage.getHeight() / 3.5);
         cardImageView.setFitWidth(bufferedImage.getWidth() / 3.5);
         cardImageView.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
@@ -686,18 +680,20 @@ public class CreateCardMenu extends Menu {
                 circles.get(0).setFill(Color.valueOf("6d5dd3"));
                 setSpecialScene();
                 break;
+
             case 1:
-//                if ((cardType.equals(CardType.MONSTER)) &&
-//                        (level == -1 || attribute.getLabel() == null || monsterType.getLabel() == null
-//                                || property.label == null || attack == -1 || defence == -1 ||
-//                                description == null || price == -1 /*|| effects == null*/)) {
-//                    new SnackBarComponent("please fill the fields", ResultState.ERROR);
-//                    break;
-//                } else if ((cardType.equals(CardType.SPELL) || cardType.equals(CardType.TRAP)) &&
-//                        ((attribute.getLabel() == null || property.label == null || description == null || price == -1 /*|| effects == null*/))) {
-//                    new SnackBarComponent("please fill the fields", ResultState.ERROR);
-//                    break;
-//                }
+                if ((cardType.equals(CardType.MONSTER)) &&
+                        (level == -1 || attribute == null || monsterType == null
+                                || property == null || attack == -1 || defence == -1 ||
+                                description == null || price == -1 /*|| effects == null*/)) {
+                    new SnackBarComponent("please fill the fields", ResultState.ERROR);
+                    break;
+                } else if ((cardType.equals(CardType.SPELL) || cardType.equals(CardType.TRAP)) &&
+                        ((status == null || property == null || description == null || price == -1 /*|| effects == null*/))) {
+                    new SnackBarComponent("please fill the fields", ResultState.ERROR);
+                    break;
+                }
+
                 mainPane.getChildren().removeAll(sceneNodes);
                 sceneNodes.addAll(sceneNodes);
                 circles.get(1).setFill(Color.valueOf("6d5dd3"));

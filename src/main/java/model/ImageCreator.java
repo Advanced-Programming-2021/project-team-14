@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class ImageCreator {
-    //    private static final String createdImageFolder = "Resources\\Images\\createdImages\\";
-//    private static final String rawImageFolder = "Resources\\Images\\rawImages\\";
+
     private static final int MAX_LINE_LENGTH = 45;
 
     public static void createCardImage(Card card, String path) {
@@ -59,21 +58,21 @@ public class ImageCreator {
 
     private static void drawMonsterCard(Graphics2D graphics, Monster card) {
         createRectangle(graphics, Colors.DARK_RED);
-//          graphics.setFont(new Font(Fonts.LALEZAR.getFont().getFontName(), Font.TRUETYPE_FONT, 80));
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
         createCircle(graphics);
         setName(graphics, card.getName());
         setLevel(graphics, String.valueOf(card.getLevel()));
         setAttackAneDefence(graphics, String.valueOf(card.getAttack()), String.valueOf(card.getDefence()));
-        setMonsterTypeAndCardType(graphics, card.getMonsterType().getLabel(), card.getCardType().getLabel());
+        setMonsterTypeAndCardType(graphics, card.getMonsterType().getLabel());
 
         setDescription(graphics, card.getDescription());
         graphics.dispose();
     }
 
-    public static void setMonsterTypeAndCardType(Graphics2D graphics, String monsterType, String cardType) {
+    public static void setMonsterTypeAndCardType(Graphics2D graphics, String monsterType) {
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Arial", Font.PLAIN, 35));
-        graphics.drawString(monsterType + " | " + cardType, 50, 950);
+        graphics.drawString("Monster | " + monsterType, 50, 950);
     }
 
     public static void setAttackAneDefence(Graphics2D graphics, String attack, String defence) {
@@ -83,11 +82,13 @@ public class ImageCreator {
     }
 
     public static void setLevel(Graphics2D graphics, String level) {
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
         graphics.setColor(Colors.DARK_GRAY.getColorForGraphic());
         graphics.drawString(level, 770, 820);
     }
 
     public static void setName(Graphics2D graphics, String name) {
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
         graphics.setColor(Color.WHITE);
         graphics.drawString(name, 50, 900);
     }
@@ -97,14 +98,14 @@ public class ImageCreator {
         graphics.fillOval(730, 730, 130, 130);
     }
 
-    public static void createRectangle(Graphics2D graphics, Colors darkRed) {
-        graphics.setColor(darkRed.getColorForGraphic());
+    public static void createRectangle(Graphics2D graphics, Colors colors) {
+        graphics.setColor(colors.getColorForGraphic());
         graphics.fillRect(0, 800, 920, 400);
     }
 
     private static void drawSpellAndTrapCard(Graphics2D graphics, SpellTrap card) {
         createRectangle(graphics, Colors.GREEN);
-//          graphics.setFont(new Font(Fonts.LALEZAR.getFont().getFontName(), Font.TRUETYPE_FONT, 80));
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
 
         setName(graphics, card.getName());
 

@@ -2,10 +2,10 @@ package graphic;
 
 import Controller.enums.DatabaseResponses;
 import com.jfoenix.controls.JFXComboBox;
-import com.sun.java.swing.plaf.windows.WindowsDesktopIconUI;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,36 +15,29 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import model.Colors;
 import model.Database;
 import model.ImageCreator;
 import model.card.Card;
-import model.card.Monster;
-import model.card.SpellTrap;
-import model.card.enums.CardType;
-import model.card.enums.Status;
 import sample.MainGraphic;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ImportExportMenu extends MainMenu {
 
 
     public AnchorPane mainPane;
     public AnchorPane dragPane;
-    public Label statusLabel;
+
     public javafx.scene.image.ImageView cardImageView;
 
+    private static ArrayList<String> importedCards = new ArrayList<>();
     private static ArrayList<Image> cardImages = new ArrayList<>();
-    private static ArrayList<String> canExportedCardsName = new ArrayList<>();
     private static String currentCardName;
 
     @FXML
     public void initialize() {
         setDragPane();
-        showCanExportedCards();
+        showImportedCards();
     }
 
 
@@ -70,22 +63,20 @@ public class ImportExportMenu extends MainMenu {
 
                     DatabaseResponses responses = Database.openDraggedCardFile(db.getUrl().replace("file:/", ""));
                     StringBuilder cardNames = new StringBuilder();
-                    ArrayList<String> draggedCardsName = Database.getDraggedCardNames();
-                    for (String name : draggedCardsName) {
+                    importedCards = Database.getDraggedCardNames();
+                    for (String name : importedCards) {
                         cardNames.append(name).append(", ");
                     }
                     cardNames.replace(cardNames.lastIndexOf(","), cardNames.lastIndexOf(",") + 1, " ");
 
                     if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
-                        createImportedCardImage(draggedCardsName);
+                        createImportedCardImage(0);
                         new SnackBarComponent(cardNames.toString() + "imported successfully!", ResultState.SUCCESS);
                     } else
                         new SnackBarComponent(responses.getLabel(), ResultState.ERROR);
 
                     success = true;
                 }
-
-
                 event.setDropCompleted(success);
                 event.consume();
             }
@@ -95,17 +86,16 @@ public class ImportExportMenu extends MainMenu {
     }
 
 
-    private void createImportedCardImage(ArrayList<String> draggedCardsName) {
+    private void createImportedCardImage(int index) {
         cardImages = new ArrayList<>();
-        for (String name : draggedCardsName) {
+        for (String name : importedCards) {
             Database.createUserDirectoryInSavedCardsDirectory(currentUser.getUsername());
             String path = "Resources\\SavedCards\\" + currentUser.getUsername() + "\\" + name + ".png";
             ImageCreator.createCardImage(Card.getCardByName(name), path);
             cardImages.add(Database.getCardImage(path));
         }
-        currentCardName = draggedCardsName.get(0);
-        statusLabel.setText("Imported Cards");
-        showImage(0);
+        currentCardName = importedCards.get(index);
+        showImage(index);
     }
 
 
@@ -113,31 +103,29 @@ public class ImportExportMenu extends MainMenu {
         Image image = cardImages.get(index);
         cardImageView.setFitHeight(image.getHeight() / 3.5);
         cardImageView.setFitWidth(image.getWidth() / 3.5);
+        cardImageView.setImage(null);
         cardImageView.setImage(image);
 
     }
 
 
-    private JFXComboBox<Label> showCanExportedCards() {
-        JFXComboBox<Label> canExport = new JFXComboBox<>();
-        canExport.setLayoutX(100);
-        canExport.setLayoutY(150);
-        canExport.setLabelFloat(true);
-        canExport.setPromptText("to export");
-        mainPane.getChildren().add(canExport);
+    private void showImportedCards() {
+        JFXComboBox<Label> importedCardsList = new JFXComboBox<>();
+        importedCardsList.setLayoutX(650);
+        importedCardsList.setLayoutY(280);
+        importedCardsList.setLabelFloat(true);
+        importedCardsList.setPromptText("imported cards");
+        mainPane.getChildren().add(importedCardsList);
 
-        canExport.setOnMouseClicked(event -> {
-            canExportedCardsName = new ArrayList<>();
-            canExportedCardsName = Database.loadCanExportedCards(currentUser.getUsername());
-
-
-            if (canExportedCardsName.size() == 0) {
-                new SnackBarComponent("there is no card to export", ResultState.ERROR);
+        importedCardsList.setOnMouseClicked(event -> {
+            if (importedCards.size() == 0) {
+                new SnackBarComponent("there is no card to show!", ResultState.ERROR);
                 return;
             }
 
-            for (String name : canExportedCardsName) {
-                canExport.getItems().add(new Label(name)); String path = "Resources\\SavedCards\\" + currentUser.getUsername() + "\\" + name + ".png";
+            for (String name : importedCards) {
+                importedCardsList.setItems(setBoxItems(importedCards));
+                String path = "Resources\\SavedCards\\" + currentUser.getUsername() + "\\" + name + ".png";
                 ImageCreator.createCardImage(Card.getCardByName(name), path);
                 cardImages.add(Database.getCardImage(path));
             }
@@ -145,15 +133,25 @@ public class ImportExportMenu extends MainMenu {
         });
 
 
-        canExport.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            statusLabel.setText("exported cards");
-            int index = canExportedCardsName.indexOf(newValue.getText());
+        importedCardsList.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (importedCards != null) {
+                if (newValue != null) {
+                    int index = importedCards.indexOf(newValue.getText());
+                    showImage(index);
+                    currentCardName = newValue.getText();
+                }
 
-            showImage(index);
-            currentCardName = newValue.getText();
+            }
         });
 
-       return canExport;
+    }
+
+    private ObservableList<Label> setBoxItems(ArrayList<String> names) {
+        ArrayList<Label> labels = new ArrayList<>();
+        for (String name : names) {
+            labels.add(new Label(name));
+        }
+        return FXCollections.observableArrayList(labels);
     }
 
 
@@ -172,9 +170,9 @@ public class ImportExportMenu extends MainMenu {
     }
 
     public void createCard(ActionEvent event) {
-        if (this.view.getChildren().size() > 0)
-            this.view.getChildren().remove(0);
-        this.view.getChildren().add(MainGraphic.loadFXML("CreateCard"));
-
+//        if (this.view.getChildren().size() > 0)
+//            this.view.getChildren().remove(0);
+//        this.view.getChildren().add(MainGraphic.loadFXML("CreateCard"));
+        //TODO : go to create card menu
     }
 }
