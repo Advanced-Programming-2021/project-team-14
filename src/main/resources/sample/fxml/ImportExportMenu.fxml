@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane fx:id="mainPane" prefHeight="800" prefWidth="980.0" stylesheets="@../CSS/ImportExportMenu.css"
+            xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="graphic.ImportExportMenu">
+
+    <AnchorPane layoutX="350" layoutY="100" styleClass="card-pane">
+        <ImageView fx:id="cardImageView" layoutX="4.1" layoutY="4.1"/>
+    </AnchorPane>
+
+    <AnchorPane fx:id="dragPane" styleClass="drag-pane" layoutX="250" layoutY="500">
+        <Label layoutY="100" layoutX="130" text="~please drag files to here~" styleClass="drag-pane-text"/>
+    </AnchorPane>
+
+    <JFXButton styleClass="export-button" text="Export" layoutY="220" layoutX="100" onAction="#exportCard"/>
+
+    <JFXButton styleClass="export-button" text="create card" layoutY="300" layoutX="100" onAction="#createCard"/>
+
+
+    <!--    <JFXButton styleClass="next-and-previous-button" text=">" layoutY="400" layoutX="300" />-->
+    <!--    <JFXButton styleClass="next-and-previous-button" text="<" layoutY="400" layoutX="200" />-->
+
+    <Label layoutY="30" layoutX="410" styleClass="status-label" fx:id="statusLabel"/>
+
+</AnchorPane>

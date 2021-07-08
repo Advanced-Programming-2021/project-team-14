@@ -1,0 +1,52 @@
+.drag-pane {
+    -fx-pref-height: 250;
+    -fx-border-style: dashed;
+    -fx-stroke-width: 50;
+    -fx-border-color: -fx-gray;
+    -fx-pref-width: 500;
+    -fx-border-width: 4;
+}
+
+.card-pane {
+    -fx-border-style: dashed;
+    -fx-stroke-width: 50;
+    -fx-border-color: -fx-gray;
+    -fx-border-width: 4;
+    -fx-pref-height: 344;
+    -fx-pref-width: 264;
+}
+
+
+.drag-pane-text {
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-gray;
+    -fx-text-alignment: CENTER;
+}
+
+.export-button {
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-pref-width: 150;
+    -fx-background-radius: 20;
+}
+
+.next-and-previous-button {
+    -fx-font-size: 20;
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: WHITE;
+    -fx-pref-height: 45;
+    -fx-min-height: 45;
+    -fx-max-height: 45;
+    -fx-pref-width: 45;
+    -fx-min-width: 45;
+    -fx-max-width: 45;
+    -fx-background-radius: 22.5;
+}
+
+.status-label {
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-gray;
+    -fx-text-alignment: CENTER;
+}
