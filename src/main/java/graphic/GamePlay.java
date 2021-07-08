@@ -1,6 +1,8 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import graphic.component.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +36,8 @@ import model.game.Duel;
 import model.game.Game;
 import sample.MainGraphic;
 import view.GamePlayMenu;
+
+import java.security.Key;
 
 
 public class GamePlay extends Menu {
@@ -97,40 +102,44 @@ public class GamePlay extends Menu {
 
                 view.setEffect(new GaussianBlur());
 
-                VBox pauseRoot = new VBox(5);
-                pauseRoot.setStyle("-fx-background-color: rgba(81, 84, 104, 0.8);");
-
-                pauseRoot.setAlignment(Pos.CENTER);
+                HBox pauseRoot = new HBox(20);
+                pauseRoot.setEffect(new DropShadow());
+                pauseRoot.setStyle("-fx-background-color: rgba(39, 39, 49, 0.95); -fx-background-radius: 15; -fx-border-radius: 15; -fx-pref-width: 340; -fx-pref-height: 50;");
+                ImageView icon = new ImageView(new Image(MainGraphic.class.getResource("PNG/terminal.png").toString()));
+                icon.setFitHeight(25);
+                icon.setFitWidth(25);
+                pauseRoot.getChildren().add(icon);
+                pauseRoot.setAlignment(Pos.TOP_LEFT);
                 pauseRoot.setPadding(new Insets(20));
 
-                TextField textField = new TextField();
+                JFXTextField textField = new JFXTextField();
+                textField.setPrefWidth(300);
+//                textField.setPadding(new Insets());
+                textField.setStyle("-fx-text-fill: WHITE; -fx-font-size: 15; -fx-font-family: 'a Astro Space'");
+
+                textField.setFocusColor(Color.TRANSPARENT);
+                textField.setUnFocusColor(Color.TRANSPARENT);
                 pauseRoot.getChildren().add(textField);
-
-                Button resume = new JFXButton("Resume");
-                String style = MainGraphic.class.getResource("CSS/GamePlay.css").toString();
-                resume.setStyle(style);
-                Button apply = new JFXButton("Apply");
-                apply.setStyle(style);
-
-                pauseRoot.getChildren().add(apply);
-                pauseRoot.getChildren().add(resume);
 
 
                 Stage cheatStage = new Stage(StageStyle.TRANSPARENT);
 //            popupStage.initOwner(primaryStage);
+                cheatStage.initStyle(StageStyle.TRANSPARENT);
                 cheatStage.initModality(Modality.APPLICATION_MODAL);
-                cheatStage.setScene(new Scene(pauseRoot, Color.DARKGREY));
-
-                apply.setOnAction(event -> {
-                    new GamePlayMenu().commandCheckers(textField.getText());
-                    view.setEffect(null);
-                    cheatStage.hide();
+                cheatStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+                cheatStage.addEventHandler(KeyEvent.KEY_PRESSED, event ->{
+                    if (event.getCode() == KeyCode.ENTER){
+                        System.out.println("enter");
+                        new GamePlayMenu().commandCheckers(textField.getText());
+                        view.setEffect(null);
+                        cheatStage.hide();
+                    }else if (event.getCode() == KeyCode.ESCAPE){
+                        System.out.println("cancel");
+                        view.setEffect(null);
+                        cheatStage.hide();
+                    }
                 });
 
-                resume.setOnAction(event -> {
-                    view.setEffect(null);
-                    cheatStage.hide();
-                });
 
                 cheatStage.show();
             }
