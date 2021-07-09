@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +60,7 @@ public class CreateCardMenu extends MainMenu {
     private static Attribute attribute;
     private static Status status;
     private static Card card;
-    //private static HashMap<String, String> effects;
+    private static HashMap<String, String> effects = new HashMap<>();
 
     private static Stage popupStage;
 
@@ -68,6 +70,12 @@ public class CreateCardMenu extends MainMenu {
 
     @FXML
     public void initialize() {
+        effects.put("special summon", "NONE");
+        effects.put("second attack/defense/lifePoint", "NONE");
+        effects.put("second amount", "NONE");
+        effects.put("second target", "NONE");
+        effects.put("special command", "*");
+
         mainPane.getStylesheets().add(this.getClass().getResource("../sample/CSS/Snackbar.css").toExternalForm());
         mainPane.setStyle("-fx-background-color: #20202A");
         priceLabel.setStyle("-fx-font-size: 55; -fx-text-fill: WHITE; -fx-text-alignment: CENTER; -fx-alignment: CENTER;");
@@ -84,7 +92,6 @@ public class CreateCardMenu extends MainMenu {
         currentCircleIndex = 0;
         setGeneralScene();
     }
-
 
     private void setExitButton() {
         JFXButton exit = new JFXButton();
@@ -104,7 +111,6 @@ public class CreateCardMenu extends MainMenu {
         price = price + amount;
         priceLabel.setText("PRICE: " + price);
     }
-
 
     private void setSaveScene() {
         currentCircleIndex = 2;
@@ -178,6 +184,7 @@ public class CreateCardMenu extends MainMenu {
                 DatabaseResponses responses = Database.exportCard(currentUser.getUsername(), card);
                 if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
                     currentUser.getWallet().decreaseCash(price / 10);
+                    currentUser.updateDatabase();
                     new SnackBarComponent("card saved successfully!", ResultState.SUCCESS, mainPane);
 
                 }
@@ -263,11 +270,44 @@ public class CreateCardMenu extends MainMenu {
 
         JFXComboBox<Label> propertyBox = setSpellTrapPropertyBox();
         propertyBox.setLayoutX(100);
-        propertyBox.setLayoutY(250);
+        propertyBox.setLayoutY(130);
 
         JFXComboBox<Label> statusBox = setSpellTrapStatusBox();
         statusBox.setLayoutX(100);
-        statusBox.setLayoutY(400);
+        statusBox.setLayoutY(200);
+
+        JFXComboBox<Label> numberOfAffectedCards = setNumberOfAffectedCardsBox();
+        numberOfAffectedCards.setLayoutX(100);
+        numberOfAffectedCards.setLayoutY(270);
+
+        JFXComboBox<Label> effectTime = setEffectTimeBox();
+        effectTime.setLayoutX(100);
+        effectTime.setLayoutY(340);
+
+        JFXComboBox<Label> changeDestroyAddCardLoader = setChangeDestroyAddCardLoaderBox();
+        changeDestroyAddCardLoader.setLayoutX(100);
+        changeDestroyAddCardLoader.setLayoutY(410);
+
+        JFXComboBox<Label> from = setFromBox();
+        from.setLayoutX(100);
+        from.setLayoutY(480);
+
+        JFXComboBox<Label> to = setToBox();
+        to.setLayoutX(100);
+        to.setLayoutY(550);
+
+        JFXComboBox<Label> attackDefenseLifePoint = setFirstAttackDefenseLifePointBox();
+        attackDefenseLifePoint.setLayoutX(650);
+        attackDefenseLifePoint.setLayoutY(410);
+
+        JFXComboBox<Label> firstTarget = setFirstTargetBox();
+        firstTarget.setLayoutX(650);
+        firstTarget.setLayoutY(480);
+
+
+        JFXComboBox<Label> firstAmount = setFirstTargetAmountBox();
+        firstAmount.setLayoutX(650);
+        firstAmount.setLayoutY(550);
 
 
         JFXTextArea descriptionArea = setDescriptionArea();
@@ -286,6 +326,14 @@ public class CreateCardMenu extends MainMenu {
         sceneNodes.add(next);
         sceneNodes.add(last);
         sceneNodes.add(descriptionArea);
+        sceneNodes.add(numberOfAffectedCards);
+        sceneNodes.add(effectTime);
+        sceneNodes.add(changeDestroyAddCardLoader);
+        sceneNodes.add(from);
+        sceneNodes.add(to);
+        sceneNodes.add(attackDefenseLifePoint);
+        sceneNodes.add(firstTarget);
+        sceneNodes.add(firstAmount);
 
 
         mainPane.getChildren().add(descriptionArea);
@@ -293,6 +341,329 @@ public class CreateCardMenu extends MainMenu {
         mainPane.getChildren().add(statusBox);
         mainPane.getChildren().add(last);
         mainPane.getChildren().add(next);
+        mainPane.getChildren().add(numberOfAffectedCards);
+        mainPane.getChildren().add(effectTime);
+        mainPane.getChildren().add(changeDestroyAddCardLoader);
+        mainPane.getChildren().add(from);
+        mainPane.getChildren().add(to);
+        mainPane.getChildren().add(attackDefenseLifePoint);
+        mainPane.getChildren().add(firstTarget);
+        mainPane.getChildren().add(firstAmount);
+
+
+    }
+
+    private JFXComboBox<Label> setNumberOfAffectedCardsBox() {
+        JFXComboBox<Label> numberOfAffectedCardsBox = new JFXComboBox<>();
+        numberOfAffectedCardsBox.getItems().add(new Label("NONE"));
+        numberOfAffectedCardsBox.getItems().add(new Label("all"));
+        numberOfAffectedCardsBox.getItems().add(new Label("1"));
+        numberOfAffectedCardsBox.getItems().add(new Label("2"));
+        numberOfAffectedCardsBox.getItems().add(new Label("3"));
+        numberOfAffectedCardsBox.getItems().add(new Label("4"));
+
+        numberOfAffectedCardsBox.setPromptText("number of affected cards");
+        numberOfAffectedCardsBox.setLabelFloat(true);
+        numberOfAffectedCardsBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        numberOfAffectedCardsBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("number of affected cardLoaders"))
+                effects.remove("number of affected cardLoaders");
+
+            effects.put("number of affected cardLoaders", newValue.getText());
+            setPrice(200);
+        });
+
+        return numberOfAffectedCardsBox;
+
+    }
+
+
+    private JFXComboBox<Label> setChangeDestroyAddCardLoaderBox() {
+        JFXComboBox<Label> changeDestroyAddCardLoaderBox = new JFXComboBox<>();
+        changeDestroyAddCardLoaderBox.getItems().add(new Label("NONE"));
+        changeDestroyAddCardLoaderBox.getItems().add(new Label("change"));
+        changeDestroyAddCardLoaderBox.getItems().add(new Label("destroy"));
+        changeDestroyAddCardLoaderBox.getItems().add(new Label("add"));
+        changeDestroyAddCardLoaderBox.getItems().add(new Label("draw"));
+
+
+        changeDestroyAddCardLoaderBox.setPromptText("change/destroy/add cardLoader");
+        changeDestroyAddCardLoaderBox.setLabelFloat(true);
+        changeDestroyAddCardLoaderBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        changeDestroyAddCardLoaderBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("change/destroy/add cardLoader"))
+                effects.remove("change/destroy/add cardLoader");
+
+            effects.put("change/destroy/add cardLoader", newValue.getText());
+        });
+        return changeDestroyAddCardLoaderBox;
+    }
+
+    private JFXComboBox<Label> setEffectTimeBox() {
+        JFXComboBox<Label> effectTimeBox = new JFXComboBox<>();
+        effectTimeBox.getItems().add(new Label("NONE"));
+        effectTimeBox.getItems().add(new Label("activate effect"));
+        effectTimeBox.getItems().add(new Label("rival attack"));
+        effectTimeBox.getItems().add(new Label("attack"));
+        effectTimeBox.getItems().add(new Label("activate effect"));
+        effectTimeBox.getItems().add(new Label("entered name exist"));
+        effectTimeBox.getItems().add(new Label("summon"));
+
+
+        effectTimeBox.setPromptText("effect time");
+        effectTimeBox.setLabelFloat(true);
+        effectTimeBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        effectTimeBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("effect time"))
+                effects.remove("effect time");
+
+            effects.put("effect time", newValue.getText());
+        });
+        return effectTimeBox;
+    }
+
+    private JFXComboBox<Label> setFirstAttackDefenseLifePointBox() {
+        JFXComboBox<Label> firstAttackDefenseLifePointBox = new JFXComboBox<>();
+        firstAttackDefenseLifePointBox.setOnMouseClicked(event -> {
+            ArrayList<String> values = new ArrayList<>();
+            if (effects.containsKey("change/destroy/add cardLoader")) {
+                switch (effects.get("change/destroy/add cardLoader")) {
+                    case "add":
+                    case "destroy":
+                    case "draw":
+                        values.add("NONE");
+                        break;
+                    case "NONE":
+                        values.add("NONE");
+                        values.add("lifePoint");
+                        break;
+                    case "change":
+                        values.add("attack");
+                        break;
+                }
+            } else {
+                new SnackBarComponent("please set change/destroy/add cardLoader first!", ResultState.ERROR, mainPane);
+            }
+            firstAttackDefenseLifePointBox.setItems(setBoxItems(values));
+        });
+        firstAttackDefenseLifePointBox.setPromptText("first attack/defense/lifePoint");
+        firstAttackDefenseLifePointBox.setLabelFloat(true);
+        firstAttackDefenseLifePointBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        firstAttackDefenseLifePointBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("first attack/defense/lifePoint"))
+                effects.remove("first attack/defense/lifePoint");
+
+            effects.put("first attack/defense/lifePoint", newValue.getText());
+        });
+        return firstAttackDefenseLifePointBox;
+    }
+
+    private JFXComboBox<Label> setFirstTargetBox() {
+        JFXComboBox<Label> firstTargetBox = new JFXComboBox<>();
+
+        firstTargetBox.setOnMouseClicked(event -> {
+            ArrayList<String> values = new ArrayList<>();
+            if (effects.containsKey("first attack/defense/lifePoint")) {
+                switch (effects.get("first attack/defense/lifePoint")) {
+                    case "attack":
+                        values.add("NONE");
+                        values.add("Beast");
+                        values.add("DARK");
+                        values.add("Aqua");
+                        break;
+
+                    case "lifePoint":
+                        values.add("player");
+                        break;
+
+                    case "NONE":
+                        switch (effects.get("change/destroy/add cardLoader")) {
+                            case "add":
+                                values.add("NONE");
+                                values.add("Field");
+                                break;
+                            case "destroy":
+                                values.add("monsters");
+                                values.add("spells/traps");
+                                break;
+                            case "draw":
+                            case "NONE":
+                                values.add("NONE");
+                                break;
+                        }
+                }
+            } else {
+                new SnackBarComponent("please set first attack/defense/lifePoint first!", ResultState.ERROR, mainPane);
+            }
+            firstTargetBox.setItems(setBoxItems(values));
+        });
+
+        firstTargetBox.setPromptText("first target");
+        firstTargetBox.setLabelFloat(true);
+        firstTargetBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        firstTargetBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("first target"))
+                effects.remove("first target");
+
+            effects.put("first target", newValue.getText());
+        });
+        return firstTargetBox;
+    }
+
+
+    private JFXComboBox<Label> setFirstTargetAmountBox() {
+        JFXComboBox<Label> firstTargetAmountBox = new JFXComboBox<>();
+
+        firstTargetAmountBox.setOnMouseClicked(event -> {
+            ArrayList<String> values = new ArrayList<>();
+            if (effects.containsKey("first attack/defense/lifePoint")) {
+                switch (effects.get("first attack/defense/lifePoint")) {
+                    case "attack":
+                        values.add("graveyard");
+                        values.add("100");
+                        values.add("200");
+                        values.add("300");
+                        values.add("400");
+                        values.add("500");
+                        values.add("600");
+                        break;
+
+                    case "lifePoint":
+                        values.add("100");
+                        values.add("200");
+                        values.add("300");
+                        values.add("400");
+                        values.add("500");
+                        values.add("1000");
+                        values.add("2000");
+                        values.add("5000");
+                        break;
+
+                    case "NONE":
+                        switch (effects.get("change/destroy/add cardLoader")) {
+                            case "add":
+                            case "destroy":
+                            case "draw":
+                            case "NONE":
+                                values.add("NONE");
+                                break;
+                        }
+                }
+            } else {
+                new SnackBarComponent("please set first attack/defense/lifePoint first!", ResultState.ERROR, mainPane);
+            }
+
+            firstTargetAmountBox.setItems(setBoxItems(values));
+        });
+
+        firstTargetAmountBox.setPromptText("first amount");
+        firstTargetAmountBox.setLabelFloat(true);
+        firstTargetAmountBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        firstTargetAmountBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("first amount"))
+                effects.remove("first amount");
+
+            effects.put("first amount", newValue.getText());
+        });
+        return firstTargetAmountBox;
+    }
+
+    private ObservableList<Label> setBoxItems(ArrayList<String> names) {
+        ArrayList<Label> labels = new ArrayList<>();
+        for (String name : names) {
+            labels.add(new Label(name));
+        }
+        return FXCollections.observableArrayList(labels);
+    }
+
+    private JFXComboBox<Label> setFromBox() {
+        JFXComboBox<Label> fromBox = new JFXComboBox<>();
+
+        fromBox.setOnMouseClicked(event -> {
+            ArrayList<String> values = new ArrayList<>();
+            if (effects.containsKey("change/destroy/add cardLoader")) {
+                switch (effects.get("change/destroy/add cardLoader")) {
+                    case "add":
+                        values.add("deck");
+                        break;
+                    case "NONE":
+                        values.add("NONE");
+                        break;
+                    case "change":
+                        values.add("NONE");
+                        values.add("player board");
+                        values.add("both");
+                        break;
+                    case "destroy":
+                        values.add("both");
+                        values.add("rival board");
+                        break;
+                    case "draw":
+                        values.add("NONE");
+                        break;
+                }
+            } else {
+                new SnackBarComponent("please set change/destroy/add cardLoader first!", ResultState.ERROR, mainPane);
+            }
+            fromBox.setItems(setBoxItems(values));
+        });
+
+
+        fromBox.setPromptText("from");
+        fromBox.setLabelFloat(true);
+        fromBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+
+        fromBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+
+            if (effects.containsKey("from"))
+                effects.remove("from");
+
+            effects.put("from", newValue.getText());
+        });
+        return fromBox;
+    }
+
+    private JFXComboBox<Label> setToBox() {
+        JFXComboBox<Label> toBox = new JFXComboBox<>();
+
+        toBox.setOnMouseClicked(event -> {
+            ArrayList<String> values = new ArrayList<>();
+            if (effects.containsKey("change/destroy/add cardLoader")) {
+                switch (effects.get("change/destroy/add cardLoader")) {
+                    case "add":
+                        values.add("hand");
+                        break;
+                    case "NONE":
+                    case "change":
+                    case "destroy":
+                    case "draw":
+                        values.add("NONE");
+                        break;
+                }
+            } else {
+                new SnackBarComponent("please set change/destroy/add cardLoader first!", ResultState.ERROR, mainPane);
+            }
+            toBox.setItems(setBoxItems(values));
+        });
+
+        toBox.setPromptText("to");
+        toBox.setLabelFloat(true);
+        toBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
+
+        toBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            if (effects.containsKey("to"))
+                effects.remove("to");
+
+            effects.put("to", newValue.getText());
+        });
+        return toBox;
     }
 
     private JFXComboBox<Label> setSpellTrapStatusBox() {
@@ -717,14 +1088,15 @@ public class CreateCardMenu extends MainMenu {
                 break;
 
             case 1:
+
                 if ((cardType.equals(CardType.MONSTER)) &&
                         (level == -1 || attribute == null || monsterType == null
                                 || property == null || attack == -1 || defence == -1 ||
-                                description == null || price == -1 /*|| effects == null*/)) {
+                                description == null || price == -1 )) {
                     new SnackBarComponent("please fill the fields", ResultState.ERROR, mainPane);
                     break;
                 } else if ((cardType.equals(CardType.SPELL) || cardType.equals(CardType.TRAP)) &&
-                        ((status == null || property == null || description == null || price == -1 /*|| effects == null*/))) {
+                        ((status == null || property == null || description == null || price == -1 || effects.size() != 13))) {
                     new SnackBarComponent("please fill the fields", ResultState.ERROR, mainPane);
                     break;
                 }
