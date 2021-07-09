@@ -16,7 +16,7 @@ public class DuelMenu extends Menu {
         Request.send();
         if (Request.isSuccessful()) {
             Console.print(Request.getMessage());
-            MainGraphic.setRoot("GamePlay3");
+            MainGraphic.setRoot("TossCoin");
         } else
             Console.print(Request.getMessage());
     }

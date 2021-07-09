@@ -39,7 +39,7 @@ import view.GamePlayMenu;
 
 public class GamePlay extends Menu {
 
-    public AnchorPane downPlayerFieldZone, downPlayerDeckZone, downPlayerGraveYard;
+    public AnchorPane downPlayerFieldZone, downPlayerDeckZone, downPlayerGraveYard, upperPlayerDeckZone;
     public ImageView background;
     @FXML
     private AnchorPane view;
@@ -254,12 +254,26 @@ public class GamePlay extends Menu {
         description.setText(card.getDescriptionGraphic());
     }
 
+
+    public void setSpecificationForCard(Card card) {
+        if (card.getCardType() == CardType.MONSTER) {
+            attack.setText(String.valueOf(((Monster) card).getAttack()));
+            defense.setText(String.valueOf(((Monster) card).getDefence()));
+        } else {
+            attack.setText("");
+            defense.setText("");
+        }
+        price.setText(String.valueOf(card.getPrice()));
+        description.setText(card.getDescriptionGraphic());
+    }
+
+
     private void initZones() {
-        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true));
-        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false));
-        downPlayerFieldZone.getChildren().add(new FieldZone());
-        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true));
-        downPlayerSpellZone.getChildren().add(new SpellZone(game, false));
+        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
+        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
+        downPlayerFieldZone.getChildren().add(new FieldZone(this));
+        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
+        downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
         downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
 //        initFieldZone();
     }
@@ -307,6 +321,7 @@ public class GamePlay extends Menu {
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
         ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
+        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update();
         initDuelistInfo();
     }
 

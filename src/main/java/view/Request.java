@@ -14,6 +14,7 @@ public class Request {
     private static JSONObject request = new JSONObject();
     private static JSONObject response;
     private static String token = null;
+    private static boolean isDuelEnded;
 
     public static void getToken() {
         token = response.getString("token");
@@ -50,6 +51,11 @@ public class Request {
         Request.setToken();
         Logger.log("client", request.toString());
         response = new JSONObject(MainController.processCommand(request.toString()));
+//        if (response.has("isDuelEnded")) {
+//            if (response.getString("isDuelEnded").equals("true")) {
+//                new EndDuelMenu().initialize(getMessage());
+//            }
+//        }
         clear();
     }
 
@@ -113,6 +119,10 @@ public class Request {
         if (matcher.find()) {
             Request.addData(key, matcher.group(1).trim());
         }
+    }
+
+    public static boolean doesHaveKey(String key) {
+        return response.has(key);
     }
 
     public static boolean isChoice() {

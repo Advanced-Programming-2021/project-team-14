@@ -1,6 +1,7 @@
 package view;
 
 import model.Strings;
+import sample.MainGraphic;
 import view.enums.CommandTags;
 import view.enums.Menus;
 import view.enums.Regexes;
@@ -173,7 +174,9 @@ public class GamePlayMenu extends Menu {
 
         if (Request.getResponse().getString("isDuelEnded").equals("true")) {
             Console.print(Request.getMessage());
-            new MainMenu().run();
+//            new MainMenu().run();
+
+            MainGraphic.setRoot("EndDuelMenu");
         }
     }
 

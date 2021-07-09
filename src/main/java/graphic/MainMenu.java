@@ -41,6 +41,9 @@ public class MainMenu extends Menu{
                 Medias.BACKGROUND.pause();
                 nextView = "DuelMenu";
                 break;
+            case "Logout":
+                MainGraphic.setRoot("LoginMenu");
+                break;
             default:
                 nextView = "DeckMenu";
         }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="view" prefHeight="545.0" prefWidth="597.0" styleClass="Menu"
+            stylesheets="@../CSS/DeckInside.css" xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="graphic.EndDuelMenu">
+   <children>
+      <AnchorPane prefHeight="404.0" prefWidth="496.0">
+         <children>
+            <Text fx:id="text" fill="#8b8b9e" layoutX="119.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="29.0"/>
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="263.0" layoutY="416.0" onAction="#exit" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -366,7 +366,6 @@ public class TaskHandler extends GameHandler {
                 selectedCell.removeCard();
                 rivalCard.removeCard();
                 return String.format(Strings.OO_ATTACK_EQUAL.getLabel(), damage);
-
         }
 
         return null;
