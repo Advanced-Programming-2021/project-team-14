@@ -22,7 +22,6 @@ public class Wallet {
 
     public void increaseCash(int amount) {
         this.cash += amount;
-
     }
 
     public boolean isCashEnough(int amount) {

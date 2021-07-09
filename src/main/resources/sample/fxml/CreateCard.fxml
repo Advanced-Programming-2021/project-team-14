@@ -11,13 +11,12 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="graphic.CreateCardMenu"
-            stylesheets="@../CSS/CreateCard.css"
             prefHeight="400.0" prefWidth="600.0" fx:id="mainPane">
 
-    <AnchorPane fx:id="cardPane" layoutX="350" layoutY="150" styleClass="card-pane">
+    <AnchorPane fx:id="cardPane" layoutX="350" layoutY="150" >
         <ImageView fx:id="cardImageView" layoutX="4.1" layoutY="4.1"/>
     </AnchorPane>
 
-    <Label fx:id="priceLabel" layoutX="350" layoutY="80" styleClass="price-label"/>
+    <Label fx:id="priceLabel" layoutX="350" layoutY="80" />
 
 </AnchorPane>
