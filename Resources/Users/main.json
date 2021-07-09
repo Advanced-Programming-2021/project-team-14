@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 820,
+    "cash": 920,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -81,5 +81,5 @@
   "score": 0,
   "rank": 2,
   "hasProfilePhoto": true,
-  "gamesPlayed": 9
+  "gamesPlayed": 10
 }

@@ -2,39 +2,42 @@ package graphic.component;
 
 import com.jfoenix.controls.JFXProgressBar;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import model.Database;
-import model.User;
+import model.game.Game;
 import model.game.Player;
 
-
-public class DuelistInfo extends AnchorPane implements ComponentLoader {
+public class DuelistInfo extends HBox implements ComponentLoader {
 
     @FXML
-    private Text username, nickname;
+    private Circle playerPhoto;
     @FXML
-    private ImageView profilePhoto;
-//    @FXML
-//    private JFXProgressBar lifePoint;
+    private Text playerNickname;
+    @FXML
+    private Text playerLifePoint;
+    @FXML
+    private JFXProgressBar progressBar;
 
-    public DuelistInfo(User user, boolean isOpponent) {
+    private Game game;
+    private Player player;
+
+    public DuelistInfo(Game game, Player player) {
         load("DuelistInfo");
-//        lifePoint.setProgress(0.5);
-        username.setText(user.getUsername());
-        nickname.setText(user.getNickname());
-        if (isOpponent) {
-            this.setLayoutY(5);
-        }
-        if (user.hasProfilePhoto()) {
-            Image image = Database.getProfilePhoto(user.getUsername());
-            profilePhoto.setImage(image);
-        } else {
-            Image image = Database.getProfilePhoto("default");
-            profilePhoto.setImage(image);
-        }
+        this.player = player;
+        this.game = game;
+        progressBar.setStyle("-fx-accent: #62C0CF");
+        progressBar.setProgress(1);
+
+        playerNickname.setText(game.getBoard().getMainPlayer().getNickname());
+        playerLifePoint.setText(String.valueOf(game.getBoard().getMainPlayer().getLifePoint()));
+        playerPhoto.setStroke(Color.TRANSPARENT);
+//        Image image = Database.getProfilePhoto(game.getBoard().getMainPlayer().getUsername());
+//        playerPhoto.setFill(new ImagePattern(image));
+    }
+
+    public void update() {
+        progressBar.setProgress(player.getLifePoint() / 8000.0);
     }
 }

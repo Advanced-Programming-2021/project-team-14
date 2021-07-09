@@ -1,6 +1,7 @@
 package graphic;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import graphic.component.*;
 import javafx.event.ActionEvent;
@@ -38,18 +39,12 @@ import view.GamePlayMenu;
 
 public class GamePlay extends Menu {
 
-    public AnchorPane downPlayerFieldZone;
+    public AnchorPane downPlayerFieldZone, downPlayerDeckZone, downPlayerGraveYard;
     public ImageView background;
     @FXML
     private AnchorPane view;
     @FXML
     private VBox sideCard;
-    @FXML
-    private Circle upperPlayerPhoto;
-    @FXML
-    private Text upperPlayerNickname;
-    @FXML
-    private Text upperPlayerLifePoint;
     @FXML
     private ImageView selectedCardImage;
     @FXML
@@ -60,12 +55,6 @@ public class GamePlay extends Menu {
     private Text price;
     @FXML
     private Text description;
-    @FXML
-    private Circle downPlayerPhoto;
-    @FXML
-    private Text downPlayerNickname;
-    @FXML
-    private Text downPlayerLifePoint;
     @FXML
     private HBox phases;
     @FXML
@@ -82,6 +71,27 @@ public class GamePlay extends Menu {
     private HBox downPlayerMonsterZone;
     @FXML
     private JFXButton pauseButton;
+    @FXML
+    private HBox upperPlayer;
+    @FXML
+    private HBox downPlayer;
+    @FXML
+    private Text downPlayerNickname;
+    @FXML
+    private Text upperPlayerNickname;
+    @FXML
+    private Text downPlayerLifePoint;
+    @FXML
+    private Text upperPlayerLifePoint;
+    @FXML
+    private Circle upperPlayerPhoto;
+    @FXML
+    private Circle downPlayerPhoto;
+    @FXML
+    private JFXProgressBar upperPlayerProgress;
+    @FXML
+    private JFXProgressBar downPlayerProgress;
+
 
     public Pane root;
     public AnchorPane addCardArea;
@@ -183,7 +193,25 @@ public class GamePlay extends Menu {
         initZones();
         initPhases();
         initDuelistInfo();
+        initGraveYard();
+//        initLifepointsCircles();
     }
+
+    private void initGraveYard() {
+        downPlayerGraveYard.getChildren().add(new GraveYard(view, game, game.getBoard().getMainPlayer()));
+//        upperPlayerGraveYard.getChildren().add(new GraveYard(view, game, game.getBoard().getRivalPlayer()));
+    }
+
+//    private void initLifepointsCircles() {
+//
+//        RingProgressIndicator ringProgressIndicator = new RingProgressIndicator();
+//        ringProgressIndicator.setRingWidth(5);
+//        ringProgressIndicator.makeIndeterminate();
+//
+//        upperLifepointCircle.getChildren().add(ringProgressIndicator);
+//        LifePointCircle pt = new LifePointCircle(ringProgressIndicator, );
+//        pt.start();
+//    }
 
 
     private void initDuelistInfo() {
@@ -197,6 +225,14 @@ public class GamePlay extends Menu {
         upperPlayerPhoto.setStroke(Color.TRANSPARENT);
 //        image = Database.getProfilePhoto(game.getBoard().getRivalPlayer().getUsername());
 //        upperPlayerPhoto.setFill(new ImagePattern(image));
+        upperPlayerProgress.setStyle("-fx-accent: #1F545D");
+        upperPlayerProgress.setProgress(game.getBoard().getRivalPlayer().getLifePoint() / 8000.0);
+        downPlayerProgress.setStyle("-fx-accent: #1f545d");
+        downPlayerProgress.setProgress(game.getBoard().getMainPlayer().getLifePoint() / 8000.0);
+
+//        downPlayer.getChildren().add(new DuelistInfo(game, game.getBoard().getMainPlayer()));
+//        upperPlayer.getChildren().add(new DuelistInfo(game, game.getBoard().getRivalPlayer()));
+
     }
 
     public void setImage(Image image) {
@@ -224,6 +260,7 @@ public class GamePlay extends Menu {
         downPlayerFieldZone.getChildren().add(new FieldZone());
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, true));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, false));
+        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
 //        initFieldZone();
     }
 
@@ -269,6 +306,7 @@ public class GamePlay extends Menu {
         ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
+        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
         initDuelistInfo();
     }
 
