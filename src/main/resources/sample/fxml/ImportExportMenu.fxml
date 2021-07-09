@@ -24,7 +24,6 @@
 
     <!--    <JFXButton styleClass="next-and-previous-button" text=">" layoutY="400" layoutX="300" />-->
     <!--    <JFXButton styleClass="next-and-previous-button" text="<" layoutY="400" layoutX="200" />-->
-
-    <Label layoutY="30" layoutX="410" styleClass="status-label" fx:id="statusLabel"/>
+    <!--    <Label layoutY="30" layoutX="410" styleClass="status-label" fx:id="statusLabel"/>-->
 
 </AnchorPane>

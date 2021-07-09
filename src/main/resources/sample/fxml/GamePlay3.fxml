@@ -199,6 +199,7 @@
     <HBox fx:id="downPlayerMonsterZone" layoutX="200" layoutY="410.0" prefHeight="100.0" prefWidth="200.0"/>
     <AnchorPane fx:id="downPlayerFieldZone" layoutX="100" layoutY="410.0"/>
     <AnchorPane fx:id="downPlayerDeckZone" layoutX="700" layoutY="410.0"/>
+    <AnchorPane fx:id="upperPlayerDeckZone" layoutX="100" layoutY="234.0" rotate="180"/>
     <JFXButton fx:id="pauseButton" layoutX="27.0" layoutY="74.0" prefHeight="50.0" prefWidth="36.0" text=".">
         <graphic>
             <FontAwesomeIconView fill="#515468" glyphName="GEARS" size="30" text="" wrappingWidth="27.056627944111824">

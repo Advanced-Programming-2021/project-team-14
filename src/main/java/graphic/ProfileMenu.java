@@ -13,13 +13,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import model.Database;
+import model.card.enums.CardType;
 import sample.MainGraphic;
 import view.Console;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 
 public class ProfileMenu extends Menu {
@@ -144,7 +149,8 @@ public class ProfileMenu extends Menu {
     private void setProfileCircle() {
         Circle circle = new Circle(490, 110, 50);
         circle.getStyleClass().add("circle");
-        circle.setFill(Color.color(Math.random(), Math.random(), Math.random()));
+        Color color = Color.color(Math.random(), Math.random(), Math.random());
+        circle.setFill(color);
         Label username = new Label(currentUser.getUsername().substring(0, 1));
         username.setLayoutY(60);
         username.setLayoutX(440);
@@ -153,8 +159,35 @@ public class ProfileMenu extends Menu {
         this.currentUsername = username;
         mainPane.getChildren().add(circle);
         mainPane.getChildren().add(username);
+        saveCircle(color);
 
     }
+
+
+    private void saveCircle(Color color) {
+        BufferedImage rawImage = null;
+
+        rawImage = Database.getMainProfileBufferedImage(rawImage);
+
+        java.awt.Color awtColor = new java.awt.Color((float) color.getRed(),
+                (float) color.getGreen(),
+                (float) color.getBlue(),
+                (float) color.getOpacity());
+
+        Graphics2D graphics = rawImage.createGraphics();
+        graphics.setColor(awtColor);
+        graphics.fillRect(0, 0, rawImage.getWidth(), rawImage.getHeight());
+
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
+        graphics.setColor(java.awt.Color.WHITE);
+        graphics.drawString(currentUser.getUsername().substring(0, 1), rawImage.getWidth()/2-20,rawImage.getHeight()/2+20);
+
+        graphics.dispose();
+
+        Database.saveProfileCircle(rawImage, currentUser.getUsername());
+    }
+
+
 
     private void setProfilePhoto() {
         ImageView profileImage = new ImageView();
