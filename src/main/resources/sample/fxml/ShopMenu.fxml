@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="Menu"
-            stylesheets="@../CSS/DeckInside.css, @../CSS/Snackbar.css" xmlns="http://javafx.com/javafx/8.0.171"
-            fx:controller="graphic.ShopMenu">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" styleClass="Menu" stylesheets="@../CSS/DeckInside.css, @../CSS/Snackbar.css, @../CSS/shopMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.ShopMenu">
 
     <HBox styleClass="Menu" stylesheets="@../CSS/DeckInside.css">
         <AnchorPane prefHeight="740.0" prefWidth="733.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css">
-            <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;"/>
-            <HBox layoutX="137.0" layoutY="68.0" prefHeight="103.0" prefWidth="512.0">
+            <JFXButton layoutX="17.0" layoutY="24.0" onAction="#back" styleClass="backButton" text="&lt;" />
+            <HBox layoutX="137.0" layoutY="68.0" spacing="100">
                 <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SHOP" wrappingWidth="131.662109375">
                     <font>
-                        <Font name="System Bold" size="48.0"/>
+                        <Font name="System Bold" size="48.0" />
                     </font>
                     <HBox.margin>
-                        <Insets top="20.0"/>
+                        <Insets top="15.0" />
                     </HBox.margin>
                 </Text>
-                        <AnchorPane fx:id="buyCardArea" prefHeight="103.0" prefWidth="289.0">
-                            <Text fill="WHITE" layoutX="93.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                  styleClass="simple-text" text="drag here to buy">
+                        <AnchorPane fx:id="buyCardArea" prefHeight="102.0" prefWidth="352.0" styleClass="buyArea">
+                            <Text layoutX="129.0" layoutY="72.0" styleClass="simple-text" text="drag here to buy">
                                 <font>
-                                    <Font name="System Bold" size="12.0"/>
+                                    <Font name="System Bold" size="12.0" />
                                 </font>
                             </Text>
-                            <Text fill="WHITE" layoutX="127.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                  styleClass="simple-text" text="+">
+                            <Text layoutX="164.0" layoutY="50.0" styleClass="simple-text" text="+">
                                 <font>
-                                    <Font name="System Bold" size="36.0"/>
+                                    <Font name="System Bold" size="36.0" />
                                 </font>
                             </Text>
                             <HBox.margin>
-                                <Insets left="50.0"/>
+                                <Insets left="50.0" />
                             </HBox.margin>
                         </AnchorPane>
             </HBox>
-            <ScrollPane layoutX="170.0" layoutY="194.0" prefHeight="500" prefWidth="580.0"
-                        style="-fx-background: #20202A; -fx-border-color: #20202A;"
-                        stylesheets="@../CSS/ScrollPane.css">
-                <TilePane fx:id="allCards" prefHeight="300.0" prefWidth="580.0" style="-fx-background-color: #20202A;"/>
+            <ScrollPane layoutX="150.0" layoutY="194.0" prefHeight="500" prefWidth="650.0" style="-fx-background: #20202A; -fx-border-color: #20202A;" stylesheets="@../CSS/ScrollPane.css">
+                <TilePane fx:id="allCards" prefHeight="300.0" prefWidth="620.0" style="-fx-background-color: #20202A;" />
             </ScrollPane>
-            <VBox fx:id="sideCard" layoutX="803.0" layoutY="58.0" prefHeight="583.0" prefWidth="360.0">
-                <ImageView fx:id="selectedCardImage" fitHeight="320.0" fitWidth="240.0" pickOnBounds="true"
-                           preserveRatio="true">
+            <VBox fx:id="sideCard" layoutX="850.0" layoutY="58.0" prefHeight="583.0" prefWidth="360.0">
+                <ImageView fx:id="selectedCardImage" fitHeight="320.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                     <VBox.margin>
-                        <Insets left="60.0" right="60.0" top="40.0"/>
+                        <Insets left="60.0" right="60.0" top="40.0" />
                     </VBox.margin>
                 </ImageView>
                 <HBox prefHeight="59.0" prefWidth="320.0">
@@ -57,69 +55,68 @@
                         <HBox>
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Atk:">
                                 <font>
-                                    <Font name="System Bold" size="14.0"/>
+                                    <Font name="System Bold" size="14.0" />
                                 </font>
                             </Text>
                             <Text fx:id="attack" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                                 <font>
-                                    <Font name="System Bold" size="14.0"/>
+                                    <Font name="System Bold" size="14.0" />
                                 </font>
                                 <HBox.margin>
-                                    <Insets left="5.0"/>
+                                    <Insets left="5.0" />
                                 </HBox.margin>
                             </Text>
                                         </HBox>
                                         <HBox>
                                             <VBox.margin>
-                                                <Insets top="10.0"/>
+                                                <Insets top="10.0" />
                                             </VBox.margin>
-                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text"
-                                                  text="Def:">
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Def:">
                                                 <font>
-                                                    <Font name="System Bold" size="14.0"/>
+                                                    <Font name="System Bold" size="14.0" />
                                                 </font>
                                             </Text>
                                             <Text fx:id="defense" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                                                 <font>
-                                                    <Font name="System Bold" size="14.0"/>
+                                                    <Font name="System Bold" size="14.0" />
                                                 </font>
                                                 <HBox.margin>
-                                                    <Insets left="5.0"/>
+                                                    <Insets left="5.0" />
                                                 </HBox.margin>
                                             </Text>
                                         </HBox>
                                     <HBox.margin>
-                                        <Insets left="60.0"/>
+                                        <Insets left="60.0" />
                                     </HBox.margin>
                                 </VBox>
                                 <HBox prefHeight="100.0" prefWidth="103.0">
                                     <HBox.margin>
-                                        <Insets left="40.0"/>
+                                        <Insets left="40.0" />
                                     </HBox.margin>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Price:">
                                         <font>
-                                            <Font name="System Bold" size="14.0"/>
+                                            <Font name="System Bold" size="14.0" />
                                         </font>
                                     </Text>
                                         <Text fx:id="price" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                                             <font>
-                                                <Font name="System Bold" size="14.0"/>
+                                                <Font name="System Bold" size="14.0" />
                                             </font>
                                             <HBox.margin>
-                                                <Insets left="5.0"/>
+                                                <Insets left="5.0" />
                                             </HBox.margin>
                                         </Text>
                                 </HBox>
                             <VBox.margin>
-                                <Insets top="30.0"/>
+                                <Insets top="30.0" />
                             </VBox.margin>
                         </HBox>
                 <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text">
                     <VBox.margin>
-                        <Insets left="60.0" right="60.0" top="20.0"/>
+                        <Insets left="60.0" right="60.0" top="20.0" />
                     </VBox.margin>
                     <font>
-                        <Font name="System Bold" size="12.0"/>
+                        <Font name="System Bold" size="12.0" />
                     </font>
                 </Text>
                 </VBox>

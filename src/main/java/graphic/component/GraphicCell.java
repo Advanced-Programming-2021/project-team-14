@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import model.Database;
 import model.card.Card;
 import sample.MainGraphic;
 
@@ -33,6 +32,7 @@ public class GraphicCell extends AnchorPane implements ComponentLoader {
     }
 
     public void removeCard() {
+        System.out.println("removing the card");
         this.setStyle("-fx-border-radius: 5; -fx-border-color: SILVER");
         this.card = null;
         image.setImage(null);

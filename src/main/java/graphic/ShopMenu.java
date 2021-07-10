@@ -21,6 +21,7 @@ import view.enums.CommandTags;
 import view.enums.Menus;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ShopMenu extends Menu {
 
@@ -43,16 +44,53 @@ public class ShopMenu extends Menu {
     @FXML
     private Text description;
 
+
+    private int counter = 0;
+
+
     public void initialize() {
 
-        ArrayList<Card> cards = Card.getCards();
 
         allCards.setHgap(15);
         allCards.setVgap(15);
         allCards.setPadding(new Insets(20, 0, 0, 0));
+        initCards();
+
+        buyCardArea.setOnDragOver(e -> {
+            if (e.getDragboard().hasString()) {
+                CardLoader cardLoader = ((CardLoader) e.getGestureSource());
+                if (cardLoader.getCard().getPrice() > currentUser.getWallet().getCash()) {
+                    buyCardArea.setStyle("-fx-border-color: " + Colors.WARNING.getHexCode() + ";");
+                    buyCardArea.getChildren().forEach(child -> child.setStyle("-fx-fill: " + Colors.WARNING.getHexCode()));
+                } else {
+                    e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    buyCardArea.setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode() + ";");
+                    buyCardArea.getChildren().forEach(child -> child.setStyle("-fx-fill: " + Colors.SUCCESS.getHexCode()));
+                }
+            }
+        });
+
+
+        onDragExited(buyCardArea);
+        addAreaOnDragDropped();
+
+    }
+
+    private void initCards() {
+
+        ArrayList<Card> cards = Card.getCards();
+
+        if (counter != 0) {
+            allCards.getChildren().remove(0, Card.getCards().size());
+        }
+
+        counter++;
+
+        cards.sort(Comparator.comparing(Card::getName));
+
         for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
-            if (currentUser.getWallet().getCash() < card.getPrice()){
+            if (currentUser.getWallet().getCash() < card.getPrice()) {
                 cardLoader.setOpacity(0.4);
             }
             cardLoader.setOnMouseEntered(e -> {
@@ -63,24 +101,8 @@ public class ShopMenu extends Menu {
             });
             allCards.getChildren().add(cardLoader);
         }
-
-        buyCardArea.setOnDragOver(e -> {
-            if (e.getDragboard().hasString()) {
-                CardLoader cardLoader = ((CardLoader) e.getGestureSource());
-                if (cardLoader.getCard().getPrice() > currentUser.getWallet().getCash()) {
-                    buyCardArea.setStyle("-fx-border-color: " + Colors.WARNING.getHexCode() + ";");
-                } else {
-                    e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                    buyCardArea.setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode() + ";");
-                }
-            }
-        });
-
-
-        onDragExited(buyCardArea);
-        addAreaOnDragDropped();
-
     }
+
 
     private void setImage(Image image) {
         selectedCardImage.setImage(image);
@@ -115,6 +137,7 @@ public class ShopMenu extends Menu {
         Request.addData("cardName", cardLoader.getName());
         Request.send();
         if (Request.isSuccessful()) {
+            initCards();
             new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, root);
         } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
     }

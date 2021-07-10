@@ -39,6 +39,7 @@ public class DeckInside extends Menu {
     public ScrollPane main;
     public ScrollPane side;
     public JFXButton activateDeck;
+    public AnchorPane rootPane;
 
     @FXML
     public void initialize() {
@@ -132,8 +133,8 @@ public class DeckInside extends Menu {
             Request.send();
             if (Request.isSuccessful()) {
                 (sideRadioButton.isSelected() ? sideCardContainer : mainCardContainer).getChildren().remove(cardLoader);
-                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
-            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, rootPane);
+            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR, rootPane);
         }
     }
 
@@ -149,8 +150,8 @@ public class DeckInside extends Menu {
             Request.send();
             if (Request.isSuccessful()) {
                 (mainRadioButton.isSelected() ? mainCardContainer : sideCardContainer).getChildren().add(new CardLoader(Card.getCardByName(cardLoader.getName()), CardSize.SMALL.getLabel(), MenuNames.DECK.getLabel()));
-                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
-            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, rootPane);
+            } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR, rootPane);
         }
     }
 
@@ -169,6 +170,8 @@ public class DeckInside extends Menu {
         Request.setCommandTag(CommandTags.ACTIVATE_DECK);
         Request.addData(Strings.DECK.getLabel(), deckTitle.getText());
         Request.send();
+        new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, rootPane);
+
     }
 
     public void back(ActionEvent actionEvent) {

@@ -26,26 +26,35 @@ public class MainMenu extends Menu{
         String nextView = null;
         switch (((JFXButton)mouseEvent.getSource()).getText()) {
             case "Profile":
+                Medias.USUAL_CLICK.play(1);
                 nextView = "ProfileMenu";
                 break;
             case "Import\\Export":
+                Medias.USUAL_CLICK.play(1);
                 nextView = "ImportExportMenu";
                 break;
             case "Scoreboard":
+                Medias.USUAL_CLICK.play(1);
                 nextView = "ScoreboardMenu";
                 break;
             case "Shop":
+                Medias.USUAL_CLICK.play(1);
                 MainGraphic.setRoot("ShopMenu");
                 break;
             case "Duel":
                 Medias.BACKGROUND.pause();
+                Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
                 break;
             case "Logout":
+                Medias.USUAL_CLICK.play(1);
                 MainGraphic.setRoot("LoginMenu");
                 break;
-            default:
+            case "Deck":
+                Medias.USUAL_CLICK.play(1);
                 nextView = "DeckMenu";
+                break;
+
         }
         if (nextView != null) {
             setView(nextView);

@@ -1,0 +1,11 @@
+.root {
+    -fx-theme-color: #6D5DD3;
+    -fx-menu-background: #20202A;
+    -fx-dark-gray: #515468;
+}
+
+.buyArea {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-dark-gray;
+    -fx-border-radius: 8;
+}

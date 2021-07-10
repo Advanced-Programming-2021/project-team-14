@@ -226,6 +226,7 @@ public class GamePlay extends Menu {
 //        image = Database.getProfilePhoto(game.getBoard().getRivalPlayer().getUsername());
 //        upperPlayerPhoto.setFill(new ImagePattern(image));
         upperPlayerProgress.setStyle("-fx-accent: #1F545D");
+        double alaki = game.getBoard().getRivalPlayer().getLifePoint();
         upperPlayerProgress.setProgress(game.getBoard().getRivalPlayer().getLifePoint() / 8000.0);
         downPlayerProgress.setStyle("-fx-accent: #1f545d");
         downPlayerProgress.setProgress(game.getBoard().getMainPlayer().getLifePoint() / 8000.0);
@@ -274,7 +275,8 @@ public class GamePlay extends Menu {
         downPlayerFieldZone.getChildren().add(new FieldZone(this));
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
-        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
+        downPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getMainPlayer(), true));
+        upperPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getRivalPlayer(), false));
 //        initFieldZone();
     }
 
@@ -313,16 +315,17 @@ public class GamePlay extends Menu {
         MainGraphic.setRoot("MainMenu");
     }
 
+
     public void update() {
-        ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
-        ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
-        ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update();
-        ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
+        initDuelistInfo();
+        ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update(true);
+        ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update(false);
+        ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update(true);
+        ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update(false);
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
-        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
-        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update();
-        initDuelistInfo();
+        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update(true);
+        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update(false);
     }
 
     public void updateFieldZone(Card card) {

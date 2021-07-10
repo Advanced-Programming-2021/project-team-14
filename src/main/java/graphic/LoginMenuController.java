@@ -4,11 +4,21 @@ package graphic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import graphic.animation.Shake;
+import graphic.component.Colors;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
@@ -20,6 +30,7 @@ public class LoginMenuController extends Menu {
     @FXML
     public Label title, textGuide;
     public AnchorPane root;
+    public AnchorPane container;
 
     @FXML
     private JFXTextField usernameField, nicknameField;
@@ -52,6 +63,8 @@ public class LoginMenuController extends Menu {
     public void register() {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || nicknameField.getText().isEmpty()) {
             new SnackBarComponent("please enter your username, password and nickname", ResultState.ERROR, root);
+            new Shake(container).shake();
+
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -62,6 +75,7 @@ public class LoginMenuController extends Menu {
 
             if (!Request.isSuccessful()) {
                 new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
+                new Shake(container).shake();
             } else {
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, root);
             }
@@ -71,6 +85,7 @@ public class LoginMenuController extends Menu {
     public void login() {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             new SnackBarComponent("please enter your username, password and nickname", ResultState.ERROR, root);
+            new Shake(container).shake();
         } else {
             Request.addData("username", usernameField.getText());
             Request.addData("password", passwordField.getText());
@@ -80,6 +95,7 @@ public class LoginMenuController extends Menu {
 
             if (!Request.isSuccessful()) {
                 new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
+                new Shake(container).shake();
             } else {
                 Request.getToken();
                 setCurrentUser(usernameField.getText());
@@ -99,4 +115,6 @@ public class LoginMenuController extends Menu {
         else
             register();
     }
+
+
 }

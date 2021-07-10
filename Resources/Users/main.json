@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 3220,
+    "cash": 60300,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -8,7 +8,25 @@
       "Magnum Shield",
       "Haniwa",
       "Haniwa",
-      "Texchanger"
+      "Texchanger",
+      "Marshmallon",
+      "Texchanger",
+      "Sword of dark destruction",
+      "Sword of dark destruction",
+      "Terratiger, the Empowered Warrior",
+      "Sword of dark destruction",
+      "Swords of Revealing Light",
+      "Terratiger, the Empowered Warrior",
+      "Swords of Revealing Light",
+      "Advanced Ritual Art",
+      "Alexandrite Dragon",
+      "Advanced Ritual Art",
+      "Advanced Ritual Art",
+      "Alexandrite Dragon",
+      "Alexandrite Dragon",
+      "Axe Raider",
+      "Baby dragon",
+      "Battle OX"
     ]
   },
   "activeDeck": "first",
@@ -73,13 +91,18 @@
         "Dark Hole",
         "Slot Machine"
       ]
+    },
+    "you": {
+      "name": "you",
+      "sideCards": [],
+      "mainCards": []
     }
   },
   "username": "main",
   "password": "123",
   "nickname": "admin1",
-  "score": 0,
+  "score": 1000,
   "rank": 2,
   "hasProfilePhoto": true,
-  "gamesPlayed": 33
+  "gamesPlayed": 35
 }

@@ -40,10 +40,6 @@ public class GraveYard extends AnchorPane implements ComponentLoader {
         load("GraveYard");
         image.setImage(new Image(MainGraphic.class.getResource("PNG/deckCards.png").toString()));
 
-        player.getGraveYard().addCard(Card.getCardByName("Haniwa"));
-        player.getGraveYard().addCard(Card.getCardByName("Haniwa"));
-        player.getGraveYard().addCard(Card.getCardByName("Haniwa"));
-
         image.setOnMouseClicked(e -> {
 
 //            view.setEffect(new GaussianBlur());

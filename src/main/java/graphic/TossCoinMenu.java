@@ -41,45 +41,38 @@ public class TossCoinMenu {
         coinCircle.setFill(new ImagePattern(image));
 
         tossButton.setOnMouseClicked(e -> {
+            Medias.COIN_FLIP.play(6);
             RotateTransition rotator = createRotator(coinCircle);
             rotator.play();
-//            Medias.COIN_FLIP.play(5);
+
             User mainUser = Duel.getCurrentDuel().getMainUser();
             User rivalUser = Duel.getCurrentDuel().getRivalUser();
-            rotator.setOnFinished(new EventHandler<ActionEvent>() {
+            rotator.setOnFinished(event -> {
 
-                @Override
-                public void handle(ActionEvent event) {
+                if (Coin.flip().equals("head")) {
+                    coinCircle.setFill(new ImagePattern(image2));
+                    Duel.getCurrentDuel().setPlayers(mainUser, rivalUser);
+                } else {
+                    coinCircle.setFill(new ImagePattern(image));
+                    Duel.getCurrentDuel().setPlayers(rivalUser, mainUser);
+                }
 
-                    if (Coin.flip().equals("head")) {
-                        coinCircle.setFill(new ImagePattern(image2));
-                        Duel.getCurrentDuel().setPlayers(mainUser, rivalUser);
+                ScaleTransition scaleTransition = createScaleTransition(coinCircle);
+
+                scaleTransition.play();
+
+                scaleTransition.setOnFinished(event1 -> {
+                    if (Duel.getCurrentDuel().isAI()) {
+                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
+                                Duel.getCurrentDuel(), true));
                     } else {
-                        coinCircle.setFill(new ImagePattern(image));
-                        Duel.getCurrentDuel().setPlayers(rivalUser, mainUser);
+                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
+                                Duel.getCurrentDuel(), false));
                     }
 
-                    ScaleTransition scaleTransition = createScaleTransition(coinCircle);
+                    MainGraphic.setRoot("GamePlay3");
 
-                    scaleTransition.play();
-
-                    scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
-
-                        @Override
-                        public void handle(ActionEvent event) {
-                            if (Duel.getCurrentDuel().isAI()) {
-                                Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
-                                        Duel.getCurrentDuel(), true));
-                            } else {
-                                Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
-                                        Duel.getCurrentDuel(), false));
-                            }
-
-                            MainGraphic.setRoot("GamePlay3");
-
-                        }
-                    });
-                }
+                });
             });
         });
     }
@@ -87,7 +80,7 @@ public class TossCoinMenu {
 
     private ScaleTransition createScaleTransition(Node card) {
 
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), coinCircle);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), coinCircle);
 
         scaleTransition.setByY(2);
         scaleTransition.setByX(2);
@@ -96,7 +89,7 @@ public class TossCoinMenu {
     }
 
     private RotateTransition createRotator(Node card) {
-        RotateTransition rotator = new RotateTransition(Duration.millis(500), card);
+        RotateTransition rotator = new RotateTransition(Duration.millis(200), card);
         rotator.setAxis(Rotate.Y_AXIS);
         rotator.setFromAngle(0);
         rotator.setToAngle(360);

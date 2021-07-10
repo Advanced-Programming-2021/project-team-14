@@ -3,8 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane fx:id="root" prefHeight="800.0" prefWidth="980.0" stylesheets="@../CSS/DeckList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.DeckMenu">
    <JFXListView fx:id="listView" layoutX="240.0" layoutY="100.0" styleClass="list-view" />
-   <JFXButton layoutX="890.0" layoutY="720.0" onAction="#addDeck" styleClass="add-button" text="+"/>
+   <JFXButton layoutX="865.0" layoutY="675.0" onAction="#addDeck" styleClass="add-button" text="+"/>
 </AnchorPane>

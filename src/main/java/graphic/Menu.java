@@ -34,6 +34,10 @@ public class Menu {
     }
 
     public void onDragExited(AnchorPane area) {
-        area.setOnDragExited(e -> area.setStyle("-fx-border-color: " + Colors.DARK_GRAY.getHexCode() + ";"));
+        area.setOnDragExited(e -> {
+            area.setStyle("-fx-border-color: " + Colors.DARK_GRAY.getHexCode() + ";");
+            area.getChildren().forEach(child -> child.setStyle("-fx-fill: " + Colors.DARK_GRAY.getHexCode()));
+        });
+
     }
 }

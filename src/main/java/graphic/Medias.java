@@ -12,7 +12,7 @@ public enum Medias {
     COIN_FLIP("coinflip.wav"),
     ATTACK("attack.wav"),
     BUY_ITEM("buyitem.wav"),
-    HOVER("hover.wav"),
+    CHANGE_PHASE("hover.wav"),
     PUT_CARD("putcard.wav"),
     SNACKBAR_ERROR("snackbarError.wav"),
     START_DUEL_CLICK("startDuelClick.wav"),
@@ -41,7 +41,7 @@ public enum Medias {
             clip.open(audioIn);
             this.clip = clip;
         } catch (Exception ignored) {
-            System.out.println("Exception");
+            System.out.println(ignored.toString());
         }
     }
 
