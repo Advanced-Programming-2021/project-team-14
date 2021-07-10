@@ -5,7 +5,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -41,7 +40,7 @@ public class TossCoinMenu {
         coinCircle.setFill(new ImagePattern(image));
 
         tossButton.setOnMouseClicked(e -> {
-            Medias.COIN_FLIP.play(6);
+            Medias.COIN_FLIP.play(3);
             RotateTransition rotator = createRotator(coinCircle);
             rotator.play();
 

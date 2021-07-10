@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 60400,
+    "cash": 56539,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -26,7 +26,8 @@
       "Alexandrite Dragon",
       "Axe Raider",
       "Baby dragon",
-      "Battle OX"
+      "Battle OX",
+      "Axe Raider"
     ]
   },
   "activeDeck": "first",
@@ -102,7 +103,7 @@
   "password": "123",
   "nickname": "admin1",
   "score": 1000,
-  "rank": 2,
-  "hasProfilePhoto": true,
-  "gamesPlayed": 36
+  "rank": 3,
+  "hasProfilePhoto": false,
+  "gamesPlayed": 37
 }

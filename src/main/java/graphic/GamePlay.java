@@ -39,7 +39,9 @@ import view.GamePlayMenu;
 
 public class GamePlay extends Menu {
 
-    public AnchorPane downPlayerFieldZone, downPlayerDeckZone, downPlayerGraveYard, upperPlayerDeckZone;
+    public AnchorPane downPlayerFieldZone, downPlayerDeckZone, downPlayerGraveYard,
+            upperPlayerDeckZone, upperPlayerGraveYard, upperPlayerFieldZone;
+
     public ImageView background;
     @FXML
     private AnchorPane view;
@@ -99,7 +101,8 @@ public class GamePlay extends Menu {
 
     @FXML
     public void initialize() {
-
+        Medias.GAMEPLAY_BACKGROUND.loop();
+        Medias.GAMEPLAY_BACKGROUND.reduceVolume();
         KeyCombination cheat = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
         game = Duel.getCurrentDuel().getGame();
 
@@ -178,6 +181,7 @@ public class GamePlay extends Menu {
             exit.setOnAction(event -> {
                 view.setEffect(null);
                 popupStage.hide();
+                Medias.GAMEPLAY_BACKGROUND.pause();
                 MainGraphic.setRoot("MainMenu");
             });
 
@@ -198,8 +202,8 @@ public class GamePlay extends Menu {
     }
 
     private void initGraveYard() {
-        downPlayerGraveYard.getChildren().add(new GraveYard(view, game, game.getBoard().getMainPlayer()));
-//        upperPlayerGraveYard.getChildren().add(new GraveYard(view, game, game.getBoard().getRivalPlayer()));
+        downPlayerGraveYard.getChildren().add(new GraveYard(view, game, true));
+        upperPlayerGraveYard.getChildren().add(new GraveYard(view, game, false));
     }
 
 //    private void initLifepointsCircles() {
@@ -273,10 +277,11 @@ public class GamePlay extends Menu {
         downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
         upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
         downPlayerFieldZone.getChildren().add(new FieldZone(this));
+        upperPlayerFieldZone.getChildren().add(new FieldZone(this));
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
-        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
-        upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
+        downPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getMainPlayer(), true));
+        upperPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getRivalPlayer(), false));
 //        initFieldZone();
     }
 
@@ -329,6 +334,9 @@ public class GamePlay extends Menu {
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
         ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update(true);
         ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update(false);
+        ((GraveYard) upperPlayerGraveYard.getChildren().get(0)).update(false);
+        ((GraveYard) downPlayerGraveYard.getChildren().get(0)).update(true);
+
     }
 
     public void updateFieldZone(Card card) {

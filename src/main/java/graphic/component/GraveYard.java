@@ -34,9 +34,9 @@ public class GraveYard extends AnchorPane implements ComponentLoader {
 
     private HBox root;
 
-    public GraveYard(AnchorPane view, Game game, Player player) {
+    public GraveYard(AnchorPane view, Game game, boolean isMain) {
         this.game = game;
-        this.player = player;
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
         load("GraveYard");
         image.setImage(new Image(MainGraphic.class.getResource("PNG/deckCards.png").toString()));
 
@@ -81,5 +81,10 @@ public class GraveYard extends AnchorPane implements ComponentLoader {
         graphic.component.CardLoader cardLoader = new graphic.component.CardLoader(card, CardSize.MEDIUM.getLabel(), "Hand");
 
         root.getChildren().add(cardLoader);
+    }
+
+    public void update(boolean isMain) {
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
+        addAllCards();
     }
 }

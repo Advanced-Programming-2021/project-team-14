@@ -23,6 +23,8 @@ public class EndDuelMenu extends Menu {
 
     @FXML
     public void initialize() throws InterruptedException {
+        Medias.GAMEPLAY_BACKGROUND.pause();
+
 
         text.setText(Request.getMessage());
 

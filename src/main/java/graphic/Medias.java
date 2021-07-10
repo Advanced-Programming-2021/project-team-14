@@ -5,6 +5,7 @@ import sample.MainGraphic;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public enum Medias {
@@ -16,6 +17,7 @@ public enum Medias {
     PUT_CARD("putcard.wav"),
     SNACKBAR_ERROR("snackbarError.wav"),
     START_DUEL_CLICK("startDuelClick.wav"),
+    GAMEPLAY_BACKGROUND("gamePlayBackground.wav"),
     USUAL_CLICK("usualClick.wav");
 
 
@@ -49,6 +51,13 @@ public enum Medias {
     public void play(int count) {
         if (!mute)
             clip.loop(count);
+
+    }
+
+    public void reduceVolume() {
+        FloatControl gainControl =
+                (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-25.0f); // Reduce volume by 10 decibels.
     }
 
     public void pause() {
