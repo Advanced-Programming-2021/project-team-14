@@ -87,11 +87,6 @@ public class ShopMenu extends Menu {
         cards.sort(Comparator.comparing(Card::getName));
 
         for (Card card : cards) {
-            System.out.println(card.getName());
-        }
-
-
-        for (Card card : cards) {
             CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
             if (currentUser.getWallet().getCash() < card.getPrice()) {
                 cardLoader.setOpacity(0.4);
