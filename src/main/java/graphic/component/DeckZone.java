@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.game.Game;
+import model.game.Player;
 import model.game.PlayingDeck;
 import sample.MainGraphic;
 
@@ -16,14 +18,21 @@ public class DeckZone extends AnchorPane implements ComponentLoader {
     @FXML
     private Text number;
     private PlayingDeck deck;
-    public DeckZone(PlayingDeck deck) {
+    private Game game;
+    private Player player;
+
+
+    public DeckZone(Game game, Player player, boolean isMain) {
+        this.game = game;
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
         load("DeckZone");
-        this.deck = deck;
         image.setImage(new Image(MainGraphic.class.getResource("PNG/deckCards.png").toString()));
-        update();
+        update(true);
     }
 
-    public void update() {
+    public void update(boolean isMain) {
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
+        this.deck = this.player.getPlayingDeck();
         number.setText(deck.toString());
     }
 }
