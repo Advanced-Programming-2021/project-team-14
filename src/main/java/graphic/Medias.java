@@ -41,7 +41,7 @@ public enum Medias {
             clip.open(audioIn);
             this.clip = clip;
         } catch (Exception ignored) {
-            System.out.println("Exception");
+            System.out.println(ignored.toString());
         }
     }
 

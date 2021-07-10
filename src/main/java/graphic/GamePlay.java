@@ -314,6 +314,7 @@ public class GamePlay extends Menu {
         MainGraphic.setRoot("MainMenu");
     }
 
+
     public void update() {
         ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
