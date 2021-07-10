@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXListView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="980.0"
-            stylesheets="@../CSS/DeckList.css" xmlns="http://javafx.com/javafx/8.0.171"
-            fx:controller="graphic.Scoreboard">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="980.0" stylesheets="@../CSS/DeckList.css"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="graphic.Scoreboard">
     <ImageView fx:id="image"/>
-    <JFXListView fx:id="listView" layoutX="220.0" layoutY="200.0" styleClass="list-view"
-                 stylesheets="@../CSS/ScrollPane.css"/>
+    <JFXListView fx:id="listView" layoutX="160.0" layoutY="141.0" prefHeight="546.0" prefWidth="635.0"
+                 styleClass="list-view" stylesheets="@../CSS/ScrollPane.css"/>
 </AnchorPane>

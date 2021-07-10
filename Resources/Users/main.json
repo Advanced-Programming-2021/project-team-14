@@ -91,6 +91,11 @@
         "Dark Hole",
         "Slot Machine"
       ]
+    },
+    "you": {
+      "name": "you",
+      "sideCards": [],
+      "mainCards": []
     }
   },
   "username": "main",
