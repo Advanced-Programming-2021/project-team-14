@@ -3,6 +3,7 @@ package graphic.component;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import graphic.GamePlay;
+import graphic.Medias;
 import graphic.Menu;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,7 @@ public class Phases extends HBox implements ComponentLoader{
     }
 
     private void nextPhase(GamePlay gamePlay) {
+        Medias.CHANGE_PHASE.play(1);
         Menu.setView(Menus.GAMEPLAY_MENU);
         Request.setCommandTag(CommandTags.NEXT_PHASE);
         Request.send();

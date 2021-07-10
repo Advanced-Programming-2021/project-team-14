@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 51300,
+    "cash": 60300,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -101,8 +101,8 @@
   "username": "main",
   "password": "123",
   "nickname": "admin1",
-  "score": 0,
+  "score": 1000,
   "rank": 2,
   "hasProfilePhoto": true,
-  "gamesPlayed": 34
+  "gamesPlayed": 35
 }

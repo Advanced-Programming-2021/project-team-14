@@ -2,6 +2,7 @@ package graphic.component;
 
 import graphic.Cursor;
 import graphic.GamePlay;
+import graphic.Medias;
 import javafx.animation.TranslateTransition;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
@@ -78,6 +79,7 @@ public class Hand extends HBox implements ComponentLoader {
                     Request.send();
                 }
                 if (Request.isSuccessful()) {
+                    Medias.PUT_CARD.play(1);
                     gamePlay.update();
                     if (card.getProperty() == Property.FIELD){
                         gamePlay.updateFieldZone(card);

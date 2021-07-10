@@ -43,7 +43,7 @@ public class MainMenu extends Menu{
                 break;
             case "Duel":
                 Medias.BACKGROUND.pause();
-                Medias.START_DUEL_CLICK.play(1);
+                Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
                 break;
             case "Logout":
