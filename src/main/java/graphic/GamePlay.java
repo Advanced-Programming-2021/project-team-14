@@ -316,6 +316,7 @@ public class GamePlay extends Menu {
 
 
     public void update() {
+        initDuelistInfo();
         ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
         ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update();
@@ -324,7 +325,6 @@ public class GamePlay extends Menu {
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
         ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
         ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update();
-        initDuelistInfo();
     }
 
     public void updateFieldZone(Card card) {

@@ -37,7 +37,7 @@ public class DuelMenu extends Menu {
 
 
     public void startOnePlayerGame(MouseEvent mouseEvent) {
-//        Medias.START_DUEL_CLICK.play(1);
+        Medias.START_DUEL_CLICK.play(1);
         setView(Menus.DUEL_MENU);
         Request.setCommandTag(CommandTags.START_DUEL_AI);
         Request.addData("rounds", "1");
@@ -50,7 +50,7 @@ public class DuelMenu extends Menu {
     }
 
     public void startTwoPlayerGame(MouseEvent mouseEvent) {
-//        Medias.START_DUEL_CLICK.play(1);
+        Medias.START_DUEL_CLICK.play(1);
 
         AtomicBoolean checker = new AtomicBoolean(false);
 
