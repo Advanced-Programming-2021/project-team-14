@@ -89,7 +89,7 @@ public class TossCoinMenu {
     }
 
     private RotateTransition createRotator(Node card) {
-        RotateTransition rotator = new RotateTransition(Duration.millis(500), card);
+        RotateTransition rotator = new RotateTransition(Duration.millis(200), card);
         rotator.setAxis(Rotate.Y_AXIS);
         rotator.setFromAngle(0);
         rotator.setToAngle(360);

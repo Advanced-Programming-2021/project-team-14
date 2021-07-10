@@ -19,7 +19,8 @@ public class SpellZone extends HBox {
         player.getSpellZone().getCells().forEach(cell -> this.getChildren().add(new GraphicCell(gamePlay)));
     }
 
-    public void update() {
+    public void update(boolean isMain) {
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
         ArrayList<Cell> cells = player.getSpellZone().getCells();
         for (int i = 0; i < cells.size(); i++) {
             if (cells.get(i).isEmpty()) {

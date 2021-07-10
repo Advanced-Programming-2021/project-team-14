@@ -275,8 +275,8 @@ public class GamePlay extends Menu {
         downPlayerFieldZone.getChildren().add(new FieldZone(this));
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
-        downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
-        upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
+        downPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getMainPlayer(), true));
+        upperPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getRivalPlayer(), false));
 //        initFieldZone();
     }
 
@@ -320,12 +320,12 @@ public class GamePlay extends Menu {
         initDuelistInfo();
         ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update(true);
         ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update(false);
-        ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update();
-        ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
+        ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update(true);
+        ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update(false);
         ((Hand) downPlayerHand.getChildren().get(0)).update();
         ((RivalHand) upperPlayerHand.getChildren().get(0)).update();
-        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update();
-        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update();
+        ((DeckZone) downPlayerDeckZone.getChildren().get(0)).update(true);
+        ((DeckZone) upperPlayerDeckZone.getChildren().get(0)).update(false);
     }
 
     public void updateFieldZone(Card card) {
