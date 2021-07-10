@@ -276,6 +276,7 @@ public class GamePlay extends Menu {
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
         downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
+        upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
 //        initFieldZone();
     }
 
