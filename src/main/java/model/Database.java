@@ -94,6 +94,9 @@ public class Database {
         File f = new File(path);
         File file = new File(profileImagesDirectory + "\\" + username + ".png");
 
+        if (file.exists())
+            file.delete();
+
         try {
             Files.copy(f.toPath(), file.toPath());
             return DatabaseResponses.SUCCESSFUL;
@@ -104,7 +107,7 @@ public class Database {
     }
 
     public static void saveProfileCircle(BufferedImage rawImage, String username) {
-        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+        File file = new File(profileImagesDirectory + "\\" + username + "_circle" + ".png");
         try {
             ImageIO.write(rawImage, "png", file);
         } catch (IOException e) {

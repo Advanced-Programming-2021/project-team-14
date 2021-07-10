@@ -1,7 +1,6 @@
 package graphic;
 
 import Controller.enums.DatabaseResponses;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
@@ -10,30 +9,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.Database;
 import model.ImageCreator;
 import model.card.Card;
-import sample.MainGraphic;
+import view.Request;
+import view.enums.CommandTags;
+import view.enums.Menus;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImportExportMenu extends MainMenu {
@@ -171,13 +159,17 @@ public class ImportExportMenu extends MainMenu {
 
     public void exportCard() {
         try {
-            DatabaseResponses responses = Database.exportCard(currentUser.getUsername(), Card.getCardByName(currentCardName));
+            Request.setCommandTag(CommandTags.EXPORT);
+            Request.addData("cardName", currentCardName);
+            Request.addData("view", Menus.IMPORT_EXPORT_MENU.getLabel());
+            Request.send();
 
-            if (responses.equals(DatabaseResponses.SUCCESSFUL))
+            if (Request.isSuccessful())
                 new SnackBarComponent(currentCardName + " exported successfully!", ResultState.SUCCESS);
             else
-                new SnackBarComponent(responses.getLabel(), ResultState.ERROR);
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
         } catch (Exception e) {
+            e.printStackTrace();
             new SnackBarComponent("There is no card to export", ResultState.ERROR);
         }
 
