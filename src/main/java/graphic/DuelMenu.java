@@ -37,6 +37,7 @@ public class DuelMenu extends Menu {
 
 
     public void startOnePlayerGame(MouseEvent mouseEvent) {
+        Medias.BACKGROUND.pause();
         Medias.START_DUEL_CLICK.play(1);
         setView(Menus.DUEL_MENU);
         Request.setCommandTag(CommandTags.START_DUEL_AI);
@@ -44,12 +45,13 @@ public class DuelMenu extends Menu {
         Request.send();
         if (Request.isSuccessful()) {
             Console.print(Request.getMessage());
-            MainGraphic.setRoot("TossCoin");
+            MainGraphic.setRoot("GamePlay3");
         } else
             Console.print(Request.getMessage());
     }
 
     public void startTwoPlayerGame(MouseEvent mouseEvent) {
+        Medias.BACKGROUND.pause();
         Medias.START_DUEL_CLICK.play(1);
 
         AtomicBoolean checker = new AtomicBoolean(false);

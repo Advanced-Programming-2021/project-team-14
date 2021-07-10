@@ -1,0 +1,14 @@
+{
+  "wallet": {
+    "cash": 100000,
+    "cards": []
+  },
+  "decks": {},
+  "username": "reza",
+  "password": "reza",
+  "nickname": "reza",
+  "score": 0,
+  "rank": 0,
+  "hasProfilePhoto": false,
+  "gamesPlayed": 0
+}

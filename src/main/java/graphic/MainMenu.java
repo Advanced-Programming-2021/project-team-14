@@ -19,6 +19,7 @@ public class MainMenu extends Menu{
     }
 
     public void initialize() {
+        Medias.BACKGROUND.loop();
         setRoot(root);
     }
 
@@ -42,7 +43,6 @@ public class MainMenu extends Menu{
                 MainGraphic.setRoot("ShopMenu");
                 break;
             case "Duel":
-                Medias.BACKGROUND.pause();
                 Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
                 break;

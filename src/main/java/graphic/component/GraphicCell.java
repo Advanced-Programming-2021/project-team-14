@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.card.Card;
 import sample.MainGraphic;
+import view.GamePlayMenu;
+import view.Request;
 
 
 public class GraphicCell extends AnchorPane implements ComponentLoader {
@@ -21,6 +23,22 @@ public class GraphicCell extends AnchorPane implements ComponentLoader {
             if (card != null) {
                 gamePlay.setSpecificationForCard(card);
                 gamePlay.setImage(new Image(MainGraphic.class.getResource("PNG/Cards/" + card.getName() + ".jpg").toString()));
+            }
+        });
+
+        this.setOnMouseClicked(e -> {
+            if (card != null) {
+                new GamePlayMenu().commandCheckers("select --monster " + card.getPositionIndex());
+                if (!gamePlay.getGame().getBoard().getRivalPlayer().getMonsterZone().isEmpty()) {
+                    new GamePlayMenu().commandCheckers("attack 1");
+                } else {
+                    new GamePlayMenu().commandCheckers("attack direct");
+                }
+                if (Request.isSuccessful()) {
+                    new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, gamePlay.getView());
+                } else
+                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, gamePlay.getView());
+                gamePlay.update();
             }
         });
     }

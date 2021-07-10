@@ -273,8 +273,8 @@ public class GamePlay extends Menu {
         downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
         upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
         downPlayerFieldZone.getChildren().add(new FieldZone(this));
-        upperPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
-        downPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
+        upperPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
+        downPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
         downPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getMainPlayer().getPlayingDeck()));
         upperPlayerDeckZone.getChildren().add(new DeckZone(game.getBoard().getRivalPlayer().getPlayingDeck()));
 //        initFieldZone();
@@ -315,6 +315,9 @@ public class GamePlay extends Menu {
         MainGraphic.setRoot("MainMenu");
     }
 
+    public Game getGame() {
+        return game;
+    }
 
     public void update() {
         initDuelistInfo();

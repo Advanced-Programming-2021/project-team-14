@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 316100,
+    "cash": 325100,
     "cards": [
       "Terraforming",
       "Marshmallon",
@@ -110,7 +110,7 @@
   "username": "aiPlayer",
   "password": "ai",
   "nickname": "aiPlayer1",
-  "score": 24000,
+  "score": 25000,
   "rank": 0,
   "hasProfilePhoto": true,
   "gamesPlayed": 0
