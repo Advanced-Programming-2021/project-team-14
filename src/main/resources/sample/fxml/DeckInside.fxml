@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.DeckInside">
-    <ScrollPane fx:id="allCardsContainer" layoutX="980.0" layoutY="63.0" prefHeight="666.0" prefWidth="220.0"
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" styleClass="Menu" stylesheets="@../CSS/DeckInside.css, @../CSS/Snackbar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.DeckInside">
+    <ScrollPane fx:id="allCardsContainer" layoutX="980.0" layoutY="35" prefHeight="700" prefWidth="220.0"
                 styleClass="scroll-pane">
         <VBox fx:id="allCardsList" styleClass="cardList"/>
         <padding>
-            <Insets bottom="30.0" left="50.0" top="30.0"/>
+            <Insets bottom="20.0" left="50.0" top="20.0"/>
         </padding>
         <stylesheets>
             <URL value="@../CSS/ScrollPane.css"/>
@@ -29,9 +29,8 @@
         <Text layoutX="20.0" layoutY="83.0" styleClass="simple-text" text="remove"/>
     </AnchorPane>
 
-    <ScrollPane fx:id="main" layoutX="169.0" layoutY="177.0" prefHeight="490.0" prefWidth="665.0"
-                style="-fx-background: #20202A; -fx-border-color: #20202A;" stylesheets="@../CSS/ScrollPane.css">
-        <TilePane fx:id="mainCardContainer" layoutX="65.0" layoutY="155.0" prefHeight="487.0" prefWidth="661.0"
+    <ScrollPane fx:id="main" layoutX="169.0" layoutY="177.0" prefHeight="490.0" prefWidth="670" stylesheets="@../CSS/ScrollPane.css">
+        <TilePane fx:id="mainCardContainer" layoutX="65.0" layoutY="155.0" prefHeight="487.0" prefWidth="650"
                   style="-fx-background-color: #20202A;"/>
     </ScrollPane>
     <ScrollPane fx:id="side" layoutX="168.0" layoutY="178.0" prefHeight="255.0" prefWidth="665.0"

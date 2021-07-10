@@ -2,6 +2,7 @@ package graphic;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import graphic.animation.Shake;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import view.enums.Menus;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -204,7 +206,7 @@ public class ProfileMenu extends Menu {
 
     public void changePassword() {
         if (currentPassField.getText().isEmpty() || newPassField.getText().isEmpty()) {
-            new SnackBarComponent("please enter current and new password", ResultState.ERROR, mainPane);
+            new SnackBarComponent("please enter current and new password", ResultState.ERROR, getRoot());
         } else {
             Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
             Request.addData("view", Menus.PROFILE_MENU.getLabel());
@@ -212,10 +214,13 @@ public class ProfileMenu extends Menu {
             Request.addData("new", newPassField.getText());
             Request.send();
 
-            if (!Request.isSuccessful())
-                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, mainPane);
+            if (!Request.isSuccessful()){
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
+                new Shake(currentPassField);
+                new Shake(newPassField);
+            }
             else
-                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, mainPane);
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
 
             Console.print(Request.getMessage());
         }
@@ -224,17 +229,19 @@ public class ProfileMenu extends Menu {
     public void changeNickname() {
 
         if (nicknameField.getText().isEmpty()) {
-            new SnackBarComponent("please enter new nickname", ResultState.ERROR, mainPane);
+            new SnackBarComponent("please enter new nickname", ResultState.ERROR, getRoot());
         } else {
             Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
             Request.addData("view", Menus.PROFILE_MENU.getLabel());
             Request.addData("new", nicknameField.getText());
             Request.send();
 
-            if (!Request.isSuccessful())
-                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, mainPane);
+            if (!Request.isSuccessful()){
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
+                new Shake(nicknameField);
+            }
             else
-                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, mainPane);
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
 
             Console.print(Request.getMessage());
         }

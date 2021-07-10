@@ -61,9 +61,11 @@ public class ShopMenu extends Menu {
                 CardLoader cardLoader = ((CardLoader) e.getGestureSource());
                 if (cardLoader.getCard().getPrice() > currentUser.getWallet().getCash()) {
                     buyCardArea.setStyle("-fx-border-color: " + Colors.WARNING.getHexCode() + ";");
+                    buyCardArea.getChildren().forEach(child -> child.setStyle("-fx-fill: " + Colors.WARNING.getHexCode()));
                 } else {
                     e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                     buyCardArea.setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode() + ";");
+                    buyCardArea.getChildren().forEach(child -> child.setStyle("-fx-fill: " + Colors.SUCCESS.getHexCode()));
                 }
             }
         });
