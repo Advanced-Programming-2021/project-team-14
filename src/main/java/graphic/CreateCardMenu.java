@@ -210,11 +210,11 @@ public class CreateCardMenu extends MainMenu {
 
         JFXTextField levelField = setLevelTextField();
         levelField.setLayoutX(100);
-        levelField.setLayoutY(100);
+        levelField.setLayoutY(140);
 
         JFXTextField attackField = setAttackTextField();
         attackField.setLayoutX(100);
-        attackField.setLayoutY(200);
+        attackField.setLayoutY(220);
 
         JFXTextField defenceField = setDefenceTextField();
         defenceField.setLayoutY(300);
@@ -222,19 +222,19 @@ public class CreateCardMenu extends MainMenu {
 
         JFXComboBox<Label> monsterTypeBox = setMonsterTypeBox();
         monsterTypeBox.setLayoutX(100);
-        monsterTypeBox.setLayoutY(400);
+        monsterTypeBox.setLayoutY(380);
 
         JFXComboBox<Label> monsterPropertyBox = setMonsterPropertyBox();
         monsterPropertyBox.setLayoutX(100);
-        monsterPropertyBox.setLayoutY(500);
+        monsterPropertyBox.setLayoutY(460);
 
         JFXComboBox<Label> monsterAttributeBox = setMonsterAttribute();
         monsterAttributeBox.setLayoutX(100);
-        monsterAttributeBox.setLayoutY(600);
+        monsterAttributeBox.setLayoutY(540);
 
         JFXTextArea descriptionArea = setDescriptionArea();
         descriptionArea.setLayoutX(650);
-        descriptionArea.setLayoutY(100);
+        descriptionArea.setLayoutY(140);
 
 
         JFXButton next = setNextLastButton(">", 730, 707);
@@ -909,7 +909,7 @@ public class CreateCardMenu extends MainMenu {
         attributeBox.getItems().add(new Label("Fire"));
         attributeBox.setPromptText("monster attribute");
         attributeBox.setLabelFloat(true);
-        attributeBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 2000;");
+        attributeBox.setStyle("-fx-font-size: 17;-fx-text-fill: #8A9EAD; -fx-pref-width: 200;");
         attributeBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
 
             if (newValue.toString().contains("Dark"))
