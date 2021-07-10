@@ -226,6 +226,7 @@ public class GamePlay extends Menu {
 //        image = Database.getProfilePhoto(game.getBoard().getRivalPlayer().getUsername());
 //        upperPlayerPhoto.setFill(new ImagePattern(image));
         upperPlayerProgress.setStyle("-fx-accent: #1F545D");
+        double alaki = game.getBoard().getRivalPlayer().getLifePoint();
         upperPlayerProgress.setProgress(game.getBoard().getRivalPlayer().getLifePoint() / 8000.0);
         downPlayerProgress.setStyle("-fx-accent: #1f545d");
         downPlayerProgress.setProgress(game.getBoard().getMainPlayer().getLifePoint() / 8000.0);

@@ -21,6 +21,7 @@ import view.enums.CommandTags;
 import view.enums.Menus;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ShopMenu extends Menu {
 
@@ -43,26 +44,17 @@ public class ShopMenu extends Menu {
     @FXML
     private Text description;
 
+
+    private int counter = 0;
+
+
     public void initialize() {
 
-        ArrayList<Card> cards = Card.getCards();
 
         allCards.setHgap(15);
         allCards.setVgap(15);
         allCards.setPadding(new Insets(20, 0, 0, 0));
-        for (Card card : cards) {
-            CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
-            if (currentUser.getWallet().getCash() < card.getPrice()){
-                cardLoader.setOpacity(0.4);
-            }
-            cardLoader.setOnMouseEntered(e -> {
-                Image image = cardLoader.getImage().getImage();
-                setImage(image);
-                setSpecification(cardLoader);
-
-            });
-            allCards.getChildren().add(cardLoader);
-        }
+        initCards();
 
         buyCardArea.setOnDragOver(e -> {
             if (e.getDragboard().hasString()) {
@@ -81,6 +73,39 @@ public class ShopMenu extends Menu {
         addAreaOnDragDropped();
 
     }
+
+    private void initCards() {
+
+        ArrayList<Card> cards = Card.getCards();
+
+        if (counter != 0) {
+            allCards.getChildren().remove(0, Card.getCards().size());
+        }
+
+        counter++;
+
+        cards.sort(Comparator.comparing(Card::getName));
+
+        for (Card card : cards) {
+            System.out.println(card.getName());
+        }
+
+
+        for (Card card : cards) {
+            CardLoader cardLoader = new CardLoader(card, CardSize.SMALL.getLabel(), MenuNames.SHOP.getLabel());
+            if (currentUser.getWallet().getCash() < card.getPrice()) {
+                cardLoader.setOpacity(0.4);
+            }
+            cardLoader.setOnMouseEntered(e -> {
+                Image image = cardLoader.getImage().getImage();
+                setImage(image);
+                setSpecification(cardLoader);
+
+            });
+            allCards.getChildren().add(cardLoader);
+        }
+    }
+
 
     private void setImage(Image image) {
         selectedCardImage.setImage(image);
@@ -115,6 +140,7 @@ public class ShopMenu extends Menu {
         Request.addData("cardName", cardLoader.getName());
         Request.send();
         if (Request.isSuccessful()) {
+            initCards();
             new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, root);
         } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
     }
