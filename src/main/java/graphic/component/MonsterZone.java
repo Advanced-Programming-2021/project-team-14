@@ -18,9 +18,12 @@ public class MonsterZone extends HBox{
         player.getMonsterZone().getCells().forEach(cell -> this.getChildren().add(new GraphicCell(gamePlay)));
     }
 
-    public void update(){
+    public void update(boolean isMain){
+        this.player = isMain ? game.getBoard().getMainPlayer() : game.getBoard().getRivalPlayer();
+        System.out.println(player);
         ArrayList<Cell> cells = player.getMonsterZone().getCells();
         for (int i = 0; i < cells.size(); i++) {
+
             if (cells.get(i).isEmpty()) {
                 ((GraphicCell) this.getChildren().get(i)).removeCard();
             }else{

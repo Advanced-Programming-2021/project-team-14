@@ -32,6 +32,7 @@ public class GraphicCell extends AnchorPane implements ComponentLoader {
     }
 
     public void removeCard() {
+        System.out.println("removing the card");
         this.setStyle("-fx-border-radius: 5; -fx-border-color: SILVER");
         this.card = null;
         image.setImage(null);

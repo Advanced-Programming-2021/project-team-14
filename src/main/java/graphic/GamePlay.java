@@ -318,8 +318,8 @@ public class GamePlay extends Menu {
 
     public void update() {
         initDuelistInfo();
-        ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update();
-        ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update();
+        ((MonsterZone) downPlayerMonsterZone.getChildren().get(0)).update(true);
+        ((MonsterZone) upperPlayerMonsterZone.getChildren().get(0)).update(false);
         ((SpellZone) downPlayerSpellZone.getChildren().get(0)).update();
         ((SpellZone) upperPlayerSpellZone.getChildren().get(0)).update();
         ((Hand) downPlayerHand.getChildren().get(0)).update();
