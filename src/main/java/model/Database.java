@@ -106,7 +106,7 @@ public class Database {
     }
 
     public static void saveProfileCircle(BufferedImage rawImage, String username) {
-        File file = new File(profileImagesDirectory + "\\" + username + ".png");
+        File file = new File(profileImagesDirectory + "\\" + username + "_circle" + ".png");
         try {
             ImageIO.write(rawImage, "png", file);
         } catch (IOException e) {
