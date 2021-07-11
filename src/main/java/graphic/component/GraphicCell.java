@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.card.Card;
+import model.card.enums.State;
 import sample.MainGraphic;
 import view.GamePlayMenu;
 import view.Request;
@@ -26,27 +27,27 @@ public class GraphicCell extends AnchorPane implements ComponentLoader {
             }
         });
 
-        this.setOnMouseClicked(e -> {
-            if (card != null) {
-                new GamePlayMenu().commandCheckers("select --monster " + card.getPositionIndex());
-                if (!gamePlay.getGame().getBoard().getRivalPlayer().getMonsterZone().isEmpty()) {
-                    new GamePlayMenu().commandCheckers("attack 1");
-                } else {
-                    new GamePlayMenu().commandCheckers("attack direct");
-                }
-                if (Request.isSuccessful()) {
-                    new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, gamePlay.getView());
-                } else
-                    new SnackBarComponent(Request.getMessage(), ResultState.ERROR, gamePlay.getView());
-                gamePlay.update();
-            }
-        });
+
     }
 
     public void setCard(Card card) {
         this.card = card;
         this.setStyle("-fx-border-radius: 0");
-        image.setImage(new Image(MainGraphic.class.getResource("PNG/Cards/" + card.getName() + ".jpg").toString()));
+        if (card.getState() == State.DEFENSIVE_HIDDEN || card.getState() == State.HIDDEN){
+            image.setImage(new Image(MainGraphic.class.getResource("PNG/Cards/hidden2.png").toString()));
+            image.setRotate(0);
+        }
+        else {
+            image.setRotate(0);
+            image.setImage(new Image(MainGraphic.class.getResource("PNG/Cards/" + card.getName() + ".jpg").toString()));
+        }
+        if (card.getState() == State.DEFENSIVE_HIDDEN || card.getState() == State.DEFENSIVE_OCCUPIED) {
+            image.setRotate(90);
+        }
+    }
+
+    public Card getCard() {
+        return card;
     }
 
     public void removeCard() {

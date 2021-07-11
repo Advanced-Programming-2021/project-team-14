@@ -3,7 +3,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1"
-         style="-fx-border-radius: 5; -fx-border-width: 1; -fx-border-color: SILVER;"
+         style="-fx-border-radius: 5; -fx-border-width: 1; -fx-border-color: SILVER; " prefWidth="74" prefHeight="96"
          type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171">
-    <ImageView fx:id="image" fitHeight="96.0" fitWidth="73.0" preserveRatio="true"/>
+    <ImageView fx:id="image" fitHeight="96.0" fitWidth="74.0" preserveRatio="true"/>
 </fx:root>
