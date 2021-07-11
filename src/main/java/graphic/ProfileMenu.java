@@ -100,9 +100,9 @@ public class ProfileMenu extends Menu {
 
     private void changeProfilePhotoView() {
         if (!Request.isSuccessful()) {
-            new SnackBarComponent(Request.getMessage(), ResultState.ERROR, mainPane);
+            new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
         } else {
-            new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, mainPane);
+            new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
             if (currentUser.hasProfilePhoto()) {
                 mainPane.getChildren().remove(currentCircle);
                 mainPane.getChildren().remove(currentUsername);
@@ -216,8 +216,6 @@ public class ProfileMenu extends Menu {
 
             if (!Request.isSuccessful()){
                 new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
-                new Shake(currentPassField);
-                new Shake(newPassField);
             }
             else
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());

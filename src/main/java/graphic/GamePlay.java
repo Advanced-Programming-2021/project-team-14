@@ -64,7 +64,7 @@ public class GamePlay extends Menu {
     @FXML
     private HBox upperPlayerSpellZone;
     @FXML
-    private HBox upperPlayerMonsterZone;
+    public HBox upperPlayerMonsterZone;
     @FXML
     private HBox downPlayerHand;
     @FXML
