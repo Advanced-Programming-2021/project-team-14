@@ -73,6 +73,7 @@ public class MonsterZone extends HBox {
                     }
                 }
             });
+            gamePlay.update();
             if (isFirstTime)
                 this.getChildren().add(graphicCell);
         });
