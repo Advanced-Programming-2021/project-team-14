@@ -29,7 +29,7 @@ public class ServerRegistrationController {
         if (doesUsernameExists(username))
             if (isPasswordCorrects(username, password)) {
                 response.success();
-                String token = TokenGenerator.generateToken(username);
+                String token = TokenGenerator.generateToken();
                 Server.addUser(token, User.getUserByUsername(username));
                 response.addToken(token);
                 return Responses.LOGIN_SUCCESSFUL.getLabel();

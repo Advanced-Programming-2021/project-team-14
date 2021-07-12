@@ -1,13 +1,15 @@
 package server;
 
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public class TokenGenerator {
-    protected static SecureRandom random = new SecureRandom();
+    private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
+    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
 
-    public synchronized static String generateToken( String username ) {
-        long longToken = Math.abs( random.nextLong() );
-        String random = Long.toString( longToken, 16 );
-        return ( username + ":" + random );
+    public static String generateToken() {
+        byte[] randomBytes = new byte[24];
+        secureRandom.nextBytes(randomBytes);
+        return base64Encoder.encodeToString(randomBytes);
     }
 }

@@ -49,4 +49,8 @@ public class Server {
         numberOfOnlineUsers++;
     }
 
+    public User getUser(String token){
+        return onlineUsers.get(token);
+    }
+
 }
