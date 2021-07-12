@@ -96,7 +96,6 @@ public class Database {
 
         if (file.exists())
             file.delete();
-
         try {
             Files.copy(f.toPath(), file.toPath());
             return DatabaseResponses.SUCCESSFUL;
@@ -130,7 +129,7 @@ public class Database {
 
     public static BufferedImage getMainProfileBufferedImage(BufferedImage rawImage) {
         try {
-            File f = new File(profileImagesDirectory + "\\main.png");
+            File f = new File(profileImagesDirectory + "\\aiPlayer.png");
             rawImage = ImageIO.read(f);
         } catch (Exception e) {
             e.printStackTrace();
