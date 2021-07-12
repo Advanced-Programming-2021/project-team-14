@@ -29,8 +29,9 @@ public class Menu {
         return data;
     }
 
-    public static void setCurrentUser(String username) {
-        currentUser = User.getUserByUsername(username);
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    //        currentUser = User.getUserByUsername(username);
     }
 
     public void onDragExited(AnchorPane area) {

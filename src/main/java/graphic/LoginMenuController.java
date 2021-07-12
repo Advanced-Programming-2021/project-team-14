@@ -1,6 +1,7 @@
 package graphic;
 
 
+import com.google.gson.Gson;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -19,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import model.User;
 import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
@@ -98,7 +100,8 @@ public class LoginMenuController extends Menu {
                 new Shake(container).shake();
             } else {
                 Request.getToken();
-                setCurrentUser(usernameField.getText());
+                setCurrentUser(new Gson().fromJson(Request.getResponse().getString("user"), User.class));
+                System.out.println("current user:" + currentUser);
                 MainGraphic.setRoot("MainMenu");
             }
         }

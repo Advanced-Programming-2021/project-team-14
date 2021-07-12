@@ -3,6 +3,7 @@ package server.controller;
 import Controller.Response;
 import Controller.enums.CommandTags;
 import Controller.enums.Responses;
+import com.google.gson.Gson;
 import model.User;
 import org.json.JSONObject;
 import server.Server;
@@ -32,6 +33,7 @@ public class ServerRegistrationController {
                 String token = TokenGenerator.generateToken();
                 Server.addUser(token, User.getUserByUsername(username));
                 response.addToken(token);
+                response.add("user", new Gson().toJson(User.getUserByUsername(username)));
                 return Responses.LOGIN_SUCCESSFUL.getLabel();
             } else {
                 response.error();
