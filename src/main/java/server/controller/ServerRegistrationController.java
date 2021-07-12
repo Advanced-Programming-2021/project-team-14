@@ -7,6 +7,7 @@ import model.User;
 import org.json.JSONObject;
 import server.Server;
 import server.ServerResponse;
+import server.TokenGenerator;
 
 public class ServerRegistrationController {
 
@@ -28,7 +29,9 @@ public class ServerRegistrationController {
         if (doesUsernameExists(username))
             if (isPasswordCorrects(username, password)) {
                 response.success();
-                response.addToken(username);
+                String token = TokenGenerator.generateToken(username);
+                Server.addUser(token, User.getUserByUsername(username));
+                response.addToken(token);
                 return Responses.LOGIN_SUCCESSFUL.getLabel();
             } else {
                 response.error();

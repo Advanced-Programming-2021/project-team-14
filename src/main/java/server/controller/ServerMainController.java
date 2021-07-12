@@ -1,6 +1,7 @@
 package server.controller;
 
 import Controller.*;
+import model.User;
 import org.json.JSONObject;
 import server.ServerResponse;
 import view.Logger;

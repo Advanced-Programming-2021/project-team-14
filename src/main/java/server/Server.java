@@ -1,10 +1,12 @@
 package server;
 
 import model.Database;
+import model.User;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -13,10 +15,14 @@ public class Server {
     private static final int PORT = 7755;
 
     private static ThreadPool threadPool;
+    private static HashMap<String, User> onlineUsers;
+    private static int numberOfOnlineUsers;
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
+        numberOfOnlineUsers = 0;
         Database.prepareDatabase();
+        onlineUsers = new HashMap<>();
         runServer();
     }
 
@@ -35,8 +41,12 @@ public class Server {
     }
 
     public static void log(String string) {
-        System.out.println("\u001B[31m" + LocalDate.now() + " | " + System.currentTimeMillis() + "\u001B[0m : " + string);
+        System.out.println("\u001B[31m" + LocalDate.now() + " | " + System.currentTimeMillis() + "_" + numberOfOnlineUsers + "\u001B[0m : " + string);
     }
 
+    public static void addUser(String token, User user){
+        onlineUsers.put(token, user);
+        numberOfOnlineUsers++;
+    }
 
 }
