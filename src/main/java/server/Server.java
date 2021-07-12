@@ -1,5 +1,7 @@
 package server;
 
+import model.Database;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ public class Server {
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
+        Database.prepareDatabase();
         runServer();
     }
 
