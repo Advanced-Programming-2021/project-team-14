@@ -1,11 +1,14 @@
 package view;
 
-import Controller.MainController;
 import org.json.JSONObject;
 import view.enums.CommandTags;
 import view.enums.Regexes;
 import view.enums.Responses;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,15 +51,36 @@ public class Request {
     }
 
     public static void send() { // sending the request to the main controller
-        Request.setToken();
+        System.out.println("sending");
         Logger.log("client", request.toString());
-        response = new JSONObject(MainController.processCommand(request.toString()));
-//        if (response.has("isDuelEnded")) {
-//            if (response.getString("isDuelEnded").equals("true")) {
-//                new EndDuelMenu().initialize(getMessage());
-//            }
-//        }
-        clear();
+        sendToServer();
+//        Request.setToken();
+//        response = new JSONObject(MainController.processCommand(request.toString()));
+////        if (response.has("isDuelEnded")) {
+////            if (response.getString("isDuelEnded").equals("true")) {
+////                new EndDuelMenu().initialize(getMessage());
+////            }
+////        }
+//        clear();
+    }
+
+    public static void sendToServer() {
+        try {
+            Request.setToken();
+            Socket socket = new Socket("localhost", 7755);
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            dataOutputStream.writeUTF(request.toString());
+            dataOutputStream.flush();
+            String result = dataInputStream.readUTF();
+            response = new JSONObject(result);
+            Logger.log("server", response.toString());
+            dataOutputStream.close();
+            socket.close();
+            clear();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static JSONObject getResponse() {
