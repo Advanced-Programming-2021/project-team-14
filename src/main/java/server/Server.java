@@ -49,8 +49,12 @@ public class Server {
         numberOfOnlineUsers++;
     }
 
-    public User getUser(String token){
+    public static User getUser(String token){
         return onlineUsers.get(token);
     }
 
+    public static void logout(String token) {
+        onlineUsers.remove(token);
+        numberOfOnlineUsers--;
+    }
 }

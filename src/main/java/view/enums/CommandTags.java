@@ -29,6 +29,7 @@ public enum CommandTags {
 
 
     LOGIN("login"),
+    LOGOUT("logout"),
     USER_DELETE("delete user"),
     REGISTER("register"),
     CREATE_DECK("create-deck"),

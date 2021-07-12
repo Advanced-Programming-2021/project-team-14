@@ -5,6 +5,9 @@ import com.jfoenix.controls.JFXButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sample.MainGraphic;
+import view.Request;
+import view.enums.CommandTags;
+import view.enums.Menus;
 
 public class MainMenu extends Menu{
 
@@ -48,6 +51,7 @@ public class MainMenu extends Menu{
                 break;
             case "Logout":
                 Medias.USUAL_CLICK.play(1);
+                logout();
                 MainGraphic.setRoot("LoginMenu");
                 break;
             case "Deck":
@@ -59,5 +63,11 @@ public class MainMenu extends Menu{
         if (nextView != null) {
             setView(nextView);
         }
+    }
+
+    private void logout() {
+        Request.setCommandTag(CommandTags.LOGOUT);
+        Request.addData("view", Menus.MAIN_MENU.getLabel());
+        Request.send();
     }
 }
