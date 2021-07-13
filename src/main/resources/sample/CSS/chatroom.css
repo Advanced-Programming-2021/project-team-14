@@ -1,0 +1,46 @@
+.root{
+    -fx-gray: #515468;
+    -fx-primary: #6D5DD3;
+    -fx-background: #20202A;
+    -fx-background-light: #272731;
+}
+
+.textFieldContainer {
+    -fx-background-color: #2C2C39;
+    -fx-background-radius: 25;
+    -fx-padding: 5 5 5 5;
+}
+
+.sendButton{
+    -fx-text-fill: -fx-primary;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+.text-area .content{
+    -fx-background-color: #2C2C39;
+    -fx-background-radius: 0;
+}
+.text-area{
+    -fx-text-fill: #bcbcbc;
+}
+
+.chatList {
+    -fx-background-color: transparent;
+}
+
+.context-menu {
+    -fx-background-color: #312253;
+    -fx-text-fill: white;
+    -fx-padding: 5 0 5 0;
+    -fx-background-radius: 5;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 12 2 12;
+
+}
+
+.menu-item:focused{
+    -fx-background-color: #38295b;
+}

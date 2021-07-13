@@ -1,10 +1,19 @@
 package Controller.enums;
 
+import model.card.enums.Attribute;
+
+import java.util.Locale;
+
 public enum CommandTags {
 
     LOGIN("login"),
     SHOW_CARD("show card everywhere"),
     REGISTER("register"),
+    UPDATE_CHAT("update chat"),
+    SEND_MESSAGE("send message"),
+    EDIT_MESSAGE("edit message"),
+    REMOVE_MESSAGE("remove message"),
+
     CREATE_DECK("create-deck"),
     CARD_NOT_FOUND("card not found!"),
     DELETE_DECK("delete-deck"),
@@ -32,5 +41,13 @@ public enum CommandTags {
 
     public String getLabel() {
         return label;
+    }
+
+    public static CommandTags fromValue(String givenName) {
+        for (CommandTags tag : values()){
+            if (tag.label.toLowerCase(Locale.ROOT).equals(givenName.toLowerCase(Locale.ROOT)))
+                return tag;
+        }
+        return null;
     }
 }

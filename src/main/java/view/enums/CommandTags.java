@@ -30,6 +30,10 @@ public enum CommandTags {
 
     LOGIN("login"),
     LOGOUT("logout"),
+    UPDATE_CHAT("update chat"),
+    SEND_MESSAGE("send message"),
+    EDIT_MESSAGE("edit message"),
+    REMOVE_MESSAGE("remove message"),
     USER_DELETE("delete user"),
     REGISTER("register"),
     CREATE_DECK("create-deck"),

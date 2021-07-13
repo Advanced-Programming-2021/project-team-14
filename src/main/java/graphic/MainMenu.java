@@ -22,7 +22,7 @@ public class MainMenu extends Menu{
     }
 
     public void initialize() {
-        Medias.BACKGROUND.loop();
+//        Medias.BACKGROUND.loop();
         setRoot(root);
     }
 
@@ -48,6 +48,10 @@ public class MainMenu extends Menu{
             case "Duel":
                 Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
+                break;
+            case "ChatRoom":
+                Medias.USUAL_CLICK.play(1);
+                nextView = "ChatRoom";
                 break;
             case "Logout":
                 Medias.USUAL_CLICK.play(1);

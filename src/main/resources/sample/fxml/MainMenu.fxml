@@ -34,6 +34,11 @@
                      <FontAwesomeIconView styleClass="icon" glyphName="USER" />
                   </graphic>
                </JFXButton>
+               <JFXButton  text="ChatRoom" onMouseClicked="#change">
+                  <graphic>
+                     <FontAwesomeIconView styleClass="icon" glyphName="CHAT" />
+                  </graphic>
+               </JFXButton>
                <JFXButton  text="Import\Export" onMouseClicked="#change">
                   <graphic>
                      <FontAwesomeIconView styleClass="icon" glyphName="EXCHANGE"/>

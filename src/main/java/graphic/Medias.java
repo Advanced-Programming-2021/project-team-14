@@ -18,7 +18,10 @@ public enum Medias {
     SNACKBAR_ERROR("snackbarError.wav"),
     START_DUEL_CLICK("startDuelClick.wav"),
     GAMEPLAY_BACKGROUND("gamePlayBackground.wav"),
-    USUAL_CLICK("usualClick.wav");
+    USUAL_CLICK("usualClick.wav"),
+
+
+    MESSAGE_NOTIFICATION("simpleMessageNotification.wav");
 
 
     private static boolean mute = false;
@@ -36,14 +39,14 @@ public enum Medias {
 
     private void setMedia() {
         URL url = MainGraphic.class.getResource("audio/" + name);
-        AudioInputStream audioIn = null;
+        AudioInputStream audioIn;
         try {
             audioIn = AudioSystem.getAudioInputStream(url);
             Clip clip = AudioSystem.getClip();
             clip.open(audioIn);
             this.clip = clip;
-        } catch (Exception ignored) {
-            System.out.println(ignored.toString());
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 

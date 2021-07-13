@@ -58,7 +58,7 @@ public class Request {
 //        response = new JSONObject(MainController.processCommand(request.toString()));
 ////        if (response.has("isDuelEnded")) {
 ////            if (response.getString("isDuelEnded").equals("true")) {
-////                new EndDuelMenu().initialize(getMessage());
+////                new EndDuelMenu().initialize(getMessageById());
 ////            }
 ////        }
 //        clear();
@@ -79,7 +79,7 @@ public class Request {
             socket.close();
             clear();
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.log("client", "404!");
         }
     }
 
