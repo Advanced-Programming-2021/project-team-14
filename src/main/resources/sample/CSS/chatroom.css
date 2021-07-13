@@ -10,6 +10,14 @@
     -fx-background-radius: 25;
     -fx-padding: 5 5 5 5;
 }
+.replyContainer {
+    -fx-background-color: #2C2C39;
+    -fx-background-radius: 25;
+    -fx-padding: 11 5 11 5;
+}
+.replyText{
+    -fx-fill: -fx-gray;
+}
 
 .sendButton{
     -fx-text-fill: -fx-primary;

@@ -8,44 +8,48 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800" prefWidth="980.0" stylesheets="@../CSS/chatroom.css, @../CSS/DeckList.css"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="graphic.ChatRoom">
-   <HBox alignment="BOTTOM_LEFT" layoutX="127.0" layoutY="701.0" styleClass="textFieldContainer"
-         AnchorPane.topAnchor="701.0">
+<AnchorPane prefHeight="800" prefWidth="980.0" stylesheets="@../CSS/chatroom.css, @../CSS/DeckList.css, @../CSS/ScrollPane.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.ChatRoom">
+   <HBox alignment="BASELINE_LEFT" layoutX="127.0" layoutY="701.0" styleClass="textFieldContainer" AnchorPane.topAnchor="701.0">
       <effect>
-         <DropShadow blurType="ONE_PASS_BOX" color="#00000015" height="74.19" offsetY="2.0" radius="18.0475"
-                     spread="0.44" width="0.0"/>
+         <DropShadow blurType="ONE_PASS_BOX" color="#00000015" height="74.19" offsetY="2.0" radius="18.0475" spread="0.44" width="0.0" />
       </effect>
-      <JFXTextArea fx:id="textField" focusColor="#ffffff00" layoutY="9.0" prefHeight="0.0" prefWidth="360.0"
-                   promptText="type here ..." unFocusColor="transparent">
+      <JFXTextArea fx:id="textField" focusColor="#ffffff00" layoutY="9.0" prefHeight="0.0" prefWidth="360.0" promptText="type here ..." unFocusColor="transparent">
          <padding>
-            <Insets bottom="-5.0" left="10.0" right="10.0"/>
+            <Insets bottom="-5.0" left="10.0" right="10.0" />
          </padding>
          <HBox.margin>
-            <Insets top="3.0"/>
+            <Insets top="3.0" />
          </HBox.margin>
       </JFXTextArea>
    </HBox>
-   <JFXButton fx:id="sendMessageButton" alignment="CENTER" layoutX="502.0" layoutY="708.0"
-              onAction="#sendMessageRequest">
+   <JFXButton fx:id="sendMessageButton" alignment="CENTER" layoutX="502.0" layoutY="708.0" onAction="#sendMessageRequest">
       <graphic>
-         <FontAwesomeIconView fill="#6d5dd3" glyphName="SEND" size="20"/>
+         <FontAwesomeIconView fill="#6d5dd3" glyphName="SEND" size="20" />
       </graphic>
    </JFXButton>
-   <JFXButton layoutX="285.0" layoutY="672.0" onAction="#update" text="update"/>
-   <JFXListView fx:id="chatList" layoutX="37.0" layoutY="65.0" prefHeight="567.0" prefWidth="637.0"
-                styleClass="chatList, list-view"/>
+   <JFXButton layoutX="285.0" layoutY="605.0" onAction="#update" text="update" />
+   <JFXListView fx:id="chatList" layoutX="37.0" layoutY="65.0" prefHeight="567.0" prefWidth="637.0" styleClass="scroll-pane, chatList, list-view" />
    <JFXButton fx:id="doneButton" layoutX="503.0" layoutY="705.0" onMouseClicked="#doneEditing">
       <graphic>
-         <FontAwesomeIconView fill="#6d5dd3" glyphName="CHECK_CIRCLE" size="25"/>
+         <FontAwesomeIconView fill="#6d5dd3" glyphName="CHECK_CIRCLE" size="25" />
       </graphic>
    </JFXButton>
    <JFXButton fx:id="cancelButton" layoutX="537.0" layoutY="706.0" onMouseClicked="#cancelEditing">
       <graphic>
-         <FontAwesomeIconView fill="#2c2c39" glyphName="CLOSE" size="18"/>
+         <FontAwesomeIconView fill="#2c2c39" glyphName="CLOSE" size="18" />
       </graphic>
    </JFXButton>
+   <HBox fx:id="replyContainer" alignment="BASELINE_LEFT" layoutX="127.0" layoutY="651.0" prefWidth="370.0"
+         styleClass="replyContainer">
+      <Text fx:id="replyText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="replyText" text="Text">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0"/>
+         </HBox.margin>
+      </Text>
+      <FontAwesomeIconView fx:id="cancelReplyButton" onMouseClicked="#CancelReplyState" fill="#515468" glyphName="CLOSE"
+                           textOrigin="TOP" translateX="300.0"/>
+   </HBox>
 
 </AnchorPane>

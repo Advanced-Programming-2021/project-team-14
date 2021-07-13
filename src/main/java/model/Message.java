@@ -17,13 +17,14 @@ public class Message{
 
     private String message;
     private String username;
-    private boolean edited;
+    private boolean edited, deleted;
     private String time;
 
 
     public Message(User user, String message){
         this.time = getCurrentTime();
         this.edited = false;
+        this.deleted = false;
         this.username = user.getUsername();
         this.message = message;
         this.id = messagesIdCounter;
@@ -44,7 +45,16 @@ public class Message{
     }
 
     public static void removeMessage(int messageId) {
-        messages.remove(messageId);
+        messages.get(messageId).delete();
+    }
+
+    private void delete() {
+        deleted = true;
+        setMessage("this message is deleted!");
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 
     public int getId() {

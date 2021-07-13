@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 public class Bubble extends AnchorPane {
 
 
+    private int id;
     private String text;
     private int p = 12;
     private int s = 2;
@@ -27,12 +28,17 @@ public class Bubble extends AnchorPane {
     private String meta;
 
 
-    public Bubble(String text, boolean isMine, boolean edited, String time) {
+    public Bubble(String text, boolean isMine, boolean edited, String time, int id) {
         super();
         this.text = text;
         this.isMine = isMine;
         this.meta = (edited ? "edited " : "") + time;
+        this.id = id;
         init();
+    }
+
+    public int getMessageId() {
+        return id;
     }
 
     private void init() {
@@ -94,8 +100,6 @@ public class Bubble extends AnchorPane {
     public void update(String text) {
         System.out.println("updating");
         getChildren().remove(0, getChildren().size() - 1);
-        if (!meta.contains("ed"))
-            meta = "ed " + meta;
         this.text = text;
         init();
     }

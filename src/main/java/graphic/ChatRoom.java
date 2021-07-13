@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import graphic.component.Bubble;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -13,8 +14,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Message;
+import sun.misc.resources.Messages;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
@@ -27,13 +32,20 @@ public class ChatRoom {
     public JFXListView<Bubble> chatList;
     public JFXButton doneButton, cancelButton;
     public JFXButton sendMessageButton;
+    public HBox replyContainer;
+    public Text replyText;
+    public FontAwesomeIconView cancelReplyButton;
     private ArrayList<Message> messages;
     private int clickedCellId;
+    private boolean isReplyState;
+    private Bubble replyingBubble;
 
 
     @FXML
     public void initialize() {
         setVisibility(true);
+        replyContainer.setVisible(false);
+
         updateRequest();
         messages = new Gson().fromJson(Request.getResponse().getString("allMessages"), new TypeToken<ArrayList<Message>>() {
         }.getType());
@@ -58,22 +70,18 @@ public class ChatRoom {
             updateRequest();
             ArrayList<Message> newMessages = new Gson().fromJson(Request.getResponse().getString("allMessages"), new TypeToken<ArrayList<Message>>() {
             }.getType());
-
+            System.out.println("updating");
             for (int i = 0; i < newMessages.size(); i++) {
-                if (i > messages.size() - 1) {
+                if (i > messages.size() - 1){
                     addCell(newMessages.get(i));
-                } else {
-                        Message history = messages.get(i);
-                    if (newMessages.get(i).getId() != (messages.get(i).getId())) {
-                        System.out.println("there must be a deleting message, not? : " + history.getMessage() + " " + history.getUsername() + " " + history.getUsername());
-                        removeCellByMessage(messages.get(i));
-                        messages.remove(messages.get(i));
-                    }
-                    history = messages.get(i);
-                    if (!newMessages.get(i).getMessage().equals(history.getMessage())) {
-
-                        System.out.println("updating the message:" + history.getMessage() + " -> " + newMessages.get(i).getMessage());
-                        updateCell(newMessages.get(i), i);
+                }else{
+                    Message oldMessage = messages.get(i);
+                    Message newMessage = newMessages.get(i);
+                    if (newMessage.isDeleted()) {
+                        updateCell(newMessage, i);
+                        chatList.getItems().get(i).setDisable(true);
+                    }else if (!newMessage.getMessage().equals(oldMessage.getMessage())){
+                        updateCell(newMessage, i);
                     }
                 }
             }
@@ -83,16 +91,7 @@ public class ChatRoom {
 
     }
 
-    private void removeCellByMessage(Message message) {
-        System.out.println("removing");
-        for (int i = 0; i < chatList.getItems().size(); i++) {
 
-            if (chatList.getItems().get(i).getText().equals(message.getMessage())) {
-                chatList.getItems().remove(chatList.getItems().get(i));
-                break;
-            }
-        }
-    }
 
     private void updateCell(Message message, int index) {
         chatList.getItems().get(index).update(message.getMessage());
@@ -124,21 +123,30 @@ public class ChatRoom {
     }
 
     private void addCell(Message message) {
-        Bubble bubble = new Bubble(message.getMessage(), message.getUsername().equals(Menu.currentUser.getUsername()), message.isEdited(), message.getTime());
+        Bubble bubble = new Bubble(message.getMessage(), message.getUsername().equals(Menu.currentUser.getUsername()), message.isEdited(), message.getTime(), message.getId());
 
         ContextMenu contextMenu = new ContextMenu();
 
         MenuItem edit = new MenuItem("Edit");
         MenuItem remove = new MenuItem("Remove");
+        MenuItem reply = new MenuItem("Reply");
 
-        contextMenu.getItems().addAll(edit, remove);
+        contextMenu.getItems().addAll(edit, remove, reply);
         edit.setOnAction(e -> editState(message.getMessage(), message.getId()));
         remove.setOnAction(e -> removeMessage(message.getId()));
+        reply.setOnAction(e -> setReplyState(bubble, message));
 
         bubble.setOnContextMenuRequested(event -> contextMenu.show(bubble, event.getScreenX(), event.getScreenY()));
         setAnimations(bubble);
         chatList.getItems().add(bubble);
         chatList.scrollTo(bubble);
+    }
+
+    private void setReplyState(Bubble bubble, Message message) {
+        replyContainer.setVisible(true);
+        isReplyState = true;
+        replyText.setText(String.valueOf(message.getMessage().subSequence(0, 3)));
+        this.replyingBubble = bubble;
     }
 
     private void setAnimations(Bubble bubble) {
@@ -195,4 +203,8 @@ public class ChatRoom {
         sendMessageButton.setVisible(isNormalState);
     }
 
+    public void CancelReplyState(MouseEvent mouseEvent) {
+        isReplyState = false;
+        replyContainer.setVisible(false);
+    }
 }
