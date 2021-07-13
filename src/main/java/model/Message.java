@@ -19,9 +19,11 @@ public class Message{
     private String username;
     private boolean edited, deleted;
     private String time;
+    private int repliedTo;
 
 
-    public Message(User user, String message){
+    public Message(User user, String message, int repliedTo){
+        this.repliedTo = repliedTo;
         this.time = getCurrentTime();
         this.edited = false;
         this.deleted = false;
@@ -29,6 +31,10 @@ public class Message{
         this.message = message;
         this.id = messagesIdCounter;
         addToMessages(messagesIdCounter++, this);
+    }
+
+    public int getRepliedTo() {
+        return repliedTo;
     }
 
     public String getTime() {

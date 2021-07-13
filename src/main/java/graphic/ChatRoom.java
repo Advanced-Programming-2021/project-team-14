@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Message;
-import sun.misc.resources.Messages;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
@@ -45,7 +44,7 @@ public class ChatRoom {
     public void initialize() {
         setVisibility(true);
         replyContainer.setVisible(false);
-
+        isReplyState = false;
         updateRequest();
         messages = new Gson().fromJson(Request.getResponse().getString("allMessages"), new TypeToken<ArrayList<Message>>() {
         }.getType());
@@ -72,16 +71,18 @@ public class ChatRoom {
             }.getType());
             System.out.println("updating");
             for (int i = 0; i < newMessages.size(); i++) {
-                if (i > messages.size() - 1){
+                if (i > messages.size() - 1) {
                     addCell(newMessages.get(i));
-                }else{
+                } else {
                     Message oldMessage = messages.get(i);
                     Message newMessage = newMessages.get(i);
                     if (newMessage.isDeleted()) {
                         updateCell(newMessage, i);
                         chatList.getItems().get(i).setDisable(true);
-                    }else if (!newMessage.getMessage().equals(oldMessage.getMessage())){
+                    } else if (!newMessage.getMessage().equals(oldMessage.getMessage())) {
                         updateCell(newMessage, i);
+                    } else if (newMessage.getRepliedTo() != oldMessage.getRepliedTo()){
+                        updateCell(newMessage.getRepliedTo(), i);
                     }
                 }
             }
@@ -92,9 +93,11 @@ public class ChatRoom {
     }
 
 
-
     private void updateCell(Message message, int index) {
         chatList.getItems().get(index).update(message.getMessage());
+    }
+    private void updateCell(int newReplyContent, int index) {
+        chatList.getItems().get(index).update(newReplyContent);
     }
 
     private void editMessageRequest(String editedText, int id) {
@@ -116,6 +119,14 @@ public class ChatRoom {
         Request.setCommandTag(CommandTags.SEND_MESSAGE);
         Request.addData("view", Menus.CHAT.getLabel());
         Request.addData("message", textField.getText());
+
+        System.out.println(replyingBubble);
+        System.out.println(isReplyState);
+        if (isReplyState){
+            System.out.println("adding data");
+            Request.addData("repliedTo", String.valueOf(replyingBubble.getMessageId()));
+        }
+
         Request.send();
         textField.clear();
         update();
@@ -123,18 +134,28 @@ public class ChatRoom {
     }
 
     private void addCell(Message message) {
-        Bubble bubble = new Bubble(message.getMessage(), message.getUsername().equals(Menu.currentUser.getUsername()), message.isEdited(), message.getTime(), message.getId());
+        Bubble bubble = new Bubble(message.getMessage(), message.getUsername().equals(Menu.currentUser.getUsername()), message.isEdited(), message.getTime(), message.getId(), message.getRepliedTo());
 
         ContextMenu contextMenu = new ContextMenu();
 
         MenuItem edit = new MenuItem("Edit");
         MenuItem remove = new MenuItem("Remove");
         MenuItem reply = new MenuItem("Reply");
+        MenuItem viewReply = new MenuItem("View Replied Msg");
+        System.out.println(message.getRepliedTo());
+        if (message.getRepliedTo() > -1) {
+            contextMenu.getItems().addAll(edit, remove, reply, viewReply);
+        }else{
+            contextMenu.getItems().addAll(edit, remove, reply);
+        }
 
-        contextMenu.getItems().addAll(edit, remove, reply);
         edit.setOnAction(e -> editState(message.getMessage(), message.getId()));
         remove.setOnAction(e -> removeMessage(message.getId()));
         reply.setOnAction(e -> setReplyState(bubble, message));
+        viewReply.setOnAction(e -> {
+            chatList.scrollTo(getBubbleById(message.getRepliedTo()));
+
+        });
 
         bubble.setOnContextMenuRequested(event -> contextMenu.show(bubble, event.getScreenX(), event.getScreenY()));
         setAnimations(bubble);
@@ -142,11 +163,21 @@ public class ChatRoom {
         chatList.scrollTo(bubble);
     }
 
+    private Bubble getBubbleById(int repliedTo) {
+        for (int i = 0; i < chatList.getItems().size(); i++) {
+            Bubble item = chatList.getItems().get(i);
+            if (item.getMessageId() == repliedTo)
+                return item;
+        }
+        return null;
+    }
+
     private void setReplyState(Bubble bubble, Message message) {
+        this.replyingBubble = bubble;
+        System.out.println(replyingBubble);
         replyContainer.setVisible(true);
         isReplyState = true;
-        replyText.setText(String.valueOf(message.getMessage().subSequence(0, 3)));
-        this.replyingBubble = bubble;
+        replyText.setText(message.getMessage());
     }
 
     private void setAnimations(Bubble bubble) {

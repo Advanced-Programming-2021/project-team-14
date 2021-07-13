@@ -24,15 +24,17 @@ public class Bubble extends AnchorPane {
     private Rectangle r;
 
     private int edgeRadius = 15;
+    private int repliedTo;
     private boolean isMine;
     private String meta;
 
 
-    public Bubble(String text, boolean isMine, boolean edited, String time, int id) {
+    public Bubble(String text, boolean isMine, boolean edited, String time, int id, int repliedTo) {
         super();
+        this.repliedTo = repliedTo;
         this.text = text;
         this.isMine = isMine;
-        this.meta = (edited ? "edited " : "") + time;
+        this.meta = (edited ? "e " : "") + time;
         this.id = id;
         init();
     }
@@ -108,4 +110,7 @@ public class Bubble extends AnchorPane {
         return text;
     }
 
+    public void update(int newReplyContent) {
+        repliedTo = newReplyContent;
+    }
 }

@@ -20,7 +20,7 @@ public class ServerChatController {
             case SEND_MESSAGE:
                 response.success();
                 response.addMessage("send successfully");
-                new Message(user, request.getString("message"));
+                new Message(user, request.getString("message"), request.has("repliedTo") ? request.getInt("repliedTo") : -1);
                 break;
             case EDIT_MESSAGE:
                 Message.getMessageById(request.getInt("messageId")).edit(request.getString("editedMessage"));
