@@ -14,9 +14,15 @@ public class Shake {
         tt.setByX(10f);
         tt.setCycleCount(3);
         tt.setAutoReverse(true);
+        tt.setOnFinished(e -> node.setTranslateX(0));
     }
 
     public void shake() {
+        tt.playFromStart();
+    }
+
+    public void littleShake() {
+        tt.setDuration(Duration.millis(100));
         tt.playFromStart();
     }
 }

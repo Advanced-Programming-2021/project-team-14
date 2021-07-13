@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import graphic.animation.Shake;
 import graphic.component.Bubble;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -81,7 +82,7 @@ public class ChatRoom {
                         chatList.getItems().get(i).setDisable(true);
                     } else if (!newMessage.getMessage().equals(oldMessage.getMessage())) {
                         updateCell(newMessage, i);
-                    } else if (newMessage.getRepliedTo() != oldMessage.getRepliedTo()){
+                    } else if (newMessage.getRepliedTo() != oldMessage.getRepliedTo()) {
                         updateCell(newMessage.getRepliedTo(), i);
                     }
                 }
@@ -96,6 +97,7 @@ public class ChatRoom {
     private void updateCell(Message message, int index) {
         chatList.getItems().get(index).update(message.getMessage());
     }
+
     private void updateCell(int newReplyContent, int index) {
         chatList.getItems().get(index).update(newReplyContent);
     }
@@ -122,7 +124,7 @@ public class ChatRoom {
 
         System.out.println(replyingBubble);
         System.out.println(isReplyState);
-        if (isReplyState){
+        if (isReplyState) {
             System.out.println("adding data");
             Request.addData("repliedTo", String.valueOf(replyingBubble.getMessageId()));
         }
@@ -145,7 +147,7 @@ public class ChatRoom {
         System.out.println(message.getRepliedTo());
         if (message.getRepliedTo() > -1) {
             contextMenu.getItems().addAll(edit, remove, reply, viewReply);
-        }else{
+        } else {
             contextMenu.getItems().addAll(edit, remove, reply);
         }
 
@@ -153,8 +155,9 @@ public class ChatRoom {
         remove.setOnAction(e -> removeMessage(message.getId()));
         reply.setOnAction(e -> setReplyState(bubble, message));
         viewReply.setOnAction(e -> {
-            chatList.scrollTo(getBubbleById(message.getRepliedTo()));
-
+            Bubble repliedBubble = getBubbleById(message.getRepliedTo());
+            chatList.scrollTo(repliedBubble);
+            new Shake(repliedBubble).littleShake();
         });
 
         bubble.setOnContextMenuRequested(event -> contextMenu.show(bubble, event.getScreenX(), event.getScreenY()));
