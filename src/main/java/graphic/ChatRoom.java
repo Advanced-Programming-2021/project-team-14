@@ -15,13 +15,18 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Message;
 import model.SimpleUser;
+import sample.MainGraphic;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
@@ -38,6 +43,11 @@ public class ChatRoom {
     public Text replyText;
     public FontAwesomeIconView cancelReplyButton;
     public JFXListView<UserListItem> usersList;
+    public AnchorPane profileContainer;
+    public ImageView profilePhoto;
+    public Label profileUsername;
+    public Label profileNickname;
+    public JFXButton backToUserLists;
     private ArrayList<Message> messages;
     private ArrayList<SimpleUser> allUsers;
     private ArrayList<String> onlineUsers;
@@ -71,12 +81,24 @@ public class ChatRoom {
                 }
             }
         }).start();
+
     }
 
     private void addUserCell(SimpleUser simpleUser) {
-        System.out.println("simple user: " + simpleUser + " -> username: " + simpleUser.getUsername());
         UserListItem item = new UserListItem(simpleUser);
+        item.setOnMouseClicked(e -> {
+            profileContainer.setVisible(true);
+            backToUserLists.setVisible(true);
+            usersList.setVisible(false);
+            setProfileData(simpleUser);
+        });
         usersList.getItems().add(item);
+    }
+
+    private void setProfileData(SimpleUser simpleUser) {
+        profilePhoto.setImage(new Image(MainGraphic.class.getResource("PNG/profile.png").toString()));
+        profileUsername.setText(simpleUser.getUsername());
+        profileNickname.setText(simpleUser.getNickname());
     }
 
 
@@ -93,14 +115,11 @@ public class ChatRoom {
             }.getType());
             ArrayList<String> onlineUsersUpdated = new Gson().fromJson(Request.getResponse().getString("onlineUsers"), new TypeToken<ArrayList<String>>() {
             }.getType());
-            onlineUsersUpdated.forEach(u -> System.out.print(u + " | "));
             for (int i = 0; i < allUsersUpdated.size(); i++) {
                 if (i > allUsers.size() - 1) {
                     addUserCell(allUsersUpdated.get(i));
                 } else {
-                    boolean test = onlineUsersUpdated.contains(allUsers.get(i).getUsername());
-                    System.out.println(test);
-                    usersList.getItems().get(i).update(test);
+                    usersList.getItems().get(i).update(onlineUsersUpdated.contains(allUsers.get(i).getUsername()));
                 }
 
             }
@@ -285,5 +304,11 @@ public class ChatRoom {
     public void CancelReplyState(MouseEvent mouseEvent) {
         isReplyState = false;
         replyContainer.setVisible(false);
+    }
+
+    public void backToUserLists(MouseEvent mouseEvent) {
+        profileContainer.setVisible(false);
+        usersList.setVisible(true);
+        backToUserLists.setVisible(false);
     }
 }

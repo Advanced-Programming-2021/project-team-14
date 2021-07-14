@@ -19,7 +19,6 @@ public class UserListItem extends AnchorPane implements ComponentLoader {
 
     public UserListItem(SimpleUser user) {
         load("userListItem");
-        System.out.println(user.getUsername());
         username.setText(user.getUsername());
         shortUsername.setText(String.valueOf(user.getUsername().charAt(0)).toUpperCase(Locale.ROOT));
     }
