@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTextArea;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import graphic.animation.Shake;
 import graphic.component.Bubble;
+import graphic.component.UserListItem;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -20,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Message;
+import model.SimpleUser;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
@@ -35,7 +37,10 @@ public class ChatRoom {
     public HBox replyContainer;
     public Text replyText;
     public FontAwesomeIconView cancelReplyButton;
+    public JFXListView<UserListItem> usersList;
     private ArrayList<Message> messages;
+    private ArrayList<SimpleUser> allUsers;
+    private ArrayList<String> onlineUsers;
     private int clickedCellId;
     private boolean isReplyState;
     private Bubble replyingBubble;
@@ -49,6 +54,11 @@ public class ChatRoom {
         updateRequest();
         messages = new Gson().fromJson(Request.getResponse().getString("allMessages"), new TypeToken<ArrayList<Message>>() {
         }.getType());
+        onlineUsers = new Gson().fromJson(Request.getResponse().getString("onlineUsers"), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        allUsers = new Gson().fromJson(Request.getResponse().getString("allUsers"), new TypeToken<ArrayList<SimpleUser>>() {
+        }.getType());
+        allUsers.forEach(this::addUserCell);
         messages.forEach(this::addCell);
         new Thread(() -> {
             System.out.println(Menu.getData());
@@ -63,13 +73,49 @@ public class ChatRoom {
         }).start();
     }
 
+    private void addUserCell(SimpleUser simpleUser) {
+        System.out.println("simple user: " + simpleUser + " -> username: " + simpleUser.getUsername());
+        UserListItem item = new UserListItem(simpleUser);
+        usersList.getItems().add(item);
+    }
+
 
     @FXML
     private void update() {
+        updateMessages();
+        updateUsers();
+
+    }
+
+    private void updateUsers() {
+        Platform.runLater(() -> {
+            ArrayList<SimpleUser> allUsersUpdated = new Gson().fromJson(Request.getResponse().getString("allUsers"), new TypeToken<ArrayList<SimpleUser>>() {
+            }.getType());
+            ArrayList<String> onlineUsersUpdated = new Gson().fromJson(Request.getResponse().getString("onlineUsers"), new TypeToken<ArrayList<String>>() {
+            }.getType());
+            onlineUsersUpdated.forEach(u -> System.out.print(u + " | "));
+            for (int i = 0; i < allUsersUpdated.size(); i++) {
+                if (i > allUsers.size() - 1) {
+                    addUserCell(allUsersUpdated.get(i));
+                } else {
+                    boolean test = onlineUsersUpdated.contains(allUsers.get(i).getUsername());
+                    System.out.println(test);
+                    usersList.getItems().get(i).update(test);
+                }
+
+            }
+            allUsers = allUsersUpdated;
+            onlineUsers = onlineUsersUpdated;
+        });
+
+    }
+
+    private void updateMessages() {
         Platform.runLater(() -> {
             updateRequest();
             ArrayList<Message> newMessages = new Gson().fromJson(Request.getResponse().getString("allMessages"), new TypeToken<ArrayList<Message>>() {
             }.getType());
+
             System.out.println("updating");
             for (int i = 0; i < newMessages.size(); i++) {
                 if (i > messages.size() - 1) {
@@ -90,7 +136,6 @@ public class ChatRoom {
             messages = newMessages;
 
         });
-
     }
 
 

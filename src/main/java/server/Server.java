@@ -1,11 +1,14 @@
 package server;
 
 import model.Database;
+import model.SimpleUser;
 import model.User;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -24,6 +27,16 @@ public class Server {
         Database.prepareDatabase();
         onlineUsers = new HashMap<>();
         runServer();
+    }
+
+    public static int getNumberOfOnlineUsers() {
+        return numberOfOnlineUsers;
+    }
+
+    public static ArrayList<String> getOnlineUsers() {
+        ArrayList<String> usernames = new ArrayList<>();
+        onlineUsers.values().forEach(u -> usernames.add(u.getUsername()));
+        return usernames;
     }
 
     private static void runServer() {

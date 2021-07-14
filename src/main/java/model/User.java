@@ -17,8 +17,8 @@ public class User {
     private Wallet wallet;
     private String activeDeck;
     private HashMap<String, Deck> decks;
-    private String username;
     private String password;
+    private String username;
     private String nickname;
     private int score;
     private int rank;
@@ -37,11 +37,13 @@ public class User {
         hasProfilePhoto = false;
         gamesPlayed = 0;
         updateDatabase();
+        new SimpleUser(this);
     }
 
     public User(User user, String username) {
         nicknames.add(user.getNickname());
         users.put(username, user);
+        new SimpleUser(user);
     }
 
     public static void addUser(User user) {

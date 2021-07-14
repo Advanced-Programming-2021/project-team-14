@@ -13,6 +13,7 @@ public enum CommandTags {
     SEND_MESSAGE("send message"),
     EDIT_MESSAGE("edit message"),
     REMOVE_MESSAGE("remove message"),
+    USER_PROFILE_SHOW("show user profile"),
 
     CREATE_DECK("create-deck"),
     CARD_NOT_FOUND("card not found!"),
