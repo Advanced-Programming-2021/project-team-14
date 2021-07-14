@@ -7,16 +7,19 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import graphic.animation.Shake;
+import graphic.animation.Swip;
 import graphic.component.Bubble;
 import graphic.component.UserListItem;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -81,6 +84,7 @@ public class ChatRoom {
                 }
             }
         }).start();
+        usersList.setVerticalGap(-5d);
 
     }
 
@@ -91,6 +95,17 @@ public class ChatRoom {
             backToUserLists.setVisible(true);
             usersList.setVisible(false);
             setProfileData(simpleUser);
+        });
+
+        Swip swip = new Swip(item);
+        item.setOnMouseEntered(e -> {
+            swip.play();
+            item.setStyle("-fx-background-color: #312253");
+        });
+        item.setOnMouseExited(e -> {
+            swip.stop();
+            item.setStyle("-fx-background-color: transparent");
+            item.setTranslateX(0);
         });
         usersList.getItems().add(item);
     }

@@ -26,4 +26,5 @@ public class UserListItem extends AnchorPane implements ComponentLoader {
     public void update(boolean isOnline) {
         circle.setVisible(isOnline);
     }
+
 }
