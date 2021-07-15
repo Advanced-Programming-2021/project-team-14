@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,7 +25,10 @@ public class User {
     private int score;
     private int rank;
     private boolean hasProfilePhoto;
+    private boolean hasProfileCircle;
     private int gamesPlayed;
+    private String imageString;
+
 
     public User(String username, String password, String nickname) {
         this.username = username;
@@ -35,6 +40,7 @@ public class User {
         this.decks = new HashMap<>();
         this.activeDeck = null;
         hasProfilePhoto = false;
+        hasProfileCircle = false;
         gamesPlayed = 0;
         updateDatabase();
         new SimpleUser(this);
@@ -89,12 +95,30 @@ public class User {
         this.updateDatabase();
     }
 
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+        updateDatabase();
+    }
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setHasProfileCircle(boolean hasProfileCircle) {
+        this.hasProfileCircle = hasProfileCircle;
+        this.updateDatabase();
+    }
+
     public int getGamesPlayed() {
         return gamesPlayed;
     }
 
     public boolean hasProfilePhoto() {
         return hasProfilePhoto;
+    }
+
+    public boolean hasProfileCircle() {
+        return hasProfileCircle;
     }
 
     public boolean doesDeckExist(String deckName) {
@@ -149,7 +173,7 @@ public class User {
         return this.rank;
     }
 
-    public void increaseGamesPlayed(){
+    public void increaseGamesPlayed() {
         gamesPlayed++;
     }
 
@@ -164,6 +188,7 @@ public class User {
 
     public void changePassword(String newPassword) {
         this.password = newPassword;
+        this.updateDatabase();
     }
 
 
@@ -171,12 +196,14 @@ public class User {
         nicknames.remove(this.nickname);    // remove old nickname
         nicknames.add(newNickname);         // add new nickname
         this.nickname = newNickname;
+        this.updateDatabase();
     }
 
     public void changeUsername(String newUsername) {
         users.remove(this.username);        // remove old username
         users.put(newUsername, this);       // add new username
         this.username = newUsername;
+        this.updateDatabase();
     }
 
     public Deck getDeck(String deckName) {

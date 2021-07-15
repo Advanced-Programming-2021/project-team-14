@@ -1,5 +1,6 @@
 package graphic;
 
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import graphic.animation.Shake;
@@ -14,19 +15,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import model.Database;
-import model.card.enums.CardType;
 import sample.MainGraphic;
 import view.Console;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 
 public class ProfileMenu extends Menu {
@@ -45,8 +43,6 @@ public class ProfileMenu extends Menu {
     public AnchorPane mainPane;
 
     private JFXButton currentProfileButton;
-    private Circle currentCircle;
-    private Label currentUsername;
     private ImageView currentProfilePhoto;
 
     @FXML
@@ -64,21 +60,16 @@ public class ProfileMenu extends Menu {
     }
 
     private void setProfilePic() {
-        if (currentUser.hasProfilePhoto()) {
-            try {
-                setProfilePhoto();
-                setProfileButton("-");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                setProfileCircle();
-                setProfileButton("+");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (!currentUser.hasProfilePhoto()) {
+            saveCircle(Color.color(Math.random(), Math.random(), Math.random()));
         }
+
+        setProfilePhoto();
+        if (currentUser.hasProfilePhoto())
+            setProfileButton("-");
+        else
+            setProfileButton("+");
+        currentProfileButton.toFront();
     }
 
     private void setProfileButton(String sign) {
@@ -89,33 +80,33 @@ public class ProfileMenu extends Menu {
         profileButton.setText(sign);
         mainPane.getChildren().add(profileButton);
         this.currentProfileButton = profileButton;
-
-        profileButton.setOnAction(event -> profileButtonOnAction());
+        profileButton.setOnAction(event -> sendChangeProfilePhotoRequest());
     }
 
-    private void profileButtonOnAction() {
-        sendChangeProfilePhotoRequest();
 
-    }
-
-    private void changeProfilePhotoView() {
+    private void changeProfilePhotoView(String path) {
         if (!Request.isSuccessful()) {
             new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
         } else {
             new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
-            if (currentUser.hasProfilePhoto()) {
-                mainPane.getChildren().remove(currentCircle);
-                mainPane.getChildren().remove(currentUsername);
-                setProfilePhoto();
+            mainPane.getChildren().remove(currentProfilePhoto);
+
+            if (!currentUser.hasProfilePhoto()) {
+                Database.saveProfilePhoto(path, currentUser.getUsername());
+                currentUser.setHasProfilePhoto(true);
                 currentProfileButton.setText("-");
             } else {
-                mainPane.getChildren().remove(currentProfilePhoto);
-                setProfileCircle();
+                Database.removeProfilePhoto(currentUser.getUsername());
+                currentUser.setHasProfilePhoto(false);
                 currentProfileButton.setText("+");
+                if (!currentUser.hasProfileCircle())
+                    saveCircle(Color.color(Math.random(), Math.random(), Math.random()));
             }
+            setProfilePhoto();
             currentProfileButton.toFront();
         }
     }
+
 
     private void sendChangeProfilePhotoRequest() {
         if (!currentUser.hasProfilePhoto()) {
@@ -124,20 +115,25 @@ public class ProfileMenu extends Menu {
             setFilter(fileChooser);
             File f = fileChooser.showOpenDialog(MainGraphic.getStage());
             if (f != null) {
+                BufferedImage rawImage = null;
+                rawImage = Database.getBufferedImage(rawImage, f.getPath());
+                String imageString = Database.convertImageToString(rawImage);
                 Request.setCommandTag(CommandTags.SET_PROFILE_PHOTO);
                 Request.addData("view", Menus.PROFILE_MENU.getLabel());
-                Request.addData("path", f.getPath());
+                Request.addData("image", imageString);
                 Request.send();
-                changeProfilePhotoView();
+                changeProfilePhotoView(f.getPath());
+
             }
         } else {
             Request.setCommandTag(CommandTags.REMOVE_PROFILE_PHOTO);
             Request.addData("view", Menus.PROFILE_MENU.getLabel());
             Request.send();
-            changeProfilePhotoView();
+            changeProfilePhotoView(null);
         }
 
     }
+
 
     private void setFilter(FileChooser fileChooser) {
         //Set extension filter
@@ -148,29 +144,9 @@ public class ProfileMenu extends Menu {
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
     }
 
-    private void setProfileCircle() {
-        Circle circle = new Circle(490, 110, 50);
-        circle.getStyleClass().add("circle");
-        Color color = Color.color(Math.random(), Math.random(), Math.random());
-        circle.setFill(color);
-        Label username = new Label(currentUser.getUsername().substring(0, 1));
-        username.setLayoutY(60);
-        username.setLayoutX(440);
-        username.getStyleClass().add("profile_username");
-        this.currentCircle = circle;
-        this.currentUsername = username;
-        mainPane.getChildren().add(circle);
-        mainPane.getChildren().add(username);
-        saveCircle(color);
-
-    }
-
-
     private void saveCircle(Color color) {
         BufferedImage rawImage = null;
-
-        rawImage = Database.getMainProfileBufferedImage(rawImage);
-
+        rawImage = Database.getBufferedImage(rawImage, "Resources\\ProfileImages\\aiPlayer.png");
         java.awt.Color awtColor = new java.awt.Color((float) color.getRed(),
                 (float) color.getGreen(),
                 (float) color.getBlue(),
@@ -182,18 +158,47 @@ public class ProfileMenu extends Menu {
 
         graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
         graphics.setColor(java.awt.Color.WHITE);
-        graphics.drawString(currentUser.getUsername().substring(0, 1), rawImage.getWidth()/2-20,rawImage.getHeight()/2+20);
+        graphics.drawString(currentUser.getUsername().substring(0, 1), rawImage.getWidth() / 2 - 20, rawImage.getHeight() / 2 + 20);
 
         graphics.dispose();
 
-        Database.saveProfileCircle(rawImage, currentUser.getUsername());
+        String imageString = Database.convertImageToString(rawImage);
+        Request.setCommandTag(CommandTags.SET_PROFILE_CIRCLE);
+        Request.addData("view", Menus.PROFILE_MENU.getLabel());
+        Request.addData("image", imageString);
+        Request.send();
+
+        if (Request.isSuccessful()) {
+            Database.saveProfileCircle(rawImage, currentUser.getUsername());
+            currentUser.setHasProfileCircle(true);
+        } else
+            new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
+
     }
-
-
 
     private void setProfilePhoto() {
         ImageView profileImage = new ImageView();
-        Image image = Database.getProfilePhoto(currentUser.getUsername());
+        Image image = null;
+
+        try {
+            if (currentUser.hasProfilePhoto()) {
+                image = Database.getProfilePhoto(currentUser.getUsername());
+            } else
+                image = Database.getProfilePhoto(currentUser.getUsername() + "_circle");
+        } catch (Exception e) {
+            Request.setCommandTag(CommandTags.GET_PROFILE_PHOTO);
+            Request.addData("view", Menus.PROFILE_MENU.getLabel());
+            Request.send();
+
+            if (Request.isSuccessful())
+                image = Database.convertStringToImage(Request.getMessage());
+            else
+                saveCircle(Color.color(Math.random(), Math.random(), Math.random()));
+        }
+
+        if (image == null)
+            saveCircle(Color.color(Math.random(), Math.random(), Math.random()));
+
         profileImage.setImage(image);
         profileImage.setFitHeight(100);
         profileImage.setFitWidth(100);
@@ -208,18 +213,19 @@ public class ProfileMenu extends Menu {
         if (currentPassField.getText().isEmpty() || newPassField.getText().isEmpty()) {
             new SnackBarComponent("please enter current and new password", ResultState.ERROR, getRoot());
         } else {
+            String newPass = newPassField.getText();
             Request.setCommandTag(CommandTags.CHANGE_PASSWORD);
             Request.addData("view", Menus.PROFILE_MENU.getLabel());
             Request.addData("current", currentPassField.getText());
-            Request.addData("new", newPassField.getText());
+            Request.addData("new", newPass);
             Request.send();
 
-            if (!Request.isSuccessful()){
+            if (!Request.isSuccessful()) {
                 new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
-            }
-            else
+            } else {
+                currentUser.changePassword(newPass);
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
-
+            }
             Console.print(Request.getMessage());
         }
     }
@@ -229,18 +235,19 @@ public class ProfileMenu extends Menu {
         if (nicknameField.getText().isEmpty()) {
             new SnackBarComponent("please enter new nickname", ResultState.ERROR, getRoot());
         } else {
+            String newNickname = nicknameField.getText();
             Request.setCommandTag(CommandTags.CHANGE_NICKNAME);
             Request.addData("view", Menus.PROFILE_MENU.getLabel());
-            Request.addData("new", nicknameField.getText());
+            Request.addData("new", newNickname);
             Request.send();
 
-            if (!Request.isSuccessful()){
+            if (!Request.isSuccessful()) {
                 new SnackBarComponent(Request.getMessage(), ResultState.ERROR, getRoot());
                 new Shake(nicknameField);
-            }
-            else
+            } else {
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, getRoot());
-
+                currentUser.changeNickname(newNickname);
+            }
             Console.print(Request.getMessage());
         }
     }

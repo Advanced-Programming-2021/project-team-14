@@ -10,20 +10,21 @@ import model.card.Card;
 import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.*;
+import org.apache.commons.io.FileExistsException;
 import org.json.JSONObject;
 import view.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.sun.org.apache.xml.internal.security.utils.XMLUtils.encodeToString;
 
 public class Database {
     private static final String spellTrapDirectory = "Resources\\Cards\\SpellTrap.csv";
@@ -90,6 +91,33 @@ public class Database {
         return cardNames;
     }
 
+    public static byte[] bufferedImageToByteArray(BufferedImage image, String format) throws IOException {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, format, baos);
+        return baos.toByteArray();
+    }
+
+    public static String convertImageToString(BufferedImage image) {
+        try {
+            byte[] imageByteArray = bufferedImageToByteArray(image, "png");
+            return encodeToString(imageByteArray);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static Image convertStringToImage(String imageString) {
+        try {
+            byte[] imageByteArray = Base64.getDecoder().decode(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByteArray);
+            BufferedImage bufferedImage  = ImageIO.read(bis);
+            return new Image(String.valueOf(bufferedImage));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static DatabaseResponses saveProfilePhoto(String path, String username) {
         File f = new File(path);
         File file = new File(profileImagesDirectory + "\\" + username + ".png");
@@ -114,22 +142,22 @@ public class Database {
         }
     }
 
-    public static Image getProfilePhoto(String username) {
+    public static Image getProfilePhoto(String username) throws Exception {
         File file = new File(profileImagesDirectory + "\\" + username + ".png");
         if (file.exists()) {
             try {
                 return new Image(String.valueOf(file.toURL()));
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new FileNotFoundException();
             }
         }
         return null;
     }
 
 
-    public static BufferedImage getMainProfileBufferedImage(BufferedImage rawImage) {
+    public static BufferedImage getBufferedImage(BufferedImage rawImage, String path) {
         try {
-            File f = new File(profileImagesDirectory + "\\aiPlayer.png");
+            File f = new File(path);
             rawImage = ImageIO.read(f);
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,7 +262,6 @@ public class Database {
         }
     }
 
-
     static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
         for (int i = n; i < keys.length; i++) {
             effects.put(keys[i], row[i]);
@@ -257,7 +284,6 @@ public class Database {
             return DatabaseResponses.SAVE_ERROR;
         }
     }
-
 
     public static DatabaseResponses importCard(String username, String cardName) {
 
@@ -359,7 +385,6 @@ public class Database {
     }
 
     public static void deleteFile(String fileName) {
-
         String userFileAddress = usersDirectory + "\\" + fileName + ".json";
 
         File file = new File(userFileAddress);
