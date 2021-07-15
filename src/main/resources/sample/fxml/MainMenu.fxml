@@ -36,7 +36,7 @@
                </JFXButton>
                <JFXButton  text="ChatRoom" onMouseClicked="#change">
                   <graphic>
-                     <FontAwesomeIconView styleClass="icon" glyphName="CHAT" />
+                     <FontAwesomeIconView styleClass="icon" glyphName="STACK_EXCHANGE" />
                   </graphic>
                </JFXButton>
                <JFXButton  text="Import\Export" onMouseClicked="#change">

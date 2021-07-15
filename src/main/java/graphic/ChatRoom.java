@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import graphic.animation.Shake;
 import graphic.animation.Swip;
@@ -12,14 +13,15 @@ import graphic.component.Bubble;
 import graphic.component.UserListItem;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,8 +53,10 @@ public class ChatRoom {
     public Label profileUsername;
     public Label profileNickname;
     public JFXButton backToUserLists;
+    public JFXTextField searchField;
     private ArrayList<Message> messages;
     private ArrayList<SimpleUser> allUsers;
+    private ObservableList<UserListItem> allUsersCells;
     private ArrayList<String> onlineUsers;
     private int clickedCellId;
     private boolean isReplyState;
@@ -61,6 +65,7 @@ public class ChatRoom {
 
     @FXML
     public void initialize() {
+        allUsersCells = FXCollections.observableArrayList();
         setVisibility(true);
         replyContainer.setVisible(false);
         isReplyState = false;
@@ -85,15 +90,34 @@ public class ChatRoom {
             }
         }).start();
         usersList.setVerticalGap(-5d);
+        searchField.textProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> search((String) newValue, (String) oldValue));
+    }
 
+    private void search(String newVal, String oldVal) {
+        if (oldVal != null && (newVal.length() < oldVal.length())) {
+            usersList.setItems(allUsersCells);
+        }
+        String value = newVal.toUpperCase();
+        ObservableList<UserListItem> subentries = FXCollections.observableArrayList();
+        for (Object entry : usersList.getItems()) {
+            boolean match = true;
+            UserListItem entryText = (UserListItem) entry;
+            if (!entryText.getUsername().toUpperCase().contains(value)) {
+                continue;
+            }
+            subentries.add(entryText);
+        }
+        usersList.setItems(subentries);
     }
 
     private void addUserCell(SimpleUser simpleUser) {
         UserListItem item = new UserListItem(simpleUser);
+        allUsersCells.add(item);
         item.setOnMouseClicked(e -> {
             profileContainer.setVisible(true);
             backToUserLists.setVisible(true);
             usersList.setVisible(false);
+            searchField.setVisible(false);
             setProfileData(simpleUser);
         });
 
@@ -134,7 +158,8 @@ public class ChatRoom {
                 if (i > allUsers.size() - 1) {
                     addUserCell(allUsersUpdated.get(i));
                 } else {
-                    usersList.getItems().get(i).update(onlineUsersUpdated.contains(allUsers.get(i).getUsername()));
+                    if (searchField.getText().isEmpty())
+                        usersList.getItems().get(i).update(onlineUsersUpdated.contains(allUsers.get(i).getUsername()));
                 }
 
             }
@@ -325,5 +350,6 @@ public class ChatRoom {
         profileContainer.setVisible(false);
         usersList.setVisible(true);
         backToUserLists.setVisible(false);
+        searchField.setVisible(true);
     }
 }

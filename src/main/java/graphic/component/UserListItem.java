@@ -27,4 +27,7 @@ public class UserListItem extends AnchorPane implements ComponentLoader {
         circle.setVisible(isOnline);
     }
 
+    public String getUsername() {
+        return username.getText();
+    }
 }
