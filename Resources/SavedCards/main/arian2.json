@@ -1,0 +1,12 @@
+{
+  "status": "LIMITED",
+  "isActivated": false,
+  "effects": {},
+  "name": "arian2",
+  "cardType": "SPELL",
+  "description": "salam",
+  "price": 1210,
+  "property": "COUNTER",
+  "positionIndex": -1,
+  "position": "DECK"
+}

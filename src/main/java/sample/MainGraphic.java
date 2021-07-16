@@ -1,6 +1,5 @@
 package sample;
 
-import graphic.Medias;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +8,7 @@ import javafx.stage.Stage;
 import model.Database;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainGraphic extends Application {
     private static Scene scene;
@@ -30,7 +30,7 @@ public class MainGraphic extends Application {
     public void start(Stage stage){
 //        Medias.BACKGROUND.loop();
         MainGraphic.stage = stage;
-        scene = new Scene(loadFXML("LoginMenu"));
+        scene = new Scene(Objects.requireNonNull(loadFXML("LoginMenu")));
         stage.setScene(scene);
         stage.show();
     }

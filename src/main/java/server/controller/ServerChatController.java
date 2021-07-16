@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import server.Server;
 import server.ServerResponse;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ServerChatController {

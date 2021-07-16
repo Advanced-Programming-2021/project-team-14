@@ -26,6 +26,8 @@ public class ServerMainController {
         }
         else if (view.equals(Menus.CHAT.getLabel())) {
             ServerChatController.processCommand(request, response, user);
+        } else if (view.equals(Menus.SCOREBOARD_MENU.getLabel())) {
+            ServerScoreBoardController.processCommand(request, response);
         }
     }
 }

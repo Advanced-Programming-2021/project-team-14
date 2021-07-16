@@ -274,12 +274,12 @@ public class GamePlay extends Menu {
 
 
     private void initZones() {
-        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
-        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
         downPlayerFieldZone.getChildren().add(new FieldZone(this));
         upperPlayerFieldZone.getChildren().add(new FieldZone(this));
         upperPlayerSpellZone.getChildren().add(new SpellZone(game, false, this));
         downPlayerSpellZone.getChildren().add(new SpellZone(game, true, this));
+        downPlayerMonsterZone.getChildren().add(new MonsterZone(game, true, this));
+        upperPlayerMonsterZone.getChildren().add(new MonsterZone(game, false, this));
         downPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getMainPlayer(), true));
         upperPlayerDeckZone.getChildren().add(new DeckZone(game, game.getBoard().getRivalPlayer(), false));
 //        initFieldZone();

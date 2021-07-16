@@ -1,0 +1,29 @@
+{
+  "level": 4,
+  "attack": 1700,
+  "defence": 1000,
+  "attackBooster": 0,
+  "defenseBooster": 0,
+  "attribute": "EARTH",
+  "monsterType": "BEAST_WARRIOR",
+  "affectedCards": [],
+  "effects": {
+    "effect time": "*",
+    "attack/defense": "*",
+    "change amount": "*",
+    "effect duration": "*",
+    "special summon": "*",
+    "attacked cardLoaders": "*",
+    "special command": "*",
+    "tributing amount": "*",
+    "status": "*",
+    "attack/lifePoint/defense": "*"
+  },
+  "name": "Battle OX1",
+  "cardType": "MONSTER",
+  "description": "A monster with tremendous power, it destroys enemies with a swing of its axe.",
+  "price": 2900,
+  "property": "NORMAL",
+  "positionIndex": -1,
+  "position": "DECK"
+}

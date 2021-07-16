@@ -1,0 +1,29 @@
+{
+  "level": 3,
+  "attack": 800,
+  "defence": 1400,
+  "attackBooster": 0,
+  "defenseBooster": 0,
+  "attribute": "WATER",
+  "monsterType": "AQUA",
+  "affectedCards": [],
+  "effects": {
+    "effect time": "*",
+    "attack/defense": "",
+    "change amount": "*",
+    "effect duration": "*",
+    "special summon": "*",
+    "attacked cardLoaders": "rival",
+    "special command": "destroy attacker",
+    "tributing amount": "*",
+    "status": "*",
+    "attack/lifePoint/defense": "*"
+  },
+  "name": "Yomi Ship1",
+  "cardType": "MONSTER",
+  "description": "If this cardLoader is destroyed by battle and sent to the GY: Destroy the monster that destroyed this cardLoader.",
+  "price": 1700,
+  "property": "EFFECT",
+  "positionIndex": -1,
+  "position": "DECK"
+}

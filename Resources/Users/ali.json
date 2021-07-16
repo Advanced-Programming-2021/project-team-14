@@ -1,0 +1,40 @@
+{
+  "wallet": {
+    "cash": 1900,
+    "cards": [
+      "Advanced Ritual Art",
+      "Advanced Ritual Art",
+      "Advanced Ritual Art",
+      "Advanced Ritual Art",
+      "Alexandrite Dragon",
+      "Axe Raider",
+      "Baby dragon",
+      "Beast King Barbaros",
+      "Bitron",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Battle OX"
+    ]
+  },
+  "decks": {
+    "alaki": {
+      "name": "alaki",
+      "sideCards": [
+        "Battle warrior"
+      ],
+      "mainCards": []
+    }
+  },
+  "username": "ali",
+  "password": "ali",
+  "nickname": "ali",
+  "score": 0,
+  "rank": 4,
+  "hasProfilePhoto": false,
+  "gamesPlayed": 0
+}

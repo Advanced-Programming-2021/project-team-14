@@ -1,25 +1,15 @@
 package graphic;
 
-
 import com.google.gson.Gson;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import graphic.animation.Shake;
-import graphic.component.Colors;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
+import javafx.scene.layout.AnchorPane;
 import model.User;
 import sample.MainGraphic;
 import view.Request;

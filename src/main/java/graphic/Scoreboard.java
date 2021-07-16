@@ -6,7 +6,6 @@ import graphic.component.ListItem;
 import javafx.fxml.FXML;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import model.ScoreBoard;
 import model.User;
@@ -16,7 +15,8 @@ import view.enums.Menus;
 
 import java.util.List;
 
-public class Scoreboard extends Menu {
+public class
+Scoreboard extends Menu {
 
     @FXML
     public ImageView image;

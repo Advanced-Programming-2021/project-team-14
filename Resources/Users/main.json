@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 56539,
+    "cash": 54312,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -27,7 +27,8 @@
       "Axe Raider",
       "Baby dragon",
       "Battle OX",
-      "Axe Raider"
+      "Axe Raider",
+      "Baby dragon"
     ]
   },
   "activeDeck": "first",
