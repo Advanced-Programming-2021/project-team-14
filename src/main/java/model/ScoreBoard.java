@@ -13,9 +13,11 @@ public class ScoreBoard {
         users = ranked;
     }
 
+    public static void setSortedUsers(ArrayList<User> users) {
+        ScoreBoard.users = users;
+    }
 
     public static ArrayList<User> getSortedUsers() {
         return users;
     }
-
 }

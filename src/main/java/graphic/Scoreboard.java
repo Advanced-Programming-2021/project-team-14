@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import model.ScoreBoard;
 import model.User;
 import view.Request;
 import view.enums.CommandTags;
@@ -36,7 +35,8 @@ Scoreboard extends Menu {
         Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
         setView(Menus.SCOREBOARD_MENU);
         Request.send();
-        users = ScoreBoard.getSortedUsers();
+        users = new Gson().fromJson(Request.getMessage(), new TypeToken<ArrayList<User>>() {
+        }.getType());
         listView.setBackground(Background.EMPTY);
         for (User user : users) {
             listView.getItems().add(addItem(user));

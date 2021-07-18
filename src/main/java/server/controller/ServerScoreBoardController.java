@@ -20,7 +20,7 @@ public class ServerScoreBoardController {
         String commandTag = request.getString("command");
 
         if (commandTag.equals(CommandTags.SHOW_SCOREBOARD.getLabel()))
-            response.addMessage(stringify(getScoreboard()));
+            response.addMessage(new Gson().toJson(getScoreboard()));
         else if (commandTag.equals(CommandTags.GET_ONLINE_USERS.getLabel()))
             response.addMessage(new Gson().toJson(Server.getOnlineUsers()));
 
@@ -31,6 +31,7 @@ public class ServerScoreBoardController {
         response.success();
         ArrayList<User> users = rankUsers(sortUsers(User.getUsers()));
         ScoreBoard.setRankUsers(users);
+
         return users;
     }
 
