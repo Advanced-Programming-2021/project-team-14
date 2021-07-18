@@ -1,6 +1,5 @@
 package server.controller;
 
-import Controller.Response;
 import Controller.enums.CommandTags;
 import Controller.enums.Responses;
 import com.google.gson.Gson;
@@ -31,6 +30,7 @@ public class ServerRegistrationController {
             if (isPasswordCorrects(username, password)) {
                 response.success();
                 String token = TokenGenerator.generateToken();
+
                 Server.addUser(token, User.getUserByUsername(username));
                 response.addToken(token);
                 response.add("user", new Gson().toJson(User.getUserByUsername(username)));

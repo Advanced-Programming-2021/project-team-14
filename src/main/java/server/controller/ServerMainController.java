@@ -28,6 +28,8 @@ public class ServerMainController {
             ServerChatController.processCommand(request, response, user);
         } else if (view.equals(Menus.SCOREBOARD_MENU.getLabel())) {
             ServerScoreBoardController.processCommand(request, response);
+        } else if (view.equals(Menus.SHOP_MENU.getLabel())) {
+            ServerShopController.processCommand(request, response);
         }
     }
 }

@@ -3,6 +3,7 @@ package view.enums;
 public enum CommandTags {
 
     SURRENDER("surrender"),
+    GET_ALL_CARDS("get all cards"),
     GET_ONLINE_USERS("get online users"),
     CARD_NOT_FOUND("card not found!"),
     SET("set"),

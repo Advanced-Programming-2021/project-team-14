@@ -50,10 +50,6 @@ public class MainMenu extends Menu{
                 Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
                 break;
-            case "ChatRoom":
-                Medias.USUAL_CLICK.play(1);
-                nextView = "ChatRoom";
-                break;
             case "Lobby":
                 Medias.USUAL_CLICK.play(1);
                 nextView = "Lobby";

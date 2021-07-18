@@ -23,7 +23,6 @@ public class ServerScoreBoardController {
             response.addMessage(new Gson().toJson(getScoreboard()));
         else if (commandTag.equals(CommandTags.GET_ONLINE_USERS.getLabel()))
             response.addMessage(new Gson().toJson(Server.getOnlineUsers()));
-
     }
 
 

@@ -1,7 +1,5 @@
 package Controller.enums;
 
-import model.card.enums.Attribute;
-
 import java.util.Locale;
 
 public enum CommandTags {
@@ -14,6 +12,7 @@ public enum CommandTags {
     EDIT_MESSAGE("edit message"),
     REMOVE_MESSAGE("remove message"),
     USER_PROFILE_SHOW("show user profile"),
+    GET_ALL_CARDS("get all cards"),
 
     CREATE_DECK("create-deck"),
     CARD_NOT_FOUND("card not found!"),

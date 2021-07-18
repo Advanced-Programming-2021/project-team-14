@@ -1,5 +1,7 @@
 package graphic;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import graphic.component.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +46,8 @@ public class ShopMenu extends Menu {
     @FXML
     private Text description;
 
+    private ArrayList<Card> cards = new ArrayList<>();
+
 
     private int counter = 0;
 
@@ -78,10 +82,10 @@ public class ShopMenu extends Menu {
 
     private void initCards() {
 
-        ArrayList<Card> cards = Card.getCards();
+        getCards();
 
         if (counter != 0) {
-            allCards.getChildren().remove(0, Card.getCards().size());
+            allCards.getChildren().remove(0, cards.size());
         }
 
         counter++;
@@ -101,6 +105,17 @@ public class ShopMenu extends Menu {
             });
             allCards.getChildren().add(cardLoader);
         }
+    }
+
+    private void getCards() {
+
+        setView(Menus.SHOP_MENU);
+        Request.setCommandTag(CommandTags.GET_ALL_CARDS);
+        Request.send();
+
+        String string = Request.getMessage();
+        cards = new Gson().fromJson(Request.getMessage(), new TypeToken<ArrayList<Monster>>() {
+        }.getType());
     }
 
 
