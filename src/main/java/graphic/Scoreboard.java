@@ -1,5 +1,7 @@
 package graphic;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jfoenix.controls.JFXListView;
 import graphic.component.Colors;
 import graphic.component.ListItem;
@@ -13,6 +15,7 @@ import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class
@@ -24,6 +27,8 @@ Scoreboard extends Menu {
     private JFXListView<ListItem> listView;
 
     private List<User> users;
+
+    private ArrayList<String> onlineUsers;
 
 
     @FXML
@@ -42,6 +47,7 @@ Scoreboard extends Menu {
 
 
     private ListItem addItem(User user) {
+        getOnlineUsers();
         ListItem listItem = new ListItem(user);
         String color = "#403c45";
         switch (user.getRank()) {
@@ -55,11 +61,24 @@ Scoreboard extends Menu {
                 color = "#cd7f32";
                 break;
         }
-        listItem.getContainer().setStyle("-fx-border-color: " + color);
-        if (currentUser.equals(user)){
+
+        if (onlineUsers.contains(user.getUsername())) {
+            listItem.getContainer().setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode());
+        } else {
+            listItem.getContainer().setStyle("-fx-border-color: " + color);
+        }
+        if (currentUser.equals(user)) {
             listItem.setEffect(new DropShadow());
             listItem.getContainer().setStyle("-fx-background-color: " + Colors.SUCCESS.getHexCode() + "; -fx-background-radius: 10;");
         }
         return listItem;
+    }
+
+    private void getOnlineUsers() {
+        setView(Menus.SCOREBOARD_MENU);
+        Request.setCommandTag(CommandTags.GET_ONLINE_USERS);
+        Request.send();
+        onlineUsers = new Gson().fromJson(Request.getMessage(), new TypeToken<ArrayList<String>>() {
+        }.getType());
     }
 }

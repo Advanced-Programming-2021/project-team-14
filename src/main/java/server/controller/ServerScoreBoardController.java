@@ -1,8 +1,10 @@
 package server.controller;
 
+import com.google.gson.Gson;
 import model.ScoreBoard;
 import model.User;
 import org.json.JSONObject;
+import server.Server;
 import server.ServerResponse;
 import view.enums.CommandTags;
 
@@ -19,8 +21,11 @@ public class ServerScoreBoardController {
 
         if (commandTag.equals(CommandTags.SHOW_SCOREBOARD.getLabel()))
             response.addMessage(stringify(getScoreboard()));
+        else if (commandTag.equals(CommandTags.GET_ONLINE_USERS.getLabel()))
+            response.addMessage(new Gson().toJson(Server.getOnlineUsers()));
 
     }
+
 
     private static ArrayList<User> getScoreboard() {
         response.success();
