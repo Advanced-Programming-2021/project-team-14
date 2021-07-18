@@ -20,6 +20,10 @@ public class ListItem extends AnchorPane implements ComponentLoader {
     JFXButton delete, edit;
     @FXML
     AnchorPane container;
+    @FXML
+    Circle onlineCircle;
+
+    private User user;
 
     public ListItem(Deck deck, boolean isActiveDeck) {
         load("DeckList");
@@ -42,10 +46,20 @@ public class ListItem extends AnchorPane implements ComponentLoader {
 
 
     public ListItem(User user) {
+        this.user = user;
         load("ScoreboardItem");
         rank.setText(String.valueOf(user.getRank()));
         score.setText(String.valueOf(user.getScore()));
         nickName.setText(user.getNickname());
+        onlineCircle.setVisible(false);
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setOnlineCircle(boolean bool) {
+        onlineCircle.setVisible(bool);
     }
 
     public AnchorPane getContainer() {

@@ -24,5 +24,6 @@ public class Lobby extends Menu {
     @FXML
     void sendRequest(ActionEvent event) {
 
+
     }
 }

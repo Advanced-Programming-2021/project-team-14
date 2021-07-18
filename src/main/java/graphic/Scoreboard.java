@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jfoenix.controls.JFXListView;
 import graphic.component.Colors;
 import graphic.component.ListItem;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -32,12 +33,28 @@ Scoreboard extends Menu {
 
     @FXML
     public void initialize() {
+        prepare();
+        new Thread(() -> {
+            System.out.println(Menu.getData());
+            while (true) {
+                update();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void prepare() {
         Request.setCommandTag(CommandTags.SHOW_SCOREBOARD);
         setView(Menus.SCOREBOARD_MENU);
         Request.send();
         users = new Gson().fromJson(Request.getMessage(), new TypeToken<ArrayList<User>>() {
         }.getType());
         listView.setBackground(Background.EMPTY);
+        getOnlineUsers();
         for (User user : users) {
             listView.getItems().add(addItem(user));
         }
@@ -45,9 +62,24 @@ Scoreboard extends Menu {
 //        image.setImage();
     }
 
+    private void update() {
+
+        getOnlineUsers();
+        Platform.runLater(() -> {
+            listView.getItems().clear();
+            prepare();
+//            for (ListItem listItem : listView.getItems()) {
+//                if (onlineUsers.contains(listItem.getUser().getUsername())) {
+//                    listItem.setOnlineCircle(true);
+//                } else {
+//                    listItem.setOnlineCircle(false);
+//                }
+//            }
+        });
+    }
+
 
     private ListItem addItem(User user) {
-        getOnlineUsers();
         ListItem listItem = new ListItem(user);
         String color = "#403c45";
         switch (user.getRank()) {
@@ -61,12 +93,11 @@ Scoreboard extends Menu {
                 color = "#cd7f32";
                 break;
         }
+        if (onlineUsers.contains(user.getUsername()))
+            listItem.setOnlineCircle(true);
 
-        if (onlineUsers.contains(user.getUsername())) {
-            listItem.getContainer().setStyle("-fx-border-color: " + Colors.SUCCESS.getHexCode());
-        } else {
-            listItem.getContainer().setStyle("-fx-border-color: " + color);
-        }
+        listItem.getContainer().setStyle("-fx-border-color: " + color);
+
         if (currentUser.equals(user)) {
             listItem.setEffect(new DropShadow());
             listItem.getContainer().setStyle("-fx-background-color: " + Colors.SUCCESS.getHexCode() + "; -fx-background-radius: 10;");

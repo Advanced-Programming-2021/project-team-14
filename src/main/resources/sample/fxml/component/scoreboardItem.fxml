@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
-<fx:root prefHeight="60.0" prefWidth="540.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane fx:id="container" layoutX="27.0" prefWidth="504.0" styleClass="scoreboardListItem" stylesheets="@ListItem.css">
+<fx:root prefHeight="60.0" prefWidth="540.0" type="javafx.scene.layout.AnchorPane"
+         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane fx:id="container" layoutX="33.0" layoutY="5.0" prefWidth="504.0" styleClass="scoreboardListItem"
+                stylesheets="@ListItem.css">
         <Text fx:id="nickName" layoutX="74.0" layoutY="30.0" styleClass="content"/>
         <Text fx:id="rank" layoutX="22.0" layoutY="31.0" styleClass="ranking"/>
         <Text fx:id="score" layoutX="400" layoutY="30.0" styleClass="content"/>
+        <Circle fx:id="onlineCircle" fill="#00c57b" layoutX="489.0" layoutY="25.0" radius="7.0" stroke="TRANSPARENT"
+                strokeType="INSIDE"/>
     </AnchorPane>
 
 </fx:root>
