@@ -35,8 +35,8 @@
     <JFXButton layoutX="342.0" layoutY="541.0" onAction="#update" text="update"/>
     <JFXListView fx:id="chatList" layoutX="37.0" layoutY="65.0" prefHeight="510.0" prefWidth="649.0"
                  styleClass="scroll-pane, chatList, list-view"/>
-    <AnchorPane layoutX="691.0">
-        <JFXListView fx:id="usersList" layoutY="50.0" prefHeight="700" prefWidth="282.0" styleClass="scroll-pane"/>
+    <AnchorPane layoutX="689.0" prefHeight="741.0" prefWidth="284.0">
+        <JFXListView fx:id="usersList" layoutY="50.0" prefHeight="630.0" prefWidth="282.0" styleClass="scroll-pane"/>
         <AnchorPane fx:id="profileContainer" layoutY="50.0" prefHeight="700.0" prefWidth="282.0" visible="false">
             <ImageView fx:id="profilePhoto" fitHeight="80.0" fitWidth="80.0" layoutX="101.0" layoutY="36.0"
                        pickOnBounds="true" preserveRatio="true"/>

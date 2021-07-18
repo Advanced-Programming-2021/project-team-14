@@ -10,19 +10,31 @@ import view.enums.Menus;
 public class Menu {
     private static String data;
     private static Pane root;
+    private static Pane view;
     protected static User currentUser;
-    public static void setView(Menus menus){
+
+    public static void setView(Menus menus) {
         Request.addData("view", menus.getLabel());
     }
-    protected static void addData(String data){
+
+    protected static void addData(String data) {
         Menu.data = data;
     }
-    protected static void setRoot(Pane pane){
+
+    protected static void setRoot(Pane pane) {
         root = pane;
+    }
+
+    protected static void setViewForMainMenu(Pane pane) {
+        view = pane;
     }
 
     public static Pane getRoot() {
         return root;
+    }
+
+    public static Pane getViewMenu() {
+        return view;
     }
 
     public static String getData() {
@@ -31,7 +43,7 @@ public class Menu {
 
     public static void setCurrentUser(User user) {
         currentUser = user;
-    //        currentUser = User.getUserByUsername(username);
+        //        currentUser = User.getUserByUsername(username);
     }
 
     public void onDragExited(AnchorPane area) {

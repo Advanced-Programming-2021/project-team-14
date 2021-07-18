@@ -15,7 +15,7 @@ public class MainMenu extends Menu{
     public AnchorPane root;
 
 
-    private void setView(String view) {
+    private void setViewMainMenu(String view) {
         if (this.view.getChildren().size() > 0)
             this.view.getChildren().remove(0);
         this.view.getChildren().add(MainGraphic.loadFXML(view));
@@ -24,6 +24,7 @@ public class MainMenu extends Menu{
     public void initialize() {
 //        Medias.BACKGROUND.loop();
         setRoot(root);
+        setViewForMainMenu(view);
     }
 
     public void change(MouseEvent mouseEvent) {
@@ -53,6 +54,10 @@ public class MainMenu extends Menu{
                 Medias.USUAL_CLICK.play(1);
                 nextView = "ChatRoom";
                 break;
+            case "Lobby":
+                Medias.USUAL_CLICK.play(1);
+                nextView = "Lobby";
+                break;
             case "Logout":
                 Medias.USUAL_CLICK.play(1);
                 logout();
@@ -65,7 +70,7 @@ public class MainMenu extends Menu{
 
         }
         if (nextView != null) {
-            setView(nextView);
+            setViewMainMenu(nextView);
         }
     }
 
