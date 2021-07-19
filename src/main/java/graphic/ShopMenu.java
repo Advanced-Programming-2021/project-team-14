@@ -52,6 +52,8 @@ public class ShopMenu extends Menu {
 
     private int counter = 0;
 
+    private boolean exit;
+
 
     public void initialize() {
 
@@ -79,12 +81,14 @@ public class ShopMenu extends Menu {
         onDragExited(buyCardArea);
         addAreaOnDragDropped();
 
+        exit = false;
+
         new Thread(() -> {
             System.out.println(Menu.getData());
-            while (true) {
+            while (!exit) {
                 update();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(6000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -183,6 +187,12 @@ public class ShopMenu extends Menu {
 
 
     public void back(ActionEvent actionEvent) {
+        exit = true;
         MainGraphic.setRoot("MainMenu");
+    }
+
+    public void adminPanel(ActionEvent actionEvent) {
+        exit = true;
+        MainGraphic.setRoot("AdminPanel");
     }
 }

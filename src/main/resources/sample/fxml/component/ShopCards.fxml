@@ -6,19 +6,23 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane>
         <ImageView fx:id="image" pickOnBounds="true" preserveRatio="true"/>
     </AnchorPane>
     <Circle fx:id="cardFreqCircle" layoutX="64" layoutY="5" radius="9.0">
         <effect>
-        <DropShadow/>
+            <DropShadow/>
         </effect>
     </Circle>
     <Text fx:id="cardFreq" fill="WHITE" layoutX="61" layoutY="9" strokeType="OUTSIDE" strokeWidth="0.0">
         <font>
             <Font name="System Bold" size="10.0"/>
+        </font>
+    </Text>
+    <Text fx:id="banSign" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
+        <font>
+            <Font name="System Bold" size="18.0"/>
         </font>
     </Text>
 </fx:root>

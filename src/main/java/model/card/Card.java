@@ -23,6 +23,7 @@ public abstract class Card {
     protected int price;
     protected int number;
     protected State state;
+    protected boolean isBanned;
     protected Property property;
     protected int positionIndex;
     protected Position position;
@@ -44,6 +45,7 @@ public abstract class Card {
     }
 
     public Card(String name, String description, CardType cardType, int price) {
+        this.isBanned = false;
         this.number = 3;
         this.name = name;
         this.description = description;
@@ -64,6 +66,14 @@ public abstract class Card {
     public abstract String show();
 
     public abstract String getDescriptionGraphic();
+
+    public boolean isBanned() {
+        return this.isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
 
     public void setState(State state) {
         this.state = state;

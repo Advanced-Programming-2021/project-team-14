@@ -47,7 +47,8 @@ public class MainGraphic extends Application {
         FXMLLoader fxmlLoader = fxmlLoader(fxml);
 
         try {
-            return fxmlLoader.load();
+            return fxmlLoader.
+                    load();
         } catch (IOException e) {
             e.printStackTrace();
         }

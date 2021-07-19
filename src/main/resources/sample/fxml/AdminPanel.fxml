@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="view" prefHeight="800" prefWidth="980.0" styleClass="Menu"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="graphic.AdminPanel">
+    <children>
+        <TextField fx:id="cardNameField" layoutX="509.0" layoutY="252.0" promptText="Card Name"/>
+        <TextField fx:id="amountField" layoutX="684.0" layoutY="252.0" promptText="Amount"/>
+        <JFXButton fx:id="banButton" layoutX="568.0" layoutY="294.0" onAction="#ban" text="Ban"/>
+        <JFXButton fx:id="applyChangeButton" layoutX="694.0" layoutY="294.0" onAction="#applyChange"
+                   text="Apply Change"/>
+        <HBox layoutX="329.0" layoutY="75.0" prefHeight="100.0" prefWidth="305.0"/>
+        <JFXButton layoutX="45.0" layoutY="50.0" onAction="#back" styleClass="backButton" text="back"
+                   textFill="#515468"/>
+        <HBox layoutX="320.0" layoutY="340.0" prefHeight="100.0" prefWidth="200.0"/>
+        <Text fill="WHITE" layoutX="533.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel"
+              wrappingWidth="321.92578125">
+            <font>
+                <Font name="System Bold" size="48.0"/>
+            </font>
+        </Text>
+        <Text fx:id="initialText" fill="#a593d7" layoutX="520.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Enter Admin Code">
+            <font>
+                <Font name="System Bold" size="36.0"/>
+            </font>
+        </Text>
+    </children>
+    <stylesheets>
+        <URL value="@../CSS/DeckInside.css"/>
+        <URL value="@../CSS/Snackbar.css"/>
+        <URL value="@../CSS/shopMenu.css"/>
+    </stylesheets>
+</AnchorPane>

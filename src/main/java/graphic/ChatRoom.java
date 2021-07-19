@@ -61,6 +61,7 @@ public class ChatRoom {
     private int clickedCellId;
     private boolean isReplyState;
     private Bubble replyingBubble;
+    private boolean exit;
 
 
     @FXML
@@ -78,9 +79,12 @@ public class ChatRoom {
         }.getType());
         allUsers.forEach(this::addUserCell);
         messages.forEach(this::addCell);
+
+        exit = false;
+
         new Thread(() -> {
             System.out.println(Menu.getData());
-            while (true) {
+            while (!exit) {
                 update();
                 try {
                     Thread.sleep(5000);
@@ -353,9 +357,10 @@ public class ChatRoom {
         searchField.setVisible(true);
     }
 
-
-//    public void back(ActionEvent actionEvent) {
-//        Medias.USUAL_CLICK.play(1);
-//        MainGraphic.setRoot("MainMenu");
-//    }
+    @FXML
+    public void back(ActionEvent actionEvent) {
+        Medias.USUAL_CLICK.play(1);
+        exit = true;
+        MainGraphic.setRoot("MainMenu");
+    }
 }

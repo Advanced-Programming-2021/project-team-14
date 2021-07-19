@@ -11,6 +11,8 @@ public enum CommandTags {
     NEXT_PHASE("next phase"),
     SET_POSITION("set position"),
     SHOW_CARD("show card everywhere"),
+    ADMIN_CHANGE_AMOUNT("admin change amount"),
+    BAN("ban"),
     CARD_ADDED_SUCCESSFULLY("card added successfully"),
     SUMMON("summon"),
     ATTACK("attack"),
