@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
     <children>
         <TextField fx:id="cardNameField" layoutX="509.0" layoutY="252.0" promptText="Card Name"/>
         <TextField fx:id="amountField" layoutX="684.0" layoutY="252.0" promptText="Amount"/>
-        <JFXButton fx:id="banButton" layoutX="568.0" layoutY="294.0" onAction="#ban" text="Ban"/>
+        <JFXButton fx:id="banButton" layoutX="536.0" layoutY="294.0" onAction="#ban" text="Ban/Unban"/>
         <JFXButton fx:id="applyChangeButton" layoutX="694.0" layoutY="294.0" onAction="#applyChange"
                    text="Apply Change"/>
         <HBox layoutX="329.0" layoutY="75.0" prefHeight="100.0" prefWidth="305.0"/>

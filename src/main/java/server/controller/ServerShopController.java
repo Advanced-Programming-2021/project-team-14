@@ -57,13 +57,17 @@ public class ServerShopController {
     }
 
     private static String ban(String cardName) {
-        if (!Card.getCardByName(cardName).isBanned()) {
+        if (Card.doesCardExist(cardName)) {
             response.success();
-            Card.getCardByName(cardName).setBanned(true);
-            return Responses.CARD_BANNED_SUCCESSFULLY.getLabel();
+            if (!Card.getCardByName(cardName).isBanned()) {
+                Card.getCardByName(cardName).setBanned(true);
+                return Responses.CARD_BANNED_SUCCESSFULLY.getLabel();
+            }
+            Card.getCardByName(cardName).setBanned(false);
+            return Responses.CARD_UNBANNED_SUCCESSFULLY.getLabel();
         } else {
             response.error();
-            return Responses.CARD_ALREADY_BANNED.getLabel();
+            return String.format(Responses.CARD_NOT_EXIST.getLabel(), cardName);
         }
     }
 

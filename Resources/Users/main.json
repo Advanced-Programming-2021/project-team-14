@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 98300,
+    "cash": 95300,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -46,7 +46,8 @@
       "Battle warrior",
       "Axe Raider",
       "Curtain of the dark ones",
-      "Yomi Ship"
+      "Yomi Ship",
+      "Advanced Ritual Art"
     ]
   },
   "activeDeck": "first",

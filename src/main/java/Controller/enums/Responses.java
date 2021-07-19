@@ -3,6 +3,7 @@ package Controller.enums;
 public enum Responses {
     LOGIN_SUCCESSFUL("user logged in successfully!"),
     CARD_BANNED_SUCCESSFULLY("Card banned successfully"),
+    CARD_UNBANNED_SUCCESSFULLY("Card unbanned successfully"),
     CARD_BANNED_BY_ADMIN("This card banned by admin!"),
     CARD_ALREADY_BANNED("Card already banned"),
     AMOUNT_CHANGED_SUCCESSFULLY("Amount changed successfully"),
