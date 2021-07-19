@@ -1,6 +1,7 @@
 package graphic;
 
 import Controller.enums.DatabaseResponses;
+import com.google.gson.Gson;
 import com.jfoenix.controls.JFXComboBox;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
@@ -160,7 +161,8 @@ public class ImportExportMenu extends MainMenu {
     public void exportCard() {
         try {
             Request.setCommandTag(CommandTags.EXPORT);
-            Request.addData("cardName", currentCardName);
+
+            Request.addData("card", new Gson().toJson(Card.getCardByName(currentCardName)));
             Request.addData("view", Menus.IMPORT_EXPORT_MENU.getLabel());
             Request.send();
 

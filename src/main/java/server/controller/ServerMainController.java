@@ -20,16 +20,17 @@ public class ServerMainController {
 
         if (view.equals(Menus.REGISTER_MENU.getLabel())) {
             ServerRegistrationController.processCommand(request, response);
-        }
-        else if (view.equals(Menus.MAIN_MENU.getLabel())) {
+        } else if (view.equals(Menus.MAIN_MENU.getLabel())) {
             Server.logout(token);
-        }
-        else if (view.equals(Menus.CHAT.getLabel())) {
+        } else if (view.equals(Menus.CHAT.getLabel())) {
             ServerChatController.processCommand(request, response, user);
         } else if (view.equals(Menus.SCOREBOARD_MENU.getLabel())) {
             ServerScoreBoardController.processCommand(request, response);
         } else if (view.equals(Menus.SHOP_MENU.getLabel())) {
             ServerShopController.processCommand(request, response);
-        }
+        } else if (view.equals(Menus.PROFILE_MENU.getLabel())) {
+            ServerProfileController.processCommand(request, response, user);
+        } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel()))
+            ServerImportExportController.processCommand(request, response, user);
     }
 }

@@ -2,10 +2,12 @@ package graphic;
 
 import Controller.enums.DatabaseResponses;
 import Controller.enums.Responses;
+import com.google.gson.Gson;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import graphic.animation.Shake;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
 import javafx.collections.FXCollections;
@@ -32,6 +34,10 @@ import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.*;
 import sample.MainGraphic;
+import view.Console;
+import view.Request;
+import view.enums.CommandTags;
+import view.enums.Menus;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -178,17 +184,18 @@ public class CreateCardMenu extends MainMenu {
 
 
         saveButton.setOnAction(event -> {
-            if (!currentUser.getWallet().isCashEnough(price / 10)) {
-                new SnackBarComponent("no enough money!", ResultState.ERROR, mainPane);
-            } else {
-                DatabaseResponses responses = Database.exportCard(currentUser.getUsername(), card);
-                if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
-                    currentUser.getWallet().decreaseCash(price / 10);
-                    currentUser.updateDatabase();
-                    new SnackBarComponent("card saved successfully!", ResultState.SUCCESS, mainPane);
+            Request.setCommandTag(CommandTags.SAVE_CARD);
+            Request.addData("view", Menus.IMPORT_EXPORT_MENU.getLabel());
+            Request.addData("card", new Gson().toJson(card));
+            Request.send();
 
-                }
+            if (!Request.isSuccessful()) {
+                new SnackBarComponent(Request.getMessage(), ResultState.ERROR, mainPane);
+            } else {
+                new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, mainPane);
             }
+            Console.print(Request.getMessage());
+
         });
 
 

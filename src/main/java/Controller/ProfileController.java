@@ -18,7 +18,7 @@ public class ProfileController {
         else if (commandTag.equals(CommandTags.CHANGE_USERNAME.getLabel()))
             Response.addMessage(changeUsername(request.getString("token"), request.getString("username")));
         else if (commandTag.equals(CommandTags.CHANGE_NICKNAME.getLabel()))
-            Response.addMessage(changeNickname(request.getString("token"), request.getString("nickname")));
+            Response.addMessage(changeNickname(request.getString("token"), request.getString("new")));
         else if (commandTag.equals(CommandTags.SET_PROFILE_PHOTO.getLabel()))
             Response.addMessage(setProfile(request.getString("token"), request.getString("path")));
         else if (commandTag.equals(CommandTags.REMOVE_PROFILE_PHOTO.getLabel()))
@@ -31,6 +31,7 @@ public class ProfileController {
 
         if (responses.equals(DatabaseResponses.SUCCESSFUL)) {
             User.getUserByUsername(username).setHasProfilePhoto(false);
+            User.getUserByUsername(username).setImageString("");
             Response.success();
             return "profile photo deleted successfully!";
         }

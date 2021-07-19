@@ -51,6 +51,8 @@ public class ProfileMenu extends Menu {
     }
 
     private void setProfile() {
+        currentUser.setHasProfilePhoto(currentUser.getImageString() != null);
+
         setProfilePic();
         usernameLabel.setText(currentUser.getUsername());
         nicknameLabel.setText(currentUser.getNickname());
@@ -98,6 +100,7 @@ public class ProfileMenu extends Menu {
             } else {
                 Database.removeProfilePhoto(currentUser.getUsername());
                 currentUser.setHasProfilePhoto(false);
+                currentUser.setImageString("");
                 currentProfileButton.setText("+");
                 if (!currentUser.hasProfileCircle())
                     saveCircle(Color.color(Math.random(), Math.random(), Math.random()));
@@ -156,9 +159,9 @@ public class ProfileMenu extends Menu {
         graphics.setColor(awtColor);
         graphics.fillRect(0, 0, rawImage.getWidth(), rawImage.getHeight());
 
-        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 80));
+        graphics.setFont(new Font("Arial", Font.TRUETYPE_FONT, 50));
         graphics.setColor(java.awt.Color.WHITE);
-        graphics.drawString(currentUser.getUsername().substring(0, 1), rawImage.getWidth() / 2 - 20, rawImage.getHeight() / 2 + 20);
+        graphics.drawString(currentUser.getUsername().substring(0, 1), rawImage.getWidth() / 2-10 , rawImage.getHeight() / 2 + 10);
 
         graphics.dispose();
 
