@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 1900,
+    "cash": 300,
     "cards": [
       "Advanced Ritual Art",
       "Advanced Ritual Art",
@@ -18,7 +18,8 @@
       "Beast King Barbaros",
       "Beast King Barbaros",
       "Beast King Barbaros",
-      "Battle OX"
+      "Battle OX",
+      "Baby dragon"
     ]
   },
   "decks": {
@@ -30,11 +31,12 @@
       "mainCards": []
     }
   },
-  "username": "ali",
   "password": "ali",
+  "username": "ali",
   "nickname": "ali",
   "score": 0,
   "rank": 4,
   "hasProfilePhoto": false,
+  "hasProfileCircle": false,
   "gamesPlayed": 0
 }

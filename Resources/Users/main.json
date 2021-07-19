@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "cash": 54312,
+    "cash": 812,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -28,7 +28,23 @@
       "Baby dragon",
       "Battle OX",
       "Axe Raider",
-      "Baby dragon"
+      "Baby dragon",
+      "Axe Raider",
+      "Battle OX",
+      "Battle OX",
+      "Baby dragon",
+      "Baby dragon",
+      "Battle warrior",
+      "Beast King Barbaros",
+      "Beast King Barbaros",
+      "Battle warrior",
+      "Beast King Barbaros",
+      "Battle warrior",
+      "Battle OX",
+      "Battle warrior",
+      "Battle warrior",
+      "Battle warrior",
+      "Axe Raider"
     ]
   },
   "activeDeck": "first",
@@ -100,11 +116,12 @@
       "mainCards": []
     }
   },
-  "username": "main",
   "password": "123",
+  "username": "main",
   "nickname": "admin1",
   "score": 1000,
   "rank": 3,
   "hasProfilePhoto": false,
+  "hasProfileCircle": false,
   "gamesPlayed": 37
 }

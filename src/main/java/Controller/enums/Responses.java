@@ -21,6 +21,7 @@ public enum Responses {
     DECK_NOT_EXIST("deck with name %s does not exist"),
     DECK_ALREADY_EXIST("deck with name %s already exists"),
     CARD_NOT_EXIST("card with name %s does not exist"),
+    CARD_NOT_AVAILABLE("This card is not available"),
     CARD_NOT_EXIST_IN_DECK("card with name %s does not exist in %s deck"),
     CARD_ALREADY_EXIST("card with name %s already exists"),
     ENOUGH_CARDS("there are already three cards with name %s in deck %s"),

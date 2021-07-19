@@ -3,6 +3,7 @@ package graphic;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import graphic.component.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -78,6 +79,18 @@ public class ShopMenu extends Menu {
         onDragExited(buyCardArea);
         addAreaOnDragDropped();
 
+        new Thread(() -> {
+            System.out.println(Menu.getData());
+            while (true) {
+                update();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
     private void initCards() {
@@ -97,6 +110,9 @@ public class ShopMenu extends Menu {
             if (currentUser.getWallet().getCash() < card.getPrice()) {
                 cardLoader.setOpacity(0.4);
             }
+            if (card.getNumber() == 0) {
+                cardLoader.setOpacity(0.2);
+            }
             cardLoader.setOnMouseEntered(e -> {
                 Image image = cardLoader.getImage().getImage();
                 setImage(image);
@@ -113,7 +129,6 @@ public class ShopMenu extends Menu {
         Request.setCommandTag(CommandTags.GET_ALL_CARDS);
         Request.send();
 
-        String string = Request.getMessage();
         cards = new Gson().fromJson(Request.getMessage(), new TypeToken<ArrayList<Monster>>() {
         }.getType());
     }
@@ -150,11 +165,20 @@ public class ShopMenu extends Menu {
         setView(Menus.SHOP_MENU);
         Request.setCommandTag(CommandTags.BUY_CARD);
         Request.addData("cardName", cardLoader.getName());
+        Request.addData("username", getCurrentUser().getUsername());
         Request.send();
+        String message = Request.getMessage();
         if (Request.isSuccessful()) {
             initCards();
-            new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS, root);
-        } else new SnackBarComponent(Request.getMessage(), ResultState.ERROR, root);
+            new SnackBarComponent(message, ResultState.SUCCESS, root);
+        } else new SnackBarComponent(message, ResultState.ERROR, root);
+    }
+
+    private void update() {
+
+        Platform.runLater(() -> {
+            initCards();
+        });
     }
 
 

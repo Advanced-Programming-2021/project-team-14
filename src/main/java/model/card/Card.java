@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Card {
-    private static final HashMap<String, Card> cardLoaders;
+    private static final HashMap<String, Card> cards;
 
     static {
-        cardLoaders = new HashMap<>();
+        cards = new HashMap<>();
     }
 
     protected HashMap<String, String> effects;
@@ -21,6 +21,7 @@ public abstract class Card {
     protected CardType cardType;
     protected String description;
     protected int price;
+    protected int number;
     protected State state;
     protected Property property;
     protected int positionIndex;
@@ -42,6 +43,24 @@ public abstract class Card {
         this.position = position;
     }
 
+    public Card(String name, String description, CardType cardType, int price) {
+        this.number = 3;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.cardType = cardType;
+        this.position = Position.DECK;
+        this.positionIndex = -1;
+    }
+
+    public static ArrayList<Card> getCards() {
+        return new ArrayList<>(cards.values());
+    }
+
+    public static void addCard(Card card) {
+        cards.put(card.getName(), card);
+    }
+
     public abstract String show();
 
     public abstract String getDescriptionGraphic();
@@ -54,13 +73,8 @@ public abstract class Card {
         return state;
     }
 
-    public Card(String name, String description, CardType cardType, int price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.cardType = cardType;
-        this.position = Position.DECK;
-        this.positionIndex = -1;
+    public static Card getCardByName(String cardName) {
+        return cards.get(cardName);
     }
 
     public Card(Card card) {
@@ -73,21 +87,21 @@ public abstract class Card {
         this.positionIndex = -1;
     }
 
-    public static ArrayList<Card> getCards() {
-        return new ArrayList<>(cardLoaders.values());
-    }
-
-
-    public static void addCard(Card card) {
-        cardLoaders.put(card.getName(), card);
-    }
-
-    public static Card getCardByName(String cardName) {
-        return cardLoaders.get(cardName);
-    }
-
     public static boolean doesCardExist(String cardName) {
-        return cardLoaders.get(cardName) != null;
+        return cards.get(cardName) != null;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void changeNumber(int amount) {
+
+        this.number += amount;
     }
 
     public String getDescription() {
@@ -117,7 +131,6 @@ public abstract class Card {
     public int getPrice() {
         return price;
     }
-
 
     @Override
     public String toString() {

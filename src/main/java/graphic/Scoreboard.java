@@ -68,13 +68,6 @@ Scoreboard extends Menu {
         Platform.runLater(() -> {
             listView.getItems().clear();
             prepare();
-//            for (ListItem listItem : listView.getItems()) {
-//                if (onlineUsers.contains(listItem.getUser().getUsername())) {
-//                    listItem.setOnlineCircle(true);
-//                } else {
-//                    listItem.setOnlineCircle(false);
-//                }
-//            }
         });
     }
 

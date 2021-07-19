@@ -22,7 +22,7 @@ public class ServerShopController {
         String commandTag = request.getString("command");
 
         if (commandTag.equals(CommandTags.BUY_CARD.getLabel()))
-            response.addMessage(buyCard(request.getString("cardName"), request.getString("token")));
+            response.addMessage(buyCard(request.getString("cardName"), request.getString("username")));
 
         else if (commandTag.equals(CommandTags.SHOP_SHOW_ALL.getLabel()))
             response.addMessage(showAllCards());
@@ -35,7 +35,6 @@ public class ServerShopController {
 
         else if (commandTag.equals(view.enums.CommandTags.SHOW_CARD.getLabel()))
             response.addMessage(showCard(request));
-
     }
 
 
@@ -79,11 +78,16 @@ public class ServerShopController {
             return Responses.NOT_ENOUGH_MONEY.getLabel();   // cash is not enough
         }
 
+        if (Card.getCardByName(cardName).getNumber() == 0) {
+            response.error();
+            return Responses.CARD_NOT_AVAILABLE.getLabel();
+        }
+
         userWallet.addCard(cardName);
         userWallet.decreaseCash(price);
+        Card.getCardByName(cardName).changeNumber(-1);
         user.updateDatabase();
         response.success();
         return Responses.CARD_BOUGHT_SUCCESSFULLY.getLabel();   // card bought successfully
-
     }
 }

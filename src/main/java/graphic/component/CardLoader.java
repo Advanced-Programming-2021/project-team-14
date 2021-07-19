@@ -1,6 +1,5 @@
 package graphic.component;
 
-import graphic.Menu;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,7 +51,7 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
     private void setCardFreq() {
         int counter;
 
-        if ((counter = Menu.getCurrentUser().getWallet().getCardFreq(cardName)) >= 3) {
+        if ((counter = card.getNumber()) == 0) {
             cardFreqCircle.setFill(Paint.valueOf(Colors.WARNING.getHexCode()));
             cardFreqCircle.setStroke(Paint.valueOf(Colors.WARNING.getHexCode()));
         } else {
