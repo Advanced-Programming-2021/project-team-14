@@ -39,8 +39,6 @@ public class User {
         nicknames.add(nickname);
         this.decks = new HashMap<>();
         this.activeDeck = null;
-        hasProfilePhoto = false;
-        hasProfileCircle = false;
         gamesPlayed = 0;
         updateDatabase();
         new SimpleUser(this);

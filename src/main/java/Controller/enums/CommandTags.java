@@ -31,7 +31,10 @@ public enum CommandTags {
     SHOP_SHOW_ALL("shop show --all"),
     INCREASE_MONEY("increase money"),
     IMPORT("import card"),
-    EXPORT("export card"), DELETE_USER("delete user");
+    EXPORT("export card"),
+    DELETE_USER("delete user"),
+    SAVE_CARD("save card");
+
 
     public final String label;
 

@@ -63,7 +63,7 @@ public enum CommandTags {
     GET_PROFILE_PHOTO("get profile photo"),
     SET_PROFILE_CIRCLE("set profile circle"),
     REMOVE_PROFILE_PHOTO("remove profile photo"),
-
+    SAVE_CARD("save card"),
     //cheat
     WIN_GAME("win game"),
     INCREASE_MONEY("increase money"),
