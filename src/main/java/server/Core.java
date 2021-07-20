@@ -3,7 +3,6 @@ package server;
 
 import org.json.JSONObject;
 import server.controller.ServerMainController;
-import server.controller.ServerRegistrationController;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -23,7 +22,7 @@ public class Core extends Thread{
         while (true) {
             TaskBlock taskBlock;
 
-            if ( (taskBlock = getBlock()) != null){
+            if ((taskBlock = getBlock()) != null) {
                 try {
                     DataInputStream dataInputStream = new DataInputStream(taskBlock.getSocket().getInputStream());
                     DataOutputStream dataOutputStream = new DataOutputStream(taskBlock.getSocket().getOutputStream());

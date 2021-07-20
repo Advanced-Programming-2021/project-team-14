@@ -115,7 +115,7 @@
                     </font>
                 </Text>
                 </VBox>
-            <JFXButton layoutX="13.0" layoutY="82.0" onAction="#adminPanel" text="Admin" textFill="#515468"/>
+         <JFXButton layoutX="13.0" layoutY="82.0" onAction="#adminPanel" text="Admin" textFill="#515468"/>
         </AnchorPane>
     </HBox>
 </AnchorPane>

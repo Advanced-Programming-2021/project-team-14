@@ -54,6 +54,10 @@ public class MainMenu extends Menu{
                 Medias.USUAL_CLICK.play(1);
                 nextView = "Lobby";
                 break;
+            case "Auction":
+                Medias.USUAL_CLICK.play(1);
+                nextView = "AuctionMenu";
+                break;
             case "Logout":
                 Medias.USUAL_CLICK.play(1);
                 logout();

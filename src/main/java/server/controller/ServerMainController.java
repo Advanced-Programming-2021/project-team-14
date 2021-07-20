@@ -30,7 +30,10 @@ public class ServerMainController {
             ServerShopController.processCommand(request, response);
         } else if (view.equals(Menus.PROFILE_MENU.getLabel())) {
             ServerProfileController.processCommand(request, response, user);
-        } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel()))
+        } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel())) {
             ServerImportExportController.processCommand(request, response, user);
+        } else if (view.equals(Menus.AUCTION.getLabel())) {
+            ServerAuctionController.processCommand(request, response, user);
+        }
     }
 }

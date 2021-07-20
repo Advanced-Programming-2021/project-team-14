@@ -1,14 +1,15 @@
 {
+  "auctions": [],
   "wallet": {
     "cash": 100000,
-    "cards": [   
-     "Pot of Greed",     
-     "Pot of Greed",     
-     "Pot of Greed",   
-     "Pot of Greed",     
-     "Pot of Greed",     
-     "Pot of Greed",   
-     "Pot of Greed",     
+    "cards": [
+      "Pot of Greed",
+      "Pot of Greed",
+      "Pot of Greed",
+      "Pot of Greed",
+      "Pot of Greed",
+      "Pot of Greed",
+      "Pot of Greed",
      "Pot of Greed",     
      "Pot of Greed",   
      "Pot of Greed",     

@@ -1,6 +1,7 @@
 package graphic;
 
 import graphic.component.Colors;
+import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import model.User;
@@ -10,6 +11,7 @@ import view.enums.Menus;
 public class Menu {
     private static String data;
     private static Pane root;
+    @FXML
     private static Pane view;
     protected static User currentUser;
 

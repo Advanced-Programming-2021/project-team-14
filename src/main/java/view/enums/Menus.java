@@ -3,6 +3,7 @@ package view.enums;
 public enum Menus {
     REGISTER_MENU("Register Menu"),
     CHAT("Chat"),
+    AUCTION("auction"),
     PROFILE_MENU("Profile Menu"),
     MAIN_MENU("Main Menu"),
     DECK_MENU("Deck Menu"),
