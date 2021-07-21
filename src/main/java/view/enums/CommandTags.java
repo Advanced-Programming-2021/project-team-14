@@ -3,14 +3,18 @@ package view.enums;
 public enum CommandTags {
 
     SURRENDER("surrender"),
+    CREATE_AUCTION("create auction"),
     GET_ALL_CARDS("get all cards"),
     GET_ONLINE_USERS("get online users"),
     CARD_NOT_FOUND("card not found!"),
+    GET_AUCTIONS("get auctions"),
     SET("set"),
     SELECT("select"),
     NEXT_PHASE("next phase"),
     SET_POSITION("set position"),
     SHOW_CARD("show card everywhere"),
+    ADMIN_CHANGE_AMOUNT("admin change amount"),
+    BAN("ban"),
     CARD_ADDED_SUCCESSFULLY("card added successfully"),
     SUMMON("summon"),
     ATTACK("attack"),

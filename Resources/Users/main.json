@@ -1,6 +1,7 @@
 {
+  "auctions": [],
   "wallet": {
-    "cash": 812,
+    "cash": 95300,
     "cards": [
       "The Calculator",
       "The Calculator",
@@ -44,7 +45,10 @@
       "Battle warrior",
       "Battle warrior",
       "Battle warrior",
-      "Axe Raider"
+      "Axe Raider",
+      "Curtain of the dark ones",
+      "Yomi Ship",
+      "Advanced Ritual Art"
     ]
   },
   "activeDeck": "first",
@@ -121,7 +125,8 @@
   "nickname": "admin1",
   "score": 1000,
   "rank": 3,
-  "hasProfilePhoto": false,
-  "hasProfileCircle": false,
-  "gamesPlayed": 37
+  "hasProfilePhoto": true,
+  "hasProfileCircle": true,
+  "gamesPlayed": 37,
+  "imageString": "iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAYAAADj79JYAAAA20lEQVR42u3W2wmAMAxA0W7qYi7n\r\nJLqAaB822HAC9zM/R0gt236ciqtAAA5cwIELOHABBw5cwIELOHABBw5cwIELOHABBw5cwIELOHBl\r\nAr+b3r3a3bTgTxg10wIdBb8ceOv0YM9ETw8+sjcDvax2n3tOxtt5Gn0P0oOPfKhZj3Ba8Ig/EOAf\r\noAH/MRrwYDTgwIEDBw4cOHDgwIEDBw4cOHDgwIEDBw4cOHDgAg4cuIADF3DgAg4cuIADF3DgAg4c\r\nOAjgwAUcuIADBw4BOHABBy7gwAUcOHABB67qLm2PJ7iMGHtnAAAAAElFTkSuQmCC"
 }

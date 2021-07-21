@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import model.Auction;
 import model.Deck;
 import model.User;
 
@@ -15,15 +16,16 @@ public class ListItem extends AnchorPane implements ComponentLoader {
     @FXML
     Circle validity;
     @FXML
-    Text cardsNum, deckName, nickName, rank, score;
+    Text cardsNum, deckName, nickName, rank, score, timer, auctionName;
     @FXML
-    JFXButton delete, edit;
+    JFXButton delete, edit, enter;
     @FXML
     AnchorPane container;
     @FXML
     Circle onlineCircle;
 
     private User user;
+    private Auction auction;
 
     public ListItem(Deck deck, boolean isActiveDeck) {
         load("DeckList");
@@ -41,7 +43,6 @@ public class ListItem extends AnchorPane implements ComponentLoader {
 
         delete.setGraphic(generateIcon(FontAwesomeIcon.TRASH));
         edit.setGraphic(generateIcon(FontAwesomeIcon.EDIT));
-
     }
 
 
@@ -52,6 +53,22 @@ public class ListItem extends AnchorPane implements ComponentLoader {
         score.setText(String.valueOf(user.getScore()));
         nickName.setText(user.getNickname());
         onlineCircle.setVisible(false);
+    }
+
+    public ListItem(Auction auction) {
+        this.auction = auction;
+        load("AuctionList");
+//        timer.setText(String.valueOf(auction.get));
+        auctionName.setText(String.valueOf(auction.getCard().getName()));
+        enter.setGraphic(generateIcon(FontAwesomeIcon.EDIT));
+    }
+
+    public String getAuctionName() {
+        return auctionName.getText();
+    }
+
+    public String getTimer() {
+        return timer.getText();
     }
 
     public User getUser() {
@@ -72,6 +89,10 @@ public class ListItem extends AnchorPane implements ComponentLoader {
 
     public JFXButton getEdit() {
         return edit;
+    }
+
+    public JFXButton getEnter() {
+        return enter;
     }
 
     public Text getCardsNum() {

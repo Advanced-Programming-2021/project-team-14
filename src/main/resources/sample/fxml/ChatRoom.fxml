@@ -83,5 +83,10 @@
         <FontAwesomeIconView fx:id="cancelReplyButton" fill="#515468" glyphName="CLOSE"
                              onMouseClicked="#CancelReplyState" textOrigin="TOP" translateX="300.0"/>
     </HBox>
+    <JFXButton layoutX="26.0" layoutY="27.0" onAction="#back" text="&lt;" textFill="#515468">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </JFXButton>
 
 </AnchorPane>

@@ -50,3 +50,18 @@
     -fx-font-weight: bold;
     -fx-text-fill: -fx-dark-gray;
 }
+
+.backButton:hover {
+    -fx-background-color: #272731;
+    -fx-fill: WHITE;
+}
+
+.button {
+    -fx-font-size: 15;
+    -fx-text-fill: -fx-dark-gray;
+}
+
+.button:hover {
+    -fx-background-color: #272731;
+    -fx-fill: WHITE;
+}

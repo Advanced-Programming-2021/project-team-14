@@ -35,6 +35,40 @@ public class ServerShopController {
 
         else if (commandTag.equals(view.enums.CommandTags.SHOW_CARD.getLabel()))
             response.addMessage(showCard(request));
+
+        else if (commandTag.equals(view.enums.CommandTags.BAN.getLabel()))
+            response.addMessage(ban(request.getString("cardName")));
+
+        else if (commandTag.equals(view.enums.CommandTags.ADMIN_CHANGE_AMOUNT.getLabel()))
+            response.addMessage(adminChangeAmount(request.getString("cardName"), request.getString("amount")));
+    }
+
+    private static String adminChangeAmount(String cardName, String amount) {
+
+        if (Card.doesCardExist(cardName)) {
+            response.success();
+            Card.getCardByName(cardName).changeNumber(Integer.parseInt(amount));
+            return Responses.AMOUNT_CHANGED_SUCCESSFULLY.getLabel();
+
+        } else {
+            response.error();
+            return String.format(Responses.CARD_NOT_EXIST.getLabel(), cardName);
+        }
+    }
+
+    private static String ban(String cardName) {
+        if (Card.doesCardExist(cardName)) {
+            response.success();
+            if (!Card.getCardByName(cardName).isBanned()) {
+                Card.getCardByName(cardName).setBanned(true);
+                return Responses.CARD_BANNED_SUCCESSFULLY.getLabel();
+            }
+            Card.getCardByName(cardName).setBanned(false);
+            return Responses.CARD_UNBANNED_SUCCESSFULLY.getLabel();
+        } else {
+            response.error();
+            return String.format(Responses.CARD_NOT_EXIST.getLabel(), cardName);
+        }
     }
 
 
@@ -81,6 +115,11 @@ public class ServerShopController {
         if (Card.getCardByName(cardName).getNumber() == 0) {
             response.error();
             return Responses.CARD_NOT_AVAILABLE.getLabel();
+        }
+
+        if (Card.getCardByName(cardName).isBanned()) {
+            response.error();
+            return Responses.CARD_BANNED_BY_ADMIN.getLabel();
         }
 
         userWallet.addCard(cardName);

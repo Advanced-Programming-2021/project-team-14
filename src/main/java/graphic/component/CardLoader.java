@@ -24,8 +24,13 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
     private Circle cardFreqCircle;
 
     @FXML
+    private Text banSign;
+
+
+    @FXML
     private Text cardFreq;
     private Card card;
+
     public CardLoader(Card card, String size, String menu) {
         this.card = card;
         this.cardName = card.getName();
@@ -33,6 +38,7 @@ public class CardLoader extends AnchorPane implements ComponentLoader {
             load("CardLoader");
         } else {
             load("ShopCards");
+            banSign.setVisible(card.isBanned());
             setCardFreq();
         }
         setImage(size, card.getName());

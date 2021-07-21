@@ -77,6 +77,7 @@ public enum Strings {
     MAIN("main"),
     MAIN_DECK("main"),
     DECK("deck"),
+    AUCTION("auction"),
     DECK_NAME("deck-name"),
     CARD("card"),
     OPTION("option"),

@@ -2,6 +2,12 @@ package Controller.enums;
 
 public enum Responses {
     LOGIN_SUCCESSFUL("user logged in successfully!"),
+    CREATE_AUCTION_SUCCESSFULLY("Auction created successfully"),
+    CARD_BANNED_SUCCESSFULLY("Card banned successfully"),
+    CARD_UNBANNED_SUCCESSFULLY("Card unbanned successfully"),
+    CARD_BANNED_BY_ADMIN("This card banned by admin!"),
+    CARD_ALREADY_BANNED("Card already banned"),
+    AMOUNT_CHANGED_SUCCESSFULLY("Amount changed successfully"),
     USER_DELETE_SUCCESSFUL("user deleted successfully!"),
     WRONG_PASSWORD("Username and password did not match!"),
     REGISTER_SUCCESSFUL("user created successfully!"),
@@ -20,6 +26,7 @@ public enum Responses {
     CHOICE("Choice"),
     DECK_NOT_EXIST("deck with name %s does not exist"),
     DECK_ALREADY_EXIST("deck with name %s already exists"),
+    AUCTION_ALREADY_EXISTS("auction for this card already exists"),
     CARD_NOT_EXIST("card with name %s does not exist"),
     CARD_NOT_AVAILABLE("This card is not available"),
     CARD_NOT_EXIST_IN_DECK("card with name %s does not exist in %s deck"),

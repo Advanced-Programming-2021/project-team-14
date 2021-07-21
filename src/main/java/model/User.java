@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +13,7 @@ public class User {
         nicknames = new ArrayList<>();
     }
 
-
+    private ArrayList<Auction> auctions;
     private Wallet wallet;
     private String activeDeck;
     private HashMap<String, Deck> decks;
@@ -31,6 +29,7 @@ public class User {
 
 
     public User(String username, String password, String nickname) {
+        this.auctions = new ArrayList<>();
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -45,6 +44,7 @@ public class User {
     }
 
     public User(User user, String username) {
+        auctions = new ArrayList<>();
         nicknames.add(user.getNickname());
         users.put(username, user);
         new SimpleUser(user);
@@ -143,6 +143,14 @@ public class User {
         decks.put(deckName, new Deck(deckName));
     }
 
+    public void addAuction(Auction auction) {
+        this.auctions.add(auction);
+    }
+
+    public void removeAuction(Auction auction) {
+        auctions.remove(auction);
+    }
+
     public void updateDatabase() {
         Database.saveUserInDatabase(this);
     }
@@ -210,5 +218,16 @@ public class User {
 
     public boolean doesHaveActiveDeck() {
         return activeDeck != null;
+    }
+
+    public boolean doesAuctionExist(String card) {
+        if (this.auctions != null) {
+            for (Auction auction : auctions) {
+                if (auction.getCard().getName().equals(card)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

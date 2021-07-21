@@ -30,16 +30,19 @@ Scoreboard extends Menu {
 
     private ArrayList<String> onlineUsers;
 
+    private boolean exit;
+
 
     @FXML
     public void initialize() {
         prepare();
+        exit = false;
         new Thread(() -> {
             System.out.println(Menu.getData());
-            while (true) {
+            while (!exit) {
                 update();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
