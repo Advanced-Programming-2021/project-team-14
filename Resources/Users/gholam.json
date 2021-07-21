@@ -1,9 +1,5 @@
 {
   "auctions": [
-    {
-      "bids": [],
-      "cardName": "Haniwa"
-    }
   ],
   "wallet": {
     "cash": 100000,

@@ -32,7 +32,6 @@ public class ServerAuctionController {
 
             response.success();
             user.addAuction(new Auction(Card.getCardByName(card)));
-            user.updateDatabase();
             return Responses.CREATE_AUCTION_SUCCESSFULLY.getLabel();
 
         }

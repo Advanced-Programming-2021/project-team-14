@@ -1,0 +1,17 @@
+{
+  "auctions": [],
+  "wallet": {
+    "cash": 100000,
+    "cards": []
+  },
+  "decks": {},
+  "password": "a",
+  "username": "a",
+  "nickname": "a",
+  "score": 0,
+  "rank": 0,
+  "hasProfilePhoto": true,
+  "hasProfileCircle": true,
+  "gamesPlayed": 0,
+  "imageString": ""
+}

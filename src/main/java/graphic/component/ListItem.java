@@ -1,6 +1,7 @@
 package graphic.component;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ public class ListItem extends AnchorPane implements ComponentLoader {
     AnchorPane container;
     @FXML
     Circle onlineCircle;
+    @FXML
+    private JFXProgressBar progressBar;
 
     private User user;
     private Auction auction;
@@ -60,6 +63,7 @@ public class ListItem extends AnchorPane implements ComponentLoader {
         load("AuctionList");
 //        timer.setText(String.valueOf(auction.get));
         auctionName.setText(String.valueOf(auction.getCard().getName()));
+        progressBar.setProgress(auction.getTimer() / 30.0);
         enter.setGraphic(generateIcon(FontAwesomeIcon.EDIT));
     }
 
