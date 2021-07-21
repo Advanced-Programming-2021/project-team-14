@@ -2,6 +2,7 @@ package model.game;
 
 import Controller.AiController;
 import model.Strings;
+import model.User;
 import model.card.Card;
 import model.card.SelectedCard;
 import org.json.JSONObject;
@@ -9,29 +10,38 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class Game {
+public class Game extends Duel{
 
     private Board board;
     private Phase phase;
     private SelectedCard selectedCard;
-    private String winner;
-    private String loser;
-    private Duel duel;
+    private String gameWinner;
+    private String gameLoser;
+   // private Duel duel;
     private int winnerLifePoint;
     private int loserLifePoint;
     private boolean isEnded;
-    private boolean isAI;
 
-
-    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI) {
-
-        this.isAI = isAI;
-        this.board = new Board(mainUser, rivalUser);
-        this.duel = duel;
+    public Game(User mainUser, User rivalUser, int round) {
+        super(mainUser, rivalUser, round);
+        this.board = new Board(super.getFirstPlayer(), super.getSecondPlayer());
         this.phase = Phase.DRAW_PHASE;
         this.isEnded = false;
-        nextPhase();
+
     }
+
+
+//    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI, int round) {
+//
+//        this.isAI = isAI;
+//        this.board = new Board(mainUser, rivalUser);
+//        this.duel = duel;
+//        this.phase = Phase.DRAW_PHASE;
+//        this.isEnded = false;
+//        this.round = round;
+//
+//        nextPhase();
+//    }
 
     public SelectedCard getSelectedCard() {
         return selectedCard;
@@ -45,7 +55,7 @@ public class Game {
         JSONObject game = new JSONObject();
         game.put("board", board.toString());
         game.put("phase", phase);
-        game.put("round", duel.getRound());
+        game.put("round", super.getRound());
         return game;
     }
 
@@ -54,7 +64,7 @@ public class Game {
     }
 
     public void changeTurn() {
-        if (!isAI) {
+        if (!super.isAI()) {
             Player temp = board.getMainPlayer();
             board.setMainPlayer(board.getRivalPlayer());
             board.setRivalPlayer(temp);
@@ -123,17 +133,18 @@ public class Game {
                 return String.format(Strings.NEW_CARD_ADDED_TO_HAND.getLabel(), card.getName());
             }
             endGame(board.getRivalPlayer(), board.getMainPlayer());
-            duel.startNewRound();
-            if (duel.endDuelChecker()) return duel.endDuel("");
+            super.startNewRound();
+            if (super.endDuelChecker()) return super.endDuel("");
         }
         return "";
     }
 
 
+
     public void endGame(Player winner, Player loser) {
 
         setWinner(winner.getNickname());
-        setLoser(loser.getNickname());
+        setGameLoser(loser.getNickname());
         setLoserLifePoint(loser.getLifePoint());
         setWinnerLifePoint(winner.getLifePoint());
 
@@ -142,12 +153,12 @@ public class Game {
         Duel.addGame(this);
     }
 
-    public void setLoser(String loser) {
-        this.loser = loser;
+    public void setGameLoser(String gameLoser) {
+        this.gameLoser = gameLoser;
     }
 
     public void setWinner(String winner) {
-        this.winner = winner;
+        this.gameWinner = winner;
     }
 
     public void setLoserLifePoint(int loserLifePoint) {

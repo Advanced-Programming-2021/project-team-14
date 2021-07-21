@@ -37,7 +37,6 @@ public class Duel {
         this.mainUser = mainUser;
         this.rivalUser = rivalUser;
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this, false));
         currentDuel = this;
     }
 
@@ -50,7 +49,7 @@ public class Duel {
         this.mainUser = mainUser;
         this.rivalUser = User.getUserByUsername("aiPlayer");
         setNumberOfRounds(round);
-        setGame(new Game(firstPlayer, secondPlayer, this, true));
+        setGame(new Game(mainUser, rivalUser, round));
         currentDuel = this;
 
     }
@@ -72,6 +71,10 @@ public class Duel {
         }
     }
 
+    public static void setCurrentDuel(Duel currentDuel) {
+        Duel.currentDuel = currentDuel;
+    }
+
     public static Duel getCurrentDuel() {
         return currentDuel;
     }
@@ -81,9 +84,9 @@ public class Duel {
         this.firstPlayer = new Player(User.getUserByUsername(firstPlayer.getUsername()), firstPlayer.getWinningRounds());
         this.secondPlayer = new Player(User.getUserByUsername(secondPlayer.getUsername()), secondPlayer.getWinningRounds());
         if (isAI)
-            setGame(new Game(firstPlayer, secondPlayer, this, true));
+            setGame(new Game(mainUser, rivalUser, round));
         else
-            setGame(new Game(firstPlayer, secondPlayer, this, false));
+            setGame(new Game(mainUser, rivalUser, round));
     }
 
     public boolean endDuelChecker() {
@@ -104,7 +107,6 @@ public class Duel {
     }
 
     private void rewardPlayers() {
-
         findLoserAndWinner();
         User winnerUser = User.getUserByNickname(winner);
         User loserUser = User.getUserByNickname(loser);

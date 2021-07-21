@@ -16,11 +16,10 @@ public class SaveGameLogs {
     private LocalDateTime endTime;
     private ArrayList<JSONObject> logs;
 
-    public SaveGameLogs(Duel duel, JSONObject log){
+    public SaveGameLogs(Duel duel){
         this.duel = duel;
         this.startTime = LocalDateTime.now();
         this.logs = new ArrayList<>();
-        this.logs.add(log);
     }
 
     public void addLog(JSONObject log){

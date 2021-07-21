@@ -62,11 +62,12 @@ public class TossCoinMenu {
 
                 scaleTransition.setOnFinished(event1 -> {
                     if (Duel.getCurrentDuel().isAI()) {
-                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
-                                Duel.getCurrentDuel(), true));
+                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getMainUser(), Duel.getCurrentDuel().getRivalUser(),
+                                Duel.getCurrentDuel().getRound()));
                     } else {
-                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getFirstPlayer(), Duel.getCurrentDuel().getSecondPlayer(),
-                                Duel.getCurrentDuel(), false));
+                        Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getMainUser(), Duel.getCurrentDuel().getRivalUser(),
+                                Duel.getCurrentDuel().getRound()));
+
                     }
 
                     MainGraphic.setRoot("GamePlay3");

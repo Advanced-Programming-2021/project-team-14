@@ -34,6 +34,10 @@ public class ServerMainController {
             ServerImportExportController.processCommand(request, response, user);
         } else if (view.equals(Menus.AUCTION.getLabel())) {
             ServerAuctionController.processCommand(request, response, user);
+        }else if (view.equals(Menus.DUEL_MENU.getLabel())) {
+            ServerDuelController.processCommand(request, response, user);
+        }else if (view.equals(Menus.GAMEPLAY_MENU.getLabel())) {
+            ServerGamePlayController.processCommand(request, response, user);
         }
     }
 }
