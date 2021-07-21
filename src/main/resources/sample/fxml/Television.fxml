@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="mainPane" prefHeight="800.0" prefWidth="980.0" stylesheets="@../CSS/Television.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.Television">
+
+
+    <Label fx:id="gameName" alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="8.0" prefHeight="82.0" prefWidth="715.0" styleClass="game_name" >
+      <font>
+         <Font name="JetBrains Mono Bold" size="12.0" />
+      </font></Label>
+
+    <AnchorPane fx:id="tvShow" layoutX="140" layoutY="100" styleClass="TV-pane">
+
+        <ImageView fitHeight="500" fitWidth="700" layoutX="7" layoutY="7">
+            <Image url="@../PNG/colorTV.gif" />
+        </ImageView>
+
+<!--        <ImageView fx:id="background" fitHeight="800" fitWidth="870"/>-->
+<!--        <VBox fx:id="sideCard" alignment="CENTER" layoutX="850.0" prefHeight="714.0" prefWidth="360.0">-->
+<!--            <VBox>-->
+<!--                <VBox.margin>-->
+<!--                    <Insets left="60.0" right="60.0"/>-->
+<!--                </VBox.margin>-->
+<!--                <children>-->
+<!--                    <HBox prefHeight="71.0" prefWidth="240.0">-->
+<!--                        <children>-->
+<!--                            <Circle fx:id="upperPlayerPhoto" fill="DODGERBLUE" radius="25.0" stroke="BLACK"-->
+<!--                                    strokeType="INSIDE">-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets left="10.0" top="5.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </Circle>-->
+<!--                            <VBox prefHeight="38.0" prefWidth="94.0">-->
+<!--                                <children>-->
+<!--                                    <Text fx:id="upperPlayerNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                                        <VBox.margin>-->
+<!--                                            <Insets left="10.0"/>-->
+<!--                                        </VBox.margin>-->
+<!--                                        <font>-->
+<!--                                            <Font name="System Bold" size="14.0"/>-->
+<!--                                        </font>-->
+<!--                                    </Text>-->
+<!--                                    <Text fx:id="upperPlayerLifePoint" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                                        <VBox.margin>-->
+<!--                                            <Insets left="10.0" top="5.0"/>-->
+<!--                                        </VBox.margin>-->
+<!--                                        <font>-->
+<!--                                            <Font size="13.0"/>-->
+<!--                                        </font>-->
+<!--                                    </Text>-->
+<!--                                </children>-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets top="5.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </VBox>-->
+<!--                            <StackPane fx:id="upperViewpointCircle" maxHeight="25.0" maxWidth="25.0" prefHeight="25.0"-->
+<!--                                       prefWidth="25.0">-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets left="5.0" top="15.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </StackPane>-->
+<!--                        </children>-->
+<!--                    </HBox>-->
+<!--                    <JFXProgressBar fx:id="upperPlayerProgress" prefHeight="13.0" prefWidth="239.0" progress="0.23"-->
+<!--                                    styleClass="jfx-progress-bar" stylesheets="@../CSS/ProgressLine.css"/>-->
+<!--                </children>-->
+<!--            </VBox>-->
+<!--            <ImageView fx:id="selectedCardImage" fitHeight="292.0" fitWidth="229.0" pickOnBounds="true"-->
+<!--                       preserveRatio="true">-->
+<!--                <VBox.margin>-->
+<!--                    <Insets left="60.0" right="60.0" top="30.0"/>-->
+<!--                </VBox.margin>-->
+<!--            </ImageView>-->
+<!--            <HBox prefHeight="59.0" prefWidth="320.0">-->
+<!--                <VBox prefHeight="100.0" prefWidth="80.0">-->
+<!--                    <HBox>-->
+<!--                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Atk:">-->
+<!--                            <font>-->
+<!--                                <Font name="System Bold" size="14.0"/>-->
+<!--                            </font>-->
+<!--                        </Text>-->
+<!--                        <Text fx:id="attack" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                            <font>-->
+<!--                                <Font name="System Bold" size="14.0"/>-->
+<!--                            </font>-->
+<!--                            <HBox.margin>-->
+<!--                                <Insets left="5.0"/>-->
+<!--                            </HBox.margin>-->
+<!--                        </Text>-->
+<!--                    </HBox>-->
+<!--                    <HBox>-->
+<!--                        <VBox.margin>-->
+<!--                            <Insets top="10.0"/>-->
+<!--                        </VBox.margin>-->
+<!--                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Def:">-->
+<!--                            <font>-->
+<!--                                <Font name="System Bold" size="14.0"/>-->
+<!--                            </font>-->
+<!--                        </Text>-->
+<!--                        <Text fx:id="defense" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                            <font>-->
+<!--                                <Font name="System Bold" size="14.0"/>-->
+<!--                            </font>-->
+<!--                            <HBox.margin>-->
+<!--                                <Insets left="5.0"/>-->
+<!--                            </HBox.margin>-->
+<!--                        </Text>-->
+<!--                    </HBox>-->
+<!--                    <HBox.margin>-->
+<!--                        <Insets left="60.0"/>-->
+<!--                    </HBox.margin>-->
+<!--                </VBox>-->
+<!--                <HBox prefHeight="100.0" prefWidth="103.0">-->
+<!--                    <HBox.margin>-->
+<!--                        <Insets left="40.0"/>-->
+<!--                    </HBox.margin>-->
+<!--                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Price:">-->
+<!--                        <font>-->
+<!--                            <Font name="System Bold" size="14.0"/>-->
+<!--                        </font>-->
+<!--                    </Text>-->
+<!--                    <Text fx:id="price" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                        <font>-->
+<!--                            <Font name="System Bold" size="14.0"/>-->
+<!--                        </font>-->
+<!--                        <HBox.margin>-->
+<!--                            <Insets left="5.0"/>-->
+<!--                        </HBox.margin>-->
+<!--                    </Text>-->
+<!--                </HBox>-->
+<!--                <VBox.margin>-->
+<!--                    <Insets top="30.0"/>-->
+<!--                </VBox.margin>-->
+<!--            </HBox>-->
+<!--            <HBox prefHeight="60.0" prefWidth="240.0">-->
+<!--                <VBox.margin>-->
+<!--                    <Insets bottom="10.0" left="60.0" right="60.0" top="20.0"/>-->
+<!--                </VBox.margin>-->
+<!--                <children>-->
+<!--                    <Text fx:id="description" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text">-->
+<!--                        <font>-->
+<!--                            <Font name="System Bold" size="12.0"/>-->
+<!--                        </font>-->
+<!--                    </Text>-->
+<!--                </children>-->
+<!--            </HBox>-->
+<!--            <VBox>-->
+<!--                <VBox.margin>-->
+<!--                    <Insets left="60.0" right="60.0"/>-->
+<!--                </VBox.margin>-->
+<!--                <children>-->
+<!--                    <HBox prefHeight="77.0" prefWidth="240.0">-->
+<!--                        <children>-->
+<!--                            <Circle fx:id="downPlayerPhoto" fill="DODGERBLUE" radius="25.0" stroke="BLACK"-->
+<!--                                    strokeType="INSIDE">-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets left="10.0" top="20.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </Circle>-->
+<!--                            <VBox prefHeight="69.0" prefWidth="100.0">-->
+<!--                                <children>-->
+<!--                                    <Text fx:id="downPlayerNickname" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                                        <VBox.margin>-->
+<!--                                            <Insets left="10.0"/>-->
+<!--                                        </VBox.margin>-->
+<!--                                        <font>-->
+<!--                                            <Font name="System Bold" size="14.0"/>-->
+<!--                                        </font>-->
+<!--                                    </Text>-->
+<!--                                    <Text fx:id="downPlayerLifePoint" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">-->
+<!--                                        <VBox.margin>-->
+<!--                                            <Insets left="10.0" top="5.0"/>-->
+<!--                                        </VBox.margin>-->
+<!--                                        <font>-->
+<!--                                            <Font size="13.0"/>-->
+<!--                                        </font>-->
+<!--                                    </Text>-->
+<!--                                </children>-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets top="20.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </VBox>-->
+<!--                            <StackPane fx:id="downLifepointCircle" prefHeight="77.0" prefWidth="78.0">-->
+<!--                                <HBox.margin>-->
+<!--                                    <Insets left="5.0" top="20.0"/>-->
+<!--                                </HBox.margin>-->
+<!--                            </StackPane>-->
+<!--                        </children>-->
+<!--                    </HBox>-->
+<!--                    <JFXProgressBar fx:id="downPlayerProgress" prefHeight="13.0" prefWidth="239.0" progress="0.27"-->
+<!--                                    styleClass="jfx-progress-bar" stylesheets="@../CSS/ProgressLine.css"/>-->
+<!--                </children>-->
+<!--            </VBox>-->
+<!--        </VBox>-->
+<!--        <HBox fx:id="phases" layoutX="77.0" layoutY="341.0" prefHeight="69.0" prefWidth="642.0"/>-->
+<!--        <HBox fx:id="upperPlayerHand" layoutX="120.0" layoutY="-16.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <HBox fx:id="upperPlayerSpellZone" layoutX="200" layoutY="126.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <HBox fx:id="upperPlayerMonsterZone" layoutX="200.0" layoutY="234.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <HBox fx:id="downPlayerHand" layoutX="120.0" layoutY="666.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <HBox fx:id="downPlayerSpellZone" layoutX="200.0" layoutY="520.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <HBox fx:id="downPlayerMonsterZone" layoutX="200" layoutY="410.0" prefHeight="100.0" prefWidth="200.0"/>-->
+<!--        <AnchorPane fx:id="downPlayerFieldZone" layoutX="100" layoutY="410.0"/>-->
+<!--        <AnchorPane fx:id="downPlayerDeckZone" layoutX="700" layoutY="410.0"/>-->
+<!--        <AnchorPane fx:id="upperPlayerDeckZone" layoutX="100" layoutY="234.0" rotate="180"/>-->
+<!--        <JFXButton fx:id="pauseButton" layoutX="27.0" layoutY="34.0" prefHeight="50.0" prefWidth="36.0" text=".">-->
+<!--            <graphic>-->
+<!--                <FontAwesomeIconView fill="#515468" glyphName="GEARS" size="30" text="" wrappingWidth="27.056627944111824">-->
+<!--                    <font>-->
+<!--                        <Font name="System Bold" size="26.0"/>-->
+<!--                    </font>-->
+<!--                </FontAwesomeIconView>-->
+<!--            </graphic>-->
+<!--        </JFXButton>-->
+<!--        <AnchorPane fx:id="downPlayerGraveYard" layoutX="700.0" layoutY="520.0" prefHeight="13.0" prefWidth="14.0"/>-->
+<!--        <AnchorPane fx:id="upperPlayerGraveYard" layoutX="100.0" layoutY="126.0" prefHeight="13.0" prefWidth="14.0"-->
+<!--                    rotate="180"/>-->
+<!--        <AnchorPane fx:id="upperPlayerFieldZone" layoutX="693.0" layoutY="234.0" prefHeight="19.0" prefWidth="14.0"-->
+<!--                    rotate="180"/>-->
+    </AnchorPane>
+
+
+
+
+</AnchorPane>

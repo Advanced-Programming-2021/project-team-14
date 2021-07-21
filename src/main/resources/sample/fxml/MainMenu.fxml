@@ -37,6 +37,11 @@
                         <FontAwesomeIconView glyphName="STACK_EXCHANGE" styleClass="icon"/>
                     </graphic>
                 </JFXButton>
+                <JFXButton onMouseClicked="#change" text="TV">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="TV" styleClass="icon"/>
+                    </graphic>
+                </JFXButton>
                 <JFXButton onMouseClicked="#change" text="Import\Export">
                     <graphic>
                         <FontAwesomeIconView glyphName="EXCHANGE" styleClass="icon"/>

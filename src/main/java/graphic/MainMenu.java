@@ -9,7 +9,7 @@ import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-public class MainMenu extends Menu{
+public class MainMenu extends Menu {
 
     public AnchorPane view;
     public AnchorPane root;
@@ -29,7 +29,7 @@ public class MainMenu extends Menu{
 
     public void change(MouseEvent mouseEvent) {
         String nextView = null;
-        switch (((JFXButton)mouseEvent.getSource()).getText()) {
+        switch (((JFXButton) mouseEvent.getSource()).getText()) {
             case "Profile":
                 Medias.USUAL_CLICK.play(1);
                 nextView = "ProfileMenu";
@@ -49,6 +49,10 @@ public class MainMenu extends Menu{
             case "Duel":
                 Medias.USUAL_CLICK.play(1);
                 nextView = "DuelMenu";
+                break;
+            case "TV":
+                Medias.USUAL_CLICK.play(1);
+                nextView = "Television";
                 break;
             case "Lobby":
                 Medias.USUAL_CLICK.play(1);

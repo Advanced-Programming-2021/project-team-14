@@ -1,0 +1,15 @@
+.TV-pane {
+    -fx-pref-height: 500;
+    -fx-border-style: dashed;
+    -fx-stroke-width: 50;
+    -fx-border-color: -fx-gray;
+    -fx-pref-width: 700;
+    -fx-border-width: 4;
+}
+.game_name {
+    -fx-font-size: 55;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+    -fx-font-weight: BOLD;
+}

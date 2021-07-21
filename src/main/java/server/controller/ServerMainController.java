@@ -32,5 +32,10 @@ public class ServerMainController {
             ServerProfileController.processCommand(request, response, user);
         } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel()))
             ServerImportExportController.processCommand(request, response, user);
+        else if (view.equals(Menus.DUEL_MENU.getLabel()))
+            ServerDuelController.processCommand(request, response, user);
+        else if (view.equals(Menus.GAMEPLAY_MENU.getLabel()))
+            ServerGamePlayController.processCommand(request, response, user);
+
     }
 }
