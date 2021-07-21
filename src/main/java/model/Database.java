@@ -10,6 +10,8 @@ import model.card.Card;
 import model.card.Monster;
 import model.card.SpellTrap;
 import model.card.enums.*;
+import model.game.Duel;
+import model.game.Game;
 import org.apache.commons.io.FileExistsException;
 import org.json.JSONObject;
 import view.Logger;
@@ -34,6 +36,8 @@ public class Database {
     private static final String savedCardsDirectory = "Resources\\SavedCards";
     private static final String profileImagesDirectory = "Resources\\ProfileImages";
     private static final String cacheDirectory = "Resources\\Cache";
+    private static final String savedGames = "Resources\\SavedGames";
+
 
     private static ArrayList<String> draggedCardNames = new ArrayList<>();
 
@@ -111,7 +115,7 @@ public class Database {
         try {
             byte[] imageByteArray = Base64.getDecoder().decode(imageString);
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByteArray);
-            BufferedImage bufferedImage  = ImageIO.read(bis);
+            BufferedImage bufferedImage = ImageIO.read(bis);
             return new Image(String.valueOf(bufferedImage));
         } catch (Exception e) {
             return null;
@@ -234,6 +238,7 @@ public class Database {
         File importedFile = new File(savedCardsDirectory);
         File profileImagesFile = new File(profileImagesDirectory);
         File cacheFile = new File(cacheDirectory);
+        File savedGamesFile = new File(savedGames);
 
         //Creating the directory
         if (!resourcesFile.exists() && resourcesFile.mkdirs())
@@ -246,6 +251,8 @@ public class Database {
             Logger.log("database", "ProfileImages folder created successfully!");
         if (!cacheFile.exists() && cacheFile.mkdirs())
             Logger.log("database", "Cache folder created successfully!");
+        if (!savedGamesFile.exists() && savedGamesFile.mkdirs())
+            Logger.log("database", "SavedGames folder created successfully!");
     }
 
     public static void saveUserInDatabase(User user) {
@@ -262,6 +269,41 @@ public class Database {
         }
     }
 
+    public static void saveGameInDatabase(SaveGameLogs recorder) {
+        String jsonString = new Gson().toJson(recorder);
+        Duel duel = recorder.getDuel();
+        //create file address
+        String userFileAddress = savedGames + "\\" + duel.getMainUser().getUsername() + "_" +
+                duel.getRivalUser().getUsername() + "_" + recorder.getStartTime().toString() + ".json";
+
+        try (FileWriter file = new FileWriter(userFileAddress)) {
+            //Write any JSONArray or JSONObject instance to the file
+            file.write(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadGames(){
+
+        // Get all files from Users directory
+        File f = new File(savedGames);
+        File[] matchingFiles = f.listFiles((dir, name) -> name.endsWith(".json"));
+
+        if (matchingFiles == null)
+            return;
+
+        //Create User object foreach file
+        for (File file : matchingFiles) {
+            String data;
+            try {
+                data = new String(Files.readAllBytes(Paths.get(file.toString())));
+                SaveGameLogs.addGame(new Gson().fromJson(data, SaveGameLogs.class));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     static void setEffects(String[] keys, HashMap<String, String> effects, String[] row, int n) {
         for (int i = n; i < keys.length; i++) {
             effects.put(keys[i], row[i]);

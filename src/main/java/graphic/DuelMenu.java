@@ -1,5 +1,7 @@
 package graphic;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.jfoenix.controls.JFXButton;
 import graphic.component.ResultState;
 import graphic.component.SnackBarComponent;
@@ -17,12 +19,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.game.Duel;
+import model.game.Game;
 import sample.MainGraphic;
 import view.Console;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
+import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DuelMenu extends Menu {
@@ -43,11 +48,17 @@ public class DuelMenu extends Menu {
         Request.setCommandTag(CommandTags.START_DUEL_AI);
         Request.addData("rounds", "1");
         Request.send();
+
         if (Request.isSuccessful()) {
+            new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
             Console.print(Request.getMessage());
+            Duel.setCurrentDuel(new Gson().fromJson((JsonElement) Request.getResponse().get("Duel"), Duel.class));
+
             MainGraphic.setRoot("GamePlay3");
-        } else
+        } else {
             Console.print(Request.getMessage());
+            new SnackBarComponent(Request.getMessage(), ResultState.ERROR);
+        }
     }
 
     public void startTwoPlayerGame(MouseEvent mouseEvent) {

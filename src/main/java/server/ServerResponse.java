@@ -15,6 +15,10 @@ public class ServerResponse {
         return response;
     }
 
+    public boolean isSuccess(){
+        return response.get("type").equals(Responses.SUCCESS.getLabel());
+    }
+
 
     public  void success() {
         response.put("type", Responses.SUCCESS.getLabel());
