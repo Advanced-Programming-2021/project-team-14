@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Hand {
 
-    private ArrayList<Card> cards;
+    private ArrayList<String> cards;
 
     public Hand() {
         cards = new ArrayList<>();
@@ -21,15 +21,19 @@ public class Hand {
     public void addCard(Card card) {
         card.setPosition(Position.HAND);
         card.setPositionIndex(cards.size() + 1);
-        cards.add(card);
+        cards.add(card.getName());
     }
 
     public ArrayList<Card> getCards() {
-        return cards;
+        ArrayList<Card> toSend = new ArrayList<>();
+        for (String cardName: cards) {
+            toSend.add(Card.getCardByName(cardName));
+        }
+        return toSend;
     }
 
     public Card getCard(int position) {
-        return cards.get(position - 1);
+        return Card.getCardByName(cards.get(position - 1));
     }
 public int getSize(){
     return cards.size();
@@ -48,16 +52,16 @@ public int getSize(){
     }
 
     public boolean doesHaveCard(String cardName) {
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) return true;
+        for (String name : cards) {
+            if (name.equals(cardName)) return true;
         }
         return false;
     }
     public void remove(String cardName){
-        ArrayList<Card> toRemove = new ArrayList<>();
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                toRemove.add(card);
+        ArrayList<String> toRemove = new ArrayList<>();
+        for (String name: cards) {
+            if (name.equals(cardName)) {
+                toRemove.add(name);
             }
         }
         cards.removeAll(toRemove);

@@ -52,8 +52,8 @@ public class DuelMenu extends Menu {
         if (Request.isSuccessful()) {
             new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
             Console.print(Request.getMessage());
-            Duel.setCurrentDuel(new Gson().fromJson((JsonElement) Request.getResponse().get("Duel"), Duel.class));
-
+            String duelText = Request.getResponse().getString("Duel");
+            Duel.setCurrentDuel(new Gson().fromJson(duelText, Duel.class));
             MainGraphic.setRoot("GamePlay3");
         } else {
             Console.print(Request.getMessage());
@@ -107,6 +107,7 @@ public class DuelMenu extends Menu {
             Request.addData("second-player", textField.getText());
             Request.send();
             if (Request.isSuccessful()) {
+                Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
                 MainGraphic.setRoot("TossCoin");
             } else
@@ -119,6 +120,7 @@ public class DuelMenu extends Menu {
 
         if (checker.get()) {
             if (Request.isSuccessful()) {
+                Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
                 new SnackBarComponent(Request.getMessage(), ResultState.SUCCESS);
                 MainGraphic.setRoot("TossCoin");
             } else

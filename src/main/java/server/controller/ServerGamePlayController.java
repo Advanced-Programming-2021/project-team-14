@@ -92,8 +92,8 @@ public class ServerGamePlayController {
             activationCanceled(request);
         }
 
-        if (response.isSuccess())
-            recorder.addLog(request);
+
+        response.add("Duel", new Gson().toJson(Duel.getCurrentDuel()));
         response.addObject("game", duel.getGame().getGameObject());
     }
 

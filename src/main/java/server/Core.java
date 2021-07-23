@@ -29,6 +29,7 @@ public class Core extends Thread{
                     ServerResponse response = new ServerResponse();
                     Server.log("processing...");
                     new ServerMainController().processCommand(new JSONObject(dataInputStream.readUTF()), response);
+                    System.out.println(response.getResponse().toString());
                     dataOutputStream.writeUTF(response.getResponse().toString());
                     dataOutputStream.flush();
                     Server.log("-> " + response.getResponse().toString());

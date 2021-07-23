@@ -38,7 +38,7 @@ public class ServerDuelController {
         response.success();
         user.increaseGamesPlayed();
         second.increaseGamesPlayed();
-//        ServerGamePlayController.startAGame(user, second, rounds);
+        ServerGamePlayController.startAGame(user, second, rounds);
         return String.format(Strings.START_DUEL.getLabel(), user.getUsername(), second.getUsername());
     }
 

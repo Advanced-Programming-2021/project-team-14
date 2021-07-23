@@ -1,5 +1,6 @@
 package graphic.component;
 
+import com.google.gson.Gson;
 import graphic.Cursor;
 import graphic.GamePlay;
 import graphic.Medias;
@@ -11,6 +12,7 @@ import model.Strings;
 import model.card.Card;
 import model.card.enums.CardType;
 import model.card.enums.Property;
+import model.game.Duel;
 import model.game.Game;
 import view.Request;
 import view.enums.CommandTags;
@@ -58,14 +60,15 @@ public class Hand extends HBox implements ComponentLoader {
             if (e.getButton() == MouseButton.SECONDARY) {
                 isSet = !isSet;
                 changeCursor(card);
-            }
-            else {
+            } else {
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 Request.addData("area", "hand");
                 Request.addData(Strings.POSITION.getLabel(), String.valueOf(game.getBoard().getMainPlayer().getHand().getCards().indexOf(card) + 1));
                 Request.addBooleanData(Strings.OPPONENT_OPTION.getLabel(), false);
                 Request.setCommandTag(CommandTags.SELECT);
                 Request.send();
+                if (Request.isSuccessful())
+                    Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
 
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 if (isSet) {
@@ -79,14 +82,14 @@ public class Hand extends HBox implements ComponentLoader {
                     Request.send();
                 }
                 if (Request.isSuccessful()) {
+                    Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
                     Medias.PUT_CARD.play(1);
                     gamePlay.update();
-                    if (card.getProperty() == Property.FIELD){
+                    if (card.getProperty() == Property.FIELD) {
                         gamePlay.updateFieldZone(card);
                     }
                     this.getChildren().remove(cardInHand);
-                }
-                else {
+                } else {
                     System.out.println("snackbar");
                     new SnackBarComponent(Request.getMessage(), ResultState.ERROR, gamePlay.getView());
                 }

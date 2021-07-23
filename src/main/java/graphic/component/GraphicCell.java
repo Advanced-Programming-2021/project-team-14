@@ -8,8 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import model.card.Card;
 import model.card.enums.State;
 import sample.MainGraphic;
-import view.GamePlayMenu;
-import view.Request;
+
 
 
 public class GraphicCell extends AnchorPane implements ComponentLoader {

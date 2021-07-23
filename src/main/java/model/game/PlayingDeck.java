@@ -13,9 +13,9 @@ import java.util.Collections;
 
 public class PlayingDeck {
 
-    private ArrayList<Card> cardLoaders;
-    private ArrayList<Monster> monsters = new ArrayList<>();
-    private ArrayList<SpellTrap> spellTraps = new ArrayList<>();
+    private ArrayList<String> cardLoaders;
+    private ArrayList<String> monsters = new ArrayList<>();
+    private ArrayList<String> spellTraps = new ArrayList<>();
 
     public PlayingDeck(Deck activeDeck) {
         cardLoaders = new ArrayList<>();
@@ -28,8 +28,9 @@ public class PlayingDeck {
             loadCard(Card.getCardByName(cardName));
         for (String cardName : activeDeck.getCards(false))   // load main cardLoaders
             loadCard(Card.getCardByName(cardName));
-        monsters = Monster.getMonsters();
-        spellTraps = SpellTrap.getSpellTraps();
+//        monsters = Monster.getMonsters();
+//
+//        spellTraps = SpellTrap.getSpellTraps();
     }
 
     public void shuffle() {
@@ -38,7 +39,7 @@ public class PlayingDeck {
 
     public Card drawCard() {
         if (cardLoaders.size() != 0) {
-            Card card = cardLoaders.get(0);
+            Card card = Card.getCardByName(cardLoaders.get(0));
             cardLoaders.remove(0);
             return card;          // draw first card from deck
         }
@@ -50,16 +51,13 @@ public class PlayingDeck {
     }
 
     public void loadCard(Card card) {
-        if (card.getCardType() == CardType.MONSTER)
-            cardLoaders.add(new Monster((Monster) card));
-        else
-            cardLoaders.add(new SpellTrap((SpellTrap) card));
+        cardLoaders.add(card.getName());
     }
 
 
-
     public Card getACard(Property property) {
-        for (Card card : cardLoaders) {
+        for (String cardName : cardLoaders) {
+            Card card = Card.getCardByName(cardName);
             if (card.getProperty() == property) {
                 return card;
             }
@@ -74,9 +72,9 @@ public class PlayingDeck {
     }
 
     public void remove(String name) {
-        ArrayList<Card> removedCards = new ArrayList<>();
-        cardLoaders.forEach(card -> {
-            if (card.getName().equals(name)) removedCards.add(card);
+        ArrayList<String> removedCards = new ArrayList<>();
+        cardLoaders.forEach(cardName -> {
+            if (Card.getCardByName(cardName).getName().equals(name)) removedCards.add(cardName);
         });
         cardLoaders.removeAll(removedCards);
     }

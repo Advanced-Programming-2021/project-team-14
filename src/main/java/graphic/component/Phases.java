@@ -1,5 +1,6 @@
 package graphic.component;
 
+import com.google.gson.Gson;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import graphic.GamePlay;
@@ -8,19 +9,22 @@ import graphic.Menu;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import model.game.Duel;
 import model.game.Game;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-public class Phases extends HBox implements ComponentLoader{
+import java.security.GeneralSecurityException;
+
+public class Phases extends HBox implements ComponentLoader {
 
     @FXML
     JFXButton nextPhase;
 
     private Game game;
 
-    public Phases(Game game, GamePlay gamePlay){
+    public Phases(Game game, GamePlay gamePlay) {
         load("Phases");
         this.game = game;
         deactivateAll();
@@ -37,6 +41,7 @@ public class Phases extends HBox implements ComponentLoader{
         Menu.setView(Menus.GAMEPLAY_MENU);
         Request.setCommandTag(CommandTags.NEXT_PHASE);
         Request.send();
+        Duel.getCurrentDuel().getGame().nextPhase();
         updatePhases();
         gamePlay.update();
 
