@@ -42,7 +42,7 @@ public class AuctionMenu extends Menu {
             while (!exit) {
                 update();
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -51,9 +51,9 @@ public class AuctionMenu extends Menu {
     }
 
     private void update() {
+        getAuctions();
 
         Platform.runLater(() -> {
-            getAuctions();
             listView.getItems().clear();
             listView.setBackground(Background.EMPTY);
             auctions.forEach(this::addItem);

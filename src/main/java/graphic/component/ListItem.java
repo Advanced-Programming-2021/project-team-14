@@ -63,9 +63,9 @@ public class ListItem extends AnchorPane implements ComponentLoader {
         load("AuctionList");
 //        timer.setText(String.valueOf(auction.get));
         auctionName.setText(String.valueOf(auction.getCard().getName()));
-        progressBar.setProgress(auction.getTimer() / 30.0);
         enter.setGraphic(generateIcon(FontAwesomeIcon.EDIT));
     }
+
 
     public String getAuctionName() {
         return auctionName.getText();

@@ -67,8 +67,8 @@ public class Request {
     public static void sendToServer() {
         try {
             Request.setToken();
-//            Socket socket = new Socket("localhost", 7755);
-            Socket socket = new Socket("8.tcp.ngrok.io", 18819);
+            Socket socket = new Socket("localhost", 7755);
+//            Socket socket = new Socket("8.tcp.ngrok.io", 18819);
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream.writeUTF(request.toString());

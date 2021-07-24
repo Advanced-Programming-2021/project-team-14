@@ -30,7 +30,7 @@ public class Stopwatch {
                 System.out.println(interval--);
                 if (interval == 0) {
                     timer.cancel();
-                    finishTimer();
+
                 }
             }
         }, delay, period);
@@ -40,7 +40,4 @@ public class Stopwatch {
         return this.interval;
     }
 
-    private void finishTimer() {
-        auction.endAuction();
-    }
 }

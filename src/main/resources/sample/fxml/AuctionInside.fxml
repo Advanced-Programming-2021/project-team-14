@@ -23,7 +23,7 @@
 
 
     <AnchorPane fx:id="addCardArea" layoutX="881.0" layoutY="227.0" styleClass="area">
-        <Text layoutX="31.0" layoutY="85.0" styleClass="simple-text" text="add"/>
+        <Text layoutX="18.0" layoutY="85.0" styleClass="simple-text" text="Add Bid"/>
     </AnchorPane>
     <AnchorPane fx:id="removeCardArea" layoutX="881.0" layoutY="356.0" styleClass="area">
         <Text layoutX="20.0" layoutY="83.0" styleClass="simple-text" text="remove"/>
@@ -40,8 +40,6 @@
                   style="-fx-background-color: #20202A;"/>
     </ScrollPane>
     <Text id="title" fx:id="deckTitle" layoutX="192.0" layoutY="99.0" text="Auction Title"/>
-    <JFXButton fx:id="activateDeck" layoutY="384.0" onMouseClicked="#setAsActiveDeck" styleClass="verticalButton"
-               text="set as active deck"/>
     <JFXButton layoutX="7.0" layoutY="14.0" onAction="#back" styleClass="backButton" text="&lt;"/>
 
 

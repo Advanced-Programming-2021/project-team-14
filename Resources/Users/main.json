@@ -1,5 +1,14 @@
 {
-  "auctions": [],
+  "auctions": [
+    {
+      "bids": [],
+      "cardName": "Haniwa"
+    },
+    {
+      "bids": [],
+      "cardName": "Advanced Ritual Art"
+    }
+  ],
   "wallet": {
     "cash": 95300,
     "cards": [
