@@ -1,0 +1,36 @@
+package server.controller.Handlers;
+
+import model.Strings;
+import model.game.Duel;
+import model.game.Game;
+import org.json.JSONObject;
+import server.ServerResponse;
+
+public class PositionValidityHandler extends GameHandler {
+    public String handle(JSONObject request, Duel duel, ServerResponse response) {
+
+        Game game = duel.getGame();
+        int position = 0;
+        String area = request.getString(Strings.AREA.getLabel());
+        if (!request.getString("area").equals("field")) {
+            position = request.getInt(Strings.POSITION.getLabel());
+        }
+
+        switch (area) {
+            case "monster":
+            case "spell":
+                if (isPositionValid(position, 5))
+                    return Strings.INVALID_SELECTION.getLabel();
+            case "hand":
+                if (isPositionValid(position, game.getBoard().getMainPlayer().getHand().getSize()))
+                    return Strings.INVALID_SELECTION.getLabel();
+        }
+
+        return super.handle(request, duel, response);
+    }
+
+    private boolean isPositionValid(int position, int limitation) {
+        if (position < 1) return true;
+        return position > limitation;
+    }
+}

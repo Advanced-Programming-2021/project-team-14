@@ -37,11 +37,15 @@ public class Phases extends HBox implements ComponentLoader {
     }
 
     private void nextPhase(GamePlay gamePlay) {
+        System.out.println("------------------------------------------- "+ Duel.getCurrentDuel().getGame().getPhase());
         Medias.CHANGE_PHASE.play(1);
         Menu.setView(Menus.GAMEPLAY_MENU);
         Request.setCommandTag(CommandTags.NEXT_PHASE);
+        Request.addData("Duel" , new Gson().toJson(Duel.getCurrentDuel()));
         Request.send();
-        Duel.getCurrentDuel().getGame().nextPhase();
+        Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
+        System.out.println("------------------------------------------- "+ Duel.getCurrentDuel().getGame().getPhase());
+
         updatePhases();
         gamePlay.update();
 

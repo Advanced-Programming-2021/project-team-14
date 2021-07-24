@@ -63,14 +63,15 @@ public class Hand extends HBox implements ComponentLoader {
             } else {
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
                 Request.addData("area", "hand");
+                Request.addData("Duel", new Gson().toJson(Duel.getCurrentDuel()));
                 Request.addData(Strings.POSITION.getLabel(), String.valueOf(game.getBoard().getMainPlayer().getHand().getCards().indexOf(card) + 1));
                 Request.addBooleanData(Strings.OPPONENT_OPTION.getLabel(), false);
                 Request.setCommandTag(CommandTags.SELECT);
                 Request.send();
-                if (Request.isSuccessful())
-                    Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
+                Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));
 
                 Request.addData("view", Menus.GAMEPLAY_MENU.getLabel());
+                Request.addData("Duel", new Gson().toJson(Duel.getCurrentDuel()));
                 if (isSet) {
                     Request.setCommandTag(CommandTags.SET);
                     Request.send();

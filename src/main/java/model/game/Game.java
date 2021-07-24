@@ -23,15 +23,18 @@ public class Game extends Duel{
     private boolean isEnded;
 
     public Game(User mainUser, User rivalUser, int round) {
-        super(mainUser, rivalUser, round);
+//        super(mainUser, rivalUser, round);
         this.board = new Board(super.getFirstPlayer(), super.getSecondPlayer());
         this.phase = Phase.DRAW_PHASE;
         this.isEnded = false;
 
     }
 
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
 
-//    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI, int round) {
+    //    public Game(Player mainUser, Player rivalUser, Duel duel, boolean isAI, int round) {
 //
 //        this.isAI = isAI;
 //        this.board = new Board(mainUser, rivalUser);

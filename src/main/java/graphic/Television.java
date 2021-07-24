@@ -45,6 +45,8 @@ public class Television {
             upperPlayerDeckZone, upperPlayerGraveYard, upperPlayerFieldZone;
 
     public ImageView background;
+    public ImageView noisySignal;
+
     @FXML
     private AnchorPane view;
     @FXML
@@ -111,17 +113,9 @@ public class Television {
         mainPane.getChildren().add(onlineGames);
         mainPane.getChildren().add(offlineGames);
 
-//        setDefaultGif();
     }
 
-//    private void setDefaultGif() {
-//        ImageView imageView = new ImageView(new Image("@../PNG/colorTV.gif"));
-//        imageView.setFitHeight(500);
-//        imageView.setFitWidth(700);
-//        imageView.setLayoutX(7);
-//        imageView.setLayoutY(7);
-//        tvShow.getChildren().add(imageView);
-//    }
+
 //
 //    private void initGraveYard() {
 //        downPlayerGraveYard.getChildren().add(new GraveYard(view, game, true));

@@ -20,14 +20,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.game.Duel;
-import model.game.Game;
 import sample.MainGraphic;
 import view.Console;
 import view.Request;
 import view.enums.CommandTags;
 import view.enums.Menus;
 
-import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DuelMenu extends Menu {
@@ -47,6 +45,7 @@ public class DuelMenu extends Menu {
         setView(Menus.DUEL_MENU);
         Request.setCommandTag(CommandTags.START_DUEL_AI);
         Request.addData("rounds", "1");
+        Request.addData("Duel", new Gson().toJson(Duel.getCurrentDuel()));
         Request.send();
 
         if (Request.isSuccessful()) {
@@ -105,6 +104,7 @@ public class DuelMenu extends Menu {
             Request.setCommandTag(CommandTags.START_DUEL);
             Request.addData("rounds", "1");
             Request.addData("second-player", textField.getText());
+            Request.addData("Duel", new Gson().toJson(Duel.getCurrentDuel()));
             Request.send();
             if (Request.isSuccessful()) {
                 Duel.setCurrentDuel(new Gson().fromJson(Request.getResponse().getString("Duel"), Duel.class));

@@ -67,7 +67,6 @@ public class TossCoinMenu {
                     } else {
                         Duel.getCurrentDuel().setGame(new Game(Duel.getCurrentDuel().getMainUser(), Duel.getCurrentDuel().getRivalUser(),
                                 Duel.getCurrentDuel().getRound()));
-
                     }
 
                     MainGraphic.setRoot("GamePlay3");

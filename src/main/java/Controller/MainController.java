@@ -21,9 +21,9 @@ public class MainController {
         } else if (view.equals(Menus.SHOP_MENU.getLabel())) {
             ShopController.processCommand(request);
         } else if (view.equals(Menus.DUEL_MENU.getLabel())) {
-            DuelController.processCommand(request);
+//            DuelController.processCommand(request);
         } else if (view.equals(Menus.GAMEPLAY_MENU.getLabel())) {
-            GamePlayController.processCommand(request);
+//            GamePlayController.processCommand(request);
         } else if (view.equals(Menus.IMPORT_EXPORT_MENU.getLabel())) {
             ImportExportController.processCommand(request);
         }

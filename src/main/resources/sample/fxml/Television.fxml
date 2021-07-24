@@ -15,8 +15,8 @@
 
     <AnchorPane fx:id="tvShow" layoutX="140" layoutY="100" styleClass="TV-pane">
 
-        <ImageView fitHeight="500" fitWidth="700" layoutX="7" layoutY="7">
-            <Image url="@../PNG/colorTV.gif" />
+        <ImageView fx:id="noisySignal" fitHeight="500" fitWidth="700" layoutX="7" layoutY="7">
+            <Image />
         </ImageView>
 
 <!--        <ImageView fx:id="background" fitHeight="800" fitWidth="870"/>-->

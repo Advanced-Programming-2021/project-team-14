@@ -54,6 +54,9 @@ public class Duel {
 
     }
 
+    public Duel() {
+    }
+
     public void setPlayers(User firstUser, User secondUser) {
 
         this.firstPlayer = new Player(firstUser, 0);

@@ -55,9 +55,9 @@ public class Request {
         Logger.log("client", request.toString());
         sendToServer();
 //        Request.setToken();
-//        response = new JSONObject(MainController.processCommand(request.toString()));
-////        if (response.has("isDuelEnded")) {
-////            if (response.getString("isDuelEnded").equals("true")) {
+//        responseString = new JSONObject(MainController.processCommand(request.toString()));
+////        if (responseString.has("isDuelEnded")) {
+////            if (responseString.getString("isDuelEnded").equals("true")) {
 ////                new EndDuelMenu().initialize(getMessageById());
 ////            }
 ////        }

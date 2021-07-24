@@ -1,6 +1,6 @@
 package server.controller;
 
-import Controller.Handlers.*;
+import server.controller.Handlers.*;
 import com.google.gson.Gson;
 import model.SaveGameLogs;
 import model.Strings;
@@ -22,8 +22,8 @@ public class ServerGamePlayController {
         duel = new Duel(first, second, rounds);
         recorder = new SaveGameLogs(duel);
         TV.addOnlineGame(duel);
-//        response.add("duel", new Gson().toJson(duel));
-//        response.add("recorder", new Gson().toJson(recorder));
+//        responseString.add("duel", new Gson().toJson(duel));
+//        responseString.add("recorder", new Gson().toJson(recorder));
     }
 
     public static void startGameWithAi(User first, int rounds, ServerResponse response) {
@@ -31,13 +31,14 @@ public class ServerGamePlayController {
         recorder = new SaveGameLogs(duel);
         TV.addOnlineGame(duel);
         response.add("Duel", new Gson().toJson(duel));
-//        response.add("recorder", new Gson().toJson(recorder));
+//        responseString.add("recorder", new Gson().toJson(recorder));
     }
 
 
     public static void processCommand(JSONObject request, ServerResponse response, User user) {
+        System.out.println(request.toString());
         ServerGamePlayController.response = response;
-
+        Duel.setCurrentDuel(new Gson().fromJson(request.getString("Duel"), Duel.class));
         response.add("isDuelEnded", "false");
         String command = request.getString(Strings.COMMAND.getLabel());
         FieldController.handle(duel.getGame());
@@ -92,6 +93,7 @@ public class ServerGamePlayController {
             activationCanceled(request);
         }
 
+        System.out.println("++++++++++++++++++++++++++++++++++++ " + Duel.getCurrentDuel().getGame().getPhase());
 
         response.add("Duel", new Gson().toJson(Duel.getCurrentDuel()));
         response.addObject("game", duel.getGame().getGameObject());
@@ -130,7 +132,7 @@ public class ServerGamePlayController {
     }
 
     private static void activationCanceled(JSONObject request) {
-        ChainHandler.run();
+        ChainHandler.run(response);
         duel.getGame().getBoard().getRivalPlayer().getTurnLogger().setTemporarilyChanged(false);
     }
 
@@ -140,13 +142,13 @@ public class ServerGamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new DataHandler())
                 .linksWith(new TaskHandler());
-        return activateEffect.handle(request, duel);
+        return activateEffect.handle(request, duel, response);
     }
 
 
     private static String increaseLifePoint(JSONObject request) {
         Handler taskHandler = new TaskHandler();
-        return taskHandler.handle(request, duel);
+        return taskHandler.handle(request, duel, response);
     }
 
     private static String activateEffect(JSONObject request) {
@@ -159,7 +161,7 @@ public class ServerGamePlayController {
                 .linksWith(new EffectHandler())
                 .linksWith(new DataHandler())
                 .linksWith(new TaskHandler());
-        return activateEffect.handle(request, duel);
+        return activateEffect.handle(request, duel, response);
     }
 
     private static String attack(JSONObject request) {
@@ -170,7 +172,7 @@ public class ServerGamePlayController {
                 .linksWith(new CardExistenceHandler())
                 .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
-        return attack.handle(request, duel);
+        return attack.handle(request, duel, response);
     }
 
     private static String directAttack(JSONObject request) {
@@ -180,11 +182,11 @@ public class ServerGamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new EmptyPlaceHandler())
                 .linksWith(new TaskHandler());
-        return directAttack.handle(request, duel);
+        return directAttack.handle(request, duel, response);
     }
 
     private static String nextPhase(JSONObject request) {
-        return new TaskHandler().handle(request, duel);
+        return new TaskHandler().handle(request, duel, response);
     }
 
     private static String summon(JSONObject request) {
@@ -199,7 +201,7 @@ public class ServerGamePlayController {
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new EffectHandler())
                 .linksWith(new TaskHandler());
-        return summon.handle(request, duel);
+        return summon.handle(request, duel, response);
     }
 
 
@@ -210,7 +212,7 @@ public class ServerGamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new CardStateHandler())
                 .linksWith(new TaskHandler());
-        return set.handle(request, duel);
+        return set.handle(request, duel, response);
     }
 
 
@@ -222,7 +224,7 @@ public class ServerGamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new MonsterTributeHandler())
                 .linksWith(new TaskHandler());
-        return set.handle(request, duel);
+        return set.handle(request, duel, response);
     }
 
     private static String setPosition(JSONObject request) {
@@ -233,14 +235,14 @@ public class ServerGamePlayController {
                 .linksWith(new TurnLogHandler())
                 .linksWith(new TaskHandler());
 
-        return setPosition.handle(request, duel);
+        return setPosition.handle(request, duel, response);
     }
 
     private static String showSelectedCard(JSONObject request) {
         Handler showCard = new SelectedCardHandler();
         showCard.linksWith(new CardStateHandler())
                 .linksWith(new TaskHandler());
-        return showCard.handle(request, duel);
+        return showCard.handle(request, duel, response);
     }
 
 
@@ -248,7 +250,7 @@ public class ServerGamePlayController {
 
         Handler set = new TaskHandler();
 
-        return set.handle(request, duel);
+        return set.handle(request, duel, response);
     }
 
 
@@ -256,12 +258,12 @@ public class ServerGamePlayController {
         Handler selection = new PositionValidityHandler();
         selection.linksWith(new CardExistenceHandler())
                 .linksWith(new TaskHandler());
-        return selection.handle(request, duel);
+        return selection.handle(request, duel, response);
     }
 
     private static String deselect(JSONObject request) {
         Handler selection = new SelectedCardHandler();
         selection.linksWith(new TaskHandler());
-        return selection.handle(request, duel);
+        return selection.handle(request, duel, response);
     }
 }
